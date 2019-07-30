@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[我的第一篇文章]]></title>
     <url>%2F2019%2F07%2F30%2F%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%2F</url>
-    <content type="text"><![CDATA[一段旅程从现在开始…… ###什么样的旅程呢？ 昨天从下午六点一直搞到深夜一点， ###为什么要写这个博客呢？ 首先，在b站上看到codesheep大佬的视频，深受感动（在这里也要给大家推荐一下这位up主的视频）。 ###所以，要做些什么呢？ 12345from zinw import zinWfor knowledge in ['pytorch', 'deeplearning', 'math', ...]: zinW.learn(knowledge)]]></content>
+    <content type="text"><![CDATA[一段旅程从现在开始…… 什么样的旅程呢？昨天从下午六点一直搞到深夜一点， 为什么要写这个博客呢？首先，在b站上看到codesheep大佬的视频，深受感动（在这里也要给大家推荐一下这位up主的视频）。 所以，要做些什么呢？12345from zinw import zinWfor knowledge in ['pytorch', 'deeplearning', 'math', ...]: zinW.learn(knowledge)]]></content>
       <categories>
         <category>一段话</category>
       </categories>
