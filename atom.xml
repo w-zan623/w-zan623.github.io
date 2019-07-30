@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-07-30T03:37:01.294Z</updated>
+  <updated>2019-07-30T07:45:22.646Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,9 +21,20 @@
     <link href="http://yoursite.com/2019/07/30/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/"/>
     <id>http://yoursite.com/2019/07/30/我的第一篇文章/</id>
     <published>2019-07-30T03:18:40.000Z</published>
-    <updated>2019-07-30T03:37:01.294Z</updated>
+    <updated>2019-07-30T07:45:22.646Z</updated>
+    
+    <content type="html"><![CDATA[<p>一段旅程从现在开始……</p><p>###什么样的旅程呢？</p><p>昨天从下午六点一直搞到深夜一点，</p><p>###为什么要写这个博客呢？</p><p>首先，在b站上看到<a href="https://www.bilibili.com/video/av56930990?from=search&seid=8484164184384979340" target="_blank" rel="noopener">codesheep大佬的视频</a>，深受感动（在这里也要给大家推荐一下这位up主的视频）。</p><p>###所以，要做些什么呢？</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> zinw <span class="keyword">import</span> zinW</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> knowledge <span class="keyword">in</span> [<span class="string">'pytorch'</span>, <span class="string">'deeplearning'</span>, <span class="string">'math'</span>, ...]:</span><br><span class="line"></span><br><span class="line">    zinW.learn(knowledge)</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
+    
+      
+      
+        &lt;p&gt;一段旅程从现在开始……&lt;/p&gt;
+&lt;p&gt;###什么样的旅程呢？&lt;/p&gt;
+&lt;p&gt;昨天从下午六点一直搞到深夜一点，&lt;/p&gt;
+&lt;p&gt;###为什么要写这个博客呢？&lt;/p&gt;
+&lt;p&gt;首先，在b站上看到&lt;a href=&quot;https://www.bilibili.com/video/av56
+      
     
     </summary>
     
