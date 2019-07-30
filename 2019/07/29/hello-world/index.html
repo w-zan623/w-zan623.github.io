@@ -20,6 +20,7 @@
 
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
   <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
   <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
   <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
@@ -34,8 +35,8 @@
     sidebar: {"position":"left","display":"post","offset":12,"onmobile":true},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     copycode: {"enable":false,"show_result":false,"style":null},
-    fancybox: false,
-    mediumzoom: false,
+    fancybox: true,
+    mediumzoom: true,
     lazyload: false,
     pangu: false,
     algolia: {
@@ -77,10 +78,14 @@
 <meta property="og:site_name" content="zinw的博客">
 <meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-29T14:26:56.476Z">
+<meta property="og:image" content="http://yoursite.com/images/avatar.jpg">
+<meta property="og:image" content="http://yoursite.com/uploads/wechat-qcode.jpg">
+<meta property="og:image" content="http://yoursite.com/uploads/wechat-qcode.jpg">
+<meta property="og:updated_time" content="2019-07-30T02:20:56.860Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hello World">
 <meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:image" content="http://yoursite.com/images/avatar.jpg">
   <link rel="alternate" href="/atom.xml" title="zinw的博客" type="application/atom+xml">
   <link rel="canonical" href="http://yoursite.com/2019/07/29/hello-world/">
 
@@ -305,12 +310,37 @@
                 
               
 
-              <time title="创建时间：2019-07-29 19:47:34 / 修改时间：22:26:56" itemprop="dateCreated datePublished" datetime="2019-07-29T19:47:34+08:00">2019-07-29</time>
+              <time title="创建时间：2019-07-29 19:47:34" itemprop="dateCreated datePublished" datetime="2019-07-29T19:47:34+08:00">2019-07-29</time>
             </span>
           
             
 
             
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-30 10:20:56" itemprop="dateModified" datetime="2019-07-30T10:20:56+08:00">2019-07-30</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/初始化/" itemprop="url" rel="index"><span itemprop="name">初始化</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           <br/>
@@ -321,7 +351,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">430</span>
+              <span title="本文字数">439</span>
             </span>
           
             <span class="post-meta-item">
@@ -350,9 +380,10 @@
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
 <h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p><img src="/images/avatar.jpg" alt><br><img src="/uploads/wechat-qcode.jpg" alt><br>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line"><span class="built_in">cd</span> /hhh/</span><br></pre></td></tr></table></figure>
 
+<p><img src="/uploads/wechat-qcode.jpg" alt="qcode"></p>
 <p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
 <h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
@@ -475,6 +506,23 @@
         
           <span class="site-state-item-count">1</span>
           <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span>
         </a>
       </div>
     
@@ -655,6 +703,8 @@
   
   <script color='23,23,23' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
   <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="true"></script>
+  <script src="/lib/mediumzoom/medium-zoom.min.js"></script>
   <script src="/lib/reading_progress/reading_progress.js"></script>
   <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
@@ -689,6 +739,8 @@
 
 
 
+
+  
 
 
 
