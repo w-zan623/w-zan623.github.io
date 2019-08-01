@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-08-01T07:26:52.671Z</updated>
+  <updated>2019-08-01T09:19:06.944Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://yoursite.com/2019/08/01/Xshell%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85-%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     <id>http://yoursite.com/2019/08/01/Xshell下载安装-连接服务器/</id>
     <published>2019-08-01T04:32:52.000Z</published>
-    <updated>2019-08-01T07:26:52.671Z</updated>
+    <updated>2019-08-01T09:19:06.944Z</updated>
     
-    <content type="html"><![CDATA[<p>学习深度学习需要足够的计算资源，往往需要连接远程服务器用来计算。本篇文章就介绍一下如何在windows系统里利用xshell连接服务器。</p><h2 id="xshell下载安装"><a href="#xshell下载安装" class="headerlink" title="xshell下载安装"></a>xshell下载安装</h2>]]></content>
+    <content type="html"><![CDATA[<p>学习深度学习需要足够的计算资源，往往需要连接远程服务器用来计算。本篇文章就介绍一下如何在windows系统里利用xshell连接服务器。</p><h2 id="xshell下载安装"><a href="#xshell下载安装" class="headerlink" title="xshell下载安装"></a>xshell下载安装</h2><p>首先要下载安装包:<a href="https://pan.baidu.com/s/1BK70moXvCw5xt3w7pKFH5g" target="_blank" rel="noopener">百度网盘资源</a>。<br>当然也可以去官网下载安装包，选择<a href="https://www.netsarang.com/zh/free-for-home-school/" target="_blank" rel="noopener">家庭学校免费版</a>，下载前要填一下姓名邮箱，提交后你会收到带有下载链接的邮件。</p><p>![xshell download](/uploads/download xshell/1.png)</p>]]></content>
     
     <summary type="html">
     
