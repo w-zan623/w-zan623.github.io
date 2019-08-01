@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-07-31T10:18:10.957Z</updated>
+  <updated>2019-08-01T07:26:52.671Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>windows系统：Xshell下载安装+连接服务器</title>
+    <link href="http://yoursite.com/2019/08/01/Xshell%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85-%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    <id>http://yoursite.com/2019/08/01/Xshell下载安装-连接服务器/</id>
+    <published>2019-08-01T04:32:52.000Z</published>
+    <updated>2019-08-01T07:26:52.671Z</updated>
+    
+    <content type="html"><![CDATA[<p>学习深度学习需要足够的计算资源，往往需要连接远程服务器用来计算。本篇文章就介绍一下如何在windows系统里利用xshell连接服务器。</p><h2 id="xshell下载安装"><a href="#xshell下载安装" class="headerlink" title="xshell下载安装"></a>xshell下载安装</h2>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;学习深度学习需要足够的计算资源，往往需要连接远程服务器用来计算。本篇文章就介绍一下如何在windows系统里利用xshell连接服务器。&lt;/p&gt;
+&lt;h2 id=&quot;xshell下载安装&quot;&gt;&lt;a href=&quot;#xshell下载安装&quot; class=&quot;headerlink&quot; tit
+      
+    
+    </summary>
+    
+      <category term="Xshell" scheme="http://yoursite.com/categories/Xshell/"/>
+    
+    
+      <category term="Xshell" scheme="http://yoursite.com/tags/Xshell/"/>
+    
+      <category term="linux服务器" scheme="http://yoursite.com/tags/linux%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+      <category term="windows" scheme="http://yoursite.com/tags/windows/"/>
+    
+  </entry>
   
   <entry>
     <title>人生</title>
