@@ -47,11 +47,11 @@
   </entry>
   
   <entry>
-    <title>Xshell：在本地浏览器使用服务器的jupyter notook</title>
+    <title>Xshell：在本地浏览器使用服务器的jupyter notebook</title>
     <link href="https://zinw623.github.io/2019/08/02/hexo-jupyter/"/>
     <id>https://zinw623.github.io/2019/08/02/hexo-jupyter/</id>
     <published>2019-08-02T01:47:42.000Z</published>
-    <updated>2019-08-02T08:24:34.752Z</updated>
+    <updated>2019-08-02T08:32:51.642Z</updated>
     
     <content type="html"><![CDATA[<p>有的服务器里只是命令行，无法可视化，可能就无法使用jupyter notebook。其实需要稍微修改一下连接的属性就能在本地浏览器里打开在服务器里启动的jupyter notebook，具体操作如下：</p><ol><li>首先右击会话管理器里的服务器标签，在菜单点击属性。</li></ol><img width="50%" data-src="/uploads/xshellJupyter/1.PNG"><ol start="2"><li>然后点击左侧的隧道，然后再点击添加。</li></ol><img width="50%" data-src="/uploads/xshellJupyter/2.PNG"><ol start="3"><li>输入两个端口号，我这输入的是jupyter notebook默认的8888端口，然后点确定</li></ol><img width="50%" data-src="/uploads/xshellJupyter/3.PNG"><ol start="4"><li>然后再取消右下方转发X11连接到的选项，然后点确定。</li></ol><img width="50%" data-src="/uploads/xshellJupyter/4.PNG"><ol start="5"><li>之后双击会话管理器里的服务器进行连接，在命令行里输入jupyter notebook，启动后在浏览器里访问<a href="http://localhost:8888/" target="_blank" rel="noopener"></a>就会看到jupyter notebook的界面了。</li></ol><img width="50%" data-src="/uploads/xshellJupyter/5.PNG"><p>欢迎收藏访问我的<a href="https://zinw623.github.io/">博客</a></p><p>——————————感谢阅读—————————————</p>]]></content>
     
