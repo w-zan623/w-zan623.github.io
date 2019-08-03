@@ -78,7 +78,7 @@
 <meta property="og:site_name" content="zinW的博客">
 <meta property="og:description" content="正在构思中。。。。。。 $e^{i\pi} + 1 = 0$ $R_{\mu\nu} - \frac{1}{2}Rg_{\mu\nu} = \frac{8 \pi G}{c^4}T_{\mu\nu}$  欢迎收藏访问我的博客  知乎   掘金  简书 知乎  ———————————————感谢阅读———————————————">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-03T15:00:06.081Z">
+<meta property="og:updated_time" content="2019-08-03T15:07:13.927Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="总结：统计学习方法-第一章">
 <meta name="twitter:description" content="正在构思中。。。。。。 $e^{i\pi} + 1 = 0$ $R_{\mu\nu} - \frac{1}{2}Rg_{\mu\nu} = \frac{8 \pi G}{c^4}T_{\mu\nu}$  欢迎收藏访问我的博客  知乎   掘金  简书 知乎  ———————————————感谢阅读———————————————">
@@ -314,7 +314,7 @@
                 
               
 
-              <time title="创建时间：2019-08-03 18:17:41 / 修改时间：23:00:06" itemprop="dateCreated datePublished" datetime="2019-08-03T18:17:41+08:00">2019-08-03</time>
+              <time title="创建时间：2019-08-03 18:17:41 / 修改时间：23:07:13" itemprop="dateCreated datePublished" datetime="2019-08-03T18:17:41+08:00">2019-08-03</time>
             </span>
           
             
@@ -829,6 +829,51 @@
 
 
 
+  
+    
+      <script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
   
 
 
