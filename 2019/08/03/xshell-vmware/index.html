@@ -70,18 +70,18 @@
   daovoice('update');
   </script>
 
-  <meta name="description" content="因为使用VM虚拟机太过占用资源，所以我们可以用Xshell连接到虚拟机，来达到节省本机资源的目的。 &amp;lt;–more–&amp;gt;  安装SSH：   1sudo apt-get install openssh-server   获得登录需要的ip ,在虚拟机输入：  1ifconfig     ens*后面的inet后面的值就是ip。  按照我之前写过的xshell连接的教程 windows系统：">
+  <meta name="description" content="因为使用VM虚拟机太过占用资源，所以我们可以用Xshell连接到虚拟机，来达到节省本机资源的目的。">
 <meta name="keywords" content="Xshell,虚拟机,Ubuntu">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用Xshell管理虚拟机Ubuntu">
 <meta property="og:url" content="https://zinw623.github.io/2019/08/03/xshell-vmware/index.html">
 <meta property="og:site_name" content="zinW的博客">
-<meta property="og:description" content="因为使用VM虚拟机太过占用资源，所以我们可以用Xshell连接到虚拟机，来达到节省本机资源的目的。 &amp;lt;–more–&amp;gt;  安装SSH：   1sudo apt-get install openssh-server   获得登录需要的ip ,在虚拟机输入：  1ifconfig     ens*后面的inet后面的值就是ip。  按照我之前写过的xshell连接的教程 windows系统：">
+<meta property="og:description" content="因为使用VM虚拟机太过占用资源，所以我们可以用Xshell连接到虚拟机，来达到节省本机资源的目的。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-04T03:12:57.826Z">
+<meta property="og:updated_time" content="2019-08-04T03:20:33.671Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用Xshell管理虚拟机Ubuntu">
-<meta name="twitter:description" content="因为使用VM虚拟机太过占用资源，所以我们可以用Xshell连接到虚拟机，来达到节省本机资源的目的。 &amp;lt;–more–&amp;gt;  安装SSH：   1sudo apt-get install openssh-server   获得登录需要的ip ,在虚拟机输入：  1ifconfig     ens*后面的inet后面的值就是ip。  按照我之前写过的xshell连接的教程 windows系统：">
+<meta name="twitter:description" content="因为使用VM虚拟机太过占用资源，所以我们可以用Xshell连接到虚拟机，来达到节省本机资源的目的。">
   <link rel="alternate" href="/atom.xml" title="zinW的博客" type="application/atom+xml">
   <link rel="canonical" href="https://zinw623.github.io/2019/08/03/xshell-vmware/">
 
@@ -327,7 +327,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-04 11:12:57" itemprop="dateModified" datetime="2019-08-04T11:12:57+08:00">2019-08-04</time>
+                <time title="修改时间：2019-08-04 11:20:33" itemprop="dateModified" datetime="2019-08-04T11:20:33+08:00">2019-08-04</time>
               </span>
             
           
@@ -355,7 +355,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">306</span>
+              <span title="本文字数">288</span>
             </span>
           
             <span class="post-meta-item">
@@ -379,22 +379,18 @@
 
       
         <p>因为使用VM虚拟机太过占用资源，所以我们可以用Xshell连接到虚拟机，来达到节省本机资源的目的。</p>
-<p>&lt;–more–&gt;</p>
+<a id="more"></a>
 <ol>
 <li>安装SSH： </li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install openssh-server</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
+<ol>
 <li>获得登录需要的ip ,在虚拟机输入：</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig</span><br></pre></td></tr></table></figure>
-
-<img width="50%" data-src="/uploads/xshell-vmware/1.PNG">
-
-
+<p><img width="50%" data-src="/uploads/xshell-vmware/1.PNG"></p>
 <p>ens*后面的inet后面的值就是ip。</p>
-<ol start="3">
+<ol>
 <li><p>按照我之前写过的xshell连接的教程 <a href="/2019/08/01/XshellDownload/">windows系统：Xshell下载安装+连接服务器</a> 建立会话就ok，主机就是刚才你获得的ip，登录用的用户名和密码就是你安装时填的用户名(非root账户)和密码。</p>
 </li>
 <li><p>之后只需要打开虚拟机后最小化界面，从xshell登入就可以了。</p>
@@ -411,12 +407,16 @@
       
       <div class="popular-posts-title"><a href="\2019\08\02\hexo-jupyter\" rel="bookmark">Xshell：在本地浏览器使用服务器的jupyter notebook</a></div>
       
+        <div class="popular-posts-excerpt"><p><p>有的服务器里只是命令行，无法可视化，可能就无法使用jupyter notebook。其实需要稍微修改一下连接的属性就能在本地浏览器里打开在服务器里启动的jupyter notebook</p></div>
+      
     </li>
   
     <li class="popular-posts-item">
       
       
       <div class="popular-posts-title"><a href="\2019\08\01\XshellDownload\" rel="bookmark">windows系统：Xshell下载安装+连接服务器</a></div>
+      
+        <div class="popular-posts-excerpt"><p><p>学习深度学习需要足够的计算资源，往往需要连接远程服务器用来计算。本篇文章就介绍一下如何在windows系统里利用xshell连接服务器。<br></p></div>
       
     </li>
   
