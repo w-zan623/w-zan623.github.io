@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[【notes】docker学习笔记-docker镜像]]></title>
     <url>%2F2019%2F08%2F06%2Fdocker-3%2F</url>
-    <content type="text"><![CDATA[查看和删除镜像 镜像的存储位置：/var/lib/docker 列出镜像 images [OPSIONS] [REPOSITORY]```1234567891011121314151617181920212223242526 -a, --all = false # 显示所有镜像，默认并不显示中间层镜像（没有标签名的镜像） -f, --filter = [] # 过滤条件 --no-trunc = false # 不使用截断的形式来显示数据(默认使用截断显示EID，比文件名短) -q, --quiet = false # 只显示EID#### 镜像标签和仓库* 镜像仓库 区分： * REPOSITORY 仓库 * REGISTRY 仓库 REGISTRY里会有很多REPOSITORY仓库，每个REPOSITORY里会有一个个独立的镜像。* 标签 TAG * 镜像的名字 = 镜像仓库名 : 镜像标签 --对应--&gt; 镜像ID ubuntu:latest, ubuntu:14.04, ..... * 如果没有指定标签，默认为latest。 * 同一仓库的不同标签可以对应同一镜像ID，也就是说可以根据需求给同一镜像文件打上不同的标签。 * 没有标签名的镜像称作中间层镜像。#### 查看镜像* ```docker inspect [OPTIONS] CONTIANER|IMAGE [CONTAINER|IMAGE...] -f, –format=”” 删除镜像 rmi [OPTIONS] IMAGE [IMAGE...]```1234567-f, --force = false 强制删除--no-prune = false 不删除未打标签的父镜像对应多个标签的镜像文件可以直接用ID选定所有标签``` docker rmi ID 获取和推送镜像查找镜像 Docker Hub https://registry.hub.docker.com search [OPTIONS] TERM12345678 --automated = false --no-trunc = false -s, stars = 0 只显示最少多少stars的 最多返回25个结果#### 拉取镜像* ```docker pull [OPTIONS] NAME [:TAG] -a, –all-tags = false 下载仓库中所有被标记的镜像 推送镜像 push username/IMAGE```1234567891011### 构建镜像* 保存对容器的修改，并再次使用* 自定义镜像的能力* 以软件的形式打包并分发服务及其运行环境#### docker commit通过容器构建* ```docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]] -a, –author=”” Author e.g., &quot;John Hannibal Smith hannibal@a-team.com&quot; -m, –message=”” 记录构建的信息 -p, –pause = true 不暂停容器的运行 docker build通过Dockerfile文件构建 dockerfile: #First DockerfileFROM ubuntu:14.04MAINTAINER dormancypress “dormancypress@outlook.comRUN apt-get updateRUN apt-get install -y nginxEXPOSE 80 docker build [OPTIONS] PATH|URL|- –force-rm = false–no-cache = false–pull=false-q,–quiet = false–rm = true-t, –tag=””]]></content>
+    <content type="text"><![CDATA[查看和删除镜像 镜像的存储位置：/var/lib/docker 列出镜像 images [OPSIONS] [REPOSITORY] ```1234567891011121314151617181920212223242526 -a, --all = false # 显示所有镜像，默认并不显示中间层镜像（没有标签名的镜像） -f, --filter = [] # 过滤条件 --no-trunc = false # 不使用截断的形式来显示数据(默认使用截断显示EID，比文件名短) -q, --quiet = false # 只显示EID#### 镜像标签和仓库* 镜像仓库 区分： * REPOSITORY 仓库 * REGISTRY 仓库 REGISTRY里会有很多REPOSITORY仓库，每个REPOSITORY里会有一个个独立的镜像。* 标签 TAG * 镜像的名字 = 镜像仓库名 : 镜像标签 --对应--&gt; 镜像ID ubuntu:latest, ubuntu:14.04, ..... * 如果没有指定标签，默认为latest。 * 同一仓库的不同标签可以对应同一镜像ID，也就是说可以根据需求给同一镜像文件打上不同的标签。 * 没有标签名的镜像称作中间层镜像。#### 查看镜像* ``` docker inspect [OPTIONS] CONTIANER|IMAGE [CONTAINER|IMAGE...] -f, –format=”” 删除镜像 rmi [OPTIONS] IMAGE [IMAGE...] ```1234567-f, --force = false 强制删除--no-prune = false 不删除未打标签的父镜像对应多个标签的镜像文件可以直接用ID选定所有标签``` docker rmi ID 获取和推送镜像查找镜像 Docker Hub https://registry.hub.docker.com search [OPTIONS] TERM12345678 --automated = false --no-trunc = false -s, stars = 0 只显示最少多少stars的 最多返回25个结果#### 拉取镜像* ``` docker pull [OPTIONS] NAME [:TAG] -a, –all-tags = false 下载仓库中所有被标记的镜像 推送镜像 push username/IMAGE ```1234567891011### 构建镜像* 保存对容器的修改，并再次使用* 自定义镜像的能力* 以软件的形式打包并分发服务及其运行环境#### docker commit通过容器构建* ``` docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]] -a, –author=”” Author e.g., &quot;John Hannibal Smith hannibal@a-team.com&quot; -m, –message=”” 记录构建的信息 -p, –pause = true 不暂停容器的运行 docker build通过Dockerfile文件构建 dockerfile: #First DockerfileFROM ubuntu:14.04MAINTAINER dormancypress “dormancypress@outlook.comRUN apt-get updateRUN apt-get install -y nginxEXPOSE 80 docker build [OPTIONS] PATH|URL|- –force-rm = false–no-cache = false–pull=false-q,–quiet = false–rm = true-t, –tag=””]]></content>
       <categories>
         <category>笔记</category>
         <category>docker</category>
@@ -66,14 +66,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[我只是一个置顶介绍]]></title>
-    <url>%2F2019%2F08%2F03%2Ftop%2F</url>
-    <content type="text"><![CDATA[thinkload是一个字典里查不到词。 Thinkload, download something from my mind when thinking. Thinkload系列是我学习时的一些思考。 Notes系列是学习笔记。]]></content>
-      <tags>
-        <tag>thinkload</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[【thinkload】统计学习方法-第一章-统计学习方法概论]]></title>
     <url>%2F2019%2F08%2F03%2Ftongjixuexifangfa1%2F</url>
     <content type="text"><![CDATA[统计学习，学习为核心，统计为方法，学习是根据已有的经验归纳总结出潜在的规律并把所得运用到以后的行为中，]]></content>
@@ -83,6 +75,14 @@
       </categories>
       <tags>
         <tag>统计学习方法</tag>
+        <tag>thinkload</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[我只是一个置顶介绍]]></title>
+    <url>%2F2019%2F08%2F03%2Ftop%2F</url>
+    <content type="text"><![CDATA[thinkload是一个字典里查不到词。 Thinkload, download something from my mind when thinking. Thinkload系列是我学习时的一些思考。 Notes系列是学习笔记。]]></content>
+      <tags>
         <tag>thinkload</tag>
       </tags>
   </entry>
