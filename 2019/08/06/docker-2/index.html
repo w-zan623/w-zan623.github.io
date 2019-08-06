@@ -70,18 +70,18 @@
   daovoice('update');
   </script>
 
-  <meta name="description" content="容器的基本操作启动容器 仅一次命令 1docker run IMAGE [COMMAND] [ARG]  启动交互式容器 1docker run -i -t IMAGE /bin/bash    -i –interactive=ture | false 默认是false，为容器始终打开标准输入-t –tty=true | false 默认是false，分配一个终端  自定义容器名字 1docker">
-<meta name="keywords" content="笔记,docker">
+  <meta name="description" content="容器的基本操作启动容器 仅一次命令 1docker run IMAGE [COMMAND] [ARG]  启动交互式容器 1docker run -i -t IMAGE /bin/bash   -i —interactive=ture | false 默认是false，为容器始终打开标准输入-t —tty=true | false 默认是false，分配一个终端  自定义容器名字 1docker">
+<meta name="keywords" content="docker,笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【notes】docker学习笔记2-docker容器">
 <meta property="og:url" content="https://zinw623.github.io/2019/08/06/docker-2/index.html">
 <meta property="og:site_name" content="zinW&#39; s thinkload">
-<meta property="og:description" content="容器的基本操作启动容器 仅一次命令 1docker run IMAGE [COMMAND] [ARG]  启动交互式容器 1docker run -i -t IMAGE /bin/bash    -i –interactive=ture | false 默认是false，为容器始终打开标准输入-t –tty=true | false 默认是false，分配一个终端  自定义容器名字 1docker">
+<meta property="og:description" content="容器的基本操作启动容器 仅一次命令 1docker run IMAGE [COMMAND] [ARG]  启动交互式容器 1docker run -i -t IMAGE /bin/bash   -i —interactive=ture | false 默认是false，为容器始终打开标准输入-t —tty=true | false 默认是false，分配一个终端  自定义容器名字 1docker">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-06T15:45:01.235Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【notes】docker学习笔记2-docker容器">
-<meta name="twitter:description" content="容器的基本操作启动容器 仅一次命令 1docker run IMAGE [COMMAND] [ARG]  启动交互式容器 1docker run -i -t IMAGE /bin/bash    -i –interactive=ture | false 默认是false，为容器始终打开标准输入-t –tty=true | false 默认是false，分配一个终端  自定义容器名字 1docker">
+<meta name="twitter:description" content="容器的基本操作启动容器 仅一次命令 1docker run IMAGE [COMMAND] [ARG]  启动交互式容器 1docker run -i -t IMAGE /bin/bash   -i —interactive=ture | false 默认是false，为容器始终打开标准输入-t —tty=true | false 默认是false，分配一个终端  自定义容器名字 1docker">
   <link rel="alternate" href="/atom.xml" title="zinW' s thinkload" type="application/atom+xml">
   <link rel="canonical" href="https://zinw623.github.io/2019/08/06/docker-2/">
 
@@ -352,7 +352,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">1.7k</span>
+              <span title="本文字数">1.6k</span>
             </span>
           
             <span class="post-meta-item">
@@ -362,7 +362,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">2 分钟</span>
+              <span title="阅读时长">1 分钟</span>
             </span>
           
 
@@ -381,10 +381,9 @@
 </li>
 <li><p>启动交互式容器</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -i -t IMAGE /bin/bash</span><br></pre></td></tr></table></figure>
-
 </li>
 </ul>
-<p>-i –interactive=ture | false 默认是false，为容器始终打开标准输入<br>-t –tty=true | false 默认是false，分配一个终端</p>
+<p>-i —interactive=ture | false 默认是false，为容器始终打开标准输入<br>-t —tty=true | false 默认是false，分配一个终端</p>
 <ul>
 <li><p>自定义容器名字</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name=自定义名 -i -t IMAGE /bin/bash</span><br></pre></td></tr></table></figure>
@@ -398,42 +397,32 @@
 </li>
 <li><p>查看容器参数</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect [ID] or [name]</span><br></pre></td></tr></table></figure>
-
 </li>
 </ul>
 <h4 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a>删除容器</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm 容器名</span><br></pre></td></tr></table></figure>
-
 <h3 id="守护式容器"><a href="#守护式容器" class="headerlink" title="守护式容器"></a>守护式容器</h3><p>什么是守护式容器：</p>
 <ul>
 <li>能够长期运行</li>
 <li>没有交互式会话</li>
 </ul>
 <h4 id="以守护形式运行容器："><a href="#以守护形式运行容器：" class="headerlink" title="以守护形式运行容器："></a>以守护形式运行容器：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run -i -t IMAGE /bin/bash</span><br><span class="line">Ctrl + P Ctrl + Q</span><br></pre></td></tr></table></figure>
-
 <h4 id="附加到运行中的容器"><a href="#附加到运行中的容器" class="headerlink" title="附加到运行中的容器"></a>附加到运行中的容器</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker attach 容器名</span><br></pre></td></tr></table></figure>
-
 <h4 id="启动守护式容器"><a href="#启动守护式容器" class="headerlink" title="启动守护式容器"></a>启动守护式容器</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d 镜像名 [COMMAND] [ARG...]</span><br></pre></td></tr></table></figure>
-
 <h4 id="得知容器运行情况"><a href="#得知容器运行情况" class="headerlink" title="得知容器运行情况"></a>得知容器运行情况</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs [-f] [-t] [--tail] 容器名</span><br></pre></td></tr></table></figure>
-
-<p>-f –follows=true | false 默认为false  一直跟踪日志变化并返回结果<br>-t –timestamps=true | false 默认为false  结果加上时间戳<br>–tail= “all”  多少数量的日志</p>
+<p>-f —follows=true | false 默认为false  一直跟踪日志变化并返回结果<br>-t —timestamps=true | false 默认为false  结果加上时间戳<br>—tail= “all”  多少数量的日志</p>
 <h4 id="查看运行中容器进程"><a href="#查看运行中容器进程" class="headerlink" title="查看运行中容器进程"></a>查看运行中容器进程</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker top 容器名</span><br></pre></td></tr></table></figure>
-
 <h4 id="在运行中的容器内启动新进程"><a href="#在运行中的容器内启动新进程" class="headerlink" title="在运行中的容器内启动新进程"></a>在运行中的容器内启动新进程</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> [-d] [-i] [-t] 容器名 [COMMAND] [ARG...]</span><br></pre></td></tr></table></figure>
-
 <h4 id="停止守护式容器"><a href="#停止守护式容器" class="headerlink" title="停止守护式容器"></a>停止守护式容器</h4><ul>
 <li><p>发送指令等待停止</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop 容器名</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>直接停止容器</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">kill</span> 容器名</span><br></pre></td></tr></table></figure>
-
 </li>
 </ul>
-<p>###在容器中部署静态网站</p>
-<h4 id="设置容器的端口映射"><a href="#设置容器的端口映射" class="headerlink" title="设置容器的端口映射"></a>设置容器的端口映射</h4><p>run [-P]</p>
+<h3 id="在容器中部署静态网站"><a href="#在容器中部署静态网站" class="headerlink" title="在容器中部署静态网站"></a>在容器中部署静态网站</h3><h4 id="设置容器的端口映射"><a href="#设置容器的端口映射" class="headerlink" title="设置容器的端口映射"></a>设置容器的端口映射</h4><p>run [-P]</p>
 <ul>
-<li><p>-P , –publish-all = true | false 默认为false  为容器暴露的所有端口设置映射</p>
+<li><p>-P , —publish-all = true | false 默认为false  为容器暴露的所有端口设置映射</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -P -t -i ubuntu /bin/bash</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>-p , 指定端口</p>
@@ -449,7 +438,6 @@
 </li>
 <li><p>ip:宿主机端口:容器端口</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 0.0.0.0:8080:80 -i -t ubuntu /bin/bash</span><br></pre></td></tr></table></figure>
-
 </li>
 </ul>
 </li>
@@ -474,7 +462,6 @@
 </li>
 <li><p>验证网站访问</p>
   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker port web <span class="comment"># 查看端口映射情况</span></span><br><span class="line">docker top web <span class="comment"># 查看进程运行情况</span></span><br><span class="line">docker inspect web <span class="comment">#查看ip</span></span><br><span class="line">curl http://172.17.0.2</span><br></pre></td></tr></table></figure>
-
 </li>
 </ul>
 
@@ -539,9 +526,9 @@
           
         
         <div class="post-tags">
-            <a href="/tags/笔记/" rel="tag"><i class="fa fa-tag"></i> 笔记</a>
-          
             <a href="/tags/docker/" rel="tag"><i class="fa fa-tag"></i> docker</a>
+          
+            <a href="/tags/笔记/" rel="tag"><i class="fa fa-tag"></i> 笔记</a>
           
         </div>
         <div class="post-widgets">
@@ -811,7 +798,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#容器的基本操作"><span class="nav-number">1.</span> <span class="nav-text">容器的基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#启动容器"><span class="nav-number">1.1.</span> <span class="nav-text">启动容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看容器"><span class="nav-number">1.2.</span> <span class="nav-text">查看容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除容器"><span class="nav-number">1.3.</span> <span class="nav-text">删除容器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#守护式容器"><span class="nav-number">2.</span> <span class="nav-text">守护式容器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#以守护形式运行容器："><span class="nav-number">2.1.</span> <span class="nav-text">以守护形式运行容器：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#附加到运行中的容器"><span class="nav-number">2.2.</span> <span class="nav-text">附加到运行中的容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动守护式容器"><span class="nav-number">2.3.</span> <span class="nav-text">启动守护式容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#得知容器运行情况"><span class="nav-number">2.4.</span> <span class="nav-text">得知容器运行情况</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看运行中容器进程"><span class="nav-number">2.5.</span> <span class="nav-text">查看运行中容器进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在运行中的容器内启动新进程"><span class="nav-number">2.6.</span> <span class="nav-text">在运行中的容器内启动新进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#停止守护式容器"><span class="nav-number">2.7.</span> <span class="nav-text">停止守护式容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置容器的端口映射"><span class="nav-number">2.8.</span> <span class="nav-text">设置容器的端口映射</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Nginx部署"><span class="nav-number">2.9.</span> <span class="nav-text">Nginx部署</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#容器的基本操作"><span class="nav-number">1.</span> <span class="nav-text">容器的基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#启动容器"><span class="nav-number">1.1.</span> <span class="nav-text">启动容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看容器"><span class="nav-number">1.2.</span> <span class="nav-text">查看容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除容器"><span class="nav-number">1.3.</span> <span class="nav-text">删除容器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#守护式容器"><span class="nav-number">2.</span> <span class="nav-text">守护式容器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#以守护形式运行容器："><span class="nav-number">2.1.</span> <span class="nav-text">以守护形式运行容器：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#附加到运行中的容器"><span class="nav-number">2.2.</span> <span class="nav-text">附加到运行中的容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动守护式容器"><span class="nav-number">2.3.</span> <span class="nav-text">启动守护式容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#得知容器运行情况"><span class="nav-number">2.4.</span> <span class="nav-text">得知容器运行情况</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看运行中容器进程"><span class="nav-number">2.5.</span> <span class="nav-text">查看运行中容器进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在运行中的容器内启动新进程"><span class="nav-number">2.6.</span> <span class="nav-text">在运行中的容器内启动新进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#停止守护式容器"><span class="nav-number">2.7.</span> <span class="nav-text">停止守护式容器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在容器中部署静态网站"><span class="nav-number">3.</span> <span class="nav-text">在容器中部署静态网站</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#设置容器的端口映射"><span class="nav-number">3.1.</span> <span class="nav-text">设置容器的端口映射</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Nginx部署"><span class="nav-number">3.2.</span> <span class="nav-text">Nginx部署</span></a></li></ol></li></ol></div>
             
 
           </div>
