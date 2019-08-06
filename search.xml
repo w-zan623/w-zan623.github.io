@@ -3,13 +3,13 @@
   <entry>
     <title><![CDATA[【notes】docker学习笔记-docker容器]]></title>
     <url>%2F2019%2F08%2F06%2Fdocker-2%2F</url>
-    <content type="text"><![CDATA[容器的基本操作启动容器 仅一次命令 1docker run IMAGE [COMMAND] [ARG] 启动交互式容器 1docker run -i -t IMAGE /bin/bash 守护式容器在容器中部署静态网站]]></content>
+    <content type="text"><![CDATA[容器的基本操作启动容器 仅一次命令 1docker run IMAGE [COMMAND] [ARG] 启动交互式容器 1docker run -i -t IMAGE /bin/bash -i —interactive=ture | false 默认是false，为容器始终打开标准输入-t —tty=true | false 默认是false，分配一个终端 自定义容器名字 1docker run --name=自定义名 -i -t IMAGE /bin/bash 重新启动已建立的容器docker start [-i] 容器名 查看容器 不加参数是正在运行的容器，-a是所有容器，-l是最新创建的一个容器。 1docker ps [-a] [-l] 查看容器参数 1docker inspect [ID] or [name] 删除容器1docker rm 容器名 守护式容器什么是守护式容器： 能够长期运行 没有交互式会话 以守护形式运行容器：12docker run -i -t IMAGE /bin/bashCtrl + P Ctrl + Q 附加到运行中的容器1docker attach 容器名 启动守护式容器1docker run -d 镜像名 [COMMAND] [ARG...] 得知容器运行情况1docker logs [-f] [-t] [--tail] 容器名 -f —follows=true | false 默认为false 一直跟踪日志变化并返回结果-t —timestamps=true | false 默认为false 结果加上时间戳—tail= “all” 多少数量的日志 查看运行中容器进程1docker top 容器名 在运行中的容器内启动新进程1docker exec [-d] [-i] [-t] 容器名 [COMMAND] [ARG...] 停止守护式容器 发送指令等待停止 1docker stop 容器名 直接停止容器 1docker kill 容器名 在容器中部署静态网站设置容器的端口映射run [-P] -P , —publish-all = true | false 默认为false 为容器暴露的所有端口设置映射 1docker run -P -t -i ubuntu /bin/bash -p , 指定端口 容器端口 1docker run -p 80 -i -t ubuntu /bin/bash 宿主机端口:容器端口 1docker run -p 8080:80 -i -t ubuntu /bin/bash ip::容器端口 1docker run -p 0.0.0.0:80 -i -t ubuntu /bin/bash ip:宿主机端口:容器端口 1docker run -p 0.0.0.0:8080:80 -i -t ubuntu /bin/bash Nginx部署 创建映射80端口的交互式容器 1docker run -p 80 --name web -it ubuntu /bin/bash 安装Nginx 安装文本编辑器vim 1234apt-get updateapt-get upgradeapt-get install nginx -yapt-get install vim -y 创建静态页面 12mkdir -p /var/www/htmlvim index.html 修改Nginx配置文件 1vim /etc/nginx/sites-enabled/default 运行Nginx 123nginxps -efCtrl P Ctrl Q 验证网站访问 1234docker port web # 查看端口映射情况docker top web # 查看进程运行情况docker inspect web #查看ipcurl http://172.17.0.2]]></content>
       <categories>
         <category>docker</category>
       </categories>
       <tags>
-        <tag>笔记</tag>
         <tag>docker</tag>
+        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -20,8 +20,8 @@
         <category>docker</category>
       </categories>
       <tags>
-        <tag>笔记</tag>
         <tag>docker</tag>
+        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -33,8 +33,8 @@
         <category>笔记</category>
       </categories>
       <tags>
-        <tag>Git</tag>
         <tag>笔记</tag>
+        <tag>Git</tag>
       </tags>
   </entry>
   <entry>
