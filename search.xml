@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[【notes】docker学习笔记-docker镜像]]></title>
+    <url>%2F2019%2F08%2F06%2Fdocker-3%2F</url>
+    <content type="text"><![CDATA[查看和删除镜像 镜像的存储位置：/var/lib/docker 列出镜像 images [OPSIONS] [REPOSITORY]```1234567891011121314151617181920212223242526 -a, --all = false # 显示所有镜像，默认并不显示中间层镜像（没有标签名的镜像） -f, --filter = [] # 过滤条件 --no-trunc = false # 不使用截断的形式来显示数据(默认使用截断显示EID，比文件名短) -q, --quiet = false # 只显示EID#### 镜像标签和仓库* 镜像仓库 区分： * REPOSITORY 仓库 * REGISTRY 仓库 REGISTRY里会有很多REPOSITORY仓库，每个REPOSITORY里会有一个个独立的镜像。* 标签 TAG * 镜像的名字 = 镜像仓库名 : 镜像标签 --对应--&gt; 镜像ID ubuntu:latest, ubuntu:14.04, ..... * 如果没有指定标签，默认为latest。 * 同一仓库的不同标签可以对应同一镜像ID，也就是说可以根据需求给同一镜像文件打上不同的标签。 * 没有标签名的镜像称作中间层镜像。#### 查看镜像* ```docker inspect [OPTIONS] CONTIANER|IMAGE [CONTAINER|IMAGE...] -f, –format=”” 删除镜像 rmi [OPTIONS] IMAGE [IMAGE...]```1234567-f, --force = false 强制删除--no-prune = false 不删除未打标签的父镜像对应多个标签的镜像文件可以直接用ID选定所有标签``` docker rmi ID 获取和推送镜像查找镜像 Docker Hub https://registry.hub.docker.com search [OPTIONS] TERM12345678 --automated = false --no-trunc = false -s, stars = 0 只显示最少多少stars的 最多返回25个结果#### 拉取镜像* ```docker pull [OPTIONS] NAME [:TAG] -a, –all-tags = false 下载仓库中所有被标记的镜像 推送镜像 push username/IMAGE```1234567891011### 构建镜像* 保存对容器的修改，并再次使用* 自定义镜像的能力* 以软件的形式打包并分发服务及其运行环境#### docker commit通过容器构建* ```docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]] -a, –author=”” Author e.g., &quot;John Hannibal Smith hannibal@a-team.com&quot; -m, –message=”” 记录构建的信息 -p, –pause = true 不暂停容器的运行 docker build通过Dockerfile文件构建 dockerfile: #First DockerfileFROM ubuntu:14.04MAINTAINER dormancypress “dormancypress@outlook.comRUN apt-get updateRUN apt-get install -y nginxEXPOSE 80 docker build [OPTIONS] PATH|URL|- –force-rm = false–no-cache = false–pull=false-q,–quiet = false–rm = true-t, –tag=””]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[【notes】docker学习笔记-docker容器]]></title>
     <url>%2F2019%2F08%2F06%2Fdocker-2%2F</url>
     <content type="text"><![CDATA[容器的基本操作启动容器 仅一次命令 1docker run IMAGE [COMMAND] [ARG] 启动交互式容器 1docker run -i -t IMAGE /bin/bash -i –interactive=ture | false 默认是false，为容器始终打开标准输入-t –tty=true | false 默认是false，分配一个终端 自定义容器名字 1docker run --name=自定义名 -i -t IMAGE /bin/bash 重新启动已建立的容器docker start [-i] 容器名 查看容器 不加参数是正在运行的容器，-a是所有容器，-l是最新创建的一个容器。 1docker ps [-a] [-l] 查看容器参数 1docker inspect [ID] or [name] 删除容器1docker rm 容器名 守护式容器什么是守护式容器： 能够长期运行 没有交互式会话 以守护形式运行容器：12docker run -i -t IMAGE /bin/bashCtrl + P Ctrl + Q 附加到运行中的容器1docker attach 容器名 启动守护式容器1docker run -d 镜像名 [COMMAND] [ARG...] 得知容器运行情况1docker logs [-f] [-t] [--tail] 容器名 -f –follows=true | false 默认为false 一直跟踪日志变化并返回结果-t –timestamps=true | false 默认为false 结果加上时间戳–tail= “all” 多少数量的日志 查看运行中容器进程1docker top 容器名 在运行中的容器内启动新进程1docker exec [-d] [-i] [-t] 容器名 [COMMAND] [ARG...] 停止守护式容器 发送指令等待停止 1docker stop 容器名 直接停止容器 1docker kill 容器名 ###在容器中部署静态网站 设置容器的端口映射run [-P] -P , –publish-all = true | false 默认为false 为容器暴露的所有端口设置映射 1docker run -P -t -i ubuntu /bin/bash -p , 指定端口 容器端口 1docker run -p 80 -i -t ubuntu /bin/bash 宿主机端口:容器端口 1docker run -p 8080:80 -i -t ubuntu /bin/bash ip::容器端口 1docker run -p 0.0.0.0:80 -i -t ubuntu /bin/bash ip:宿主机端口:容器端口 1docker run -p 0.0.0.0:8080:80 -i -t ubuntu /bin/bash Nginx部署 创建映射80端口的交互式容器 1docker run -p 80 --name web -it ubuntu /bin/bash 安装Nginx 安装文本编辑器vim 1234apt-get updateapt-get upgradeapt-get install nginx -yapt-get install vim -y 创建静态页面 12mkdir -p /var/www/htmlvim index.html 修改Nginx配置文件 1vim /etc/nginx/sites-enabled/default 运行Nginx 123nginxps -efCtrl P Ctrl Q 验证网站访问 1234docker port web # 查看端口映射情况docker top web # 查看进程运行情况docker inspect web #查看ipcurl http://172.17.0.2]]></content>
@@ -9,8 +22,8 @@
         <category>docker</category>
       </categories>
       <tags>
-        <tag>笔记</tag>
         <tag>docker</tag>
+        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -22,8 +35,8 @@
         <category>docker</category>
       </categories>
       <tags>
-        <tag>笔记</tag>
         <tag>docker</tag>
+        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -35,8 +48,8 @@
         <category>Git</category>
       </categories>
       <tags>
-        <tag>Git</tag>
         <tag>笔记</tag>
+        <tag>Git</tag>
       </tags>
   </entry>
   <entry>
