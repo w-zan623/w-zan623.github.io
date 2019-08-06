@@ -2,23 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://zinw623.github.io/about/index.html</loc>
+    <loc>https://zinw623.github.io/2019/08/06/docker-1/</loc>
     
-    <lastmod>2019-08-04T15:21:01.441Z</lastmod>
+    <lastmod>2019-08-06T07:17:20.350Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://zinw623.github.io/2019/08/03/xshell-vmware/</loc>
+    <loc>https://zinw623.github.io/2019/08/05/git-1/</loc>
     
-    <lastmod>2019-08-04T03:20:33.671Z</lastmod>
+    <lastmod>2019-08-05T12:23:56.140Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://zinw623.github.io/2019/08/03/tongjixuexifangfa1/</loc>
     
-    <lastmod>2019-08-04T03:20:21.467Z</lastmod>
+    <lastmod>2019-08-05T11:51:50.630Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zinw623.github.io/2019/08/03/top/</loc>
+    
+    <lastmod>2019-08-05T11:49:03.887Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zinw623.github.io/2019/08/03/xshell-vmware/</loc>
+    
+    <lastmod>2019-08-05T10:31:08.285Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zinw623.github.io/about/index.html</loc>
+    
+    <lastmod>2019-08-04T15:21:01.441Z</lastmod>
     
   </url>
   
@@ -47,13 +68,6 @@
     <loc>https://zinw623.github.io/2019/08/02/hexo-jupyter/</loc>
     
     <lastmod>2019-08-04T03:19:26.760Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zinw623.github.io/2019/08/03/top/</loc>
-    
-    <lastmod>2019-08-04T03:19:02.352Z</lastmod>
     
   </url>
   

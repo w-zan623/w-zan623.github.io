@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zinw623.github.io/"/>
-  <updated>2019-08-04T03:20:33.671Z</updated>
+  <updated>2019-08-06T07:17:20.350Z</updated>
   <id>https://zinw623.github.io/</id>
   
   <author>
@@ -17,13 +17,78 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>【notes】docker学习笔记-docker基本组成</title>
+    <link href="https://zinw623.github.io/2019/08/06/docker-1/"/>
+    <id>https://zinw623.github.io/2019/08/06/docker-1/</id>
+    <published>2019-08-06T02:30:45.000Z</published>
+    <updated>2019-08-06T07:17:20.350Z</updated>
+    
+    <content type="html"><![CDATA[<p>###Docker的基本组成</p><ul><li>Docker Client 客户端</li><li>Docker Daemon 守护进程</li><li>Docker Image 镜像</li><li>Docker Container 容器</li><li>Docker Registry 仓库</li></ul><h4 id="Docker客户端-守护进程"><a href="#Docker客户端-守护进程" class="headerlink" title="Docker客户端/守护进程"></a>Docker客户端/守护进程</h4><ul><li>C/S架构</li><li>docker客户端对服务器的访问： 本地/远程</li><li>docker客户端向发送给守护进程请求，守护进程的执行结果还会传回给客户端。</li></ul><h4 id="Docker-Image镜像"><a href="#Docker-Image镜像" class="headerlink" title="Docker Image镜像"></a>Docker Image镜像</h4><ul><li>构建和打包阶段。</li><li>容器的基石，相当于保存了容器运行需要的源代码。</li><li>层叠的层叠文件系统。 bootfs（引导文件系统）-&gt; rootfs(Ubuntu) -&gt; add emacs -&gt; add Apache</li><li>联合加载（union mount）:一次加载多个文件系统（add Apache，add emacs），将所有文件系统叠加在一切。镜像可以叠加在一起，位于底部的成为基础镜像（rootfs），add emacs（副镜像）。</li></ul><h4 id="Docker-Container容器"><a href="#Docker-Container容器" class="headerlink" title="Docker Container容器"></a>Docker Container容器</h4><ul><li>通过镜像启动。</li><li>启动执行阶段。</li><li>配置数据和镜像层（bootfs -&gt; ······ -&gt; add emacs) -&gt; 可写层。</li><li>写时复制：docker出现变化时都会应用到可写层，先从只读镜像层复制到可写层然后只读层的文件被隐藏。</li></ul><h4 id="Docker-Registry仓库"><a href="#Docker-Registry仓库" class="headerlink" title="Docker Registry仓库"></a>Docker Registry仓库</h4><ul><li>保存docker镜像。</li><li>分为公有和私有。公有：Docker Hub</li></ul><h4 id="图示结构"><a href="#图示结构" class="headerlink" title="图示结构"></a>图示结构</h4><p>Docker:</p><p><img alt data-src="/uploads/docker/0.PNG"></p><p>Docker Image:</p><p><img alt data-src="/uploads/docker/1.PNG"></p><p>Docker Container:</p><p><img alt data-src="/uploads/docker/2.PNG"></p><h4 id="docker基本指令"><a href="#docker基本指令" class="headerlink" title="docker基本指令"></a>docker基本指令</h4><ul><li><p>查找镜像</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search tutorial</span><br></pre></td></tr></table></figure></li><li><p>下载镜像</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull learn/tutorial</span><br></pre></td></tr></table></figure></li><li><p>启动一个容器，使用echo命令输出hello world</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run learn/tutorial <span class="built_in">echo</span> <span class="string">'hello world'</span></span><br></pre></td></tr></table></figure></li><li><p>启动一个容器下载ping</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run learn/tutorial apt-get install -y ping</span><br></pre></td></tr></table></figure></li><li><p>查看有哪些容器</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -l</span><br></pre></td></tr></table></figure></li><li><p>提交容器，即创建一个新的镜像</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit [docker ID] learn/ping</span><br></pre></td></tr></table></figure></li><li><p>用新镜像建立一个容器</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run learn/ping ping www.baidu.com</span><br></pre></td></tr></table></figure></li><li><p>查看容器信息</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect [docker ID]</span><br></pre></td></tr></table></figure></li><li><p>查看有哪些镜像</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker image</span><br></pre></td></tr></table></figure></li><li><p>将镜像保存到docker hub上</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker push /learn/ping</span><br></pre></td></tr></table></figure></li></ul><h3 id="Docker容器相关技术简介"><a href="#Docker容器相关技术简介" class="headerlink" title="Docker容器相关技术简介"></a>Docker容器相关技术简介</h3><h4 id="Docker依赖的Linux内核特性"><a href="#Docker依赖的Linux内核特性" class="headerlink" title="Docker依赖的Linux内核特性"></a>Docker依赖的Linux内核特性</h4><ul><li><p>Namespaces 命名空间<br>  提供了系统资源的隔离，for轻量级虚拟化服务<br>  五种命名空间：</p><ul><li>PID 进程隔离</li><li>NET 管理网络接口</li><li>IPC 管理跨进程通信的访问</li><li>MNT 管理挂载点</li><li>UTS 隔离内核和版本标识</li></ul></li><li><p>Control groups 控制组</p><ul><li>资源限制（内存上限等）</li><li>优先级设定（设定哪些进程组使用哪些资源）</li><li>资源计量</li><li>资源控制（挂起恢复）</li></ul></li></ul><h4 id="Docker容器的能力"><a href="#Docker容器的能力" class="headerlink" title="Docker容器的能力"></a>Docker容器的能力</h4><ul><li>文件系统隔离：每个容器都有自己的root文件系统</li><li>进程隔离： 每个容器都运行在自己的进程环境中</li><li>网络隔离： 容器间的虚拟网络接口和IP地址都是分开的</li><li>资源隔离和分组：使用cgroups将CPU和内存之类的资源独立分配给每个Docker容器</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;###Docker的基本组成&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Docker Client 客户端&lt;/li&gt;
+&lt;li&gt;Docker Daemon 守护进程&lt;/li&gt;
+&lt;li&gt;Docker Image 镜像&lt;/li&gt;
+&lt;li&gt;Docker Container 容器&lt;/li&gt;
+&lt;li&gt;
+      
+    
+    </summary>
+    
+      <category term="docker" scheme="https://zinw623.github.io/categories/docker/"/>
+    
+    
+      <category term="docker" scheme="https://zinw623.github.io/tags/docker/"/>
+    
+      <category term="笔记" scheme="https://zinw623.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【notes】Git笔记-1</title>
+    <link href="https://zinw623.github.io/2019/08/05/git-1/"/>
+    <id>https://zinw623.github.io/2019/08/05/git-1/</id>
+    <published>2019-08-05T11:55:41.000Z</published>
+    <updated>2019-08-05T12:23:56.140Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Git工作流程"><a href="#Git工作流程" class="headerlink" title="Git工作流程"></a>Git工作流程</h3><ul><li>克隆Git资源作为工作目录。</li><li>在克隆的资源上修改文件。</li><li>如果其他人修改，你也可以修改资源。</li><li>在提交前查看修改。</li><li>提交修改</li><li>提交后后悔的话可以撤回提交，另外可以再做修改。</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;Git工作流程&quot;&gt;&lt;a href=&quot;#Git工作流程&quot; class=&quot;headerlink&quot; title=&quot;Git工作流程&quot;&gt;&lt;/a&gt;Git工作流程&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;克隆Git资源作为工作目录。&lt;/li&gt;
+&lt;li&gt;在克隆的资源上修改文件。&lt;/li&gt;
+&lt;l
+      
+    
+    </summary>
+    
+      <category term="Git" scheme="https://zinw623.github.io/categories/Git/"/>
+    
+      <category term="笔记" scheme="https://zinw623.github.io/categories/Git/%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="笔记" scheme="https://zinw623.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="Git" scheme="https://zinw623.github.io/tags/Git/"/>
+    
+  </entry>
+  
+  <entry>
     <title>用Xshell管理虚拟机Ubuntu</title>
     <link href="https://zinw623.github.io/2019/08/03/xshell-vmware/"/>
     <id>https://zinw623.github.io/2019/08/03/xshell-vmware/</id>
     <published>2019-08-03T14:14:16.000Z</published>
-    <updated>2019-08-04T03:20:33.671Z</updated>
+    <updated>2019-08-05T10:31:08.285Z</updated>
     
-    <content type="html"><![CDATA[<p>因为使用VM虚拟机太过占用资源，所以我们可以用Xshell连接到虚拟机，来达到节省本机资源的目的。</p><a id="more"></a><ol><li>安装SSH： </li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install openssh-server</span><br></pre></td></tr></table></figure><ol start="2"><li>获得登录需要的ip ,在虚拟机输入：</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig</span><br></pre></td></tr></table></figure><img width="50%" data-src="/uploads/xshell-vmware/1.PNG"><p>ens*后面的inet后面的值就是ip。</p><ol start="3"><li><p>按照我之前写过的xshell连接的教程 <a href="/2019/08/01/XshellDownload/">windows系统：Xshell下载安装+连接服务器</a> 建立会话就ok，主机就是刚才你获得的ip，登录用的用户名和密码就是你安装时填的用户名(非root账户)和密码。</p></li><li><p>之后只需要打开虚拟机后最小化界面，从xshell登入就可以了。</p></li></ol>]]></content>
+    <content type="html"><![CDATA[<p>因为使用VM虚拟机太过占用资源，所以我们可以用Xshell连接到虚拟机，来达到节省本机资源的目的。</p><a id="more"></a><ol><li>安装SSH： </li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install openssh-server</span><br><span class="line">service iptables stop <span class="comment">#关闭防火墙</span></span><br><span class="line">service ssh start <span class="comment">#开启ssh服务</span></span><br></pre></td></tr></table></figure><ol start="2"><li>获得登录需要的ip ,在虚拟机输入：</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig</span><br></pre></td></tr></table></figure><img width="50%" data-src="/uploads/xshell-vmware/1.PNG"><p>ens*后面的inet后面的值就是ip。</p><ol start="3"><li><p>按照我之前写过的xshell连接的教程 <a href="/2019/08/01/XshellDownload/">windows系统：Xshell下载安装+连接服务器</a> 建立会话就ok，主机就是刚才你获得的ip，登录用的用户名和密码就是你安装时填的用户名(非root账户)和密码。</p></li><li><p>之后只需要打开虚拟机后最小化界面，从xshell登入就可以了。</p></li></ol>]]></content>
     
     <summary type="html">
     
@@ -47,17 +112,18 @@
     <link href="https://zinw623.github.io/2019/08/03/top/"/>
     <id>https://zinw623.github.io/2019/08/03/top/</id>
     <published>2019-08-03T10:17:41.000Z</published>
-    <updated>2019-08-04T03:19:02.352Z</updated>
+    <updated>2019-08-05T11:49:03.887Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p>Thinkload, download something from my mind when thinking.</p></blockquote><p>Thinkload系列是我学习时的总结思考，自己的想法多一些，文章观点可能有不合适，欢迎大家留言讨论指正。</p><p>另外，thinkload是我自创的一个单词，也不知道到底存不存在，所以不要误会这是个真的在用的词。</p><a id="more"></a>]]></content>
+    <content type="html"><![CDATA[<p>thinkload是一个字典里查不到词。</p><blockquote><p>Thinkload, download something from my mind when thinking.</p></blockquote><p>Thinkload系列是我学习时的一些思考。</p><p>Notes系列是学习笔记。</p><a id="more"></a>]]></content>
     
     <summary type="html">
     
-      &lt;blockquote&gt;
+      &lt;p&gt;thinkload是一个字典里查不到词。&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;p&gt;Thinkload, download something from my mind when thinking.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;Thinkload系列是我学习时的总结思考，自己的想法多一些，文章观点可能有不合适，欢迎大家留言讨论指正。&lt;/p&gt;
-&lt;p&gt;另外，thinkload是我自创的一个单词，也不知道到底存不存在，所以不要误会这是个真的在用的词。&lt;/p&gt;
+&lt;p&gt;Thinkload系列是我学习时的一些思考。&lt;/p&gt;
+&lt;p&gt;Notes系列是学习笔记。&lt;/p&gt;
     
     </summary>
     
@@ -67,17 +133,17 @@
   </entry>
   
   <entry>
-    <title>thinkload：统计学习方法-第一章-统计学习方法概论</title>
+    <title>【thinkload】统计学习方法-第一章-统计学习方法概论</title>
     <link href="https://zinw623.github.io/2019/08/03/tongjixuexifangfa1/"/>
     <id>https://zinw623.github.io/2019/08/03/tongjixuexifangfa1/</id>
     <published>2019-08-03T10:17:41.000Z</published>
-    <updated>2019-08-04T03:20:21.467Z</updated>
+    <updated>2019-08-05T11:51:50.630Z</updated>
     
-    <content type="html"><![CDATA[<p>构思中。。。</p><a id="more"></a>]]></content>
+    <content type="html"><![CDATA[<p>统计学习，学习为核心，统计为方法，学习是根据已有的经验归纳总结出潜在的规律并把所得运用到以后的行为中，</p><a id="more"></a>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;构思中。。。&lt;/p&gt;
+      &lt;p&gt;统计学习，学习为核心，统计为方法，学习是根据已有的经验归纳总结出潜在的规律并把所得运用到以后的行为中，&lt;/p&gt;
     
     </summary>
     
