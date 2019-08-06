@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zinw623.github.io/"/>
-  <updated>2019-08-06T15:31:10.301Z</updated>
+  <updated>2019-08-06T15:37:23.859Z</updated>
   <id>https://zinw623.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://zinw623.github.io/2019/08/06/docker-3/"/>
     <id>https://zinw623.github.io/2019/08/06/docker-3/</id>
     <published>2019-08-06T13:17:53.000Z</published>
-    <updated>2019-08-06T15:31:10.301Z</updated>
+    <updated>2019-08-06T15:37:23.859Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="查看和删除镜像"><a href="#查看和删除镜像" class="headerlink" title="查看和删除镜像"></a>查看和删除镜像</h3><ul><li>镜像的存储位置：/var/lib/docker</li></ul><h4 id="列出镜像"><a href="#列出镜像" class="headerlink" title="列出镜像"></a>列出镜像</h4><ul><li><figure class="highlight docker"><figcaption><span>images [OPSIONS] [REPOSITORY] ```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">    -a, --all = false   <span class="comment"># 显示所有镜像，默认并不显示中间层镜像（没有标签名的镜像）</span></span><br><span class="line">    -f, --filter = []   <span class="comment"># 过滤条件</span></span><br><span class="line">    --no-trunc = false  <span class="comment"># 不使用截断的形式来显示数据(默认使用截断显示EID，比文件名短)</span></span><br><span class="line">    -q, --quiet = false <span class="comment"># 只显示EID</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#### 镜像标签和仓库</span></span><br><span class="line">* 镜像仓库</span><br><span class="line">    区分：</span><br><span class="line">    * REPOSITORY 仓库</span><br><span class="line">    * REGISTRY 仓库</span><br><span class="line"></span><br><span class="line">    REGISTRY里会有很多REPOSITORY仓库，每个REPOSITORY里会有一个个独立的镜像。</span><br><span class="line"></span><br><span class="line">* 标签 TAG</span><br><span class="line">    * 镜像的名字 = 镜像仓库名 : 镜像标签    --对应--&gt;   镜像ID </span><br><span class="line"></span><br><span class="line">     ubuntu:latest, ubuntu:<span class="number">14.04</span>, .....</span><br><span class="line"></span><br><span class="line">    * 如果没有指定标签，默认为latest。</span><br><span class="line">    * 同一仓库的不同标签可以对应同一镜像ID，也就是说可以根据需求给同一镜像文件打上不同的标签。</span><br><span class="line">    * 没有标签名的镜像称作中间层镜像。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#### 查看镜像</span></span><br><span class="line"></span><br><span class="line">* ``` docker inspect [OPTIONS] CONTIANER|IMAGE [CONTAINER|IMAGE...]</span><br></pre></td></tr></table></figure></li></ul><p>-f, –format=””</p><h4 id="删除镜像"><a href="#删除镜像" class="headerlink" title="删除镜像"></a>删除镜像</h4><ul><li><figure class="highlight docker"><figcaption><span>rmi [OPTIONS] IMAGE [IMAGE...] ```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">-f, --force = false  强制删除</span><br><span class="line">--no-prune = false  不删除未打标签的父镜像</span><br><span class="line"></span><br><span class="line">对应多个标签的镜像文件可以直接用ID选定所有标签</span><br><span class="line"></span><br><span class="line">``` docker rmi ID</span><br></pre></td></tr></table></figure></li></ul><h3 id="获取和推送镜像"><a href="#获取和推送镜像" class="headerlink" title="获取和推送镜像"></a>获取和推送镜像</h3><h4 id="查找镜像"><a href="#查找镜像" class="headerlink" title="查找镜像"></a>查找镜像</h4><ul><li>Docker Hub<br>  <a href="https://registry.hub.docker.com" target="_blank" rel="noopener">https://registry.hub.docker.com</a></li><li><figure class="highlight docker"><figcaption><span>search [OPTIONS] TERM</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">    --automated = false </span><br><span class="line">    --no-trunc = false </span><br><span class="line">    -s, stars = <span class="number">0</span>   只显示最少多少stars的</span><br><span class="line">    最多返回<span class="number">25</span>个结果</span><br><span class="line"></span><br><span class="line"><span class="comment">#### 拉取镜像</span></span><br><span class="line"></span><br><span class="line">* ``` docker pull [OPTIONS] NAME [:TAG]</span><br></pre></td></tr></table></figure></li></ul><p>-a, –all-tags = false 下载仓库中所有被标记的镜像</p><h4 id="推送镜像"><a href="#推送镜像" class="headerlink" title="推送镜像"></a>推送镜像</h4><ul><li><figure class="highlight docker"><figcaption><span>push username/IMAGE ```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### 构建镜像</span></span><br><span class="line"></span><br><span class="line">* 保存对容器的修改，并再次使用</span><br><span class="line">* 自定义镜像的能力</span><br><span class="line">* 以软件的形式打包并分发服务及其运行环境</span><br><span class="line"></span><br><span class="line"><span class="comment">#### docker commit</span></span><br><span class="line"></span><br><span class="line">通过容器构建</span><br><span class="line"></span><br><span class="line">* ``` docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]</span><br></pre></td></tr></table></figure><p>  -a, –author=”” Author</p><pre><code>e.g., &quot;John Hannibal Smith hannibal@a-team.com&quot;</code></pre><p>  -m, –message=””    记录构建的信息<br>  -p, –pause = true  不暂停容器的运行</p></li></ul><h4 id="docker-build"><a href="#docker-build" class="headerlink" title="docker build"></a>docker build</h4><p>通过Dockerfile文件构建</p><p>dockerfile:</p><blockquote><p> <strong>#First Dockerfile</strong><br>FROM ubuntu:14.04<br>MAINTAINER dormancypress “<a href="mailto:dormancypress@outlook.com" target="_blank" rel="noopener">dormancypress@outlook.com</a><br>RUN apt-get update<br>RUN apt-get install -y nginx<br>EXPOSE 80</p></blockquote><ul><li><code>docker build [OPTIONS] PATH|URL|-</code></li></ul><p>–force-rm = false<br>–no-cache = false<br>–pull=false<br>-q,–quiet = false<br>–rm = true<br>-t, –tag=””</p>]]></content>
+    <content type="html"><![CDATA[<h3 id="查看和删除镜像"><a href="#查看和删除镜像" class="headerlink" title="查看和删除镜像"></a>查看和删除镜像</h3><ul><li>镜像的存储位置：/var/lib/docker</li></ul><h4 id="列出镜像"><a href="#列出镜像" class="headerlink" title="列出镜像"></a>列出镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images [OPSIONS] [REPOSITORY]</span><br></pre></td></tr></table></figure><pre><code>-a, --all = false   # 显示所有镜像，默认并不显示中间层镜像（没有标签名的镜像）-f, --filter = []   # 过滤条件--no-trunc = false  # 不使用截断的形式来显示数据(默认使用截断显示EID，比文件名短)-q, --quiet = false # 只显示EID</code></pre><h4 id="镜像标签和仓库"><a href="#镜像标签和仓库" class="headerlink" title="镜像标签和仓库"></a>镜像标签和仓库</h4><ul><li><p>镜像仓库<br>  区分：</p><ul><li><p>REPOSITORY 仓库</p></li><li><p>REGISTRY 仓库</p><p>REGISTRY里会有很多REPOSITORY仓库，每个REPOSITORY里会有一个个独立的镜像。</p></li></ul></li><li><p>标签 TAG</p><ul><li><p>镜像的名字 = 镜像仓库名 : 镜像标签    –对应–&gt;   镜像ID </p><p>ubuntu:latest, ubuntu:14.04, …..</p></li><li><p>如果没有指定标签，默认为latest。</p></li><li><p>同一仓库的不同标签可以对应同一镜像ID，也就是说可以根据需求给同一镜像文件打上不同的标签。</p></li><li><p>没有标签名的镜像称作中间层镜像。</p></li></ul></li></ul><h4 id="查看镜像"><a href="#查看镜像" class="headerlink" title="查看镜像"></a>查看镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect [OPTIONS] CONTIANER|IMAGE [CONTAINER|IMAGE...]</span><br></pre></td></tr></table></figure><p>-f, –format=””</p><h4 id="删除镜像"><a href="#删除镜像" class="headerlink" title="删除镜像"></a>删除镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rmi [OPTIONS] IMAGE [IMAGE...]</span><br></pre></td></tr></table></figure><p>-f, –force = false  强制删除<br>–no-prune = false  不删除未打标签的父镜像</p><p>对应多个标签的镜像文件可以直接用ID选定所有标签</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rmi ID</span><br></pre></td></tr></table></figure><h3 id="获取和推送镜像"><a href="#获取和推送镜像" class="headerlink" title="获取和推送镜像"></a>获取和推送镜像</h3><h4 id="查找镜像"><a href="#查找镜像" class="headerlink" title="查找镜像"></a>查找镜像</h4><ul><li><p>Docker Hub<br>  <a href="https://registry.hub.docker.com" target="_blank" rel="noopener">https://registry.hub.docker.com</a></p></li><li><p>docker search</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search [OPTIONS] TERM</span><br></pre></td></tr></table></figure><p>  –automated = false<br>  –no-trunc = false<br>  -s, stars = 0   只显示最少多少stars的<br>  最多返回25个结果</p></li></ul><h4 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull [OPTIONS] NAME [:TAG]</span><br></pre></td></tr></table></figure><p>-a, –all-tags = false 下载仓库中所有被标记的镜像</p><h4 id="推送镜像"><a href="#推送镜像" class="headerlink" title="推送镜像"></a>推送镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker push username/IMAGE</span><br></pre></td></tr></table></figure><h3 id="构建镜像"><a href="#构建镜像" class="headerlink" title="构建镜像"></a>构建镜像</h3><ul><li>保存对容器的修改，并再次使用</li><li>自定义镜像的能力</li><li>以软件的形式打包并分发服务及其运行环境</li></ul><h4 id="docker-commit"><a href="#docker-commit" class="headerlink" title="docker commit"></a>docker commit</h4><p>通过容器构建</p><ul><li><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]</span><br></pre></td></tr></table></figure><p>  -a, –author=”” Author</p><pre><code>e.g., &quot;John Hannibal Smith hannibal@a-team.com&quot;</code></pre><p>  -m, –message=””    记录构建的信息<br>  -p, –pause = true  不暂停容器的运行</p></li></ul><h4 id="docker-build"><a href="#docker-build" class="headerlink" title="docker build"></a>docker build</h4><p>通过Dockerfile文件构建</p><p>dockerfile:</p><blockquote><p> <strong>#First Dockerfile</strong><br>FROM ubuntu:14.04<br>MAINTAINER dormancypress “<a href="mailto:dormancypress@outlook.com" target="_blank" rel="noopener">dormancypress@outlook.com</a><br>RUN apt-get update<br>RUN apt-get install -y nginx<br>EXPOSE 80</p></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build [OPTIONS] PATH|URL|-</span><br></pre></td></tr></table></figure><p>–force-rm = false<br>–no-cache = false<br>–pull=false<br>-q,–quiet = false<br>–rm = true<br>-t, –tag=””</p>]]></content>
     
     <summary type="html">
     
@@ -167,6 +167,31 @@
   </entry>
   
   <entry>
+    <title>我只是一个置顶介绍</title>
+    <link href="https://zinw623.github.io/2019/08/03/top/"/>
+    <id>https://zinw623.github.io/2019/08/03/top/</id>
+    <published>2019-08-03T10:17:41.000Z</published>
+    <updated>2019-08-05T11:49:03.887Z</updated>
+    
+    <content type="html"><![CDATA[<p>thinkload是一个字典里查不到词。</p><blockquote><p>Thinkload, download something from my mind when thinking.</p></blockquote><p>Thinkload系列是我学习时的一些思考。</p><p>Notes系列是学习笔记。</p><a id="more"></a>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;thinkload是一个字典里查不到词。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Thinkload, download something from my mind when thinking.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Thinkload系列是我学习时的一些思考。&lt;/p&gt;
+&lt;p&gt;Notes系列是学习笔记。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="thinkload" scheme="https://zinw623.github.io/tags/thinkload/"/>
+    
+  </entry>
+  
+  <entry>
     <title>【thinkload】统计学习方法-第一章-统计学习方法概论</title>
     <link href="https://zinw623.github.io/2019/08/03/tongjixuexifangfa1/"/>
     <id>https://zinw623.github.io/2019/08/03/tongjixuexifangfa1/</id>
@@ -187,31 +212,6 @@
     
     
       <category term="统计学习方法" scheme="https://zinw623.github.io/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
-    
-      <category term="thinkload" scheme="https://zinw623.github.io/tags/thinkload/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>我只是一个置顶介绍</title>
-    <link href="https://zinw623.github.io/2019/08/03/top/"/>
-    <id>https://zinw623.github.io/2019/08/03/top/</id>
-    <published>2019-08-03T10:17:41.000Z</published>
-    <updated>2019-08-05T11:49:03.887Z</updated>
-    
-    <content type="html"><![CDATA[<p>thinkload是一个字典里查不到词。</p><blockquote><p>Thinkload, download something from my mind when thinking.</p></blockquote><p>Thinkload系列是我学习时的一些思考。</p><p>Notes系列是学习笔记。</p><a id="more"></a>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;thinkload是一个字典里查不到词。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Thinkload, download something from my mind when thinking.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Thinkload系列是我学习时的一些思考。&lt;/p&gt;
-&lt;p&gt;Notes系列是学习笔记。&lt;/p&gt;
-    
-    </summary>
-    
     
       <category term="thinkload" scheme="https://zinw623.github.io/tags/thinkload/"/>
     
