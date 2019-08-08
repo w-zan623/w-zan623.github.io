@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[【notes】docker学习笔记5-dockerfile]]></title>
     <url>%2F2019%2F08%2F08%2Fdocker-5%2F</url>
-    <content type="text"><![CDATA[dockerfile指令指令格式注释： # Comment指令： INSTRUCTION argument FROM FROM &lt;image&gt; FROM &lt;image&gt;:&lt;tag&gt; 必须已经存在的镜像，也就是基础镜像 必须是第一条非注释指令 MAINTAINER MAINTAINER &lt;name&gt; 指定镜像的作者信息，包含镜像的所有者和练习方式 RUN构建构成运行的 RUN &lt;command&gt; (shell模式) /bin/sh -c command RUN [“executable”, “param1”, “param2”] (exec模式) RUN[“/bin/bash”, “-c”, “echo hello”] EXPOSE EXPOSE &lt;port&gt; [&lt;port&gt;…] 指定运行该镜像的容器使用的端口，但只是告诉docker会使用特定的端口号，出于安全考虑不会自动打开，在容器运行时仍需要手动指定端口映射。CMD ENTERYPOINT 指定容器启动时运行的命令 CMD [“executable”, “param1”, “param2”] (exec模式) CMD command param1 param2 (shell模式) CMD [“params1”, “params2”] (作为ENTRYPOINT指令的默认参数) 在docker run时如果指定命令的话dockerfile里的cmd命令会被覆盖掉。 ENTRYPOINT [“executable”, “param1”, “param2”] (exec模式) ENTRYPOINT command param1 param2 (shell模式) 默认不会被覆盖，如果需要覆盖需要指定docker run –entrypoint 覆盖 ADD COPY VOLUME设置镜像的目录和文件 WORKDIR ENV USER构建及容器运行时的环境设置 ONBUILD]]></content>
+    <content type="text"><![CDATA[dockerfile指令指令格式注释： # Comment指令： INSTRUCTION argument FROM FROM &lt;image&gt; FROM &lt;image&gt;:&lt;tag&gt; 必须已经存在的镜像，也就是基础镜像 必须是第一条非注释指令 MAINTAINER MAINTAINER &lt;name&gt; 指定镜像的作者信息，包含镜像的所有者和练习方式 RUN构建构成运行的 RUN &lt;command&gt; (shell模式) /bin/sh -c command RUN [“executable”, “param1”, “param2”] (exec模式) RUN[“/bin/bash”, “-c”, “echo hello”] EXPOSE EXPOSE &lt;port&gt; [&lt;port&gt;…] 指定运行该镜像的容器使用的端口，但只是告诉docker会使用特定的端口号，出于安全考虑不会自动打开，在容器运行时仍需要手动指定端口映射。CMD ENTERYPOINT 指定容器启动时运行的命令 CMD [“executable”, “param1”, “param2”] (exec模式) CMD command param1 param2 (shell模式) CMD [“params1”, “params2”] (作为ENTRYPOINT指令的默认参数) 在docker run时如果指定命令的话dockerfile里的cmd命令会被覆盖掉。 ENTRYPOINT [“executable”, “param1”, “param2”] (exec模式) ENTRYPOINT command param1 param2 (shell模式) 默认不会被覆盖，如果需要覆盖需要指定docker run –entrypoint 覆盖 ADD COPY VOLUME设置镜像的目录和文件 ADD &lt;src&gt;…&lt;dest&gt; ADD [“&lt;src”…”“] (适用于文件路径中有空格) COPY &lt;src&gt;…&lt;dest&gt; COPY [“&lt;src”…”“] (适用于文件路径中有空格) 可以使文件地址（构建目录的相对地址），也可以是远程url（推荐使用curl获取文件内容） ADD vs. COPY ADD包含类似tar的解压功能 如果单纯复制文件，docker推荐使用COPY VOLUME [“/data”] 添加卷 WORKDIR ENV USER构建及容器运行时的环境设置 WORKDIR /path/to/workdir (设置工作目录，通常使用绝对路径，否则会一直传递下去) e.g: 1234WORKDIR /aWORKDIR bWORKDIR CRUN pwd # 结果为 /a/b/c ENV &lt;key&gt;&lt;value&gt; ENV &lt;key&gt;=&lt;value&gt; 设置环境变量 USER daemon USER user USER uidUSER user:group USER uid:gidUSER user:gid USER uid:group 指定运行的用户，若不指定则默认root用户。 ONBUILD ONBUILD [INSTRUCTION] 镜像触发器 当一个镜像被其他镜像作为基础镜像时执行 会在构建过程中插入指令 dockerfile构建过程 从基础镜像运行一个容器 执行一条指令，对容器作出修改 执行类似docker commit的操作， 提交一个新的镜像层（中间层镜像） 再基于刚提交的镜像运行一个新的容器 执行dockerfile中的下一条指令，直至所有指令执行完毕 中间层镜像进行调试 注：dockerfile会删除中间层镜像容器但不会删除中间层镜像 构建缓存，构建时会建立缓存，因此第二次执行构建命令会很快，是因为使用了缓存。 不使用缓存 1docker build --no-cache 另一种方法通过更改缓存刷新时间 FROM Ubuntu:14:04MAINTAINER dormancypress user@mail.comENV REFRESH_DATE 2019-08-08RUN apt-get updateRUN apt-get install -y nginxEXPOSE 80 修改REFRESH_DATE时间 查看镜像构建过程 1docker history [image]]]></content>
       <categories>
         <category>笔记</category>
         <category>docker</category>
@@ -92,6 +92,14 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[我只是一个置顶介绍]]></title>
+    <url>%2F2019%2F08%2F03%2Ftop%2F</url>
+    <content type="text"><![CDATA[thinkload是一个字典里查不到词。 Thinkload, download something from my mind when thinking. Thinkload系列是我学习时的一些思考。 Notes系列是学习笔记。]]></content>
+      <tags>
+        <tag>thinkload</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[【thinkload】统计学习方法-第一章-统计学习方法概论]]></title>
     <url>%2F2019%2F08%2F03%2Ftongjixuexifangfa1%2F</url>
     <content type="text"><![CDATA[统计学习，学习为核心，统计为方法，学习是根据已有的经验归纳总结出潜在的规律并把所得运用到以后的行为中，]]></content>
@@ -101,14 +109,6 @@
       </categories>
       <tags>
         <tag>统计学习方法</tag>
-        <tag>thinkload</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[我只是一个置顶介绍]]></title>
-    <url>%2F2019%2F08%2F03%2Ftop%2F</url>
-    <content type="text"><![CDATA[thinkload是一个字典里查不到词。 Thinkload, download something from my mind when thinking. Thinkload系列是我学习时的一些思考。 Notes系列是学习笔记。]]></content>
-      <tags>
         <tag>thinkload</tag>
       </tags>
   </entry>
