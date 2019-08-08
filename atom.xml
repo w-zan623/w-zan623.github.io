@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zinw623.github.io/"/>
-  <updated>2019-08-08T03:07:56.995Z</updated>
+  <updated>2019-08-08T04:09:12.871Z</updated>
   <id>https://zinw623.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【notes】docker学习笔记5-dockerfile</title>
+    <link href="https://zinw623.github.io/2019/08/08/docker-5/"/>
+    <id>https://zinw623.github.io/2019/08/08/docker-5/</id>
+    <published>2019-08-08T03:27:42.000Z</published>
+    <updated>2019-08-08T04:09:12.871Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="dockerfile指令"><a href="#dockerfile指令" class="headerlink" title="dockerfile指令"></a>dockerfile指令</h3><h4 id="指令格式"><a href="#指令格式" class="headerlink" title="指令格式"></a>指令格式</h4><p>注释： # Comment<br>指令： INSTRUCTION argument</p><h5 id="FROM"><a href="#FROM" class="headerlink" title="FROM"></a>FROM</h5><ul><li>FROM &lt;image&gt;</li><li>FROM &lt;image&gt;:&lt;tag&gt;</li><li>必须已经存在的镜像，也就是基础镜像</li><li>必须是第一条非注释指令</li></ul><h5 id="MAINTAINER"><a href="#MAINTAINER" class="headerlink" title="MAINTAINER"></a>MAINTAINER</h5><ul><li>MAINTAINER &lt;name&gt;<br>  指定镜像的作者信息，包含镜像的所有者和练习方式</li></ul><h5 id="RUN"><a href="#RUN" class="headerlink" title="RUN"></a>RUN</h5><p><strong>构建构成运行的</strong></p><ul><li>RUN &lt;command&gt;  (shell模式)<br>  /bin/sh -c command</li><li>RUN [“executable”, “param1”, “param2”]  (exec模式)<br>  RUN[“/bin/bash”, “-c”, “echo hello”]</li></ul><h5 id="EXPOSE"><a href="#EXPOSE" class="headerlink" title="EXPOSE"></a>EXPOSE</h5><ul><li>EXPOSE &lt;port&gt; [&lt;port&gt;…]<br>  指定运行该镜像的容器使用的端口，但只是告诉docker会使用特定的端口号，出于安全考虑不会自动打开，在容器运行时仍需要手动指定端口映射。<h5 id="CMD-ENTERYPOINT"><a href="#CMD-ENTERYPOINT" class="headerlink" title="CMD ENTERYPOINT"></a>CMD ENTERYPOINT</h5></li></ul><p><strong>指定容器启动时运行的命令</strong></p><ul><li>CMD [“executable”, “param1”, “param2”] (exec模式)</li><li>CMD command param1 param2 (shell模式)</li><li>CMD [“params1”, “params2”] (作为ENTRYPOINT指令的默认参数)</li></ul><p>在docker run时如果指定命令的话dockerfile里的cmd命令会被覆盖掉。</p><ul><li>ENTRYPOINT [“executable”, “param1”, “param2”] (exec模式)</li><li>ENTRYPOINT command param1 param2 (shell模式)</li></ul><p>默认不会被覆盖，如果需要覆盖需要指定docker run –entrypoint 覆盖</p><h5 id="ADD-COPY-VOLUME"><a href="#ADD-COPY-VOLUME" class="headerlink" title="ADD COPY VOLUME"></a>ADD COPY VOLUME</h5><p><strong>设置镜像的目录和文件</strong></p><h5 id="WORKDIR-ENV-USER"><a href="#WORKDIR-ENV-USER" class="headerlink" title="WORKDIR ENV USER"></a>WORKDIR ENV USER</h5><p><strong>构建及容器运行时的环境设置</strong></p><h5 id="ONBUILD"><a href="#ONBUILD" class="headerlink" title="ONBUILD"></a>ONBUILD</h5>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;dockerfile指令&quot;&gt;&lt;a href=&quot;#dockerfile指令&quot; class=&quot;headerlink&quot; title=&quot;dockerfile指令&quot;&gt;&lt;/a&gt;dockerfile指令&lt;/h3&gt;&lt;h4 id=&quot;指令格式&quot;&gt;&lt;a href=&quot;#指令格式&quot; cla
+      
+    
+    </summary>
+    
+      <category term="笔记" scheme="https://zinw623.github.io/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="docker" scheme="https://zinw623.github.io/categories/%E7%AC%94%E8%AE%B0/docker/"/>
+    
+    
+      <category term="docker" scheme="https://zinw623.github.io/tags/docker/"/>
+    
+      <category term="笔记" scheme="https://zinw623.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>【notes】docker学习笔记4-docker客户端与守护进程</title>
@@ -111,18 +140,22 @@
     <link href="https://zinw623.github.io/2019/08/06/docker-1/"/>
     <id>https://zinw623.github.io/2019/08/06/docker-1/</id>
     <published>2019-08-06T02:30:45.000Z</published>
-    <updated>2019-08-06T15:45:07.285Z</updated>
+    <updated>2019-08-08T03:29:44.227Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="Docker的基本组成"><a href="#Docker的基本组成" class="headerlink" title="Docker的基本组成"></a>Docker的基本组成</h3><ul><li>Docker Client 客户端</li><li>Docker Daemon 守护进程</li><li>Docker Image 镜像</li><li>Docker Container 容器</li><li>Docker Registry 仓库</li></ul><h4 id="Docker客户端-守护进程"><a href="#Docker客户端-守护进程" class="headerlink" title="Docker客户端/守护进程"></a>Docker客户端/守护进程</h4><ul><li>C/S架构</li><li>docker客户端对服务器的访问： 本地/远程</li><li>docker客户端向发送给守护进程请求，守护进程的执行结果还会传回给客户端。</li></ul><h4 id="Docker-Image镜像"><a href="#Docker-Image镜像" class="headerlink" title="Docker Image镜像"></a>Docker Image镜像</h4><ul><li>构建和打包阶段。</li><li>容器的基石，相当于保存了容器运行需要的源代码。</li><li>层叠的层叠文件系统。 bootfs（引导文件系统）-&gt; rootfs(Ubuntu) -&gt; add emacs -&gt; add Apache</li><li>联合加载（union mount）:一次加载多个文件系统（add Apache，add emacs），将所有文件系统叠加在一切。镜像可以叠加在一起，位于底部的成为基础镜像（rootfs），add emacs（副镜像）。</li></ul><h4 id="Docker-Container容器"><a href="#Docker-Container容器" class="headerlink" title="Docker Container容器"></a>Docker Container容器</h4><ul><li>通过镜像启动。</li><li>启动执行阶段。</li><li>配置数据和镜像层（bootfs -&gt; ······ -&gt; add emacs) -&gt; 可写层。</li><li>写时复制：docker出现变化时都会应用到可写层，先从只读镜像层复制到可写层然后只读层的文件被隐藏。</li></ul><h4 id="Docker-Registry仓库"><a href="#Docker-Registry仓库" class="headerlink" title="Docker Registry仓库"></a>Docker Registry仓库</h4><ul><li>保存docker镜像。</li><li>分为公有和私有。公有：Docker Hub</li></ul><h4 id="图示结构"><a href="#图示结构" class="headerlink" title="图示结构"></a>图示结构</h4><p>Docker:</p><p><img alt data-src="/uploads/docker/0.PNG"></p><p>Docker Image:</p><p><img alt data-src="/uploads/docker/1.PNG"></p><p>Docker Container:</p><p><img alt data-src="/uploads/docker/2.PNG"></p><h4 id="docker基本指令"><a href="#docker基本指令" class="headerlink" title="docker基本指令"></a>docker基本指令</h4><ul><li><p>查找镜像</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search tutorial</span><br></pre></td></tr></table></figure></li><li><p>下载镜像</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull learn/tutorial</span><br></pre></td></tr></table></figure></li><li><p>启动一个容器，使用echo命令输出hello world</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run learn/tutorial <span class="built_in">echo</span> <span class="string">'hello world'</span></span><br></pre></td></tr></table></figure></li><li><p>启动一个容器下载ping</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run learn/tutorial apt-get install -y ping</span><br></pre></td></tr></table></figure></li><li><p>查看有哪些容器</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -l</span><br></pre></td></tr></table></figure></li><li><p>提交容器，即创建一个新的镜像</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit [docker ID] learn/ping</span><br></pre></td></tr></table></figure></li><li><p>用新镜像建立一个容器</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run learn/ping ping www.baidu.com</span><br></pre></td></tr></table></figure></li><li><p>查看容器信息</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect [docker ID]</span><br></pre></td></tr></table></figure></li><li><p>查看有哪些镜像</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker image</span><br></pre></td></tr></table></figure></li><li><p>将镜像保存到docker hub上</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker push /learn/ping</span><br></pre></td></tr></table></figure></li></ul><h3 id="Docker容器相关技术简介"><a href="#Docker容器相关技术简介" class="headerlink" title="Docker容器相关技术简介"></a>Docker容器相关技术简介</h3><h4 id="Docker依赖的Linux内核特性"><a href="#Docker依赖的Linux内核特性" class="headerlink" title="Docker依赖的Linux内核特性"></a>Docker依赖的Linux内核特性</h4><ul><li><p>Namespaces 命名空间<br>  提供了系统资源的隔离，for轻量级虚拟化服务<br>  五种命名空间：</p><ul><li>PID 进程隔离</li><li>NET 管理网络接口</li><li>IPC 管理跨进程通信的访问</li><li>MNT 管理挂载点</li><li>UTS 隔离内核和版本标识</li></ul></li><li><p>Control groups 控制组</p><ul><li>资源限制（内存上限等）</li><li>优先级设定（设定哪些进程组使用哪些资源）</li><li>资源计量</li><li>资源控制（挂起恢复）</li></ul></li></ul><h4 id="Docker容器的能力"><a href="#Docker容器的能力" class="headerlink" title="Docker容器的能力"></a>Docker容器的能力</h4><ul><li>文件系统隔离：每个容器都有自己的root文件系统</li><li>进程隔离： 每个容器都运行在自己的进程环境中</li><li>网络隔离： 容器间的虚拟网络接口和IP地址都是分开的</li><li>资源隔离和分组：使用cgroups将CPU和内存之类的资源独立分配给每个Docker容器</li></ul>]]></content>
+    <content type="html"><![CDATA[<h3 id="Docker的基本组成"><a href="#Docker的基本组成" class="headerlink" title="Docker的基本组成"></a>Docker的基本组成</h3><ul><li><p>Docker Client 客户端</p></li><li><p>Docker Daemon 守护进程</p></li><li><p>Docker Image 镜像</p></li><li><p>Docker Container 容器</p></li><li><p>Docker Registry 仓库</p><a id="more"></a><h4 id="Docker客户端-守护进程"><a href="#Docker客户端-守护进程" class="headerlink" title="Docker客户端/守护进程"></a>Docker客户端/守护进程</h4></li><li><p>C/S架构</p></li><li><p>docker客户端对服务器的访问： 本地/远程</p></li><li><p>docker客户端向发送给守护进程请求，守护进程的执行结果还会传回给客户端。</p></li></ul><h4 id="Docker-Image镜像"><a href="#Docker-Image镜像" class="headerlink" title="Docker Image镜像"></a>Docker Image镜像</h4><ul><li>构建和打包阶段。</li><li>容器的基石，相当于保存了容器运行需要的源代码。</li><li>层叠的层叠文件系统。 bootfs（引导文件系统）-&gt; rootfs(Ubuntu) -&gt; add emacs -&gt; add Apache</li><li>联合加载（union mount）:一次加载多个文件系统（add Apache，add emacs），将所有文件系统叠加在一切。镜像可以叠加在一起，位于底部的成为基础镜像（rootfs），add emacs（副镜像）。</li></ul><h4 id="Docker-Container容器"><a href="#Docker-Container容器" class="headerlink" title="Docker Container容器"></a>Docker Container容器</h4><ul><li>通过镜像启动。</li><li>启动执行阶段。</li><li>配置数据和镜像层（bootfs -&gt; ······ -&gt; add emacs) -&gt; 可写层。</li><li>写时复制：docker出现变化时都会应用到可写层，先从只读镜像层复制到可写层然后只读层的文件被隐藏。</li></ul><h4 id="Docker-Registry仓库"><a href="#Docker-Registry仓库" class="headerlink" title="Docker Registry仓库"></a>Docker Registry仓库</h4><ul><li>保存docker镜像。</li><li>分为公有和私有。公有：Docker Hub</li></ul><h4 id="图示结构"><a href="#图示结构" class="headerlink" title="图示结构"></a>图示结构</h4><p>Docker:</p><p><img alt data-src="/uploads/docker/0.PNG"></p><p>Docker Image:</p><p><img alt data-src="/uploads/docker/1.PNG"></p><p>Docker Container:</p><p><img alt data-src="/uploads/docker/2.PNG"></p><h4 id="docker基本指令"><a href="#docker基本指令" class="headerlink" title="docker基本指令"></a>docker基本指令</h4><ul><li><p>查找镜像</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search tutorial</span><br></pre></td></tr></table></figure></li><li><p>下载镜像</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull learn/tutorial</span><br></pre></td></tr></table></figure></li><li><p>启动一个容器，使用echo命令输出hello world</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run learn/tutorial <span class="built_in">echo</span> <span class="string">'hello world'</span></span><br></pre></td></tr></table></figure></li><li><p>启动一个容器下载ping</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run learn/tutorial apt-get install -y ping</span><br></pre></td></tr></table></figure></li><li><p>查看有哪些容器</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -l</span><br></pre></td></tr></table></figure></li><li><p>提交容器，即创建一个新的镜像</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit [docker ID] learn/ping</span><br></pre></td></tr></table></figure></li><li><p>用新镜像建立一个容器</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run learn/ping ping www.baidu.com</span><br></pre></td></tr></table></figure></li><li><p>查看容器信息</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect [docker ID]</span><br></pre></td></tr></table></figure></li><li><p>查看有哪些镜像</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker image</span><br></pre></td></tr></table></figure></li><li><p>将镜像保存到docker hub上</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker push /learn/ping</span><br></pre></td></tr></table></figure></li></ul><h3 id="Docker容器相关技术简介"><a href="#Docker容器相关技术简介" class="headerlink" title="Docker容器相关技术简介"></a>Docker容器相关技术简介</h3><h4 id="Docker依赖的Linux内核特性"><a href="#Docker依赖的Linux内核特性" class="headerlink" title="Docker依赖的Linux内核特性"></a>Docker依赖的Linux内核特性</h4><ul><li><p>Namespaces 命名空间<br>  提供了系统资源的隔离，for轻量级虚拟化服务<br>  五种命名空间：</p><ul><li>PID 进程隔离</li><li>NET 管理网络接口</li><li>IPC 管理跨进程通信的访问</li><li>MNT 管理挂载点</li><li>UTS 隔离内核和版本标识</li></ul></li><li><p>Control groups 控制组</p><ul><li>资源限制（内存上限等）</li><li>优先级设定（设定哪些进程组使用哪些资源）</li><li>资源计量</li><li>资源控制（挂起恢复）</li></ul></li></ul><h4 id="Docker容器的能力"><a href="#Docker容器的能力" class="headerlink" title="Docker容器的能力"></a>Docker容器的能力</h4><ul><li>文件系统隔离：每个容器都有自己的root文件系统</li><li>进程隔离： 每个容器都运行在自己的进程环境中</li><li>网络隔离： 容器间的虚拟网络接口和IP地址都是分开的</li><li>资源隔离和分组：使用cgroups将CPU和内存之类的资源独立分配给每个Docker容器</li></ul>]]></content>
     
     <summary type="html">
     
-      
-      
-        &lt;h3 id=&quot;Docker的基本组成&quot;&gt;&lt;a href=&quot;#Docker的基本组成&quot; class=&quot;headerlink&quot; title=&quot;Docker的基本组成&quot;&gt;&lt;/a&gt;Docker的基本组成&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;Docker Client 客户端&lt;/li&gt;
-&lt;li&gt;D
-      
+      &lt;h3 id=&quot;Docker的基本组成&quot;&gt;&lt;a href=&quot;#Docker的基本组成&quot; class=&quot;headerlink&quot; title=&quot;Docker的基本组成&quot;&gt;&lt;/a&gt;Docker的基本组成&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Docker Client 客户端&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Docker Daemon 守护进程&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Docker Image 镜像&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Docker Container 容器&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Docker Registry 仓库&lt;/p&gt;
     
     </summary>
     
@@ -196,6 +229,32 @@
   </entry>
   
   <entry>
+    <title>【thinkload】统计学习方法-第一章-统计学习方法概论</title>
+    <link href="https://zinw623.github.io/2019/08/03/tongjixuexifangfa1/"/>
+    <id>https://zinw623.github.io/2019/08/03/tongjixuexifangfa1/</id>
+    <published>2019-08-03T10:17:41.000Z</published>
+    <updated>2019-08-06T10:50:34.208Z</updated>
+    
+    <content type="html"><![CDATA[<p>统计学习，学习为核心，统计为方法，学习是根据已有的经验归纳总结出潜在的规律并把所得运用到以后的行为中，</p><a id="more"></a>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;统计学习，学习为核心，统计为方法，学习是根据已有的经验归纳总结出潜在的规律并把所得运用到以后的行为中，&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="thinkload" scheme="https://zinw623.github.io/categories/thinkload/"/>
+    
+      <category term="统计学习方法" scheme="https://zinw623.github.io/categories/thinkload/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
+    
+    
+      <category term="统计学习方法" scheme="https://zinw623.github.io/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
+    
+      <category term="thinkload" scheme="https://zinw623.github.io/tags/thinkload/"/>
+    
+  </entry>
+  
+  <entry>
     <title>我只是一个置顶介绍</title>
     <link href="https://zinw623.github.io/2019/08/03/top/"/>
     <id>https://zinw623.github.io/2019/08/03/top/</id>
@@ -221,39 +280,13 @@
   </entry>
   
   <entry>
-    <title>【thinkload】统计学习方法-第一章-统计学习方法概论</title>
-    <link href="https://zinw623.github.io/2019/08/03/tongjixuexifangfa1/"/>
-    <id>https://zinw623.github.io/2019/08/03/tongjixuexifangfa1/</id>
-    <published>2019-08-03T10:17:41.000Z</published>
-    <updated>2019-08-06T10:50:34.208Z</updated>
-    
-    <content type="html"><![CDATA[<p>统计学习，学习为核心，统计为方法，学习是根据已有的经验归纳总结出潜在的规律并把所得运用到以后的行为中，</p><a id="more"></a>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;统计学习，学习为核心，统计为方法，学习是根据已有的经验归纳总结出潜在的规律并把所得运用到以后的行为中，&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="thinkload" scheme="https://zinw623.github.io/categories/thinkload/"/>
-    
-      <category term="统计学习方法" scheme="https://zinw623.github.io/categories/thinkload/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
-    
-    
-      <category term="thinkload" scheme="https://zinw623.github.io/tags/thinkload/"/>
-    
-      <category term="统计学习方法" scheme="https://zinw623.github.io/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
     <title>photoshop cc 2019安装破解</title>
     <link href="https://zinw623.github.io/2019/08/02/photoshop-cc-2019-download/"/>
     <id>https://zinw623.github.io/2019/08/02/photoshop-cc-2019-download/</id>
     <published>2019-08-02T03:08:27.000Z</published>
-    <updated>2019-08-04T03:19:43.371Z</updated>
+    <updated>2019-08-08T03:22:57.465Z</updated>
     
-    <content type="html"><![CDATA[<p>Photoshop如今已经非常常用的处理图片的软件，本文就是介绍一下photoshop cc 2019安装破解的完整过程。</p><p>注：本文参考了<a href="http://www.3322.cc/soft/48343.html" target="_blank" rel="noopener">http://www.3322.cc/soft/48343.html</a></p><a id="more"></a><h3 id="下载creative-cloud"><a href="#下载creative-cloud" class="headerlink" title="下载creative cloud"></a>下载creative cloud</h3><p>什么是creative cloud？creative cloud相当于adobe系列的一个应用商城，我们可以在里面安装各种adobe系列的软件。<br>下载链接： <a href="https://creativecloud.adobe.com/apps/download/creative-cloud?promoid=KSPDX" target="_blank" rel="noopener">官网链接</a>      <a href="/uploads/downloadPS/Creative_Cloud_Set-Up.exe">其他链接</a>    <a href="https://pan.baidu.com/s/1qr6U3l48Nr-pakBNumR7Tw" target="_blank" rel="noopener">网盘链接</a></p><p>下载完成直接按提示安装，然后注册adobe账号并登陆。</p><h3 id="下载安装photoshop-cc-2019"><a href="#下载安装photoshop-cc-2019" class="headerlink" title="下载安装photoshop-cc-2019"></a>下载安装photoshop-cc-2019</h3><p>默认的下载位置在c盘，如果想改到其他盘可以点击右上角的三个点，出来菜单再点首选项。</p><img width="50%" data-src="/uploads/downloadPS/3.PNG"><p>然后点击creative Cloud界面，在安装位置条目处更改到你想安装到的位置。</p><img width="50%" data-src="/uploads/downloadPS/4.PNG"><p>打开creative cloud，找到photoshop的条目点击试用，photoshop自动下载安装成功。</p><img width="50%" data-src="/uploads/downloadPS/5.PNG"><img width="50%" data-src="/uploads/downloadPS/1.PNG"><h3 id="利用补丁破解"><a href="#利用补丁破解" class="headerlink" title="利用补丁破解"></a>利用补丁破解</h3><p>安装完成后安全起见先不要打开ps，我们先下载补丁工具。<br>下载链接：<a href="https://pan.baidu.com/s/1RWVV7HKcgqNU_a6GsLjyDw" target="_blank" rel="noopener">网盘链接</a> <a href="/uploads/downloadPS/PhotoshopCC2019pjbd_48343.zip">其他链接</a></p><p>将压缩包里的adobe.photoshop.cc.2019.20.0.0-patch.exe文件解压到ps安装目录下，就是你刚才修改的安装位置，保证那个位置下有photoshop.exe文件。</p><p>然后点击运行补丁（你可能会听到一段诡异的音乐。。。）。</p><img width="50%" data-src="/uploads/downloadPS/6.PNG"><p>点击应用，等待出现文件补丁已成功完成的提示。</p><img width="50%" data-src="/uploads/downloadPS/7.PNG"><p>这样就破解完成了，这时再打开ps发现没有试用还有多少天的提醒了。</p><img width="50%" data-src="/uploads/downloadPS/8.PNG"><p>按照补丁制作者的建议，在 编辑 ==&gt; 首选项 ==&gt; 常规 ==&gt; 停用”主页”屏幕 打钩。</p><img width="50%" data-src="/uploads/downloadPS/9.PNG"><p>最后做好重启一下ps再试用。</p><p>注：这篇文章是我安装后就写了，我在安装完的七天后再次检验是否失效，如果失效我会更新补丁，如果补丁失效可以回来看我是否有更新方法。</p>]]></content>
+    <content type="html"><![CDATA[<p>Photoshop如今已经非常常用的处理图片的软件，本文就是介绍一下photoshop cc 2019安装破解的完整过程。</p><p>注：本文参考了<a href="http://www.3322.cc/soft/48343.html" target="_blank" rel="noopener">http://www.3322.cc/soft/48343.html</a></p><a id="more"></a><h3 id="下载creative-cloud"><a href="#下载creative-cloud" class="headerlink" title="下载creative cloud"></a>下载creative cloud</h3><p>什么是creative cloud？creative cloud相当于adobe系列的一个应用商城，我们可以在里面安装各种adobe系列的软件。<br>下载链接： <a href="https://creativecloud.adobe.com/apps/download/creative-cloud?promoid=KSPDX" target="_blank" rel="noopener">官网链接</a>       <a href="https://pan.baidu.com/s/1qr6U3l48Nr-pakBNumR7Tw" target="_blank" rel="noopener">网盘链接</a></p><p>下载完成直接按提示安装，然后注册adobe账号并登陆。</p><h3 id="下载安装photoshop-cc-2019"><a href="#下载安装photoshop-cc-2019" class="headerlink" title="下载安装photoshop-cc-2019"></a>下载安装photoshop-cc-2019</h3><p>默认的下载位置在c盘，如果想改到其他盘可以点击右上角的三个点，出来菜单再点首选项。</p><img width="50%" data-src="/uploads/downloadPS/3.PNG"><p>然后点击creative Cloud界面，在安装位置条目处更改到你想安装到的位置。</p><img width="50%" data-src="/uploads/downloadPS/4.PNG"><p>打开creative cloud，找到photoshop的条目点击试用，photoshop自动下载安装成功。</p><img width="50%" data-src="/uploads/downloadPS/5.PNG"><img width="50%" data-src="/uploads/downloadPS/1.PNG"><h3 id="利用补丁破解"><a href="#利用补丁破解" class="headerlink" title="利用补丁破解"></a>利用补丁破解</h3><p>安装完成后安全起见先不要打开ps，我们先下载补丁工具。<br>下载链接：<a href="https://pan.baidu.com/s/1RWVV7HKcgqNU_a6GsLjyDw" target="_blank" rel="noopener">网盘链接</a> <a href="/uploads/downloadPS/PhotoshopCC2019pjbd_48343.zip">其他链接</a></p><p>将压缩包里的adobe.photoshop.cc.2019.20.0.0-patch.exe文件解压到ps安装目录下，就是你刚才修改的安装位置，保证那个位置下有photoshop.exe文件。</p><p>然后点击运行补丁（你可能会听到一段诡异的音乐。。。）。</p><img width="50%" data-src="/uploads/downloadPS/6.PNG"><p>点击应用，等待出现文件补丁已成功完成的提示。</p><img width="50%" data-src="/uploads/downloadPS/7.PNG"><p>这样就破解完成了，这时再打开ps发现没有试用还有多少天的提醒了。</p><img width="50%" data-src="/uploads/downloadPS/8.PNG"><p>按照补丁制作者的建议，在 编辑 ==&gt; 首选项 ==&gt; 常规 ==&gt; 停用”主页”屏幕 打钩。</p><img width="50%" data-src="/uploads/downloadPS/9.PNG"><p>最后做好重启一下ps再试用。</p><p>注：这篇文章是我安装后就写了，我在安装完的七天后再次检验是否失效，如果失效我会更新补丁，如果补丁失效可以回来看我是否有更新方法。</p>]]></content>
     
     <summary type="html">
     
