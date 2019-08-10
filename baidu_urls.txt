@@ -1,3 +1,4 @@
+https://zinw623.github.io/2019/08/10/thinkload/
 https://zinw623.github.io/2019/08/09/docker-6/
 https://zinw623.github.io/2019/08/08/docker-5/
 https://zinw623.github.io/2019/08/07/docker-4/
@@ -5,7 +6,6 @@ https://zinw623.github.io/2019/08/06/docker-3/
 https://zinw623.github.io/2019/08/06/docker-2/
 https://zinw623.github.io/2019/08/06/docker-1/
 https://zinw623.github.io/2019/08/03/xshell-vmware/
-https://zinw623.github.io/2019/08/03/tongjixuexifangfa1/
 https://zinw623.github.io/2019/08/02/photoshop-cc-2019-download/
 https://zinw623.github.io/2019/08/02/hexo-jupyter/
 https://zinw623.github.io/2019/08/01/XshellDownload/

@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[thinkload]]></title>
+    <url>%2F2019%2F08%2F10%2Fthinkload%2F</url>
+    <content type="text"><![CDATA[Thinkload, download something from my mind when thinking. 2019-08-10 要达到完全的确定性，在下定义的角度必然需要无穷个修饰词, 或者说解释无穷个足够的特性，或者说无穷个参数。 另一个角度，把具有存在的物体可以看做一个函数，一个从一个定义域（一个包含所有我们在意的物体的集合）映射到一个可观测领域的函数，对于这个可观测领域的人要准确确定其存在或理解其存在需要理解这个函数的所有参数。 而因为有很多观察角度，就有很多观测领域，对于每个领域的参数又显然是不同的，对一个领域准确注定对另一不同领域就不那么准确。 也可以说函数的参数确定了可观测领域，函数的参数里蕴含了可观测领域的性质，这么看物体本身到底是什么就不那么重要，更重要的是可观测领域的性质，更重要的是观察物体的角度。 那参数是怎么得到的呢？这里发现，我们认识一个新的物体的存在必然需要一些先天的或者一些先验的存在，比如视觉听觉等五感之类的，或者一些产生在大脑的感觉，更进一步是思维灵魂的东西，或者直接说自我的存在—一个观察者自我的存在。 之前思考问题时犯了个错，不该不严谨的将物体给以“个”的量词，使得思考范围被放到离散的物体分布。 可能通过“试错”的方式学习有效，和反复试验取频率作为概率的方法有效这件事有相似性。另外，大数定律的内在含义到底是什么？为什么反复试验起作用？]]></content>
+      <categories>
+        <category>thinkload</category>
+      </categories>
+      <tags>
+        <tag>thinkload</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[【notes】docker学习笔记6-docker容器数据管理]]></title>
     <url>%2F2019%2F08%2F09%2Fdocker-6%2F</url>
     <content type="text"><![CDATA[docker容器的数据管理简介 docker容器的数据卷 docker的数据卷容器 docker数据卷的备份和还原 docker容器的数据卷什么是数据卷(Data Volume)docker的生存周期是与运行的程序相一致的，而我们需要数据持久化，docker容器之间也需要共享一些数据 数据卷是经过特殊设计的目录，可以绕过联合文件系统（UFS)，为一个或多个容器提供访问。 数据卷设计的目的，在于数据持久化，它完全对独立于容器的生存周期，因此docker不会在容器删除时删除其挂载的数据卷，也不会存在类似的垃圾收集机制，对容器引用的数据卷进行处理。 数据卷架构： docker数据卷独立于docker，独立运docker的生存周期。 docker数据卷位于docker的宿主机中文件系统。 docker数据卷既可以是目录也可是文件。 docker数据卷与宿主机进行数据共享。 同一目录或文件可以支持多个容器 数据卷的特点 数据卷在容器启动时初始化，如果容器使用的镜像在挂载点包含了数据，这些数据会拷贝到新初始化的数据卷中。 数据卷可以在容器之间共享和重用 可以对数据卷里的内容直接进行修改 数据卷的变化不会影响镜像的更新 卷会一直存在，即使挂载数据卷的容器已经被删除 数据卷的使用 为容器添加数据卷 1sudo docker run -v ~/container_data:/data -it ubuntu /bin/bash 在本机系统的目录:在容器中映射的目录名 注：这种方式（bind mount)已不推荐使用，应使用volume方式 123456docker volume create my_volume # 创建卷docker volume ls # 卷列表docker volume inspect my_volume #卷信息docker volume rm my_volume # 删除卷docker run -v [卷名]:[容器目录]:[选项列表] -it ubuntu /bin/bash 详情：https://deepzz.com/post/the-docker-volumes-basic.html 为数据卷添加访问权限 1sudo docker run -v [卷名]:[容器目录]:ro(访问权限) -it ubuntu /bin/bash 使用dockerfile构建包含数据卷的镜像dockerfile指令： VOLUME [“/data1”, “/data2”] 不能映射到本地目录，并且运行同一镜像的不同容器所创建的数据卷也是不一样的。 docker的数据卷容器什么是数据卷容器： 命名的容器挂载数据卷，其他容器通过挂载这个容器实现数据共享，挂载数据卷的容器，就叫做数据卷容器 图示： 挂载数据卷容器的方法 1docker run --volumes-from [CONTAINER NAME] 如果数据卷容器删除（即使同时删除挂载的数据卷）后，挂载该数据卷容器的容器的数据目录仍存在且有效。 数据卷容器的作用仅仅是将数据卷挂载的配置传递到挂载了数据卷容器的新容器中。 docker数据卷的备份与还原 数据备份方法 1docker run --volumes-from [container name] -v $(pwd):/backup ubuntu tar cvf /backup/backup.tar [container data volume] 数据还原方法 1docker run --volumes-from [container name] -v $(pwd):/backup ubuntu tar xvf /backup/backup.tar [container data volume]]]></content>
@@ -89,19 +100,6 @@
         <tag>Xshell</tag>
         <tag>虚拟机</tag>
         <tag>Ubuntu</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[【thinkload】统计学习方法-第一章-统计学习方法概论]]></title>
-    <url>%2F2019%2F08%2F03%2Ftongjixuexifangfa1%2F</url>
-    <content type="text"><![CDATA[统计学习，学习为核心，统计为方法，学习是根据已有的经验归纳总结出潜在的规律并把所得运用到以后的行为中，]]></content>
-      <categories>
-        <category>thinkload</category>
-        <category>统计学习方法</category>
-      </categories>
-      <tags>
-        <tag>统计学习方法</tag>
-        <tag>thinkload</tag>
       </tags>
   </entry>
   <entry>
