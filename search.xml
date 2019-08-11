@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[【notes】Deep Learning-1]]></title>
     <url>%2F2019%2F08%2F11%2FDeepLearning-1%2F</url>
-    <content type="text"><![CDATA[Three Steps for DL1.神经网络 –&gt; 2.成本函数 –&gt; 3.优化 Step 1.神经网络就是一个由许多简单的函数组成的复杂函数。 通常需要我们自己设计网络的结构，来让机器从数据中学习参数。 Step 2.需要一个成本函数来评估参数和模型的好坏。 我们通常基于任务来设计成本函数。 Step 3.找出性能最好的函数的集合。(e.g. gradient descent) 基本类型全连接层 $每层的节点数：N_l$$每个节点的输出： a^{l}_{i} $ $l 代表层数, i 代表的是第 l 层的第 i 个节点。$ $一层中所有的输出组成一个长度为N_l的向量a^l。$ $第l-1层的每个节点都与第l层的各个节点相连，两个相连的节点都对应一个参数w^{l}{ij}，i是l层的第i个节点，j是l-1层的第j个节点。把所有w^{l}{ij}组合成一个矩阵W^l，w^{l}{ij}是第i行第j列的元素。总行数为N_l，总列数为N{l-1}。$ $同理偏置b^l_i和向量b^l$ $z^l_i : 第l层神经元激活函数的输入$$z^l : 向量第l层神经元激活函数的所有输入$ $z^l_i = w^l_{il}a^{l-1}{l} + w^l{i2}a^{l-1}_2···+ b^l_i$]]></content>
+    <content type="text"><![CDATA[Three Steps for DL1.神经网络 –&gt; 2.成本函数 –&gt; 3.优化 Step 1.神经网络就是一个由许多简单的函数组成的复杂函数。 通常需要我们自己设计网络的结构，来让机器从数据中学习参数。 Step 2.需要一个成本函数来评估参数和模型的好坏。 我们通常基于任务来设计成本函数。 Step 3.找出性能最好的函数的集合。(e.g. gradient descent) 基本类型全连接层 $ 每层的节点数：N_l $$ 每个节点的输出： a^{l}_{i} $ $ l 代表层数, i 代表的是第 l 层的第 i 个节点。 $ $ 一层中所有的输出组成一个长度为N_l的向量a^l。 $ $ 第l-1层的每个节点都与第l层的各个节点相连，两个相连的节点都对应一个参数w^{l}{ij}，i是l层的第i个节点，j是l-1层的第j个节点。把所有w^{l}{ij}组合成一个矩阵W^l，w^{l}{ij}是第i行第j列的元素。总行数为N_l，总列数为N{l-1}。 $ $ 同理偏置b^l_i和向量b^l $ $ z^l_i : 第l层神经元激活函数的输入 $$ z^l : 向量第l层神经元激活函数的所有输入 $ $ z^l_i = w^l_{il}a^{l-1}{l} + w^l{i2}a^{l-1}_2···+ b^l_i $]]></content>
       <categories>
         <category>笔记</category>
         <category>Deep Learning</category>
@@ -33,8 +33,8 @@
         <category>docker</category>
       </categories>
       <tags>
-        <tag>笔记</tag>
         <tag>docker</tag>
+        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -46,8 +46,8 @@
         <category>docker</category>
       </categories>
       <tags>
-        <tag>笔记</tag>
         <tag>docker</tag>
+        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -59,8 +59,8 @@
         <category>docker</category>
       </categories>
       <tags>
-        <tag>笔记</tag>
         <tag>docker</tag>
+        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -72,8 +72,8 @@
         <category>docker</category>
       </categories>
       <tags>
-        <tag>笔记</tag>
         <tag>docker</tag>
+        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -85,8 +85,8 @@
         <category>docker</category>
       </categories>
       <tags>
-        <tag>笔记</tag>
         <tag>docker</tag>
+        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -98,8 +98,8 @@
         <category>docker</category>
       </categories>
       <tags>
-        <tag>笔记</tag>
         <tag>docker</tag>
+        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
