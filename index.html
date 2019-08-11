@@ -441,7 +441,7 @@
                 
               
 
-              <time title="创建时间：2019-08-11 20:27:50 / 修改时间：21:33:28" itemprop="dateCreated datePublished" datetime="2019-08-11T20:27:50+08:00">2019-08-11</time>
+              <time title="创建时间：2019-08-11 20:27:50 / 修改时间：21:38:25" itemprop="dateCreated datePublished" datetime="2019-08-11T20:27:50+08:00">2019-08-11</time>
             </span>
           
             
@@ -2094,7 +2094,7 @@ docker客户端对服务器的访问： 本地/远程
       
     
       
-    
+        
       
     
       
@@ -2110,6 +2110,53 @@ docker客户端对服务器的访问： 本地/远程
       
     
       
+    
+      
+    
+  
+    
+      <script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
     
   
 
