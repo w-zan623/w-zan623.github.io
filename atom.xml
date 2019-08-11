@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zinw623.github.io/"/>
-  <updated>2019-08-10T09:20:06.683Z</updated>
+  <updated>2019-08-11T13:29:32.599Z</updated>
   <id>https://zinw623.github.io/</id>
   
   <author>
@@ -17,17 +17,48 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>【notes】Deep Learning-1</title>
+    <link href="https://zinw623.github.io/2019/08/11/DeepLearning-1/"/>
+    <id>https://zinw623.github.io/2019/08/11/DeepLearning-1/</id>
+    <published>2019-08-11T12:27:50.000Z</published>
+    <updated>2019-08-11T13:29:32.599Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Three-Steps-for-DL"><a href="#Three-Steps-for-DL" class="headerlink" title="Three Steps for DL"></a>Three Steps for DL</h3><p>1.神经网络 –&gt; 2.成本函数 –&gt; 3.优化</p><ul><li><p>Step 1.神经网络就是一个由许多简单的函数组成的复杂函数。</p><blockquote><p>通常需要我们自己设计网络的结构，来让机器从数据中学习参数。</p></blockquote></li><li><p>Step 2.需要一个成本函数来评估参数和模型的好坏。</p><blockquote><p>我们通常基于任务来设计成本函数。</p></blockquote></li><li><p>Step 3.找出性能最好的函数的集合。(e.g. gradient descent)</p></li></ul><h3 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h3><h4 id="全连接层"><a href="#全连接层" class="headerlink" title="全连接层"></a>全连接层</h4><p><img alt data-src="/uploads/DL/FC.PNG"></p><p>$每层的节点数：N_l$<br>$每个节点的输出： a^{l}_{i} $</p><blockquote><p>$l 代表层数, i 代表的是第 l 层的第 i 个节点。$</p></blockquote><p>$一层中所有的输出组成一个长度为N_l的向量a^l。$</p><p><img alt data-src="/uploads/DL/FCw.PNG"></p><p>$第l-1层的每个节点都与第l层的各个节点相连，两个相连的节点都对应一个参数w^{l}<em>{ij}，i是l层的第i个节点，j是l-1层的第j个节点。把所有w^{l}</em>{ij}组合成一个矩阵W^l，w^{l}<em>{ij}是第i行第j列的元素。总行数为N_l，总列数为N</em>{l-1}。$</p><p>$同理偏置b^l_i和向量b^l$</p><p>$z^l_i : 第l层神经元激活函数的输入$<br>$z^l : 向量第l层神经元激活函数的所有输入$</p><p>$z^l_i = w^l_{il}a^{l-1}<em>{l} + w^l</em>{i2}a^{l-1}_2···+ b^l_i$</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;Three-Steps-for-DL&quot;&gt;&lt;a href=&quot;#Three-Steps-for-DL&quot; class=&quot;headerlink&quot; title=&quot;Three Steps for DL&quot;&gt;&lt;/a&gt;Three Steps for DL&lt;/h3&gt;&lt;p&gt;1.神经网络
+      
+    
+    </summary>
+    
+      <category term="笔记" scheme="https://zinw623.github.io/categories/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="Deep Learning" scheme="https://zinw623.github.io/categories/%E7%AC%94%E8%AE%B0/Deep-Learning/"/>
+    
+    
+      <category term="笔记" scheme="https://zinw623.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="Deep Learning" scheme="https://zinw623.github.io/tags/Deep-Learning/"/>
+    
+  </entry>
+  
+  <entry>
     <title>thinkload</title>
     <link href="https://zinw623.github.io/2019/08/10/thinkload/"/>
     <id>https://zinw623.github.io/2019/08/10/thinkload/</id>
     <published>2019-08-10T07:53:41.000Z</published>
-    <updated>2019-08-10T09:20:06.683Z</updated>
+    <updated>2019-08-10T09:21:52.195Z</updated>
     
-    <content type="html"><![CDATA[<p>Thinkload, download something from my mind when thinking.</p><a id="more"></a><h3 id="2019-08-10"><a href="#2019-08-10" class="headerlink" title="2019-08-10"></a>2019-08-10</h3><ul><li>要达到完全的确定性，在下定义的角度必然需要无穷个<strong>修饰词</strong>, 或者说解释无穷个足够的特性，或者说无穷个参数。</li><li>另一个角度，把具有存在的物体可以看做一个函数，一个从一个定义域（一个包含所有我们在意的物体的集合）映射到一个可观测领域的函数，对于这个可观测领域的人要准确确定其存在或理解其存在需要理解这个函数的所有参数。</li><li>而因为有很多观察角度，就有很多观测领域，对于每个领域的参数又显然是不同的，对一个领域准确注定对另一不同领域就不那么准确。</li><li>也可以说函数的参数确定了可观测领域，函数的参数里蕴含了可观测领域的性质，这么看物体本身到底是什么就不那么重要，更重要的是可观测领域的性质，更重要的是观察物体的角度。</li><li>那参数是怎么得到的呢？这里发现，我们认识一个新的物体的存在必然需要一些先天的或者一些先验的存在，比如视觉听觉等五感之类的，或者一些产生在大脑的感觉，更进一步是思维灵魂的东西，或者直接说自我的存在—一个观察者自我的存在。</li></ul><ul><li>之前思考问题时犯了个错，不该不严谨的将物体给以“个”的量词，使得思考范围被放到离散的物体分布。</li></ul><ul><li>可能通过“试错”的方式学习有效，和反复试验取频率作为概率的方法有效这件事有相似性。另外，大数定律的内在含义到底是什么？为什么反复试验起作用？</li></ul>]]></content>
+    <content type="html"><![CDATA[<blockquote><p><strong>Thinkload, download something from my mind when thinking.</strong></p></blockquote><a id="more"></a><h3 id="2019-08-10"><a href="#2019-08-10" class="headerlink" title="2019-08-10"></a>2019-08-10</h3><ul><li>要达到完全的确定性，在下定义的角度必然需要无穷个<strong>修饰词</strong>, 或者说解释无穷个足够的特性，或者说无穷个参数。</li><li>另一个角度，把具有存在的物体可以看做一个函数，一个从一个定义域（一个包含所有我们在意的物体的集合）映射到一个可观测领域的函数，对于这个可观测领域的人要准确确定其存在或理解其存在需要理解这个函数的所有参数。</li><li>而因为有很多观察角度，就有很多观测领域，对于每个领域的参数又显然是不同的，对一个领域准确注定对另一不同领域就不那么准确。</li><li>也可以说函数的参数确定了可观测领域，函数的参数里蕴含了可观测领域的性质，这么看物体本身到底是什么就不那么重要，更重要的是可观测领域的性质，更重要的是观察物体的角度。</li><li>那参数是怎么得到的呢？这里发现，我们认识一个新的物体的存在必然需要一些先天的或者一些先验的存在，比如视觉听觉等五感之类的，或者一些产生在大脑的感觉，更进一步是思维灵魂的东西，或者直接说自我的存在—一个观察者自我的存在。</li></ul><ul><li>之前思考问题时犯了个错，不该不严谨的将物体给以“个”的量词，使得思考范围被放到离散的物体分布。</li></ul><ul><li>可能通过“试错”的方式学习有效，和反复试验取频率作为概率的方法有效这件事有相似性。另外，大数定律的内在含义到底是什么？为什么反复试验起作用？</li></ul>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;Thinkload, download something from my mind when thinking.&lt;/p&gt;
+      &lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Thinkload, download something from my mind when thinking.&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
     
     </summary>
     
@@ -62,9 +93,9 @@
       <category term="docker" scheme="https://zinw623.github.io/categories/%E7%AC%94%E8%AE%B0/docker/"/>
     
     
-      <category term="docker" scheme="https://zinw623.github.io/tags/docker/"/>
-    
       <category term="笔记" scheme="https://zinw623.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="docker" scheme="https://zinw623.github.io/tags/docker/"/>
     
   </entry>
   
@@ -91,9 +122,9 @@
       <category term="docker" scheme="https://zinw623.github.io/categories/%E7%AC%94%E8%AE%B0/docker/"/>
     
     
-      <category term="docker" scheme="https://zinw623.github.io/tags/docker/"/>
-    
       <category term="笔记" scheme="https://zinw623.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="docker" scheme="https://zinw623.github.io/tags/docker/"/>
     
   </entry>
   
@@ -120,9 +151,9 @@
       <category term="docker" scheme="https://zinw623.github.io/categories/%E7%AC%94%E8%AE%B0/docker/"/>
     
     
-      <category term="docker" scheme="https://zinw623.github.io/tags/docker/"/>
-    
       <category term="笔记" scheme="https://zinw623.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="docker" scheme="https://zinw623.github.io/tags/docker/"/>
     
   </entry>
   
@@ -152,9 +183,9 @@
       <category term="docker" scheme="https://zinw623.github.io/categories/%E7%AC%94%E8%AE%B0/docker/"/>
     
     
-      <category term="docker" scheme="https://zinw623.github.io/tags/docker/"/>
-    
       <category term="笔记" scheme="https://zinw623.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="docker" scheme="https://zinw623.github.io/tags/docker/"/>
     
   </entry>
   
@@ -181,9 +212,9 @@
       <category term="docker" scheme="https://zinw623.github.io/categories/%E7%AC%94%E8%AE%B0/docker/"/>
     
     
-      <category term="docker" scheme="https://zinw623.github.io/tags/docker/"/>
-    
       <category term="笔记" scheme="https://zinw623.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="docker" scheme="https://zinw623.github.io/tags/docker/"/>
     
   </entry>
   
@@ -212,9 +243,9 @@
       <category term="docker" scheme="https://zinw623.github.io/categories/%E7%AC%94%E8%AE%B0/docker/"/>
     
     
-      <category term="docker" scheme="https://zinw623.github.io/tags/docker/"/>
-    
       <category term="笔记" scheme="https://zinw623.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="docker" scheme="https://zinw623.github.io/tags/docker/"/>
     
   </entry>
   
