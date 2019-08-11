@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zinw623.github.io/"/>
-  <updated>2019-08-11T13:38:25.948Z</updated>
+  <updated>2019-08-11T13:46:36.903Z</updated>
   <id>https://zinw623.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://zinw623.github.io/2019/08/11/DeepLearning-1/"/>
     <id>https://zinw623.github.io/2019/08/11/DeepLearning-1/</id>
     <published>2019-08-11T12:27:50.000Z</published>
-    <updated>2019-08-11T13:38:25.948Z</updated>
+    <updated>2019-08-11T13:46:36.903Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="Three-Steps-for-DL"><a href="#Three-Steps-for-DL" class="headerlink" title="Three Steps for DL"></a>Three Steps for DL</h3><p>1.神经网络 –&gt; 2.成本函数 –&gt; 3.优化</p><ul><li><p>Step 1.神经网络就是一个由许多简单的函数组成的复杂函数。</p><blockquote><p>通常需要我们自己设计网络的结构，来让机器从数据中学习参数。</p></blockquote></li><li><p>Step 2.需要一个成本函数来评估参数和模型的好坏。</p><blockquote><p>我们通常基于任务来设计成本函数。</p></blockquote></li><li><p>Step 3.找出性能最好的函数的集合。(e.g. gradient descent)</p></li></ul><h3 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h3><h4 id="全连接层"><a href="#全连接层" class="headerlink" title="全连接层"></a>全连接层</h4><p><img alt data-src="/uploads/DL/FC.PNG"></p><p>$ 每层的节点数：N_l $<br>$ 每个节点的输出： a^{l}_{i} $</p><blockquote><p>$ l 代表层数, i 代表的是第 l 层的第 i 个节点。 $</p></blockquote><p>$ 一层中所有的输出组成一个长度为N_l的向量a^l。 $</p><p><img alt data-src="/uploads/DL/FCw.PNG"></p><p>$ 第l-1层的每个节点都与第l层的各个节点相连，两个相连的节点都对应一个参数w^{l}<em>{ij}，i是l层的第i个节点，j是l-1层的第j个节点。把所有w^{l}</em>{ij}组合成一个矩阵W^l，w^{l}<em>{ij}是第i行第j列的元素。总行数为N_l，总列数为N</em>{l-1}。 $</p><p>$ 同理偏置b^l_i和向量b^l $</p><p>$ z^l_i : 第l层神经元激活函数的输入 $<br>$ z^l : 向量第l层神经元激活函数的所有输入 $</p><p>$ z^l_i = w^l_{il}a^{l-1}<em>{l} + w^l</em>{i2}a^{l-1}_2···+ b^l_i $</p>]]></content>
+    <content type="html"><![CDATA[<h3 id="Three-Steps-for-DL"><a href="#Three-Steps-for-DL" class="headerlink" title="Three Steps for DL"></a>Three Steps for DL</h3><p>1.神经网络 –&gt; 2.成本函数 –&gt; 3.优化</p><ul><li><p>Step 1.神经网络就是一个由许多简单的函数组成的复杂函数。</p><blockquote><p>通常需要我们自己设计网络的结构，来让机器从数据中学习参数。</p></blockquote></li><li><p>Step 2.需要一个成本函数来评估参数和模型的好坏。</p><blockquote><p>我们通常基于任务来设计成本函数。</p></blockquote></li><li><p>Step 3.找出性能最好的函数的集合。(e.g. gradient descent)</p></li></ul><h3 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h3><h4 id="全连接层"><a href="#全连接层" class="headerlink" title="全连接层"></a>全连接层</h4><p><img alt data-src="/uploads/DL/FC.PNG"></p><p>$ 每层的节点数：N_l $<br>$ 每个节点的输出： a^{l}_{i} $</p><blockquote><p>$ l 代表层数, i 代表的是第 l 层的第 i 个节点 $</p></blockquote><p>$ 一层中所有的输出组成一个长度为N_l的向量a^l $</p><p><img alt data-src="/uploads/DL/FCw.PNG"></p><p>$ 第l-1层的每个节点都与第l层的各个节点相连，两个相连的节点都对应一个参数w^{l}<em>{ij}，i是l层的第i个节点，j是l-1层的第j个节点。把所有w^{l}</em>{ij}组合成一个矩阵W^l，w^{l}<em>{ij}是第i行第j列的元素。总行数为N_l，总列数为N</em>{l-1} $</p><p>$ 同理偏置b^l_i和向量b^l $</p><p>$ z^l_i : 第l层神经元激活函数的输入 $<br>$ z^l : 向量第l层神经元激活函数的所有输入 $</p><p>$$ z^l_i = w^l_{il}a^{l-1}<em>{l} + w^l</em>{i2}a^{l-1}_2···+ b^l_i $$</p>]]></content>
     
     <summary type="html">
     
@@ -93,9 +93,9 @@
       <category term="docker" scheme="https://zinw623.github.io/categories/%E7%AC%94%E8%AE%B0/docker/"/>
     
     
-      <category term="笔记" scheme="https://zinw623.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
-    
       <category term="docker" scheme="https://zinw623.github.io/tags/docker/"/>
+    
+      <category term="笔记" scheme="https://zinw623.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
@@ -122,9 +122,9 @@
       <category term="docker" scheme="https://zinw623.github.io/categories/%E7%AC%94%E8%AE%B0/docker/"/>
     
     
-      <category term="笔记" scheme="https://zinw623.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
-    
       <category term="docker" scheme="https://zinw623.github.io/tags/docker/"/>
+    
+      <category term="笔记" scheme="https://zinw623.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
@@ -151,9 +151,9 @@
       <category term="docker" scheme="https://zinw623.github.io/categories/%E7%AC%94%E8%AE%B0/docker/"/>
     
     
-      <category term="笔记" scheme="https://zinw623.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
-    
       <category term="docker" scheme="https://zinw623.github.io/tags/docker/"/>
+    
+      <category term="笔记" scheme="https://zinw623.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
@@ -183,9 +183,9 @@
       <category term="docker" scheme="https://zinw623.github.io/categories/%E7%AC%94%E8%AE%B0/docker/"/>
     
     
-      <category term="笔记" scheme="https://zinw623.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
-    
       <category term="docker" scheme="https://zinw623.github.io/tags/docker/"/>
+    
+      <category term="笔记" scheme="https://zinw623.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
@@ -212,9 +212,9 @@
       <category term="docker" scheme="https://zinw623.github.io/categories/%E7%AC%94%E8%AE%B0/docker/"/>
     
     
-      <category term="笔记" scheme="https://zinw623.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
-    
       <category term="docker" scheme="https://zinw623.github.io/tags/docker/"/>
+    
+      <category term="笔记" scheme="https://zinw623.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
@@ -243,9 +243,9 @@
       <category term="docker" scheme="https://zinw623.github.io/categories/%E7%AC%94%E8%AE%B0/docker/"/>
     
     
-      <category term="笔记" scheme="https://zinw623.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
-    
       <category term="docker" scheme="https://zinw623.github.io/tags/docker/"/>
+    
+      <category term="笔记" scheme="https://zinw623.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
