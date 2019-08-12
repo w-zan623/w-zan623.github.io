@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>zinW&#39; s thinkload</title>
+  <title>Zihan.W的博客</title>
   
   
   <link href="/atom.xml" rel="self"/>
@@ -10,7 +10,7 @@
   <id>https://zinw623.github.io/</id>
   
   <author>
-    <name>zinW</name>
+    <name>Zihan.W</name>
     
   </author>
   
@@ -225,9 +225,9 @@
     <link href="https://zinw623.github.io/2019/08/03/xshell-vmware/"/>
     <id>https://zinw623.github.io/2019/08/03/xshell-vmware/</id>
     <published>2019-08-03T14:14:16.000Z</published>
-    <updated>2019-08-05T10:31:08.285Z</updated>
+    <updated>2019-08-12T10:55:59.650Z</updated>
     
-    <content type="html"><![CDATA[<p>因为使用VM虚拟机太过占用资源，所以我们可以用Xshell连接到虚拟机，来达到节省本机资源的目的。</p><a id="more"></a><ol><li>安装SSH： </li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install openssh-server</span><br><span class="line">service iptables stop <span class="comment">#关闭防火墙</span></span><br><span class="line">service ssh start <span class="comment">#开启ssh服务</span></span><br></pre></td></tr></table></figure><ol start="2"><li>获得登录需要的ip ,在虚拟机输入：</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig</span><br></pre></td></tr></table></figure><img width="50%" data-src="/uploads/xshell-vmware/1.PNG"><p>ens*后面的inet后面的值就是ip。</p><ol start="3"><li><p>按照我之前写过的xshell连接的教程 <a href="/2019/08/01/XshellDownload/">windows系统：Xshell下载安装+连接服务器</a> 建立会话就ok，主机就是刚才你获得的ip，登录用的用户名和密码就是你安装时填的用户名(非root账户)和密码。</p></li><li><p>之后只需要打开虚拟机后最小化界面，从xshell登入就可以了。</p></li></ol>]]></content>
+    <content type="html"><![CDATA[<p>因为使用VM虚拟机太过占用资源，所以我们可以用Xshell连接到虚拟机，来达到节省本机资源的目的。</p><a id="more"></a><ol><li>安装SSH： </li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install openssh-server</span><br><span class="line">service iptables stop <span class="comment">#关闭防火墙</span></span><br><span class="line">service ssh start <span class="comment">#开启ssh服务</span></span><br></pre></td></tr></table></figure><ol start="2"><li>获得登录需要的ip ,在虚拟机输入：</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig</span><br></pre></td></tr></table></figure><img width="50%" data-src="/uploads/xshell-vmware/1.PNG"><p>ens*后面的inet后面的值就是ip。</p><ol start="3"><li><p>按照我之前写过的xshell连接的教程 <a href="/2019/08/01/XshellDownload/">windows系统：Xshell下载安装+连接服务器</a> 建立会话就ok，主机就是刚才你获得的ip，登录用的用户名和密码就是你安装时填的用户名(非root账户)和密码。</p></li><li><p>之后只需要打开虚拟机后最小化界面，从xshell登入后reboot一下虚拟机，这样从内存角度就能节省将近90多MB。</p></li></ol>]]></content>
     
     <summary type="html">
     
@@ -318,32 +318,6 @@
       <category term="linux服务器" scheme="https://zinw623.github.io/tags/linux%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     
       <category term="windows" scheme="https://zinw623.github.io/tags/windows/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>人生</title>
-    <link href="https://zinw623.github.io/2019/07/30/myFirstArticle/"/>
-    <id>https://zinw623.github.io/2019/07/30/myFirstArticle/</id>
-    <published>2019-07-30T03:18:40.000Z</published>
-    <updated>2019-08-04T03:19:37.837Z</updated>
-    
-    <content type="html"><![CDATA[<p>一段旅程从2000年开始……</p><p>到我写这段话已经过了十九年······</p><p><strong>什么样的旅程呢？ 当然是创造的伟大旅程！！！</strong></p><a id="more"></a><p>还记得小时候自己喜欢借用自己手边的东西组成各种奇形怪状的玩具、凭着各种感性认识在各种课本上画着各种有趣插画、反复读着被老师夸过的自己认真写过的作文、努力地独立想出解决卷子上颇具难度的问题的方法。。。。。。</p><p>各种自己花时间用心搞过的创造总是能给自己足够的乐趣与成就感，并且这种凝结着努力和价值的东西也诠释着存在的意义。每个人的人生其实都可以通过以时间为索引的一个自己参与过的值得叙述给别人的事件的列表总结，就像这样：</p><p>“老子（老娘）年轻的时候，一个人······，可是到了中年，我来到了······，经历了我这一辈子不会忘记的事······，后来我老了，我打算去······，并且真的这么做了，一直想这样生活到现在······”</p><p>如何总结自己的一生？我想，不论是你拥有多少名利，得过多少荣誉，经历过多少难忘的事，这些可以被看作我们活着我们的行为创造过的各种沧桑岁月啊！我们投入过感情去创造的那些被自己认可的、有资格拿出来吹牛的经历将会成为我们一生的精炼内核。</p><p>所以我想：</p><blockquote><p>我是人，我有自我的意识，我要自由地用自己真实感情驱使着不太完美的躯壳去创造出完美的生命光辉，光辉不必夺目，但我年老回头看时能使我不自主地淡淡微笑，最好是能像夕阳落山前发出的光芒一样，并不强烈刺眼，但非常美丽，也曾与讨厌的黑夜争过地盘，也曾点燃过那无边的海面······</p></blockquote><hr><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> people <span class="keyword">import</span> me</span><br><span class="line"></span><br><span class="line">real_lives = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> knowledge <span class="keyword">in</span> [<span class="string">'math'</span>, <span class="string">'deeplearning'</span>, <span class="string">'python'</span>, ...]:</span><br><span class="line"></span><br><span class="line">    me.learn(knowledge)</span><br><span class="line">    real_lives.apend(me.create())</span><br><span class="line"></span><br><span class="line">    me.lives -= <span class="number">1</span></span><br></pre></td></tr></table></figure><p>—感谢阅读—</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;一段旅程从2000年开始……&lt;/p&gt;
-&lt;p&gt;到我写这段话已经过了十九年······&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;什么样的旅程呢？ 当然是创造的伟大旅程！！！&lt;/strong&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="一段话" scheme="https://zinw623.github.io/categories/%E4%B8%80%E6%AE%B5%E8%AF%9D/"/>
-    
-    
-      <category term="人生" scheme="https://zinw623.github.io/tags/%E4%BA%BA%E7%94%9F/"/>
-    
-      <category term="创造" scheme="https://zinw623.github.io/tags/%E5%88%9B%E9%80%A0/"/>
     
   </entry>
   
