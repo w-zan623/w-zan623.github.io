@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[[notes]pytorch笔记：Tensor和autograd]]></title>
+    <url>%2F2019%2F08%2F17%2Fpytorch-1%2F</url>
+    <content type="text"><![CDATA[每个深度学习框架的设计核心是张量和计算图，在pytorch里体现为张量系统（Tensor）和自动微分系统（atutograd）。 Tensor 中文译为张量，可以简单看作一个数组。 与numpy里的ndarrays类似，但tensor支持GPU加速。 基础操作接口角度： torch.function tensor.function 存储角度： 不会修改自身数据，如1234567891011121314151617181920212223242. 会修改自身数据，如```a.add_(b)```，加法的值储存在a中了。##### 创建Tensor 在pytorch中常见的新建tensor的方法：|类别| 特点 | 函数 | 功能 ||:-----|:----|:-----|:-----||第一类：基础方法|最灵活|Tensor(\*sizes)|基础构造函数||第二类：根据sizes建立|常数型|ones(\*sizes)|全1Tensor|||常数型|zeros(\*sizes)|全0Tensor|||常数型|eyes(\*sizes)|对角线为1，其他为0|||概率分布型|rand/randn(\*sizes)|均匀/标准分布||第三类：根据一定范围建立|等差数列型|arange(s,e,step)|从s到e，步长为step|||等差数列型|linspace(s,e,steps)|从s到e，均匀切分成steps份|||概率分布型|normal(mean,std)/uniform(from,to)|正态分布/均匀分布|||概率分布型|randperm(m)|随机分布|* 其中使用Tensor函数新建tensor是最复杂多变的，它既可以接受一个list，并根据list的数据新建tensor，也可根据指定的形状新建tensor，还能传入其他的tensor。```python# 引入必要的包import torch as tfrom torch.autograd import Variable as V 12# 指定tensor的形状a = t.Tensor(2, 3);a tensor([[5.8337e-10, 1.3567e-19, 1.4584e-19], [7.8447e+17, 1.3556e-19, 1.3563e-19]])12# 用list的数据创建tensorb = t.Tensor([[1,2,3],[4,5,6]]);b tensor([[1., 2., 3.], [4., 5., 6.]])1b.tolist(),type(b.tolist()) # 把tensor转为list ([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]], list)tensor.size()返回torch.Size()对象，它是tuple的子类，但其使用方式与tuple略有不同。 1b_size = b.size();b_size torch.Size([2, 3])1b.numel() # numelements前五个字母，b中元素总个数，等价于b.nelement() 6]]></content>
+      <categories>
+        <category>笔记</category>
+        <category>pytorch</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>pytorch</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[[thinkload]读书-疑问]]></title>
+    <url>%2F2019%2F08%2F13%2Fdeeplearning-book%2F</url>
+    <content type="text"><![CDATA[2019-8-13 为什么要求算法最小化cost function却要以准确率错误率来衡量它？从cost到准确率丢失了衡量差距到底有多大的信息，这两个并不等价啊！ 如何衡量一个被选择的函数在某一目的上达到了多少效果？或者起到了多少作用？ 把输入端之前看成也连接了一个网络，这个网络是一种输出数据的网络，两个网络连接在一起看成一个大网络，而这种网络的生成目的应当是不同于后面我们人类设计网络的目的。但是输出的结果仍能一定程度上的符合人类需求，是不是说网络的每个部分可以存在不同的目标？ 有一个迷宫一样的屋子，同样也是一个挑战，找出从一楼走到天台的最短路径，有一万个人来接受挑战每个走到屋顶的人都被告知自己是否是走的最短路径，每个人都是独立的，有自己的判断标准，当他再次上楼时如何分析他们行为的变化？]]></content>
+      <categories>
+        <category>thinkload</category>
+        <category>花书</category>
+      </categories>
+      <tags>
+        <tag>thinkload</tag>
+        <tag>花书</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[thinkload]]></title>
     <url>%2F2019%2F08%2F10%2Fthinkload%2F</url>
     <content type="text"><![CDATA[Thinkload, download something from my mind when thinking. 2019-08-10 要达到完全的确定性，在下定义的角度必然需要无穷个修饰词, 或者说解释无穷个足够的特性，或者说无穷个参数。 另一个角度，把具有存在的物体可以看做一个函数，一个从一个定义域（一个包含所有我们在意的物体的集合）映射到一个可观测领域的函数，对于这个可观测领域的人要准确确定其存在或理解其存在需要理解这个函数的所有参数。 而因为有很多观察角度，就有很多观测领域，对于每个领域的参数又显然是不同的，对一个领域准确注定对另一不同领域就不那么准确。 也可以说函数的参数确定了可观测领域，函数的参数里蕴含了可观测领域的性质，这么看物体本身到底是什么就不那么重要，更重要的是可观测领域的性质，更重要的是观察物体的角度。 那参数是怎么得到的呢？这里发现，我们认识一个新的物体的存在必然需要一些先天的或者一些先验的存在，比如视觉听觉等五感之类的，或者一些产生在大脑的感觉，更进一步是思维灵魂的东西，或者直接说自我的存在—一个观察者自我的存在。 之前思考问题时犯了个错，不该不严谨的将物体给以“个”的量词，使得思考范围被放到离散的物体分布。 可能通过“试错”的方式学习有效，和反复试验取频率作为概率的方法有效这件事有相似性。另外，大数定律的内在含义到底是什么？为什么反复试验起作用？]]></content>
@@ -27,7 +53,7 @@
   <entry>
     <title><![CDATA[【notes】docker学习笔记5-dockerfile]]></title>
     <url>%2F2019%2F08%2F08%2Fdocker-5%2F</url>
-    <content type="text"><![CDATA[dockerfile指令指令格式注释： # Comment指令： INSTRUCTION argument FROM FROM &lt;image&gt; FROM &lt;image&gt;:&lt;tag&gt; 必须已经存在的镜像，也就是基础镜像 必须是第一条非注释指令 MAINTAINER MAINTAINER &lt;name&gt; 指定镜像的作者信息，包含镜像的所有者和练习方式 RUN构建构成运行的 RUN &lt;command&gt; (shell模式) /bin/sh -c command RUN [“executable”, “param1”, “param2”] (exec模式) RUN[“/bin/bash”, “-c”, “echo hello”] EXPOSE EXPOSE &lt;port&gt; [&lt;port&gt;…] 指定运行该镜像的容器使用的端口，但只是告诉docker会使用特定的端口号，出于安全考虑不会自动打开，在容器运行时仍需要手动指定端口映射。CMD ENTERYPOINT 指定容器启动时运行的命令 CMD [“executable”, “param1”, “param2”] (exec模式) CMD command param1 param2 (shell模式) CMD [“params1”, “params2”] (作为ENTRYPOINT指令的默认参数) 在docker run时如果指定命令的话dockerfile里的cmd命令会被覆盖掉。 ENTRYPOINT [“executable”, “param1”, “param2”] (exec模式) ENTRYPOINT command param1 param2 (shell模式) 默认不会被覆盖，如果需要覆盖需要指定docker run –entrypoint 覆盖 ADD COPY VOLUME设置镜像的目录和文件 ADD &lt;src&gt;…&lt;dest&gt; ADD [“&lt;src”…”“] (适用于文件路径中有空格) COPY &lt;src&gt;…&lt;dest&gt; COPY [“&lt;src”…”“] (适用于文件路径中有空格) 可以使文件地址（构建目录的相对地址），也可以是远程url（推荐使用curl获取文件内容） ADD vs. COPY ADD包含类似tar的解压功能 如果单纯复制文件，docker推荐使用COPY VOLUME [“/data”] 添加卷 WORKDIR ENV USER构建及容器运行时的环境设置 WORKDIR /path/to/workdir (设置工作目录，通常使用绝对路径，否则会一直传递下去) e.g: 1234WORKDIR /aWORKDIR bWORKDIR CRUN pwd # 结果为 /a/b/c ENV &lt;key&gt;&lt;value&gt; ENV &lt;key&gt;=&lt;value&gt; 设置环境变量 USER daemon USER user USER uidUSER user:group USER uid:gidUSER user:gid USER uid:group 指定运行的用户，若不指定则默认root用户。 ONBUILD ONBUILD [INSTRUCTION] 镜像触发器 当一个镜像被其他镜像作为基础镜像时执行 会在构建过程中插入指令 dockerfile构建过程 从基础镜像运行一个容器 执行一条指令，对容器作出修改 执行类似docker commit的操作， 提交一个新的镜像层（中间层镜像） 再基于刚提交的镜像运行一个新的容器 执行dockerfile中的下一条指令，直至所有指令执行完毕 中间层镜像进行调试 注：dockerfile会删除中间层镜像容器但不会删除中间层镜像 构建缓存，构建时会建立缓存，因此第二次执行构建命令会很快，是因为使用了缓存。 不使用缓存 1docker build --no-cache 另一种方法通过更改缓存刷新时间 FROM Ubuntu:14:04MAINTAINER dormancypress user@mail.comENV REFRESH_DATE 2019-08-08RUN apt-get updateRUN apt-get install -y nginxEXPOSE 80 修改REFRESH_DATE时间 查看镜像构建过程 1docker history [image]]]></content>
+    <content type="text"><![CDATA[dockerfile指令指令格式注释： # Comment指令： INSTRUCTION argument FROM FROM &lt;image&gt; FROM &lt;image&gt;:&lt;tag&gt; 必须已经存在的镜像，也就是基础镜像 必须是第一条非注释指令 MAINTAINER MAINTAINER &lt;name&gt; 指定镜像的作者信息，包含镜像的所有者和练习方式 RUN构建构成运行的 RUN &lt;command&gt; (shell模式) /bin/sh -c command RUN [“executable”, “param1”, “param2”] (exec模式) RUN[“/bin/bash”, “-c”, “echo hello”] EXPOSE EXPOSE &lt;port&gt; [&lt;port&gt;…] 指定运行该镜像的容器使用的端口，但只是告诉docker会使用特定的端口号，出于安全考虑不会自动打开，在容器运行时仍需要手动指定端口映射。CMD ENTRYPOINT 指定容器启动时运行的命令 CMD [“executable”, “param1”, “param2”] (exec模式) CMD command param1 param2 (shell模式) CMD [“params1”, “params2”] (作为ENTRYPOINT指令的默认参数) 在docker run时如果指定命令的话dockerfile里的cmd命令会被覆盖掉。 ENTRYPOINT [“executable”, “param1”, “param2”] (exec模式) ENTRYPOINT command param1 param2 (shell模式) 默认不会被覆盖，如果需要覆盖需要指定docker run –entrypoint 覆盖 ADD COPY VOLUME设置镜像的目录和文件 ADD &lt;src&gt;…&lt;dest&gt; ADD [“&lt;src”…”“] (适用于文件路径中有空格) COPY &lt;src&gt;…&lt;dest&gt; COPY [“&lt;src”…”“] (适用于文件路径中有空格) 可以使文件地址（构建目录的相对地址），也可以是远程url（推荐使用curl获取文件内容） ADD vs. COPY ADD包含类似tar的解压功能 如果单纯复制文件，docker推荐使用COPY VOLUME [“/data”] 添加卷 WORKDIR ENV USER构建及容器运行时的环境设置 WORKDIR /path/to/workdir (设置工作目录，通常使用绝对路径，否则会一直传递下去) e.g: 1234WORKDIR /aWORKDIR bWORKDIR CRUN pwd # 结果为 /a/b/c ENV &lt;key&gt;&lt;value&gt; ENV &lt;key&gt;=&lt;value&gt; 设置环境变量 USER daemon USER user USER uidUSER user:group USER uid:gidUSER user:gid USER uid:group 指定运行的用户，若不指定则默认root用户。 ONBUILD ONBUILD [INSTRUCTION] 镜像触发器 当一个镜像被其他镜像作为基础镜像时执行 会在构建过程中插入指令 dockerfile构建过程 从基础镜像运行一个容器 执行一条指令，对容器作出修改 执行类似docker commit的操作， 提交一个新的镜像层（中间层镜像） 再基于刚提交的镜像运行一个新的容器 执行dockerfile中的下一条指令，直至所有指令执行完毕 中间层镜像进行调试 注：dockerfile会删除中间层镜像容器但不会删除中间层镜像 构建缓存，构建时会建立缓存，因此第二次执行构建命令会很快，是因为使用了缓存。 不使用缓存 1docker build --no-cache 另一种方法通过更改缓存刷新时间 FROM Ubuntu:14:04MAINTAINER dormancypress user@mail.comENV REFRESH_DATE 2019-08-08RUN apt-get updateRUN apt-get install -y nginxEXPOSE 80 修改REFRESH_DATE时间 查看镜像构建过程 1docker history [image]]]></content>
       <categories>
         <category>笔记</category>
         <category>docker</category>
@@ -92,7 +118,7 @@
   <entry>
     <title><![CDATA[用Xshell管理虚拟机Ubuntu]]></title>
     <url>%2F2019%2F08%2F03%2Fxshell-vmware%2F</url>
-    <content type="text"><![CDATA[因为使用VM虚拟机太过占用资源，所以我们可以用Xshell连接到虚拟机，来达到节省本机资源的目的。 安装SSH： 123sudo apt-get install openssh-serverservice iptables stop #关闭防火墙service ssh start #开启ssh服务 获得登录需要的ip ,在虚拟机输入： 1ifconfig ens*后面的inet后面的值就是ip。 按照我之前写过的xshell连接的教程 windows系统：Xshell下载安装+连接服务器 建立会话就ok，主机就是刚才你获得的ip，登录用的用户名和密码就是你安装时填的用户名(非root账户)和密码。 之后只需要打开虚拟机后最小化界面，从xshell登入后reboot一下虚拟机，这样从内存角度就能节省将近90多MB。]]></content>
+    <content type="text"><![CDATA[因为使用VM虚拟机太过占用资源，所以我们可以用Xshell连接到虚拟机，来达到节省本机资源的目的。 安装SSH： 123sudo apt-get install openssh-serverservice iptables stop #关闭防火墙service ssh start #开启ssh服务 获得登录需要的ip ,在虚拟机输入： 1ifconfig ens*后面的inet后面的值就是ip。 按照我之前写过的xshell连接的教程 windows系统：Xshell下载安装+连接服务器 建立会话就ok，主机就是刚才你获得的ip，登录用的用户名和密码就是你安装时填的用户名(非root账户)和密码。 之后只需要打开虚拟机后最小化界面，从xshell登入后reboot一下虚拟机，这样从内存角度就能节省将近90多MB。 注意： reboot后就不要在打开VMware了，一直让它最小化直到关闭。]]></content>
       <categories>
         <category>Xshell</category>
       </categories>

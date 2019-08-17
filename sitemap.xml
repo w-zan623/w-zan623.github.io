@@ -2,9 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zinw623.github.io/2019/08/17/pytorch-1/</loc>
+    
+    <lastmod>2019-08-17T03:26:31.066Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://zinw623.github.io/2019/08/03/xshell-vmware/</loc>
     
-    <lastmod>2019-08-12T10:55:59.650Z</lastmod>
+    <lastmod>2019-08-13T08:28:01.528Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zinw623.github.io/2019/08/08/docker-5/</loc>
+    
+    <lastmod>2019-08-13T04:38:51.262Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zinw623.github.io/2019/08/13/deeplearning-book/</loc>
+    
+    <lastmod>2019-08-13T03:02:00.205Z</lastmod>
     
   </url>
   
@@ -26,13 +47,6 @@
     <loc>https://zinw623.github.io/2019/08/06/docker-1/</loc>
     
     <lastmod>2019-08-08T12:29:30.031Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zinw623.github.io/2019/08/08/docker-5/</loc>
-    
-    <lastmod>2019-08-08T12:20:07.098Z</lastmod>
     
   </url>
   

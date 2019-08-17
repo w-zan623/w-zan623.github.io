@@ -1,3 +1,5 @@
+https://zinw623.github.io/2019/08/17/pytorch-1/
+https://zinw623.github.io/2019/08/13/deeplearning-book/
 https://zinw623.github.io/2019/08/10/thinkload/
 https://zinw623.github.io/2019/08/09/docker-6/
 https://zinw623.github.io/2019/08/08/docker-5/

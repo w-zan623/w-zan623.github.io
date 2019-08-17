@@ -70,19 +70,20 @@
   daovoice('update');
   </script>
 
-  <meta name="description" content="Download something from my mind when thinking!">
-<meta name="keywords" content="python, deeplearning, math......">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Zihan.W的博客">
-<meta property="og:url" content="https://zinw623.github.io/archives/2019/08/page/2/index.html">
+  <meta name="description" content="每个深度学习框架的设计核心是张量和计算图，在pytorch里体现为张量系统（Tensor）和自动微分系统（atutograd）。">
+<meta name="keywords" content="笔记,pytorch">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[notes]pytorch笔记：Tensor和autograd">
+<meta property="og:url" content="https://zinw623.github.io/2019/08/17/pytorch-1/index.html">
 <meta property="og:site_name" content="Zihan.W的博客">
-<meta property="og:description" content="Download something from my mind when thinking!">
+<meta property="og:description" content="每个深度学习框架的设计核心是张量和计算图，在pytorch里体现为张量系统（Tensor）和自动微分系统（atutograd）。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-17T03:26:31.066Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zihan.W的博客">
-<meta name="twitter:description" content="Download something from my mind when thinking!">
+<meta name="twitter:title" content="[notes]pytorch笔记：Tensor和autograd">
+<meta name="twitter:description" content="每个深度学习框架的设计核心是张量和计算图，在pytorch里体现为张量系统（Tensor）和自动微分系统（atutograd）。">
   <link rel="alternate" href="/atom.xml" title="Zihan.W的博客" type="application/atom+xml">
-  <link rel="canonical" href="https://zinw623.github.io/archives/2019/08/page/2/">
+  <link rel="canonical" href="https://zinw623.github.io/2019/08/17/pytorch-1/">
 
 
 <script id="page.configurations">
@@ -91,7 +92,7 @@
   };
 </script>
 
-  <title>归档 | Zihan.W的博客</title>
+  <title>[notes]pytorch笔记：Tensor和autograd | Zihan.W的博客</title>
   
 
 
@@ -140,7 +141,7 @@
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -217,7 +218,7 @@
         
         
           
-          <li class="menu-item menu-item-archives menu-item-active">
+          <li class="menu-item menu-item-archives">
       
     
 
@@ -232,27 +233,6 @@
       
     </ul>
     
-
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
 
     <div class="site-search">
       
@@ -291,150 +271,272 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+    <div class="reading-progress-bar"></div>
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
-      <span class="archive-page-counter">
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zinw623.github.io/2019/08/17/pytorch-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zihan.W">
+      <meta itemprop="description" content="Download something from my mind when thinking!">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zihan.W的博客">
+    </span>
+      <header class="post-header">
+
         
+          <h1 class="post-title" itemprop="name headline">[notes]pytorch笔记：Tensor和autograd
+
+              
+            
+          </h1>
         
-        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-17 11:23:44 / 修改时间：11:26:31" itemprop="dateCreated datePublished" datetime="2019-08-17T11:23:44+08:00">2019-08-17</time>
+            </span>
           
-        
-        嗯..! 目前共计 13 篇日志。 继续努力。
-      </span>
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/笔记/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/笔记/pytorch/" itemprop="url" rel="index"><span itemprop="name">pytorch</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          <br/>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">1.3k</span>
+            </span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">1 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
+        <blockquote>
+<p>每个深度学习框架的设计核心是张量和计算图，在pytorch里体现为张量系统（Tensor）和自动微分系统（atutograd）。<a id="more"></a></p>
+</blockquote>
+<h3 id="Tensor"><a href="#Tensor" class="headerlink" title="Tensor"></a>Tensor</h3><ul>
+<li>中文译为张量，可以简单看作一个数组。</li>
+<li>与numpy里的ndarrays类似，但tensor支持GPU加速。</li>
+</ul>
+<h4 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h4><p>接口角度：</p>
+<ol>
+<li>torch.function </li>
+<li>tensor.function</li>
+</ol>
+<p>存储角度：</p>
+<ol>
+<li>不会修改自身数据，如<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">2. 会修改自身数据，如```a.add_(b)```，加法的值储存在a中了。</span><br><span class="line"></span><br><span class="line">##### 创建Tensor</span><br><span class="line"></span><br><span class="line">    在pytorch中常见的新建tensor的方法：</span><br><span class="line">|类别| 特点 | 函数 | 功能 |</span><br><span class="line">|:-----|:----|:-----|:-----|</span><br><span class="line">|第一类：基础方法|最灵活|Tensor(\*sizes)|基础构造函数|</span><br><span class="line">|第二类：根据sizes建立|常数型|ones(\*sizes)|全1Tensor|</span><br><span class="line">||常数型|zeros(\*sizes)|全0Tensor|</span><br><span class="line">||常数型|eyes(\*sizes)|对角线为1，其他为0|</span><br><span class="line">||概率分布型|rand/randn(\*sizes)|均匀/标准分布|</span><br><span class="line">|第三类：根据一定范围建立|等差数列型|arange(s,e,step)|从s到e，步长为step|</span><br><span class="line">||等差数列型|linspace(s,e,steps)|从s到e，均匀切分成steps份|</span><br><span class="line">||概率分布型|normal(mean,std)/uniform(from,to)|正态分布/均匀分布|</span><br><span class="line">||概率分布型|randperm(m)|随机分布|</span><br><span class="line"></span><br><span class="line">* 其中使用Tensor函数新建tensor是最复杂多变的，它既可以接受一个list，并根据list的数据新建tensor，也可根据指定的形状新建tensor，还能传入其他的tensor。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">```python</span><br><span class="line"># 引入必要的包</span><br><span class="line">import torch as t</span><br><span class="line">from torch.autograd import Variable as V</span><br></pre></td></tr></table></figure></li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 指定tensor的形状</span></span><br><span class="line">a = t.Tensor(<span class="number">2</span>, <span class="number">3</span>);a</span><br></pre></td></tr></table></figure>
 
-        
-        
-        
+<pre><code>tensor([[5.8337e-10, 1.3567e-19, 1.4584e-19],
+        [7.8447e+17, 1.3556e-19, 1.3563e-19]])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 用list的数据创建tensor</span></span><br><span class="line">b = t.Tensor([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]]);b</span><br></pre></td></tr></table></figure>
 
+<pre><code>tensor([[1., 2., 3.],
+        [4., 5., 6.]])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b.tolist(),type(b.tolist()) <span class="comment"># 把tensor转为list</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]], list)</code></pre><p>tensor.size()返回torch.Size()对象，它是tuple的子类，但其使用方式与tuple略有不同。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b_size = b.size();b_size</span><br></pre></td></tr></table></figure>
+
+<pre><code>torch.Size([2, 3])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b.numel() <span class="comment"># numelements前五个字母，b中元素总个数，等价于b.nelement()</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>6</code></pre>
+    </div>
+      <p>———————————————感谢阅读———————————————</p>
+<blockquote><p>欢迎收藏访问我的<a href="https://zinw623.github.io/">博客</a>  <a href="https://www.zhihu.com/people/tai-li-wu-yan-zu/activities" target="_blank" rel="noopener">知乎</a>   <a href="https://juejin.im/user/5d40058ef265da03b76afb66" target="_blank" rel="noopener">掘金</a>  <a href="https://www.jianshu.com/u/a38373c2e45b" target="_blank" rel="noopener">简书</a> <a href="https://www.zhihu.com/people/tai-li-wu-yan-zu/activities" target="_blank" rel="noopener">知乎</a></p></blockquote>
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\2019\08\09\docker-6\" rel="bookmark">【notes】docker学习笔记6-docker容器数据管理</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\2019\08\08\docker-5\" rel="bookmark">【notes】docker学习笔记5-dockerfile</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\2019\08\07\docker-4\" rel="bookmark">【notes】docker学习笔记4-docker客户端与守护进程</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\2019\08\06\docker-3\" rel="bookmark">【notes】docker学习笔记3-docker镜像</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\2019\08\06\docker-2\" rel="bookmark">【notes】docker学习笔记2-docker容器</a></div>
+      
+    </li>
+  
+  </ul>
+
+
+    
+    
+    
+      <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="Zihan.W wechat" style="width: 200px; max-width: 100%;">
+  <div>欢迎扫描二维码订阅我的公众号！</div>
+</div>
+
+    
+      <div>
+        <div id="reward-container">
+  <div></div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
         
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.jpg" alt="Zihan.W 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+      </div>
+
+    <footer class="post-footer">
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
+        
+        <div class="post-tags">
+            <a href="/tags/笔记/" rel="tag"><i class="fa fa-tag"></i> 笔记</a>
+          
+            <a href="/tags/pytorch/" rel="tag"><i class="fa fa-tag"></i> pytorch</a>
+          
+        </div>
+        <div class="post-widgets">
+        
+
+        
+
+        
+          <div class="social-share">
+            
+            
+              <div id="needsharebutton-postbottom">
+                <span class="btn">
+                  <i class="fa fa-share-alt" aria-hidden="true"></i>
+                </span>
+              </div>
+            
           </div>
         
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/08/02/photoshop-cc-2019-download/" itemprop="url">
-            
-              <span itemprop="name">photoshop cc 2019安装破解</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-08-02T11:08:27+08:00"
-              content="2019-08-02">
-          08-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
+        </div>
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/08/02/hexo-jupyter/" itemprop="url">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+              <a href="/2019/08/13/deeplearning-book/" rel="next" title="[thinkload]读书-疑问">
+                <i class="fa fa-chevron-left"></i> [thinkload]读书-疑问
+              </a>
             
-              <span itemprop="name">Xshell：在本地浏览器使用服务器的jupyter notebook</span>
-            
-          </a>
-        
-      </h2>
+          </div>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-08-02T09:47:42+08:00"
-              content="2019-08-02">
-          08-02
-        </time>
-      </div>
+          <span class="post-nav-divider"></span>
 
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/08/01/XshellDownload/" itemprop="url">
-            
-              <span itemprop="name">windows系统：Xshell下载安装+连接服务器</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-08-01T12:32:52+08:00"
-              content="2019-08-01">
-          08-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-    </div>
+          <div class="post-nav-prev post-nav-item">
+          </div>
+        </div>
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2019/08/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/archives/2019/08/">1</a><span class="page-number current">2</span>
-  </nav>
-
+  </div>
 
 
           </div>
           
+    
+    
+  <div class="comments" id="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NTY1OS8yMjE3MA=="></div>
+  </div>
+  
+  
+
 
         </div>
           
@@ -449,8 +551,17 @@
 
   <aside id="sidebar" class="sidebar">
     <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
 
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -621,6 +732,23 @@
 
         </div>
       </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tensor"><span class="nav-number">1.</span> <span class="nav-text">Tensor</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基础操作"><span class="nav-number">1.1.</span> <span class="nav-text">基础操作</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
     </div>
   </aside>
@@ -766,6 +894,10 @@
 
 
   
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
 
   <script src="/js/next-boot.js?v=7.2.0"></script>
 
@@ -796,30 +928,11 @@
   
 
 
-    
-      
-    
-  
-    <script src="/lib/quicklink/quicklink.umd.js"></script>
-    <script>
-      
-        window.addEventListener('load', () => {
-      
-        quicklink({
-          timeout: 3000,
-          priority: true,
-          ignores: [uri => uri.includes('#'),uri => uri == 'https://zinw623.github.io/archives/2019/08/page/2/',]
-        });
-      
-        });
-      
-    </script>
-  
 
 
   <script src="/lib/bookmark/bookmark.min.js?v=1.0"></script>
   <script>
-    bookmark.loadBookmark();
+    bookmark.scrollToMark('auto', "#更多");
   
   </script>
 
@@ -852,6 +965,20 @@
 
 
     
+
+<script>
+  window.livereOptions = {
+    refer: '2019/08/17/pytorch-1/'
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
 
 
 </body>
