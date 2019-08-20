@@ -413,6 +413,145 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zinw623.github.io/2019/08/20/autograd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zihan.W">
+      <meta itemprop="description" content="Download something from my mind when thinking!">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zihan.W的博客">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/20/autograd/" class="post-title-link" itemprop="url">【notes】pytorch学习笔记2-autograd部分</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-20 17:30:45 / 修改时间：17:04:49" itemprop="dateCreated datePublished" datetime="2019-08-20T17:30:45+08:00">2019-08-20</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/笔记/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/笔记/pytorch/" itemprop="url" rel="index"><span itemprop="name">pytorch</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          <br/>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">12k</span>
+            </span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">11 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <p>
+              autogradtorch.autograd是为方便用户使用，专门开发的一套自动求导引擎，它能够根据输入和前向传播过程自动构建计算图，并执行反向传播。
+计算图是现代深度学习框架的核心，它为自动求导算法——反向传播提供了理论支持。
+Variablepytorch在autograd模块中实现计算图相关功
+              ...
+            </p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/08/20/autograd/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://zinw623.github.io/2019/08/19/pytorch-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -927,7 +1066,7 @@ docker容器的数据卷什么是数据卷(Data Volume)docker的生存周期是�
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">776</span>
+              <span title="本文字数">2k</span>
             </span>
           
             <span class="post-meta-item">
@@ -937,7 +1076,7 @@ docker容器的数据卷什么是数据卷(Data Volume)docker的生存周期是�
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">1 分钟</span>
+              <span title="阅读时长">2 分钟</span>
             </span>
           
 
@@ -954,13 +1093,12 @@ docker容器的数据卷什么是数据卷(Data Volume)docker的生存周期是�
             <p>
               dockerfile指令指令格式注释： # Comment指令： INSTRUCTION argument
 FROM
-FROM \
-FROM \:\
+FROM &lt;image&gt;
+FROM &lt;image&gt;:&lt;tag&gt;
 必须已经存在的镜像，也就是基础镜像
 必须是第一条非注释指令
 
 MAINTAINER
-MAINTAINER \  指定镜像的作者信息，包含镜像的所有者和
               ...
             </p>
           <!--noindex-->
@@ -1270,7 +1408,8 @@ uni
 
 列出镜像docker images [OPSIONS] [REPOSITORY]
 
-   -a, —all = false   # 显示所有镜像，默认并不显示中间层镜像（没有标签名的镜像）   -f, —filter = []   #
+
+   -a, –all = false   # 显示所有镜像，默认并不显示中间层镜像（没有标签名的镜像）   -f, –filter = []   
               ...
             </p>
           <!--noindex-->
@@ -1382,7 +1521,7 @@ uni
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">1.6k</span>
+              <span title="本文字数">1.7k</span>
             </span>
           
             <span class="post-meta-item">
@@ -1392,7 +1531,7 @@ uni
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">1 分钟</span>
+              <span title="阅读时长">2 分钟</span>
             </span>
           
 
@@ -1415,7 +1554,8 @@ docker run IMAGE [COMMAND] [ARG]
 docker run -i -t IMAGE /bin/bash
 
 
--i —interactive=ture | false 默认是false，为容器始终打开标准输入-t —tt
+
+-i –interactive=ture | false 默认是false，为容器始终打开标准输入-t –t
               ...
             </p>
           <!--noindex-->
@@ -1603,142 +1743,6 @@ docker客户端对服务器的访问： 本地/远程
   </article>
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://zinw623.github.io/2019/08/03/xshell-vmware/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Zihan.W">
-      <meta itemprop="description" content="Download something from my mind when thinking!">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zihan.W的博客">
-    </span>
-      <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/08/03/xshell-vmware/" class="post-title-link" itemprop="url">用Xshell管理虚拟机Ubuntu</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-08-03 22:14:16" itemprop="dateCreated datePublished" datetime="2019-08-03T22:14:16+08:00">2019-08-03</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-08-13 16:28:01" itemprop="dateModified" datetime="2019-08-13T16:28:01+08:00">2019-08-13</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Xshell/" itemprop="url" rel="index"><span itemprop="name">Xshell</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          <br/>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">本文字数：</span>
-              
-              <span title="本文字数">407</span>
-            </span>
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              
-              <span title="阅读时长">1 分钟</span>
-            </span>
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>因为使用VM虚拟机太过占用资源，所以我们可以用Xshell连接到虚拟机，来达到节省本机资源的目的。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/08/03/xshell-vmware/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </section>
 
   
@@ -1779,7 +1783,7 @@ docker客户端对服务器的访问： 本地/远程
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1955,12 +1959,12 @@ docker客户端对服务器的访问： 本地/远程
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">28k</span>
+    <span title="站点总字数">41k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">25 分钟</span>
+    <span title="站点阅读时长">37 分钟</span>
 </div>
 
 
