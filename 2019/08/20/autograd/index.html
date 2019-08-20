@@ -78,7 +78,7 @@
 <meta property="og:site_name" content="Zihan.W的博客">
 <meta property="og:description" content="autogradtorch.autograd是为方便用户使用，专门开发的一套自动求导引擎，它能够根据输入和前向传播过程自动构建计算图，并执行反向传播。 计算图是现代深度学习框架的核心，它为自动求导算法——反向传播提供了理论支持。 Variablepytorch在autograd模块中实现计算图相关功能，autograd中的核心数据结构是Variable。Variable封装了tensor，并记录对">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-20T09:15:49.779Z">
+<meta property="og:updated_time" content="2019-08-20T09:18:22.814Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【notes】pytorch学习笔记2-autograd部分">
 <meta name="twitter:description" content="autogradtorch.autograd是为方便用户使用，专门开发的一套自动求导引擎，它能够根据输入和前向传播过程自动构建计算图，并执行反向传播。 计算图是现代深度学习框架的核心，它为自动求导算法——反向传播提供了理论支持。 Variablepytorch在autograd模块中实现计算图相关功能，autograd中的核心数据结构是Variable。Variable封装了tensor，并记录对">
@@ -314,7 +314,7 @@
                 
               
 
-              <time title="创建时间：2019-08-20 17:30:45 / 修改时间：17:15:49" itemprop="dateCreated datePublished" datetime="2019-08-20T17:30:45+08:00">2019-08-20</time>
+              <time title="创建时间：2019-08-20 17:30:45 / 修改时间：17:18:22" itemprop="dateCreated datePublished" datetime="2019-08-20T17:30:45+08:00">2019-08-20</time>
             </span>
           
             
@@ -457,7 +457,7 @@ F[Add] --> G((z));
           </pre>
 
 <p>如上有向无环图，$\boldsymbol{X}$和$\boldsymbol{b}$是叶子节点，这些节点通常有用户自己创建，不依赖于其他变量。$\boldsymbol{z}$称为根节点，是计算图的最终目标。利用链式法则很容易求各个叶子节点的梯度。</p>
-<p>$\frac{\partial{z}}{\partial{b}}=1,\frac{\partial{z}}{\partial{y}}=1\\frac{\partial{y}}{\partial{w}}=x,\frac{\partial{y}}{\partial{x}}=w\\frac{\partial{z}}{\partial{x}}=\frac{\partial{z}}{\partial{y}}\frac{\partial{y}}{\partial{x}}=1<em>w\\frac{\partial{z}}{\partial{w}}=\frac{\partial{z}}{\partial{y}}\frac{\partial{y}}{\partial{w}}=1</em>x$</p>
+<p>$$\frac{\partial{z}}{\partial{b}}=1,\frac{\partial{z}}{\partial{y}}=1\\frac{\partial{y}}{\partial{w}}=x,\frac{\partial{y}}{\partial{x}}=w\\frac{\partial{z}}{\partial{x}}=\frac{\partial{z}}{\partial{y}}\frac{\partial{y}}{\partial{x}}=1<em>w\\frac{\partial{z}}{\partial{w}}=\frac{\partial{z}}{\partial{y}}\frac{\partial{y}}{\partial{w}}=1</em>x$$</p>
 <p>有了计算图上述链式求导可自动利用计算图的反向传播自动完成，其过程如图所示：</p>
 <pre class="mermaid" style="text-align: center;">
             
