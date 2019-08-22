@@ -78,7 +78,7 @@
 <meta property="og:site_name" content="Zihan.W的博客">
 <meta property="og:description" content="神经网络工具箱nnautograd实现了自动微分系统，然而对于深度学习来说过于底层。nn模块是构建与autograd之上的神经网络模块。除了nn之外，我们还会介绍神经网络中常用的工具，比如优化器optim,初始化init等。 nn.Moduletorch.nn的核心数据结构是Module，它是一个抽象的概念，既可以表示神经网络中的某个层（layer），也可以表示一个包含很多层的神经网络。在实际使用">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-22T14:16:23.265Z">
+<meta property="og:updated_time" content="2019-08-22T14:46:42.302Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【notes】pytorch学习笔记3-神经网络工具箱nn">
 <meta name="twitter:description" content="神经网络工具箱nnautograd实现了自动微分系统，然而对于深度学习来说过于底层。nn模块是构建与autograd之上的神经网络模块。除了nn之外，我们还会介绍神经网络中常用的工具，比如优化器optim,初始化init等。 nn.Moduletorch.nn的核心数据结构是Module，它是一个抽象的概念，既可以表示神经网络中的某个层（layer），也可以表示一个包含很多层的神经网络。在实际使用">
@@ -314,7 +314,7 @@
                 
               
 
-              <time title="创建时间：2019-08-22 17:30:45 / 修改时间：22:16:23" itemprop="dateCreated datePublished" datetime="2019-08-22T17:30:45+08:00">2019-08-22</time>
+              <time title="创建时间：2019-08-22 17:30:45 / 修改时间：22:46:42" itemprop="dateCreated datePublished" datetime="2019-08-22T17:30:45+08:00">2019-08-22</time>
             </span>
           
             
@@ -393,11 +393,11 @@ b Parameter containing:
 tensor([0.2586, 2.3734, 0.5372], requires_grad=True)
 </code></pre><p>但需要注意一下几点：</p>
 <ul>
-<li>自定义层Linear必须继承nn.Module，并且在其构造函数中需调用nn.Module的构造函数，即super(Linear, self).__init<strong>()或nn.Module.\</strong>init__(self)。</li>
+<li>自定义层Linear必须继承nn.Module，并且在其构造函数中需调用nn.Module的构造函数，即super(Linear, self).<strong>init</strong>()或nn.Module.__init__(self)。</li>
 <li>在构造函数__init__中必须自己定义可学习的参数，并封装成Parameter，如在本例中我们把w和b封装成Parameter。Parameter是一种特殊的Variable，但其默认需要求导（requires_grad=True）。</li>
 <li>forward函数实现前向传播过程，其输入可以是一个或多个variable，对x的任何操作也必须是variable支持的操作。</li>
 <li>无需写反向传播函数，因其前向传播都是对variable进行操作，nn.Module能够利用autograd自动实现反向传播，这一点比Function简单许多。</li>
-<li>使用时，直观上可将layer看成数学概念中的函数，调用layer(input)即可得到input对应的结果。它等价于layers.__call<strong>(input)，在\</strong>call__函数中，主要调用的是layer.forward(X)，另外还对钩子做了一些处理。所以在实际使用中应尽量使用layer(x)而不是使用layer.forward(x)。</li>
+<li>使用时，直观上可将layer看成数学概念中的函数，调用layer(input)即可得到input对应的结果。它等价于layers.__call__(input)，在__call__函数中，主要调用的是layer.forward(X)，另外还对钩子做了一些处理。所以在实际使用中应尽量使用layer(x)而不是使用layer.forward(x)。</li>
 </ul>
 <p>Module能够自动检测到自己的parameter，并将其作为学习参数。除了parameter，Module还包含子Module，主Module能够递归查找子Module中的parameter。</p>
 <p>下面看一个稍微复杂的网络：多层感知机。</p>
@@ -646,17 +646,17 @@ submodel1 Linear(in_features=3, out_features=4, bias=True)
   )), (&#39;submodel1&#39;, Linear(in_features=3, out_features=4, bias=True))]
 </code></pre><p>register_forward_hook和register_backward_hook函数的功能类似于variable的register_hook，可在module前向传播或反向传播时注册钩子。每次前向传播执行结束后会执行钩子函数（hook）。前向传播的钩子函数具有如下形式：hook(module, input, output) -&gt; None，而反向传播则具有如下形式：hook(module, grad_input, grad_ouput) -&gt; Tensor or None。钩子函数不应修改输入和输出，并且在使用后应及时删除，以避免每次都运行钩子增加运行负载。钩子函数主要用在获取某些中间结果的情景，如中间某一层的输出或某一层的梯度。这些结果本应写在forward函数中，但如果在forward函数中加上这些处理，可能会使处理逻辑比较复杂，这时使用钩子技术就更合适。下面考虑一种场景：有一个预训练的模型，需要提取模型的某一层（不是最后一层）的输出作为特征进行分类，希望不修改其原有的模型定义文件，这时就可以利用钩子函数。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">model = VGG()</span><br><span class="line">features = t.Tensor()</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hook</span><span class="params">(module, input, output)</span>:</span></span><br><span class="line">    features.copy_(output.data)</span><br><span class="line">    </span><br><span class="line">handle = model.layer8.register_forward_hook(hook)</span><br><span class="line">_ = model(input)</span><br><span class="line"><span class="comment"># 用完hook后删除</span></span><br><span class="line">handle.remove()</span><br></pre></td></tr></table></figure>
-<p>nn.Module对象在构造函数中的行为看起来有些诡异，想要理解就需要看两个魔法方法__getattr<strong>和\</strong>setattr__。在python中有两个常用的builtin方法：getattr和setattr。getattr(obj, ‘attr1’)等价于obj.attr，setattr(obj, ‘name’, value)等价于obj.name = value。</p>
+<p>nn.Module对象在构造函数中的行为看起来有些诡异，想要理解就需要看两个魔法方法__getattr__和__setattr__。在python中有两个常用的builtin方法：getattr和setattr。getattr(obj, ‘attr1’)等价于obj.attr，setattr(obj, ‘name’, value)等价于obj.name = value。</p>
 <ul>
 <li>result = obj.name会调用builtin函数getattr(obj, ‘name’)，如果该属性找不到，会调用obj.__getattr__(‘name’)</li>
-<li>obj.name = value会调用builtin函数setattr(obj, ‘name’, value)，如果obj对象实现了__setattr<strong>方法，setattr会直接调用obj.\</strong>setattr__(‘name’, value)。</li>
+<li>obj.name = value会调用builtin函数setattr(obj, ‘name’, value)，如果obj对象实现了__setattr__方法，setattr会直接调用obj.__setattr__(‘name’, value)。</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">person</span><span class="params">()</span>:</span></span><br><span class="line">    dict = &#123;<span class="string">'name'</span>:<span class="string">'xxx'</span>,<span class="string">'sex'</span>:<span class="string">'boy'</span>,<span class="string">'age'</span>:<span class="number">18</span>&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span><span class="params">(self,name)</span>:</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> self.dict[name]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__setattr__</span><span class="params">(self, name , value)</span>:</span></span><br><span class="line">        </span><br><span class="line">        self.dict[name] = value</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> value</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">one = person()</span><br><span class="line">one.name, one.sex, one.age</span><br></pre></td></tr></table></figure>
 <pre><code>(&#39;xxx&#39;, &#39;boy&#39;, 18)
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">one.name = <span class="string">'吴彦祖'</span>;one.name</span><br></pre></td></tr></table></figure>
 <pre><code>&#39;吴彦祖&#39;
-</code></pre><p>nn.Module实现了自定义的__setattr<strong>函数，当执行module.name=value时，会在\</strong>setattr<strong>中判断value是否为Parameter或nn.Module对象，如果是则将这些对象加到_parameters和_modules两个字典中；如果是其他类型的对象，如Variable、list、dict等，则调用默认的操作，将这个值保存在\</strong>dict__中。</p>
+</code></pre><p>nn.Module实现了自定义的__setattr__函数，当执行module.name=value时，会在__setattr__中判断value是否为Parameter或nn.Module对象，如果是则将这些对象加到_parameters和_modules两个字典中；如果是其他类型的对象，如Variable、list、dict等，则调用默认的操作，将这个值保存在__dict__中。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">module = nn.Module()</span><br><span class="line">module.param = nn.Parameter(t.ones(<span class="number">2</span>, <span class="number">2</span>))</span><br><span class="line">module._parameters,module.param</span><br></pre></td></tr></table></figure>
 <pre><code>(OrderedDict([(&#39;param&#39;, Parameter containing:
                tensor([[1., 1.],
@@ -672,7 +672,7 @@ __dict__[&#39;submodules&#39;]: [Linear(in_features=2, out_features=2, bias=True
   (1): Linear(in_features=2, out_features=2, bias=True)
 ))])
 __dict__[&#39;submodules&#39;]: None
-</code></pre><p>因_modules和_parameters中的item未保存在__dict<strong>中，所以默认的getattr方法无法获取它，因而nn.Module实现了自定义的\</strong>getattr<strong>方法。如果默认的getattr无法处理，就调用自定义的</strong>getattr__方法，尝试从_modules、_parameters和_buffers三个字典中获取。</p>
+</code></pre><p>因_modules和_parameters中的item未保存在__dict__中，所以默认的getattr方法无法获取它，因而nn.Module实现了自定义的__getattr__方法。如果默认的getattr无法处理，就调用自定义的__getattr__方法，尝试从_modules、_parameters和_buffers三个字典中获取。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">getattr(module, <span class="string">'training'</span>) <span class="comment"># 等价于module.training</span></span><br><span class="line"><span class="comment">#error</span></span><br><span class="line"><span class="comment">#module.__getattr__('training')</span></span><br></pre></td></tr></table></figure>
 <pre><code>True
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">module.attr1 = <span class="number">2</span></span><br><span class="line">getattr(module, <span class="string">'attr1'</span>)</span><br><span class="line"><span class="comment"># 报错</span></span><br><span class="line"><span class="comment"># module.__getattr__('attr1')</span></span><br></pre></td></tr></table></figure>
@@ -715,7 +715,6 @@ Net(
 <li>nn.functional是一些autograd操作的集合，是经过封装的函数。</li>
 </ul>
 <p>作为两种扩充pytorch接口的方法，我们在实际作用中应该如何选择？如果某一个操作在autograd中尚未支持，那么需要利用Function手动实现对应的前后传播和反向传播。如果某些时候利用autograd接口比较复杂，则可以利用Function将多个操作聚合，实现优化，比直接利用autograd低级别的操作要快。如果只是想在深度学习中怎加某一层，使用nn.Module进行封装则更简单高效。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
     </div>
       <p>———————————————感谢阅读———————————————</p>
