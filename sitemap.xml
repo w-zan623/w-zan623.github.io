@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zinw623.github.io/2019/08/22/nn.Module/</loc>
+    
+    <lastmod>2019-08-22T14:16:23.265Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zinw623.github.io/2019/08/21/dlrm/</loc>
+    
+    <lastmod>2019-08-22T14:05:27.622Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://zinw623.github.io/2019/08/20/autograd/</loc>
     
     <lastmod>2019-08-20T09:24:42.211Z</lastmod>

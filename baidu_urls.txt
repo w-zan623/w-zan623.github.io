@@ -1,3 +1,5 @@
+https://zinw623.github.io/2019/08/22/nn.Module/
+https://zinw623.github.io/2019/08/21/dlrm/
 https://zinw623.github.io/2019/08/20/autograd/
 https://zinw623.github.io/2019/08/19/pytorch-1/
 https://zinw623.github.io/2019/08/13/deeplearning-book/
