@@ -78,7 +78,7 @@
 <meta property="og:site_name" content="Zihan.W的博客">
 <meta property="og:description" content="pytorch中常见的工具在训练神经网络的过程中需要用到很多工具、其中最重要的三部分是数据、可视化和GPU加速。本章主要介绍pytorch在这几方面常用的工具，合理使用这些工具能极大地提高编码效率。 数据处理在解决深度学习问题的过程中，往往需要花费大量的精力去处理数据，包括图像、文本、语音或其他二进制数据等。数据的处理对训练神经网络来说十分重要，良好的数据处理不仅会加速模型训练，也会提高模型效果。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-23T11:24:50.142Z">
+<meta property="og:updated_time" content="2019-08-23T11:28:51.323Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【notes】pytorch学习笔记4-pytorch常用工具">
 <meta name="twitter:description" content="pytorch中常见的工具在训练神经网络的过程中需要用到很多工具、其中最重要的三部分是数据、可视化和GPU加速。本章主要介绍pytorch在这几方面常用的工具，合理使用这些工具能极大地提高编码效率。 数据处理在解决深度学习问题的过程中，往往需要花费大量的精力去处理数据，包括图像、文本、语音或其他二进制数据等。数据的处理对训练神经网络来说十分重要，良好的数据处理不仅会加速模型训练，也会提高模型效果。">
@@ -314,7 +314,7 @@
                 
               
 
-              <time title="创建时间：2019-08-23 18:30:45 / 修改时间：19:24:50" itemprop="dateCreated datePublished" datetime="2019-08-23T18:30:45+08:00">2019-08-23</time>
+              <time title="创建时间：2019-08-23 18:30:45 / 修改时间：19:28:51" itemprop="dateCreated datePublished" datetime="2019-08-23T18:30:45+08:00">2019-08-23</time>
             </span>
           
             
@@ -581,7 +581,7 @@ torch.Size([3, 224, 224]) 1</code></pre><figure class="highlight python"><table>
 <pre><code>[0, 0, 1]
 [0, 1, 1]
 [1, 1, 1]
-[0, 0, 0]</code></pre><p>一共只有10个样本，却反悔了12个，说明样本被重复返回，这就是replacement参数的作用</p>
+[0, 0, 0]</code></pre><p>一共只有10个样本，却返回了12个，说明样本被重复返回，这就是replacement参数的作用</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># replacement改为False</span></span><br><span class="line">sampler = WeightedRandomSampler(weights, num_samples=<span class="number">10</span>, replacement=<span class="literal">False</span>)</span><br><span class="line">dataloader = DataLoader(dataset, batch_size = <span class="number">5</span>, sampler=sampler)</span><br><span class="line"><span class="keyword">for</span> datas, labels <span class="keyword">in</span> dataloader:</span><br><span class="line">    print(labels.tolist())</span><br></pre></td></tr></table></figure>
 
 <pre><code>[0, 1, 0, 1, 1]
