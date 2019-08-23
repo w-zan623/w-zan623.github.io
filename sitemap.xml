@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zinw623.github.io/2019/08/23/pytorch-tools/</loc>
+    
+    <lastmod>2019-08-23T11:24:50.142Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://zinw623.github.io/2019/08/22/nn.Module/</loc>
     
     <lastmod>2019-08-22T14:46:42.302Z</lastmod>

@@ -379,35 +379,38 @@
 <h4 id="nn-Module"><a href="#nn-Module" class="headerlink" title="nn.Module"></a>nn.Module</h4><p>torch.nn的核心数据结构是Module，它是一个抽象的概念，既可以表示神经网络中的某个层（layer），也可以表示一个包含很多层的神经网络。在实际使用中，最常见的做法是继承nn.Module，撰写自己的网络、层。</p>
 <p>全连接层，又名仿射层，输出$\boldsymbol{x}$和输入$\boldsymbol{x}$满足$\boldsymbol{y=Wx+b}$，$\boldsymbol{W}$ 和 $\boldsymbol{b}$ 是可学习函数。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch <span class="keyword">as</span> t</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Variable <span class="keyword">as</span> V</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Linear</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, in_features, out_features)</span>:</span></span><br><span class="line">        </span><br><span class="line">        super(Linear, self).__init__() <span class="comment">#等价于nn.Module.__init__(self)</span></span><br><span class="line">        self.w = nn.Parameter(t.randn(in_features, out_features))</span><br><span class="line">        self.b = nn.Parameter(t.randn(out_features))</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        x = x.mm(self.w)</span><br><span class="line">        <span class="keyword">return</span> x + self.b.expand_as(x)</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">layer = Linear(<span class="number">4</span>, <span class="number">3</span>)</span><br><span class="line">input = V(t.randn(<span class="number">2</span>, <span class="number">4</span>))</span><br><span class="line">output = layer(input)</span><br><span class="line">output</span><br></pre></td></tr></table></figure>
+
 <pre><code>tensor([[ 2.0269,  5.1465,  1.5603],
-        [-0.6868, -0.8096, -0.6427]], grad_fn=&lt;AddBackward0&gt;)
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> name, parameter <span class="keyword">in</span> layer.named_parameters():</span><br><span class="line">    </span><br><span class="line">    print(name, parameter)</span><br></pre></td></tr></table></figure>
+        [-0.6868, -0.8096, -0.6427]], grad_fn=&lt;AddBackward0&gt;)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> name, parameter <span class="keyword">in</span> layer.named_parameters():</span><br><span class="line">    </span><br><span class="line">    print(name, parameter)</span><br></pre></td></tr></table></figure>
+
 <pre><code>w Parameter containing:
 tensor([[-0.0121, -0.2593, -0.5310],
         [ 0.2982, -0.2846, -0.0437],
         [ 0.6220,  1.7351,  0.8025],
         [ 1.0544,  2.3325,  0.6561]], requires_grad=True)
 b Parameter containing:
-tensor([0.2586, 2.3734, 0.5372], requires_grad=True)
-</code></pre><p>但需要注意一下几点：</p>
+tensor([0.2586, 2.3734, 0.5372], requires_grad=True)</code></pre><p>但需要注意一下几点：</p>
 <ul>
-<li>自定义层Linear必须继承nn.Module，并且在其构造函数中需调用nn.Module的构造函数，即super(Linear, self).<strong>init</strong>()或nn.Module.__init__(self)。</li>
+<li>自定义层Linear必须继承nn.Module，并且在其构造函数中需调用nn.Module的构造函数，即super(Linear, self).<strong>init</strong>()或nn.Module._<em>init_</em>(self)。</li>
 <li>在构造函数__init__中必须自己定义可学习的参数，并封装成Parameter，如在本例中我们把w和b封装成Parameter。Parameter是一种特殊的Variable，但其默认需要求导（requires_grad=True）。</li>
 <li>forward函数实现前向传播过程，其输入可以是一个或多个variable，对x的任何操作也必须是variable支持的操作。</li>
 <li>无需写反向传播函数，因其前向传播都是对variable进行操作，nn.Module能够利用autograd自动实现反向传播，这一点比Function简单许多。</li>
-<li>使用时，直观上可将layer看成数学概念中的函数，调用layer(input)即可得到input对应的结果。它等价于layers.__call__(input)，在__call__函数中，主要调用的是layer.forward(X)，另外还对钩子做了一些处理。所以在实际使用中应尽量使用layer(x)而不是使用layer.forward(x)。</li>
+<li>使用时，直观上可将layer看成数学概念中的函数，调用layer(input)即可得到input对应的结果。它等价于layers._<em>call_</em>(input)，在__call__函数中，主要调用的是layer.forward(X)，另外还对钩子做了一些处理。所以在实际使用中应尽量使用layer(x)而不是使用layer.forward(x)。</li>
 </ul>
 <p>Module能够自动检测到自己的parameter，并将其作为学习参数。除了parameter，Module还包含子Module，主Module能够递归查找子Module中的parameter。</p>
 <p>下面看一个稍微复杂的网络：多层感知机。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Perceptron</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, in_features, hidden_features, out_features)</span>:</span></span><br><span class="line">        nn.Module.__init__(self)</span><br><span class="line">        self.layer1 = Linear(in_features, hidden_features)</span><br><span class="line">        self.layer2 = Linear(hidden_features, out_features)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        x = self.layer1(x)</span><br><span class="line">        x = t.sigmoid(x)</span><br><span class="line">        <span class="keyword">return</span> self.layer2(x)</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">perceptron = Perceptron(<span class="number">3</span>, <span class="number">4</span>, <span class="number">1</span>)</span><br><span class="line"><span class="keyword">for</span> name, param <span class="keyword">in</span> perceptron.named_parameters():</span><br><span class="line">    print(name, param.size())</span><br></pre></td></tr></table></figure>
+
 <pre><code>layer1.w torch.Size([3, 4])
 layer1.b torch.Size([4])
 layer2.w torch.Size([4, 1])
-layer2.b torch.Size([1])
-</code></pre><p>注意一下两个知识点。</p>
+layer2.b torch.Size([1])</code></pre><p>注意一下两个知识点。</p>
 <ul>
 <li>构造函数__init__中，可利用前面自定义的Linear层（module）作为当前module对象的一个字module，它的可学习参数，也会成为当前module的可学习参数。</li>
 <li>在前向传播函数中，我们有意识地将输出变量都命名为x，是为了能让python回收一些中间层的输出，从而节省内存。但并不是所有的中间结果都会被回收，有些variable虽然名字被覆盖，但其在反向传播时仍需要用到，此时python的内存回收模块将通过检查引用计数，不会回收这一部分内存。</li>
@@ -426,9 +429,18 @@ layer2.b torch.Size([1])
 </ul>
 <h4 id="常用的神经网络层"><a href="#常用的神经网络层" class="headerlink" title="常用的神经网络层"></a>常用的神经网络层</h4><h5 id="图像相关层"><a href="#图像相关层" class="headerlink" title="图像相关层"></a>图像相关层</h5><p>图像相关层主要包括卷积层（Conv）、池化层（Pool）等，这些层在实际使用中可分为一维、二维和三维，池化层又分为平均池化（AvgPool）、最大值池化（MaxPool）、自适应池化（AdaptiveAvgPool）等。卷积层除了常用的前向卷积外，还有逆卷积（TransposeConv）。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch <span class="keyword">as</span> t</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Variable <span class="keyword">as</span> V</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">from</span> torchvision.transforms <span class="keyword">import</span> ToTensor, ToPILImage</span><br><span class="line">to_tensor = ToTensor()</span><br><span class="line">to_pil = ToPILImage()</span><br><span class="line">curry = Image.open(<span class="string">'curry'</span>)</span><br><span class="line">curry</span><br></pre></td></tr></table></figure>
-<p><img width="50%" data-src="\uploads\nn.module\output_15_0.png"></p>
+
+<img width="50%" data-src="\uploads\nn.module\output_15_0.png">
+
+
+
+
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 输入一个batch，batch_size = 1</span></span><br><span class="line">input = to_tensor(curry).unsqueeze(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 锐化卷积核</span></span><br><span class="line">kernel = t.ones(<span class="number">3</span>, <span class="number">3</span>) / <span class="number">-9</span></span><br><span class="line">kernel[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">conv = nn.Conv2d(<span class="number">1</span>, <span class="number">1</span>, (<span class="number">3</span>, <span class="number">3</span>), <span class="number">1</span>, bias = <span class="literal">False</span>)</span><br><span class="line">conv.weight.data = kernel.view(<span class="number">1</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">out = conv(V(input))</span><br><span class="line">to_pil(out.data.squeeze(<span class="number">0</span>))</span><br></pre></td></tr></table></figure>
-<p><img width="50%" data-src="\uploads\nn.module\output_16_0.png"></p>
+
+<img width="50%" data-src="\uploads\nn.module\output_16_0.png">
+
+
+
 <p>Shape:</p>
 <ul>
 <li>Input: $(N, C_{in}, H_{in}, W_{in})$</li>
@@ -438,9 +450,13 @@ layer2.b torch.Size([1])
 <p>图像的卷积操作还有各种变体，有关各种变体的介绍可以参照此处的介绍<a href="https://github.com/vdumoulin/conv_arithmetic/blob/master/README.md" target="_blank" rel="noopener">https://github.com/vdumoulin/conv_arithmetic/blob/master/README.md</a></p>
 <p>池化层可以看作是一种特殊的卷积层，用来下采样。但池化层没有可学习参数，其weight是固定的。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pool = nn.AvgPool2d(<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">list(pool.parameters())</span><br></pre></td></tr></table></figure>
-<pre><code>[]
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">out = pool(V(input))</span><br><span class="line">to_pil(out.data.squeeze(<span class="number">0</span>))</span><br></pre></td></tr></table></figure>
-<p><img width="50%" data-src="\uploads\nn.module\output_21_0.png"></p>
+
+<pre><code>[]</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">out = pool(V(input))</span><br><span class="line">to_pil(out.data.squeeze(<span class="number">0</span>))</span><br></pre></td></tr></table></figure>
+
+<img width="50%" data-src="\uploads\nn.module\output_21_0.png">
+
+
+
 <p>除了卷积层和池化层，深度学习中还将常用到一下几个层</p>
 <ul>
 <li>Linear：全连接层</li>
@@ -448,18 +464,19 @@ layer2.b torch.Size([1])
 <li>Dropout：dropout层，用来防止过拟合，同样分为1D、2D和3D。</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 输入batch_size=2，维度3</span></span><br><span class="line">input = V(t.randn(<span class="number">2</span>, <span class="number">3</span>))</span><br><span class="line">linear = nn.Linear(<span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">h = linear(input);h</span><br></pre></td></tr></table></figure>
+
 <pre><code>tensor([[-0.4360,  0.3433, -0.1978, -0.3128],
-        [-0.9655,  0.6278,  0.2510,  0.1256]], grad_fn=&lt;AddmmBackward&gt;)
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 4 channel,初始化标准差为4，均值为0</span></span><br><span class="line">bn = nn.BatchNorm1d(<span class="number">4</span>)</span><br><span class="line">bn.weight.data = t.ones(<span class="number">4</span>) * <span class="number">4</span></span><br><span class="line">bn.bias.data = t.zeros(<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line">bn_out = bn(h)</span><br><span class="line"><span class="comment"># 注意输出的均值和方差</span></span><br><span class="line"><span class="comment"># 方差是标准差的平方，计算无偏方差分母会减1</span></span><br><span class="line"><span class="comment"># 使用unbiased=False，分母不减1</span></span><br><span class="line">bn_out.mean(<span class="number">0</span>), bn_out.var(<span class="number">0</span>, unbiased = <span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+        [-0.9655,  0.6278,  0.2510,  0.1256]], grad_fn=&lt;AddmmBackward&gt;)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 4 channel,初始化标准差为4，均值为0</span></span><br><span class="line">bn = nn.BatchNorm1d(<span class="number">4</span>)</span><br><span class="line">bn.weight.data = t.ones(<span class="number">4</span>) * <span class="number">4</span></span><br><span class="line">bn.bias.data = t.zeros(<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line">bn_out = bn(h)</span><br><span class="line"><span class="comment"># 注意输出的均值和方差</span></span><br><span class="line"><span class="comment"># 方差是标准差的平方，计算无偏方差分母会减1</span></span><br><span class="line"><span class="comment"># 使用unbiased=False，分母不减1</span></span><br><span class="line">bn_out.mean(<span class="number">0</span>), bn_out.var(<span class="number">0</span>, unbiased = <span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
 <pre><code>(tensor([-1.1921e-07,  0.0000e+00,  0.0000e+00,  0.0000e+00],
         grad_fn=&lt;MeanBackward1&gt;),
- tensor([15.9977, 15.9921, 15.9968, 15.9967], grad_fn=&lt;VarBackward1&gt;))
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 每个元素以0.5的概率舍弃</span></span><br><span class="line">dropout = nn.Dropout(<span class="number">0.5</span>)</span><br><span class="line">o = dropout(bn_out)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 有一半的概率会变成0</span></span><br><span class="line">o</span><br></pre></td></tr></table></figure>
+ tensor([15.9977, 15.9921, 15.9968, 15.9967], grad_fn=&lt;VarBackward1&gt;))</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 每个元素以0.5的概率舍弃</span></span><br><span class="line">dropout = nn.Dropout(<span class="number">0.5</span>)</span><br><span class="line">o = dropout(bn_out)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 有一半的概率会变成0</span></span><br><span class="line">o</span><br></pre></td></tr></table></figure>
+
 <pre><code>tensor([[7.9994, -0.0000, -0.0000, -0.0000],
-        [-0.0000, 7.9980, 7.9992, 7.9992]], grad_fn=&lt;MulBackward0&gt;)
-</code></pre><p>以上很多例子中都对module的属性直接操作，其大多数是可学习参数，一般会随着学习的进行而不断改变。实际使用中除非需要使用特殊的初始化，否则尽量不要直接改变参数。</p>
-<h5 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h5><p>pytorch实现了常见的激活函数。其他具体的接口信息可参见<a href="http://pytorch.org/docs/nn.html#non-linear-activations" target="_blank" rel="noopener">官方文档</a>，这些激活函数可以作为独立的layer使用。这里介绍最常用的激活函数ReLU，其数学表达式为：</p>
-<script type="math/tex; mode=display">ReLU(x)=max(0,x)</script><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">relu = nn.ReLU(inplace = <span class="literal">True</span>)</span><br><span class="line">input = V(t.randn(<span class="number">2</span>, <span class="number">3</span>))</span><br><span class="line">print(input)</span><br><span class="line">output = relu(input)</span><br><span class="line">print(output) <span class="comment"># 小于0的都被截断为0</span></span><br><span class="line">id(input) == id(output)</span><br></pre></td></tr></table></figure>
+        [-0.0000, 7.9980, 7.9992, 7.9992]], grad_fn=&lt;MulBackward0&gt;)</code></pre><p>以上很多例子中都对module的属性直接操作，其大多数是可学习参数，一般会随着学习的进行而不断改变。实际使用中除非需要使用特殊的初始化，否则尽量不要直接改变参数。</p>
+<h5 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h5><p>pytorch实现了常见的激活函数。其他具体的接口信息可参见<a href="http://pytorch.org/docs/nn.html#non-linear-activations" target="_blank" rel="noopener">官方文档</a>，这些激活函数可以作为独立的layer使用。这里介绍最常用的激活函数ReLU，其数学表达式为：<br>$$ReLU(x)=max(0,x)$$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">relu = nn.ReLU(inplace = <span class="literal">True</span>)</span><br><span class="line">input = V(t.randn(<span class="number">2</span>, <span class="number">3</span>))</span><br><span class="line">print(input)</span><br><span class="line">output = relu(input)</span><br><span class="line">print(output) <span class="comment"># 小于0的都被截断为0</span></span><br><span class="line">id(input) == id(output)</span><br></pre></td></tr></table></figure>
+
 <pre><code>tensor([[ 0.5049,  0.6093, -0.1565],
         [-0.9114, -0.9594,  1.0539]])
 tensor([[0.5049, 0.6093, 0.0000],
@@ -469,10 +486,10 @@ tensor([[0.5049, 0.6093, 0.0000],
 
 
 
-True
-</code></pre><p>ReLU函数有个inplace参数，如果设为True，如果设为True，它会把输出直接覆盖到输入中，这样可以节省内存/显存。之所以可以覆盖是因为在计算ReLU的反向传播时，只需根据输出就能够推算出反向传播的梯度。但是只有少数的autograd操作支持inplace操作（如variable.sigmoid_()），除非你明确知道自己在做什么，否则一般不要使用inplace操作。</p>
+True</code></pre><p>ReLU函数有个inplace参数，如果设为True，如果设为True，它会把输出直接覆盖到输入中，这样可以节省内存/显存。之所以可以覆盖是因为在计算ReLU的反向传播时，只需根据输出就能够推算出反向传播的梯度。但是只有少数的autograd操作支持inplace操作（如variable.sigmoid_()），除非你明确知道自己在做什么，否则一般不要使用inplace操作。</p>
 <p>在以上例子里，都是将每一层的输出直接作为下一层的输入，这种网络成为前馈传播网络。对于此种网络，如果每次都写复杂的forward函数会有些麻烦，在此就有两种简化方式，ModuleList和Sequential。其中Sequential是一个特殊的Module，它包含几个子module，前向传播时会将输入一层接一层第传递下去。ModuleList也是一个特殊的Module，可以包含几个子Module，可以像用list一样使用它，但不能直接把输入传给ModuleList。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Sequential的三种写法</span></span><br><span class="line"></span><br><span class="line">net1 = nn.Sequential()</span><br><span class="line">net1.add_module(<span class="string">'conv'</span>, nn.Conv2d(<span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>))     <span class="comment"># 输入为(N, C_&#123;in&#125;, H_&#123;in&#125;, W_&#123;in&#125;)，参数为</span></span><br><span class="line">net1.add_module(<span class="string">'batchnorm'</span>, nn.BatchNorm2d(<span class="number">3</span>)) <span class="comment"># 3为(N, C, H, W)中的C</span></span><br><span class="line">net1.add_module(<span class="string">'activation_layer'</span>, nn.ReLU())</span><br><span class="line"></span><br><span class="line">net2 = nn.Sequential(</span><br><span class="line">    nn.Conv2d(<span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>),</span><br><span class="line">    nn.BatchNorm2d(<span class="number">3</span>),</span><br><span class="line">    nn.ReLU()</span><br><span class="line">    )</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> OrderedDict</span><br><span class="line">net3 = nn.Sequential(OrderedDict([</span><br><span class="line">    (<span class="string">'conv1'</span>, nn.Conv2d(<span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>)),</span><br><span class="line">    (<span class="string">'bn1'</span>, nn.BatchNorm2d(<span class="number">3</span>)),</span><br><span class="line">    (<span class="string">'relu1'</span>, nn.ReLU()),</span><br><span class="line">]))</span><br><span class="line"></span><br><span class="line">print(<span class="string">'net1'</span>, net1)</span><br><span class="line">print(<span class="string">'net2'</span>, net2)</span><br><span class="line">print(<span class="string">'net3'</span>, net3)</span><br></pre></td></tr></table></figure>
+
 <pre><code>net1 Sequential(
   (conv): Conv2d(3, 3, kernel_size=(3, 3), stride=(1, 1))
   (batchnorm): BatchNorm2d(3, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
@@ -487,12 +504,12 @@ net3 Sequential(
   (conv1): Conv2d(3, 3, kernel_size=(3, 3), stride=(1, 1))
   (bn1): BatchNorm2d(3, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
   (relu1): ReLU()
-)
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 可根据名字或序号取出子module</span></span><br><span class="line">net1.conv, net2[<span class="number">0</span>], net3.conv1</span><br></pre></td></tr></table></figure>
+)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 可根据名字或序号取出子module</span></span><br><span class="line">net1.conv, net2[<span class="number">0</span>], net3.conv1</span><br></pre></td></tr></table></figure>
+
 <pre><code>(Conv2d(3, 3, kernel_size=(3, 3), stride=(1, 1)),
  Conv2d(3, 3, kernel_size=(3, 3), stride=(1, 1)),
- Conv2d(3, 3, kernel_size=(3, 3), stride=(1, 1)))
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">input = V(t.rand(<span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">4</span>))</span><br><span class="line">net1(input), net2(input), net3(input), net3.relu1(net2[<span class="number">1</span>](net1.conv(input)))</span><br></pre></td></tr></table></figure>
+ Conv2d(3, 3, kernel_size=(3, 3), stride=(1, 1)))</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">input = V(t.rand(<span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">4</span>))</span><br><span class="line">net1(input), net2(input), net3(input), net3.relu1(net2[<span class="number">1</span>](net1.conv(input)))</span><br></pre></td></tr></table></figure>
+
 <pre><code>(tensor([[[[0.0000, 1.4727],
            [0.1600, 0.0000]],
 
@@ -524,67 +541,76 @@ net3 Sequential(
            [0.7015, 1.1069]],
 
           [[1.7189, 0.0000],
-           [0.0000, 0.0000]]]], grad_fn=&lt;ReluBackward0&gt;))
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">modulelist = nn.ModuleList([nn.Linear(<span class="number">3</span>, <span class="number">4</span>), nn.ReLU(), nn.Linear(<span class="number">4</span>, <span class="number">2</span>)])</span><br><span class="line">input = V(t.rand(<span class="number">1</span>, <span class="number">3</span>))</span><br><span class="line"><span class="keyword">for</span> model <span class="keyword">in</span> modulelist:</span><br><span class="line">    input = model(input)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下面会报错，因为modellist没有实现forward方法</span></span><br><span class="line"><span class="comment"># output = modellist(input)</span></span><br></pre></td></tr></table></figure>
+           [0.0000, 0.0000]]]], grad_fn=&lt;ReluBackward0&gt;))</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">modulelist = nn.ModuleList([nn.Linear(<span class="number">3</span>, <span class="number">4</span>), nn.ReLU(), nn.Linear(<span class="number">4</span>, <span class="number">2</span>)])</span><br><span class="line">input = V(t.rand(<span class="number">1</span>, <span class="number">3</span>))</span><br><span class="line"><span class="keyword">for</span> model <span class="keyword">in</span> modulelist:</span><br><span class="line">    input = model(input)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下面会报错，因为modellist没有实现forward方法</span></span><br><span class="line"><span class="comment"># output = modellist(input)</span></span><br></pre></td></tr></table></figure>
+
 <p>为何不直接使用python中自带的list，而非要多次一举呢？<br>这是因为ModuleList是Module的子类，当在Module中使用它时，就能自动识别为子module。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyModule</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super(MyModule, self).__init__()</span><br><span class="line">        self.list = [nn.Linear(<span class="number">3</span>,<span class="number">4</span>), nn.ReLU()] <span class="comment"># 直接用list</span></span><br><span class="line">        self.module_list = nn.ModuleList([nn.Conv2d(<span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>), nn.ReLU()]) <span class="comment"># 用nn.ModuleList</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    </span><br><span class="line">model = MyModule()</span><br><span class="line">model</span><br></pre></td></tr></table></figure>
+
 <pre><code>MyModule(
   (module_list): ModuleList(
     (0): Conv2d(3, 3, kernel_size=(3, 3), stride=(1, 1))
     (1): ReLU()
   )
-)
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> name, param <span class="keyword">in</span> model.named_parameters():</span><br><span class="line">    </span><br><span class="line">    print(name, param.size())</span><br></pre></td></tr></table></figure>
+)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> name, param <span class="keyword">in</span> model.named_parameters():</span><br><span class="line">    </span><br><span class="line">    print(name, param.size())</span><br></pre></td></tr></table></figure>
+
 <pre><code>module_list.0.weight torch.Size([3, 3, 3, 3])
-module_list.0.bias torch.Size([3])
-</code></pre><p>可见，list中的子module并不能被主module识别，而ModuleList中的子module能够被主module识别。</p>
+module_list.0.bias torch.Size([3])</code></pre><p>可见，list中的子module并不能被主module识别，而ModuleList中的子module能够被主module识别。</p>
 <p>除ModuleList之外还有ParameterList，它是一个可以包含多个parameter的类list对象。在实际应用中，使用方式和ModuleList类似。在构造函数__init__中用到list、tuple、dict等对象，一定要思考是否应该用ModuleList或ParameterList代替。</p>
 <h5 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h5><p>在深度学习中会用到各种各样的损失函数，这些损失函数可看作是一种特殊的layer，pytorch也将这些损失函数实现为nn.Module的子类。然而在实际使用中通常将这些损失函数专门提取出来，作为独立的一部分。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#batch_size = 3, 计算对应每个类别的分数</span></span><br><span class="line">score = V(t.randn(<span class="number">3</span>, <span class="number">10</span>))  <span class="comment"># (N, C) N是batch_size，C是class的个数</span></span><br><span class="line"><span class="comment"># 三个样本分别属于1， 0， 1类，label必须是LongTensor</span></span><br><span class="line">label = V(t.Tensor([<span class="number">1</span>, <span class="number">0</span>, <span class="number">9</span>])).long()</span><br><span class="line"></span><br><span class="line"><span class="comment"># loss与普通的layer无差异</span></span><br><span class="line">criterion = nn.CrossEntropyLoss()</span><br><span class="line">loss = criterion(score, label)</span><br><span class="line">loss</span><br></pre></td></tr></table></figure>
-<pre><code>tensor(2.8392)
-</code></pre><h4 id="优化器"><a href="#优化器" class="headerlink" title="优化器"></a>优化器</h4><p>pytorch将深度学习中常用的优化方法全部封装到torch.optim中，其设计十分灵活，能够很方便地扩展自定义的优化方法。<br>所有的优化方法都是继承基类optim.Optimizer，并实现了自己的优化步骤。下面就以最基本的优化方法————随机梯度下降法（SGD）举例说明。这里需要重点掌握：</p>
+
+<pre><code>tensor(2.8392)</code></pre><h4 id="优化器"><a href="#优化器" class="headerlink" title="优化器"></a>优化器</h4><p>pytorch将深度学习中常用的优化方法全部封装到torch.optim中，其设计十分灵活，能够很方便地扩展自定义的优化方法。<br>所有的优化方法都是继承基类optim.Optimizer，并实现了自己的优化步骤。下面就以最基本的优化方法————随机梯度下降法（SGD）举例说明。这里需要重点掌握：</p>
 <ul>
 <li>优化方法的基本使用方法</li>
 <li>如何对模型的不同部分设置不同的学习率</li>
 <li>如何调整学习率</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 首先定义一个LeNet网络</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Net</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super(Net, self).__init__()</span><br><span class="line">        self.features = nn.Sequential(</span><br><span class="line">            nn.Conv2d(<span class="number">3</span>, <span class="number">6</span>, <span class="number">5</span>),</span><br><span class="line">            nn.ReLU(),</span><br><span class="line">            nn.MaxPool2d(<span class="number">2</span>, <span class="number">2</span>),</span><br><span class="line">            nn.Conv2d(<span class="number">6</span>, <span class="number">16</span>, <span class="number">5</span>),</span><br><span class="line">            nn.ReLU(),</span><br><span class="line">            nn.MaxPool2d(<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">        )</span><br><span class="line">        </span><br><span class="line">        self.classifier = nn.Sequential(</span><br><span class="line">            nn.Linear(<span class="number">16</span> * <span class="number">5</span> * <span class="number">5</span>, <span class="number">120</span>),</span><br><span class="line">            nn.ReLU(),</span><br><span class="line">            nn.Linear(<span class="number">120</span>, <span class="number">84</span>),</span><br><span class="line">            nn.ReLU(),</span><br><span class="line">            nn.Linear(<span class="number">84</span>, <span class="number">10</span>),</span><br><span class="line">        )</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        x = self.features(x)</span><br><span class="line">        x = x.view(<span class="number">-1</span>, <span class="number">16</span> * <span class="number">5</span> * <span class="number">5</span>)</span><br><span class="line">        x = self.classifier(x)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line">net = Net()</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> optim</span><br><span class="line">optimizer = optim.SGD(params = net.parameters(), lr = <span class="number">1</span>)</span><br><span class="line">optimizer.zero_grad() <span class="comment"># 梯度清零，等价于net.zero_grad()</span></span><br><span class="line"></span><br><span class="line">input = V(t.randn(<span class="number">1</span>, <span class="number">3</span>, <span class="number">32</span>, <span class="number">32</span>))</span><br><span class="line">output = net(input)</span><br><span class="line">output.backward(output) <span class="comment"># fake backward</span></span><br><span class="line"></span><br><span class="line">optimizer.step() <span class="comment"># 执行优化</span></span><br></pre></td></tr></table></figure>
+
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 为不同子网络参数设置不同的学习率，在finetune中经常用到</span></span><br><span class="line"><span class="comment"># 如果对某个参数不指定学习率，就是用默认学习率</span></span><br><span class="line">optimizer = optim.SGD([&#123;<span class="string">'params'</span>:net.features.parameters()&#125;,&#123;<span class="string">'params'</span>:net.classifier.parameters(), <span class="string">'lr'</span>:<span class="number">1e-2</span>&#125;], lr = <span class="number">1e-5</span>)</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  只为两个全连接层设置较大的学习率，其余层的学习率较小</span></span><br><span class="line">special_layers = nn.ModuleList([net.classifier[<span class="number">0</span>],net.classifier[<span class="number">2</span>]])</span><br><span class="line">special_layers_params = list(map(id, special_layers.parameters()))</span><br><span class="line">base_params = filter(<span class="keyword">lambda</span> p: id(p) <span class="keyword">not</span> <span class="keyword">in</span> special_layers_params, net.parameters())</span><br><span class="line"></span><br><span class="line">optimizer = t.optim.SGD([</span><br><span class="line">    &#123;<span class="string">'params'</span>:base_params&#125;,</span><br><span class="line">    &#123;<span class="string">'params'</span>:special_layers.parameters(), <span class="string">'lr'</span>: <span class="number">0.01</span>&#125;</span><br><span class="line">], lr = <span class="number">0.001</span>)</span><br></pre></td></tr></table></figure>
+
 <p>调整学习率主要有两种做法。一种是修改optimmizer.param_groups中对应的学习率。另一种是新建优化器（更简单也是更推荐的做法），由于optimizer十分轻量级，构建开销很小，故可以构建新的optimizer。但是新建优化器会重新初始化动量等状态信息，这对使用动量的优化器来说（如带momentum的sgd），可能会造成损失函数在收敛过程中出震荡。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 调整学习率，新建一个optimizer</span></span><br><span class="line">old_lr = <span class="number">0.1</span></span><br><span class="line">optimizer = optim.SGD([</span><br><span class="line">    &#123;<span class="string">'params'</span>: net.features.parameters()&#125;,</span><br><span class="line">    &#123;<span class="string">'params'</span>: net.classifier.parameters(), <span class="string">'lr'</span>:old_lr *<span class="number">0.1</span>&#125;</span><br><span class="line">],lr = <span class="number">1e-5</span>)</span><br></pre></td></tr></table></figure>
+
 <h4 id="nn-functional"><a href="#nn-functional" class="headerlink" title="nn.functional"></a>nn.functional</h4><p>nn中还有一个常用的模块：nn.functional。nn中的大多数layer在functional中都有一个与之相对应的函数。<br>nn.functional中的函数和nn.Module的主要区别在于，用nn.Module实现的layers是一个特殊的类，都是由class Layer(nn.Module)定义，会自动提取可学习的参数；而nn.functional中的函数更像是纯函数，由def function(input)定义。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">input = V(t.randn(<span class="number">2</span>, <span class="number">3</span>))</span><br><span class="line">model = nn.Linear(<span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">output1 = model(input)</span><br><span class="line">output2 = nn.functional.linear(input, model.weight, model.bias)</span><br><span class="line">output1 == output2</span><br></pre></td></tr></table></figure>
+
 <pre><code>tensor([[True, True, True, True],
-        [True, True, True, True]])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">b = nn.functional.relu(input)</span><br><span class="line">b2 = nn.ReLU()(input)</span><br><span class="line">b == b2</span><br></pre></td></tr></table></figure>
+        [True, True, True, True]])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">b = nn.functional.relu(input)</span><br><span class="line">b2 = nn.ReLU()(input)</span><br><span class="line">b == b2</span><br></pre></td></tr></table></figure>
+
 <pre><code>tensor([[True, True, True],
-        [True, True, True]])
-</code></pre><p>应该什么时候使用nn.Module，什么时候使用nn.functional？<br>如果模型有可学习的参数，最好用nn.Module，否则既可以使用nn.functional也可以使用nn.Module，二者在性能上没有太大差异，具体的使用方式取决于个人喜好。<br>但建议还是使用nn.Dropout而不是nn.functional.dropout，因为dropout在训练和测试两个阶段的行为有所差别，使用nn.Module对象能够通过model.eval操作以一区分。</p>
+        [True, True, True]])</code></pre><p>应该什么时候使用nn.Module，什么时候使用nn.functional？<br>如果模型有可学习的参数，最好用nn.Module，否则既可以使用nn.functional也可以使用nn.Module，二者在性能上没有太大差异，具体的使用方式取决于个人喜好。<br>但建议还是使用nn.Dropout而不是nn.functional.dropout，因为dropout在训练和测试两个阶段的行为有所差别，使用nn.Module对象能够通过model.eval操作以一区分。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.nn <span class="keyword">import</span> functional <span class="keyword">as</span> F</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Net</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super(Net, self).__init__()</span><br><span class="line">        self.conv1 = nn.Conv2d(<span class="number">3</span>, <span class="number">6</span>, <span class="number">5</span>)</span><br><span class="line">        self.conv2 = nn.Conv2d(<span class="number">6</span>, <span class="number">16</span>, <span class="number">5</span>)</span><br><span class="line">        self.fc1 = nn.Linear(<span class="number">16</span> * <span class="number">5</span> * <span class="number">5</span>, <span class="number">120</span>)</span><br><span class="line">        self.fc2 = nn.Linear(<span class="number">120</span>, <span class="number">84</span>)</span><br><span class="line">        self.fc3 = nn.Linear(<span class="number">84</span>, <span class="number">10</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        x = F.max_pool2d(F.relu(self.conv1(x)), <span class="number">2</span>)</span><br><span class="line">        x = F.max_pool2d(F.relu(self.conv2(x)), <span class="number">2</span>)</span><br><span class="line">        x = x.view(<span class="number">-1</span>, <span class="number">16</span> * <span class="number">5</span> * <span class="number">5</span>)</span><br><span class="line">        x = F.relu(self.fc1(x))</span><br><span class="line">        x = F.relu(self.fc2(x))</span><br><span class="line">        x = self.fc3(x)</span><br><span class="line">        <span class="keyword">return</span> x</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">net = Net()</span><br><span class="line">x = t.randn(<span class="number">1</span>, <span class="number">3</span>, <span class="number">32</span>, <span class="number">32</span>)</span><br><span class="line">net(x)</span><br></pre></td></tr></table></figure>
+
 <pre><code>tensor([[-0.0539,  0.0145,  0.0214,  0.0474, -0.0516,  0.0890,  0.0539,  0.0805,
-          0.0785, -0.1043]], grad_fn=&lt;AddmmBackward&gt;)
-</code></pre><p>不具备可学习参数的层（激活层、池化层等），将它们用函数代替，这样可以不用放置在构造函数__init__中。有可学习参数的模块，也可以用functional代替，只不过实现起来较繁琐，需要手动定义参数parameter。</p>
+          0.0785, -0.1043]], grad_fn=&lt;AddmmBackward&gt;)</code></pre><p>不具备可学习参数的层（激活层、池化层等），将它们用函数代替，这样可以不用放置在构造函数__init__中。有可学习参数的模块，也可以用functional代替，只不过实现起来较繁琐，需要手动定义参数parameter。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyLinear</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super(MyLinear, self).__init__()</span><br><span class="line">        self.weight = nn.Parameter(t.randn(<span class="number">3</span>, <span class="number">4</span>))</span><br><span class="line">        self.bias = nn.Parameter(t.zeros(<span class="number">3</span>))</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self,input)</span>:</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> F.linear(input, self.weight, self.bias)</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = t.randn(<span class="number">1</span>, <span class="number">4</span>)</span><br><span class="line">linear = MyLinear()</span><br><span class="line">linear(x)</span><br></pre></td></tr></table></figure>
-<pre><code>tensor([[-0.0678,  2.5530,  0.8512]], grad_fn=&lt;AddmmBackward&gt;)
-</code></pre><h4 id="初始化策略"><a href="#初始化策略" class="headerlink" title="初始化策略"></a>初始化策略</h4><p>在深度学习中参数的初始化十分重要，良好的初始化能使模型收敛更快，并达到更高水平，而糟糕的初始化可能使模型迅速崩溃。pytorch中nn.Module的模块参数都采取了较合理的初始化策略，因此一般不用我们考虑。当然我们可以用自定义的初始化代替系统的默认初始化。自定义初始化尤为重要，因为t.Tensor()返回的是内存中的随机数，很可能会有极大值，这在实际训练网络中会造成溢出或者梯度消失。pytorch中的nn.init模块专门为初始化设计，实现了常用的初始化策略。如果某种初始化策略nn.init不提供，用户也可以自己直接初始化。</p>
+
+<pre><code>tensor([[-0.0678,  2.5530,  0.8512]], grad_fn=&lt;AddmmBackward&gt;)</code></pre><h4 id="初始化策略"><a href="#初始化策略" class="headerlink" title="初始化策略"></a>初始化策略</h4><p>在深度学习中参数的初始化十分重要，良好的初始化能使模型收敛更快，并达到更高水平，而糟糕的初始化可能使模型迅速崩溃。pytorch中nn.Module的模块参数都采取了较合理的初始化策略，因此一般不用我们考虑。当然我们可以用自定义的初始化代替系统的默认初始化。自定义初始化尤为重要，因为t.Tensor()返回的是内存中的随机数，很可能会有极大值，这在实际训练网络中会造成溢出或者梯度消失。pytorch中的nn.init模块专门为初始化设计，实现了常用的初始化策略。如果某种初始化策略nn.init不提供，用户也可以自己直接初始化。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 利用nn.init初始化</span></span><br><span class="line"><span class="keyword">from</span> torch.nn <span class="keyword">import</span> init</span><br><span class="line">linear = nn.Linear(<span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">t.manual_seed(<span class="number">1</span>)</span><br><span class="line"><span class="comment"># 等价于linear.weight.data.normal_(0, std)</span></span><br><span class="line">init.xavier_normal_(linear.weight)</span><br></pre></td></tr></table></figure>
+
 <pre><code>Parameter containing:
 tensor([[ 0.3535,  0.1427,  0.0330],
         [ 0.3321, -0.2416, -0.0888],
         [-0.8140,  0.2040, -0.5493],
-        [-0.3010, -0.4769, -0.0311]], requires_grad=True)
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line">t.manual_seed(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">std = math.sqrt(<span class="number">2</span>)/math.sqrt(<span class="number">7.</span>)</span><br><span class="line">linear.weight.data.normal_(<span class="number">0</span>, std)</span><br></pre></td></tr></table></figure>
+        [-0.3010, -0.4769, -0.0311]], requires_grad=True)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line">t.manual_seed(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">std = math.sqrt(<span class="number">2</span>)/math.sqrt(<span class="number">7.</span>)</span><br><span class="line">linear.weight.data.normal_(<span class="number">0</span>, std)</span><br></pre></td></tr></table></figure>
+
 <pre><code>tensor([[ 0.3535,  0.1427,  0.0330],
         [ 0.3321, -0.2416, -0.0888],
         [-0.8140,  0.2040, -0.5493],
-        [-0.3010, -0.4769, -0.0311]])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 对模型的所有参数进行初始化</span></span><br><span class="line"><span class="keyword">for</span> name, params <span class="keyword">in</span> net.named_parameters():</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> name.find(<span class="string">'linear'</span>) != <span class="number">-1</span>:</span><br><span class="line">        print(params[<span class="number">0</span>]) <span class="comment"># weight</span></span><br><span class="line">        print(params[<span class="number">1</span>]) <span class="comment"># bias</span></span><br><span class="line">    <span class="keyword">elif</span> name.find(<span class="string">'conv'</span>) != <span class="number">-1</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">elif</span> name.find(<span class="string">'norm'</span>) != <span class="number">-1</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+        [-0.3010, -0.4769, -0.0311]])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 对模型的所有参数进行初始化</span></span><br><span class="line"><span class="keyword">for</span> name, params <span class="keyword">in</span> net.named_parameters():</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> name.find(<span class="string">'linear'</span>) != <span class="number">-1</span>:</span><br><span class="line">        print(params[<span class="number">0</span>]) <span class="comment"># weight</span></span><br><span class="line">        print(params[<span class="number">1</span>]) <span class="comment"># bias</span></span><br><span class="line">    <span class="keyword">elif</span> name.find(<span class="string">'conv'</span>) != <span class="number">-1</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">elif</span> name.find(<span class="string">'norm'</span>) != <span class="number">-1</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
 <h4 id="nn-Module深入分析"><a href="#nn-Module深入分析" class="headerlink" title="nn.Module深入分析"></a>nn.Module深入分析</h4><p>如果想深入地理解nn.Module，研究其原理是很有必要的。首先来看看nn.Module基类的构造函数的源代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">    self._parameters = OrderedDict()</span><br><span class="line">    self._modules = OrderedDict()</span><br><span class="line">    self._buffers = OrderedDict()</span><br><span class="line">    self._backward_hooks = OrderedDict()</span><br><span class="line">    self._forward_hooks = OrderedDict()</span><br><span class="line">    self.training = <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
 <p>其中每个属性的解释如下：</p>
 <ul>
 <li>_parameters：字典。保存用户直接设置的parameter，self.param1 = nn.Parameter(t.randn(3, 3))会被检测到，在字典中加入一个key为param，value为对应parameter的item，而self.submodule = nn.Linear(3, 4)中的parameter则不会存于此。</li>
@@ -595,98 +621,101 @@ tensor([[ 0.3535,  0.1427,  0.0330],
 </ul>
 <p>上述几个属性中，_parameters、_modules和_buffers这三个字典中的键值，都可以通过self.key方式获得，效果等价于self._parameters[‘key’]</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Net</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super(Net, self).__init__()</span><br><span class="line">        <span class="comment"># 等价于self.register_parameter('param1', nn.Parameter(t.randn(3, 3)))</span></span><br><span class="line">        self.param1 = nn.Parameter(t.rand(<span class="number">3</span>, <span class="number">3</span>))</span><br><span class="line">        self.submodel1 = nn.Linear(<span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">foward</span><span class="params">(self, input)</span>:</span></span><br><span class="line">        x = self.param1 * input</span><br><span class="line">        x = self.submodel1(x)</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line">net = Net()</span><br><span class="line">net</span><br></pre></td></tr></table></figure>
+
 <pre><code>Net(
   (submodel1): Linear(in_features=3, out_features=4, bias=True)
-)
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net._modules</span><br></pre></td></tr></table></figure>
-<pre><code>OrderedDict([(&#39;submodel1&#39;, Linear(in_features=3, out_features=4, bias=True))])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net._parameters</span><br></pre></td></tr></table></figure>
-<pre><code>OrderedDict([(&#39;param1&#39;, Parameter containing:
+)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net._modules</span><br></pre></td></tr></table></figure>
+
+<pre><code>OrderedDict([(&apos;submodel1&apos;, Linear(in_features=3, out_features=4, bias=True))])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net._parameters</span><br></pre></td></tr></table></figure>
+
+<pre><code>OrderedDict([(&apos;param1&apos;, Parameter containing:
               tensor([[0.3398, 0.5239, 0.7981],
                       [0.7718, 0.0112, 0.8100],
-                      [0.6397, 0.9743, 0.8300]], requires_grad=True))])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net.param1 == net._parameters[<span class="string">'param1'</span>]</span><br></pre></td></tr></table></figure>
+                      [0.6397, 0.9743, 0.8300]], requires_grad=True))])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net.param1 == net._parameters[<span class="string">'param1'</span>]</span><br></pre></td></tr></table></figure>
+
 <pre><code>tensor([[True, True, True],
         [True, True, True],
-        [True, True, True]])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> name, param <span class="keyword">in</span> net.named_parameters():</span><br><span class="line">    print(name, param.size())</span><br></pre></td></tr></table></figure>
+        [True, True, True]])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> name, param <span class="keyword">in</span> net.named_parameters():</span><br><span class="line">    print(name, param.size())</span><br></pre></td></tr></table></figure>
+
 <pre><code>param1 torch.Size([3, 3])
 submodel1.weight torch.Size([4, 3])
-submodel1.bias torch.Size([4])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> name, submodel <span class="keyword">in</span> net.named_modules():</span><br><span class="line">    print(name, submodel)</span><br></pre></td></tr></table></figure>
+submodel1.bias torch.Size([4])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> name, submodel <span class="keyword">in</span> net.named_modules():</span><br><span class="line">    print(name, submodel)</span><br></pre></td></tr></table></figure>
+
 <pre><code> Net(
   (submodel1): Linear(in_features=3, out_features=4, bias=True)
 )
-submodel1 Linear(in_features=3, out_features=4, bias=True)
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bn = nn.BatchNorm1d(<span class="number">2</span>)</span><br><span class="line">input = V(t.rand(<span class="number">3</span>,<span class="number">2</span>), requires_grad = <span class="literal">True</span>)</span><br><span class="line">output = bn(input)</span><br><span class="line">bn._buffers</span><br></pre></td></tr></table></figure>
-<pre><code>OrderedDict([(&#39;running_mean&#39;, tensor([0.0362, 0.0596])),
-             (&#39;running_var&#39;, tensor([0.9009, 0.9262])),
-             (&#39;num_batches_tracked&#39;, tensor(1))])
-</code></pre><p>nn.Module在实际使用中可能层层嵌套，一个module包含若干个子module，每一个子module又包含了更多的子module。为了方便用户访问各个子module，nn.Module实现了很多方法，如函数children可以查看直接子module，函数modules可以查看所有的子module（包括当前module）。与之相对应的还有函数named_children和named_modules，其能够在返回module列表的同时返回它们的名字。</p>
+submodel1 Linear(in_features=3, out_features=4, bias=True)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bn = nn.BatchNorm1d(<span class="number">2</span>)</span><br><span class="line">input = V(t.rand(<span class="number">3</span>,<span class="number">2</span>), requires_grad = <span class="literal">True</span>)</span><br><span class="line">output = bn(input)</span><br><span class="line">bn._buffers</span><br></pre></td></tr></table></figure>
+
+<pre><code>OrderedDict([(&apos;running_mean&apos;, tensor([0.0362, 0.0596])),
+             (&apos;running_var&apos;, tensor([0.9009, 0.9262])),
+             (&apos;num_batches_tracked&apos;, tensor(1))])</code></pre><p>nn.Module在实际使用中可能层层嵌套，一个module包含若干个子module，每一个子module又包含了更多的子module。为了方便用户访问各个子module，nn.Module实现了很多方法，如函数children可以查看直接子module，函数modules可以查看所有的子module（包括当前module）。与之相对应的还有函数named_children和named_modules，其能够在返回module列表的同时返回它们的名字。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">input = V(t.arange(<span class="number">0</span>, <span class="number">12</span>).view(<span class="number">3</span>, <span class="number">4</span>).float())</span><br><span class="line">model = nn.Dropout()</span><br><span class="line">model(input)</span><br></pre></td></tr></table></figure>
+
 <pre><code>tensor([[ 0.,  0.,  0.,  0.],
         [ 0.,  0., 12.,  0.],
-        [ 0., 18.,  0.,  0.]])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">model.training = <span class="literal">False</span></span><br><span class="line">model(input)</span><br></pre></td></tr></table></figure>
+        [ 0., 18.,  0.,  0.]])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">model.training = <span class="literal">False</span></span><br><span class="line">model(input)</span><br></pre></td></tr></table></figure>
+
 <pre><code>tensor([[ 0.,  1.,  2.,  3.],
         [ 4.,  5.,  6.,  7.],
-        [ 8.,  9., 10., 11.]])
-</code></pre><p>对batchnorm、dropout、instancenorm等在训练和测试阶段行为差距较大的层，如果在测试时不将其training值设为False，则可能会有很大影响，这在实际使用中千万注意。虽然可通过直接设置training属性将子module设为train和eval模式，但是这种方式比较繁琐。推荐的做法是调用model.train()函数，它会将当前module及其子module中的所有training属性都设为True。model.eval()函数会把training属性都设为False。</p>
+        [ 8.,  9., 10., 11.]])</code></pre><p>对batchnorm、dropout、instancenorm等在训练和测试阶段行为差距较大的层，如果在测试时不将其training值设为False，则可能会有很大影响，这在实际使用中千万注意。虽然可通过直接设置training属性将子module设为train和eval模式，但是这种方式比较繁琐。推荐的做法是调用model.train()函数，它会将当前module及其子module中的所有training属性都设为True。model.eval()函数会把training属性都设为False。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(net.training, net.submodel1.training)</span><br><span class="line">net.eval()</span><br><span class="line">net.training, net.submodel1.training</span><br></pre></td></tr></table></figure>
+
 <pre><code>True True
 
 
 
 
 
-(False, False)
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list(net.named_modules())</span><br></pre></td></tr></table></figure>
-<pre><code>[(&#39;&#39;, Net(
+(False, False)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list(net.named_modules())</span><br></pre></td></tr></table></figure>
+
+<pre><code>[(&apos;&apos;, Net(
     (submodel1): Linear(in_features=3, out_features=4, bias=True)
-  )), (&#39;submodel1&#39;, Linear(in_features=3, out_features=4, bias=True))]
-</code></pre><p>register_forward_hook和register_backward_hook函数的功能类似于variable的register_hook，可在module前向传播或反向传播时注册钩子。每次前向传播执行结束后会执行钩子函数（hook）。前向传播的钩子函数具有如下形式：hook(module, input, output) -&gt; None，而反向传播则具有如下形式：hook(module, grad_input, grad_ouput) -&gt; Tensor or None。钩子函数不应修改输入和输出，并且在使用后应及时删除，以避免每次都运行钩子增加运行负载。钩子函数主要用在获取某些中间结果的情景，如中间某一层的输出或某一层的梯度。这些结果本应写在forward函数中，但如果在forward函数中加上这些处理，可能会使处理逻辑比较复杂，这时使用钩子技术就更合适。下面考虑一种场景：有一个预训练的模型，需要提取模型的某一层（不是最后一层）的输出作为特征进行分类，希望不修改其原有的模型定义文件，这时就可以利用钩子函数。</p>
+  )), (&apos;submodel1&apos;, Linear(in_features=3, out_features=4, bias=True))]</code></pre><p>register_forward_hook和register_backward_hook函数的功能类似于variable的register_hook，可在module前向传播或反向传播时注册钩子。每次前向传播执行结束后会执行钩子函数（hook）。前向传播的钩子函数具有如下形式：hook(module, input, output) -&gt; None，而反向传播则具有如下形式：hook(module, grad_input, grad_ouput) -&gt; Tensor or None。钩子函数不应修改输入和输出，并且在使用后应及时删除，以避免每次都运行钩子增加运行负载。钩子函数主要用在获取某些中间结果的情景，如中间某一层的输出或某一层的梯度。这些结果本应写在forward函数中，但如果在forward函数中加上这些处理，可能会使处理逻辑比较复杂，这时使用钩子技术就更合适。下面考虑一种场景：有一个预训练的模型，需要提取模型的某一层（不是最后一层）的输出作为特征进行分类，希望不修改其原有的模型定义文件，这时就可以利用钩子函数。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">model = VGG()</span><br><span class="line">features = t.Tensor()</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hook</span><span class="params">(module, input, output)</span>:</span></span><br><span class="line">    features.copy_(output.data)</span><br><span class="line">    </span><br><span class="line">handle = model.layer8.register_forward_hook(hook)</span><br><span class="line">_ = model(input)</span><br><span class="line"><span class="comment"># 用完hook后删除</span></span><br><span class="line">handle.remove()</span><br></pre></td></tr></table></figure>
+
 <p>nn.Module对象在构造函数中的行为看起来有些诡异，想要理解就需要看两个魔法方法__getattr__和__setattr__。在python中有两个常用的builtin方法：getattr和setattr。getattr(obj, ‘attr1’)等价于obj.attr，setattr(obj, ‘name’, value)等价于obj.name = value。</p>
 <ul>
-<li>result = obj.name会调用builtin函数getattr(obj, ‘name’)，如果该属性找不到，会调用obj.__getattr__(‘name’)</li>
-<li>obj.name = value会调用builtin函数setattr(obj, ‘name’, value)，如果obj对象实现了__setattr__方法，setattr会直接调用obj.__setattr__(‘name’, value)。</li>
+<li>result = obj.name会调用builtin函数getattr(obj, ‘name’)，如果该属性找不到，会调用obj._<em>getattr_</em>(‘name’)</li>
+<li>obj.name = value会调用builtin函数setattr(obj, ‘name’, value)，如果obj对象实现了_<em>setattr_<em>方法，setattr会直接调用obj.__setattr\</em></em>(‘name’, value)。</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">person</span><span class="params">()</span>:</span></span><br><span class="line">    dict = &#123;<span class="string">'name'</span>:<span class="string">'xxx'</span>,<span class="string">'sex'</span>:<span class="string">'boy'</span>,<span class="string">'age'</span>:<span class="number">18</span>&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span><span class="params">(self,name)</span>:</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> self.dict[name]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__setattr__</span><span class="params">(self, name , value)</span>:</span></span><br><span class="line">        </span><br><span class="line">        self.dict[name] = value</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> value</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">one = person()</span><br><span class="line">one.name, one.sex, one.age</span><br></pre></td></tr></table></figure>
-<pre><code>(&#39;xxx&#39;, &#39;boy&#39;, 18)
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">one.name = <span class="string">'吴彦祖'</span>;one.name</span><br></pre></td></tr></table></figure>
-<pre><code>&#39;吴彦祖&#39;
-</code></pre><p>nn.Module实现了自定义的__setattr__函数，当执行module.name=value时，会在__setattr__中判断value是否为Parameter或nn.Module对象，如果是则将这些对象加到_parameters和_modules两个字典中；如果是其他类型的对象，如Variable、list、dict等，则调用默认的操作，将这个值保存在__dict__中。</p>
+
+<pre><code>(&apos;xxx&apos;, &apos;boy&apos;, 18)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">one.name = <span class="string">'吴彦祖'</span>;one.name</span><br></pre></td></tr></table></figure>
+
+<pre><code>&apos;吴彦祖&apos;</code></pre><p>nn.Module实现了自定义的__setattr__函数，当执行module.name=value时，会在__setattr__中判断value是否为Parameter或nn.Module对象，如果是则将这些对象加到_parameters和_modules两个字典中；如果是其他类型的对象，如Variable、list、dict等，则调用默认的操作，将这个值保存在__dict__中。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">module = nn.Module()</span><br><span class="line">module.param = nn.Parameter(t.ones(<span class="number">2</span>, <span class="number">2</span>))</span><br><span class="line">module._parameters,module.param</span><br></pre></td></tr></table></figure>
-<pre><code>(OrderedDict([(&#39;param&#39;, Parameter containing:
+
+<pre><code>(OrderedDict([(&apos;param&apos;, Parameter containing:
                tensor([[1., 1.],
                        [1., 1.]], requires_grad=True))]), Parameter containing:
  tensor([[1., 1.],
-         [1., 1.]], requires_grad=True))
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">submodule1 = nn.Linear(<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">submodule2 = nn.Linear(<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">module_list = [submodule1, submodule2]</span><br><span class="line"><span class="comment"># 对于list对象，调用builtin函数，保存在__dict__中</span></span><br><span class="line">module.submodules = module_list</span><br><span class="line">print(<span class="string">'_modules:'</span>,module._modules)</span><br><span class="line">print(<span class="string">"__dict__['submodules']:"</span>,module.__dict__.get(<span class="string">'submodules'</span>))</span><br></pre></td></tr></table></figure>
+         [1., 1.]], requires_grad=True))</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">submodule1 = nn.Linear(<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">submodule2 = nn.Linear(<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">module_list = [submodule1, submodule2]</span><br><span class="line"><span class="comment"># 对于list对象，调用builtin函数，保存在__dict__中</span></span><br><span class="line">module.submodules = module_list</span><br><span class="line">print(<span class="string">'_modules:'</span>,module._modules)</span><br><span class="line">print(<span class="string">"__dict__['submodules']:"</span>,module.__dict__.get(<span class="string">'submodules'</span>))</span><br></pre></td></tr></table></figure>
+
 <pre><code>_modules: OrderedDict()
-__dict__[&#39;submodules&#39;]: [Linear(in_features=2, out_features=2, bias=True), Linear(in_features=2, out_features=2, bias=True)]
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">module.submodules = nn.ModuleList(module_list)</span><br><span class="line">print(<span class="string">'_modules:'</span>,module._modules)</span><br><span class="line">print(<span class="string">"__dict__['submodules']:"</span>,module.__dict__.get(<span class="string">'submodules'</span>))</span><br></pre></td></tr></table></figure>
-<pre><code>_modules: OrderedDict([(&#39;submodules&#39;, ModuleList(
+__dict__[&apos;submodules&apos;]: [Linear(in_features=2, out_features=2, bias=True), Linear(in_features=2, out_features=2, bias=True)]</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">module.submodules = nn.ModuleList(module_list)</span><br><span class="line">print(<span class="string">'_modules:'</span>,module._modules)</span><br><span class="line">print(<span class="string">"__dict__['submodules']:"</span>,module.__dict__.get(<span class="string">'submodules'</span>))</span><br></pre></td></tr></table></figure>
+
+<pre><code>_modules: OrderedDict([(&apos;submodules&apos;, ModuleList(
   (0): Linear(in_features=2, out_features=2, bias=True)
   (1): Linear(in_features=2, out_features=2, bias=True)
 ))])
-__dict__[&#39;submodules&#39;]: None
-</code></pre><p>因_modules和_parameters中的item未保存在__dict__中，所以默认的getattr方法无法获取它，因而nn.Module实现了自定义的__getattr__方法。如果默认的getattr无法处理，就调用自定义的__getattr__方法，尝试从_modules、_parameters和_buffers三个字典中获取。</p>
+__dict__[&apos;submodules&apos;]: None</code></pre><p>因_modules和_parameters中的item未保存在__dict__中，所以默认的getattr方法无法获取它，因而nn.Module实现了自定义的__getattr__方法。如果默认的getattr无法处理，就调用自定义的__getattr__方法，尝试从_modules、_parameters和_buffers三个字典中获取。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">getattr(module, <span class="string">'training'</span>) <span class="comment"># 等价于module.training</span></span><br><span class="line"><span class="comment">#error</span></span><br><span class="line"><span class="comment">#module.__getattr__('training')</span></span><br></pre></td></tr></table></figure>
-<pre><code>True
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">module.attr1 = <span class="number">2</span></span><br><span class="line">getattr(module, <span class="string">'attr1'</span>)</span><br><span class="line"><span class="comment"># 报错</span></span><br><span class="line"><span class="comment"># module.__getattr__('attr1')</span></span><br></pre></td></tr></table></figure>
-<pre><code>2
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getattr(module, <span class="string">'param'</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>True</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">module.attr1 = <span class="number">2</span></span><br><span class="line">getattr(module, <span class="string">'attr1'</span>)</span><br><span class="line"><span class="comment"># 报错</span></span><br><span class="line"><span class="comment"># module.__getattr__('attr1')</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>2</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getattr(module, <span class="string">'param'</span>)</span><br></pre></td></tr></table></figure>
+
 <pre><code>Parameter containing:
 tensor([[1., 1.],
-        [1., 1.]], requires_grad=True)
-</code></pre><p>在pytorch中保存模型十分简单，所有的module对象都具有state_dict()函数，返回当前Module所有的状态数据。将这些状态数据保存后，下次使用模型时即可利用model.load_state_dict()函数将状态加载进来。优化器（optimizer）也有类似机制，不过一般并不需要保存优化器的运行状态。</p>
+        [1., 1.]], requires_grad=True)</code></pre><p>在pytorch中保存模型十分简单，所有的module对象都具有state_dict()函数，返回当前Module所有的状态数据。将这些状态数据保存后，下次使用模型时即可利用model.load_state_dict()函数将状态加载进来。优化器（optimizer）也有类似机制，不过一般并不需要保存优化器的运行状态。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 保存模型</span></span><br><span class="line">t.save(net.state_dict(), <span class="string">'net.pth'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载已保存的模型</span></span><br><span class="line">net2 = Net()</span><br><span class="line">net2.load_state_dict(t.load(<span class="string">'net.pth'</span>))</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;All keys matched successfully&gt;
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">t.save(net, <span class="string">'net_all.pth'</span>)</span><br><span class="line">net2 = t.load(<span class="string">'net_all.pth'</span>)</span><br><span class="line">net2</span><br></pre></td></tr></table></figure>
-<pre><code>/usr/local/lib/python3.6/dist-packages/torch/serialization.py:256: UserWarning: Couldn&#39;t retrieve source code for container of type Net. It won&#39;t be checked for correctness upon loading.
-  &quot;type &quot; + obj.__name__ + &quot;. It won&#39;t be checked &quot;
+
+<pre><code>&lt;All keys matched successfully&gt;</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">t.save(net, <span class="string">'net_all.pth'</span>)</span><br><span class="line">net2 = t.load(<span class="string">'net_all.pth'</span>)</span><br><span class="line">net2</span><br></pre></td></tr></table></figure>
+
+<pre><code>/usr/local/lib/python3.6/dist-packages/torch/serialization.py:256: UserWarning: Couldn&apos;t retrieve source code for container of type Net. It won&apos;t be checked for correctness upon loading.
+  &quot;type &quot; + obj.__name__ + &quot;. It won&apos;t be checked &quot;
 
 
 
@@ -694,8 +723,7 @@ tensor([[1., 1.],
 
 Net(
   (submodel1): Linear(in_features=3, out_features=4, bias=True)
-)
-</code></pre><p>将Module放在GPU上运行也十分简单，只需一下两步。</p>
+)</code></pre><p>将Module放在GPU上运行也十分简单，只需一下两步。</p>
 <ul>
 <li>model = model.cuda():将模型的所有参数转存到GPU</li>
 <li>input.cuda():将输入数据放置到GPU上。</li>
@@ -707,6 +735,7 @@ Net(
 </ul>
 <p>可见二者的参数十分相似，通过device_ids参数可以指定在哪些GPU上进行优化，output_device指定输出到哪个GPU上。唯一的不同在于前者直接利用多GPU并行计算得出结果，后者则返回一个新的module，能够自动在多GPU上进行并行加速。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># method1</span></span><br><span class="line">new_net = nn.DataParallel(net, device_ids = [<span class="number">0</span>, <span class="number">1</span>])</span><br><span class="line">output = new_net(input)</span><br><span class="line"></span><br><span class="line"><span class="comment"># method 2</span></span><br><span class="line">output = nn.parallel.data_parallel(net, input, device_ids = [<span class="number">0</span>, <span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+
 <p>DataParallel并行的方式，是将输入一个batch的数据均分成多份，分别送到对应的GPU进行计算，然后将各个GPU得到的梯度相加。与Module相关的所有数据也会以浅复制的方式复制多份。</p>
 <h4 id="nn和aautograd的关系"><a href="#nn和aautograd的关系" class="headerlink" title="nn和aautograd的关系"></a>nn和aautograd的关系</h4><p>nn.Module利用的是autograd技术，其主要工作是实现前向传播。在forward函数中，nn.Module对输入的Variable进行的各种操作，本质上都用了autograd技术。这里需要对比autograd.Function和nn.Module之间的区别。</p>
 <ul>
@@ -721,6 +750,13 @@ Net(
 <blockquote><p>欢迎收藏访问我的<a href="https://zinw623.github.io/">博客</a>  <a href="https://www.zhihu.com/people/tai-li-wu-yan-zu/activities" target="_blank" rel="noopener">知乎</a>   <a href="https://juejin.im/user/5d40058ef265da03b76afb66" target="_blank" rel="noopener">掘金</a>  <a href="https://www.jianshu.com/u/a38373c2e45b" target="_blank" rel="noopener">简书</a> <a href="https://www.zhihu.com/people/tai-li-wu-yan-zu/activities" target="_blank" rel="noopener">知乎</a></p></blockquote>
   <div class="popular-posts-header">相关文章</div>
   <ul class="popular-posts">
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\2019\08\23\pytorch-tools\" rel="bookmark">【notes】pytorch学习笔记4-pytorch常用工具</a></div>
+      
+    </li>
+  
     <li class="popular-posts-item">
       
       
@@ -741,7 +777,8 @@ Net(
       <div class="popular-posts-title"><a href="\2019\08\21\dlrm\" rel="bookmark">dlrm</a></div>
       
         <div class="popular-posts-excerpt"><p><blockquote>
-<p>一个人在不接触对方的情况下，通过一种特殊的方式，和对方进行一系列的问答。如果在想当长时间内，他无法根据这些问题判断对方是人还是计算机，那么就可以认为这个计算机是智能的。<br></p></div>
+<p>一个人在不接触对方的情况下，通过一种特殊的方式，和对方进行一系列的问答。如果在想当长时间内，他无法根据这些问题判断对方是人还是计算机，那么就可以认为这个计算机是智能的。</p>
+</blockquote></p></div>
       
     </li>
   
@@ -749,13 +786,6 @@ Net(
       
       
       <div class="popular-posts-title"><a href="\2019\08\09\docker-6\" rel="bookmark">【notes】docker学习笔记6-docker容器数据管理</a></div>
-      
-    </li>
-  
-    <li class="popular-posts-item">
-      
-      
-      <div class="popular-posts-title"><a href="\2019\08\08\docker-5\" rel="bookmark">【notes】docker学习笔记5-dockerfile</a></div>
       
     </li>
   
@@ -829,6 +859,10 @@ Net(
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+              <a href="/2019/08/23/pytorch-tools/" rel="prev" title="【notes】pytorch学习笔记4-pytorch常用工具">
+                【notes】pytorch学习笔记4-pytorch常用工具 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
     </footer>
@@ -890,7 +924,7 @@ Net(
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1087,12 +1121,12 @@ Net(
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">65k</span>
+    <span title="站点总字数">83k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">59 分钟</span>
+    <span title="站点阅读时长">1:16</span>
 </div>
 
 
