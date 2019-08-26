@@ -1,3 +1,4 @@
+https://zinw623.github.io/2019/08/26/pytorch-notes/
 https://zinw623.github.io/2019/08/23/pytorch-tools/
 https://zinw623.github.io/2019/08/22/nn.Module/
 https://zinw623.github.io/2019/08/21/dlrm/
