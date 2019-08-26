@@ -70,18 +70,18 @@
   daovoice('update');
   </script>
 
-  <meta name="description" content="docker的C/S模式 客户端与守护进程通信的接口 命令行接口 remote API： RESTful风格API STDIN STDOUT STDERR 语言参考：https://docs.docker.com/reference/api/docker_remote_api    连接方式 unix:///var/run/docker.sock  默认方式 tcp://host:port fd:">
-<meta name="keywords" content="docker,笔记">
+  <meta name="description" content="¶docker的C/S模式  ¶客户端与守护进程通信的接口  命令行接口 remote API：  RESTful风格API STDIN STDOUT STDERR 语言参考：https://docs.docker.com/reference/api/docker_remote_api    ¶连接方式  unix:///var/run/docker.sock  默认方式 tcp://host:p">
+<meta name="keywords" content="笔记,docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【notes】docker学习笔记4-docker客户端与守护进程">
 <meta property="og:url" content="https://zinw623.github.io/2019/08/07/docker-4/index.html">
 <meta property="og:site_name" content="Zihan.W的博客">
-<meta property="og:description" content="docker的C/S模式 客户端与守护进程通信的接口 命令行接口 remote API： RESTful风格API STDIN STDOUT STDERR 语言参考：https://docs.docker.com/reference/api/docker_remote_api    连接方式 unix:///var/run/docker.sock  默认方式 tcp://host:port fd:">
+<meta property="og:description" content="¶docker的C/S模式  ¶客户端与守护进程通信的接口  命令行接口 remote API：  RESTful风格API STDIN STDOUT STDERR 语言参考：https://docs.docker.com/reference/api/docker_remote_api    ¶连接方式  unix:///var/run/docker.sock  默认方式 tcp://host:p">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-08T03:07:56.995Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【notes】docker学习笔记4-docker客户端与守护进程">
-<meta name="twitter:description" content="docker的C/S模式 客户端与守护进程通信的接口 命令行接口 remote API： RESTful风格API STDIN STDOUT STDERR 语言参考：https://docs.docker.com/reference/api/docker_remote_api    连接方式 unix:///var/run/docker.sock  默认方式 tcp://host:port fd:">
+<meta name="twitter:description" content="¶docker的C/S模式  ¶客户端与守护进程通信的接口  命令行接口 remote API：  RESTful风格API STDIN STDOUT STDERR 语言参考：https://docs.docker.com/reference/api/docker_remote_api    ¶连接方式  unix:///var/run/docker.sock  默认方式 tcp://host:p">
   <link rel="alternate" href="/atom.xml" title="Zihan.W的博客" type="application/atom+xml">
   <link rel="canonical" href="https://zinw623.github.io/2019/08/07/docker-4/">
 
@@ -362,7 +362,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">2k</span>
+              <span title="本文字数">1.9k</span>
             </span>
           
             <span class="post-meta-item">
@@ -385,22 +385,27 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="docker的C-S模式"><a href="#docker的C-S模式" class="headerlink" title="docker的C/S模式"></a>docker的C/S模式</h3><p><img alt data-src="/uploads/docker/4.PNG"></p>
-<h4 id="客户端与守护进程通信的接口"><a href="#客户端与守护进程通信的接口" class="headerlink" title="客户端与守护进程通信的接口"></a>客户端与守护进程通信的接口</h4><ol>
+        <h3 id="docker的c-s模式"><a class="header-anchor" href="#docker的c-s模式">¶</a>docker的C/S模式</h3>
+<p><img alt data-src="/uploads/docker/4.PNG"></p>
+<h4 id="客户端与守护进程通信的接口"><a class="header-anchor" href="#客户端与守护进程通信的接口">¶</a>客户端与守护进程通信的接口</h4>
+<ol>
 <li>命令行接口</li>
-<li>remote API：<ul>
+<li>remote API：
+<ul>
 <li>RESTful风格API</li>
 <li>STDIN STDOUT STDERR</li>
 <li>语言参考：<a href="https://docs.docker.com/reference/api/docker_remote_api" target="_blank" rel="noopener">https://docs.docker.com/reference/api/docker_remote_api</a></li>
 </ul>
 </li>
 </ol>
-<h4 id="连接方式"><a href="#连接方式" class="headerlink" title="连接方式"></a>连接方式</h4><ul>
+<h4 id="连接方式"><a class="header-anchor" href="#连接方式">¶</a>连接方式</h4>
+<ul>
 <li>unix:///var/run/docker.sock  默认方式</li>
 <li>tcp://host:port</li>
 <li>fd://socketfd</li>
 </ul>
-<h4 id="利用socket进行通信"><a href="#利用socket进行通信" class="headerlink" title="利用socket进行通信"></a>利用socket进行通信</h4><ul>
+<h4 id="利用socket进行通信"><a class="header-anchor" href="#利用socket进行通信">¶</a>利用socket进行通信</h4>
+<ul>
 <li>查看正在运行的守护进程</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep docker</span><br></pre></td></tr></table></figure>
@@ -409,7 +414,8 @@
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nc -U /var/run/docker.sock</span><br><span class="line">GET /info HTTP/1.1</span><br></pre></td></tr></table></figure>
 <p>以上都是在本地的访问，docker也支持远程访问。</p>
-<h3 id="docker守护进程的配置和操作"><a href="#docker守护进程的配置和操作" class="headerlink" title="docker守护进程的配置和操作"></a>docker守护进程的配置和操作</h3><ul>
+<h3 id="docker守护进程的配置和操作"><a class="header-anchor" href="#docker守护进程的配置和操作">¶</a>docker守护进程的配置和操作</h3>
+<ul>
 <li>查看守护进程</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep docker</span><br><span class="line">sudo status docker</span><br></pre></td></tr></table></figure>
@@ -418,48 +424,86 @@
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo service docker start</span><br><span class="line">sudo service docker stop</span><br><span class="line">sudo service docker restart</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>docker的启动选项</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker -d [OPTIONS]  <span class="comment">#所以守护形式运行</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>运行相关:<br>  -D, —debug = false<br>  -e, —exec-driver = “native”<br>  -g, —graph = “/var/lib/docker”<br>  —icc = true<br>  -l, —log-level = “info”<br>  —label = []<br>  -p, —pidfile = “/var/run/docker.pid”</p>
-</li>
-<li>docker服务器连接相关：<br>  -G, —group = “docker”<br>  -H, —host = []<br>  —tls = false<br>  —tlscacert = “/home/sven/.docker/ca.pem”<br>  —tlscert = “/home/sven/.docker/cert.pem”<br>  —tlskey = “/home/sven/.docker/key.pem”<br>  —tlsverify = false</li>
-<li>RemotAPI相关：<br>  —api-enable-cors = false</li>
-<li>Registry相关：<br>  —insecure-registry = []<br>  —registry-mirror = []</li>
-<li>网络设置相关：<br>  -b, —bridge = “”<br>  —bip = “”<br>  —fixed-cidr = “”<br>  —fixed-cidr-v6 = “”<br>  —dns = []<br>  —dns-search = []<br>  —ip = 0.0.0.0<br>  —ip-forward = true<br>  —ip-masq = true<br>  —iptables = true<br>  —ipv6 = false<br>  —mtu = 0</li>
-<li>启动配置文件  /etc/default/docker<br>  注：ubuntu 16.04及以上版本使用：<pre><code>  修改/lib/systemd/system/docker.service中的ExecStart
-  加载配置：
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">service docker restart</span><br><span class="line">docker info</span><br></pre></td></tr></table></figure>
-</code></pre></li>
+<li>docker的启动选项</li>
 </ul>
-<h3 id="docker的远程访问"><a href="#docker的远程访问" class="headerlink" title="docker的远程访问"></a>docker的远程访问</h3><ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker -d [OPTIONS]  <span class="comment">#所以守护形式运行</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>运行相关:<br>
+-D, --debug = false<br>
+-e, --exec-driver = “native”<br>
+-g, --graph = “/var/lib/docker”<br>
+–icc = true<br>
+-l, --log-level = “info”<br>
+–label = []<br>
+-p, --pidfile = “/var/run/docker.pid”</li>
+<li>docker服务器连接相关：<br>
+-G, --group = “docker”<br>
+-H, --host = []<br>
+–tls = false<br>
+–tlscacert = “/home/sven/.docker/ca.pem”<br>
+–tlscert = “/home/sven/.docker/cert.pem”<br>
+–tlskey = “/home/sven/.docker/key.pem”<br>
+–tlsverify = false</li>
+<li>RemotAPI相关：<br>
+–api-enable-cors = false</li>
+<li>Registry相关：<br>
+–insecure-registry = []<br>
+–registry-mirror = []</li>
+<li>网络设置相关：<br>
+-b, --bridge = “”<br>
+–bip = “”<br>
+–fixed-cidr = “”<br>
+–fixed-cidr-v6 = “”<br>
+–dns = []<br>
+–dns-search = []<br>
+–ip = 0.0.0.0<br>
+–ip-forward = true<br>
+–ip-masq = true<br>
+–iptables = true<br>
+–ipv6 = false<br>
+–mtu = 0</li>
+<li>启动配置文件  /etc/default/docker<br>
+注：ubuntu 16.04及以上版本使用：<br>
+修改/lib/systemd/system/docker.service中的ExecStart<br>
+加载配置：<br>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">service docker restart</span><br><span class="line">docker info</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="docker的远程访问"><a class="header-anchor" href="#docker的远程访问">¶</a>docker的远程访问</h3>
+<ul>
 <li>第二台安装docker的服务器</li>
 <li>保证Client API与Server API版本一致</li>
 </ul>
-<h4 id="修改docker守护进程启动选项"><a href="#修改docker守护进程启动选项" class="headerlink" title="修改docker守护进程启动选项"></a>修改docker守护进程启动选项</h4><ul>
-<li><p>修改服务器端配置<br>  -H  tcp://host:post</p>
-<pre><code>  unix:///path/to/socket 
-  fd://* or fd//socketfd
-</code></pre><p>  守护进程默认配置：</p>
-<pre><code>  -H unix:///var/run/docker.sock
-  注：我的默认的是 fd://
-</code></pre><p>  改为 tcp:</p>
-<pre><code>  tcp://0.0.0.0:2375
-</code></pre>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl http://ip:2375/info</span><br></pre></td></tr></table></figure>
+<h4 id="修改docker守护进程启动选项"><a class="header-anchor" href="#修改docker守护进程启动选项">¶</a>修改docker守护进程启动选项</h4>
+<ul>
+<li>
+<p>修改服务器端配置<br>
+-H  tcp://host:post<br>
+unix:///path/to/socket<br>
+fd://* or fd//socketfd<br>
+守护进程默认配置：<br>
+-H unix:///var/run/docker.sock<br>
+注：我的默认的是 fd://<br>
+改为 tcp:<br>
+tcp://0.0.0.0:2375</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl http://ip:2375/info</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>修改客户端配置<br>  -H  tcp://host:post</p>
-<pre><code>  unix:///path/to/socket 
-  fd://* or fd//socketfd
-</code></pre><p>  默认配置：</p>
-<pre><code>  -H unix:///var/run/docker.sock
-</code></pre><ol>
+<li>
+<p>修改客户端配置<br>
+-H  tcp://host:post<br>
+unix:///path/to/socket<br>
+fd://* or fd//socketfd<br>
+默认配置：<br>
+-H unix:///var/run/docker.sock</p>
+<ol>
 <li>docker -H tcp//ip:2375 # 太麻烦</li>
-<li>export DOCKET_HOST=”tcp://ip:2357” # 使用环境变量<br> export DOCKET_HOST=”tcp://ip:2357”  # 使用本地</li>
+<li>export DOCKET_HOST=“tcp://ip:2357” # 使用环境变量<br>
+export DOCKET_HOST=“tcp://ip:2357”  # 使用本地</li>
 </ol>
 </li>
 </ul>
 <ul>
-<li>怎样在设置了远程连接的服务器也支持本机连接？<br>答：给-H再增加一个方式，-H可以设置多个值。</li>
+<li>怎样在设置了远程连接的服务器也支持本机连接？<br>
+答：给-H再增加一个方式，-H可以设置多个值。</li>
 </ul>
 
     </div>
@@ -537,9 +581,9 @@
           
         
         <div class="post-tags">
-            <a href="/tags/docker/" rel="tag"><i class="fa fa-tag"></i> docker</a>
-          
             <a href="/tags/笔记/" rel="tag"><i class="fa fa-tag"></i> 笔记</a>
+          
+            <a href="/tags/docker/" rel="tag"><i class="fa fa-tag"></i> docker</a>
           
         </div>
         <div class="post-widgets">
@@ -813,7 +857,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#docker的C-S模式"><span class="nav-number">1.</span> <span class="nav-text">docker的C/S模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#客户端与守护进程通信的接口"><span class="nav-number">1.1.</span> <span class="nav-text">客户端与守护进程通信的接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#连接方式"><span class="nav-number">1.2.</span> <span class="nav-text">连接方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用socket进行通信"><span class="nav-number">1.3.</span> <span class="nav-text">利用socket进行通信</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker守护进程的配置和操作"><span class="nav-number">2.</span> <span class="nav-text">docker守护进程的配置和操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker的远程访问"><span class="nav-number">3.</span> <span class="nav-text">docker的远程访问</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#修改docker守护进程启动选项"><span class="nav-number">3.1.</span> <span class="nav-text">修改docker守护进程启动选项</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#docker的c-s模式"><span class="nav-number">1.</span> <span class="nav-text">¶docker的C/S模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#客户端与守护进程通信的接口"><span class="nav-number">1.1.</span> <span class="nav-text">¶客户端与守护进程通信的接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#连接方式"><span class="nav-number">1.2.</span> <span class="nav-text">¶连接方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用socket进行通信"><span class="nav-number">1.3.</span> <span class="nav-text">¶利用socket进行通信</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker守护进程的配置和操作"><span class="nav-number">2.</span> <span class="nav-text">¶docker守护进程的配置和操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker的远程访问"><span class="nav-number">3.</span> <span class="nav-text">¶docker的远程访问</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#修改docker守护进程启动选项"><span class="nav-number">3.1.</span> <span class="nav-text">¶修改docker守护进程启动选项</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -840,12 +884,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">87k</span>
+    <span title="站点总字数">89k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:19</span>
+    <span title="站点阅读时长">1:21</span>
 </div>
 
 

@@ -70,18 +70,18 @@
   daovoice('update');
   </script>
 
-  <meta name="description" content="docker容器的数据管理简介 docker容器的数据卷 docker的数据卷容器 docker数据卷的备份和还原  docker容器的数据卷什么是数据卷(Data Volume)docker的生存周期是与运行的程序相一致的，而我们需要数据持久化，docker容器之间也需要共享一些数据  数据卷是经过特殊设计的目录，可以绕过联合文件系统（UFS)，为一个或多个容器提供访问。  数据卷设计的目的，在">
-<meta name="keywords" content="docker,笔记">
+  <meta name="description" content="¶docker容器的数据管理简介  docker容器的数据卷 docker的数据卷容器 docker数据卷的备份和还原  ¶docker容器的数据卷 ¶什么是数据卷(Data Volume) docker的生存周期是与运行的程序相一致的，而我们需要数据持久化，docker容器之间也需要共享一些数据   数据卷是经过特殊设计的目录，可以绕过联合文件系统（UFS)，为一个或多个容器提供访问。   数据">
+<meta name="keywords" content="笔记,docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【notes】docker学习笔记6-docker容器数据管理">
 <meta property="og:url" content="https://zinw623.github.io/2019/08/09/docker-6/index.html">
 <meta property="og:site_name" content="Zihan.W的博客">
-<meta property="og:description" content="docker容器的数据管理简介 docker容器的数据卷 docker的数据卷容器 docker数据卷的备份和还原  docker容器的数据卷什么是数据卷(Data Volume)docker的生存周期是与运行的程序相一致的，而我们需要数据持久化，docker容器之间也需要共享一些数据  数据卷是经过特殊设计的目录，可以绕过联合文件系统（UFS)，为一个或多个容器提供访问。  数据卷设计的目的，在">
+<meta property="og:description" content="¶docker容器的数据管理简介  docker容器的数据卷 docker的数据卷容器 docker数据卷的备份和还原  ¶docker容器的数据卷 ¶什么是数据卷(Data Volume) docker的生存周期是与运行的程序相一致的，而我们需要数据持久化，docker容器之间也需要共享一些数据   数据卷是经过特殊设计的目录，可以绕过联合文件系统（UFS)，为一个或多个容器提供访问。   数据">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-09T12:14:33.803Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【notes】docker学习笔记6-docker容器数据管理">
-<meta name="twitter:description" content="docker容器的数据管理简介 docker容器的数据卷 docker的数据卷容器 docker数据卷的备份和还原  docker容器的数据卷什么是数据卷(Data Volume)docker的生存周期是与运行的程序相一致的，而我们需要数据持久化，docker容器之间也需要共享一些数据  数据卷是经过特殊设计的目录，可以绕过联合文件系统（UFS)，为一个或多个容器提供访问。  数据卷设计的目的，在">
+<meta name="twitter:description" content="¶docker容器的数据管理简介  docker容器的数据卷 docker的数据卷容器 docker数据卷的备份和还原  ¶docker容器的数据卷 ¶什么是数据卷(Data Volume) docker的生存周期是与运行的程序相一致的，而我们需要数据持久化，docker容器之间也需要共享一些数据   数据卷是经过特殊设计的目录，可以绕过联合文件系统（UFS)，为一个或多个容器提供访问。   数据">
   <link rel="alternate" href="/atom.xml" title="Zihan.W的博客" type="application/atom+xml">
   <link rel="canonical" href="https://zinw623.github.io/2019/08/09/docker-6/">
 
@@ -375,19 +375,25 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="docker容器的数据管理简介"><a href="#docker容器的数据管理简介" class="headerlink" title="docker容器的数据管理简介"></a>docker容器的数据管理简介</h3><ul>
+        <h3 id="docker容器的数据管理简介"><a class="header-anchor" href="#docker容器的数据管理简介">¶</a>docker容器的数据管理简介</h3>
+<ul>
 <li>docker容器的数据卷</li>
 <li>docker的数据卷容器</li>
 <li>docker数据卷的备份和还原</li>
 </ul>
-<h3 id="docker容器的数据卷"><a href="#docker容器的数据卷" class="headerlink" title="docker容器的数据卷"></a>docker容器的数据卷</h3><h4 id="什么是数据卷-Data-Volume"><a href="#什么是数据卷-Data-Volume" class="headerlink" title="什么是数据卷(Data Volume)"></a>什么是数据卷(Data Volume)</h4><p>docker的生存周期是与运行的程序相一致的，而我们需要数据持久化，docker容器之间也需要共享一些数据</p>
+<h3 id="docker容器的数据卷"><a class="header-anchor" href="#docker容器的数据卷">¶</a>docker容器的数据卷</h3>
+<h4 id="什么是数据卷-data-volume"><a class="header-anchor" href="#什么是数据卷-data-volume">¶</a>什么是数据卷(Data Volume)</h4>
+<p>docker的生存周期是与运行的程序相一致的，而我们需要数据持久化，docker容器之间也需要共享一些数据</p>
 <ul>
-<li><p>数据卷是经过特殊设计的目录，可以绕过联合文件系统（UFS)，为一个或多个容器提供访问。</p>
+<li>
+<p>数据卷是经过特殊设计的目录，可以绕过联合文件系统（UFS)，为一个或多个容器提供访问。</p>
 </li>
-<li><p>数据卷设计的目的，在于数据持久化，它完全对独立于容器的生存周期，因此docker不会在容器删除时删除其挂载的数据卷，也不会存在类似的垃圾收集机制，对容器引用的数据卷进行处理。</p>
+<li>
+<p>数据卷设计的目的，在于数据持久化，它完全对独立于容器的生存周期，因此docker不会在容器删除时删除其挂载的数据卷，也不会存在类似的垃圾收集机制，对容器引用的数据卷进行处理。</p>
 </li>
-<li><p>数据卷架构：</p>
-<p>  <img alt data-src="/uploads/docker/5.PNG"></p>
+<li>
+<p>数据卷架构：</p>
+<p><img alt data-src="/uploads/docker/5.PNG"></p>
 <ul>
 <li>docker数据卷独立于docker，独立运docker的生存周期。</li>
 <li>docker数据卷位于docker的宿主机中文件系统。</li>
@@ -396,7 +402,8 @@
 <li>同一目录或文件可以支持多个容器</li>
 </ul>
 </li>
-<li><p>数据卷的特点</p>
+<li>
+<p>数据卷的特点</p>
 <ul>
 <li>数据卷在容器启动时初始化，如果容器使用的镜像在挂载点包含了数据，这些数据会拷贝到新初始化的数据卷中。</li>
 <li>数据卷可以在容器之间共享和重用</li>
@@ -406,7 +413,8 @@
 </ul>
 </li>
 </ul>
-<h4 id="数据卷的使用"><a href="#数据卷的使用" class="headerlink" title="数据卷的使用"></a>数据卷的使用</h4><ul>
+<h4 id="数据卷的使用"><a class="header-anchor" href="#数据卷的使用">¶</a>数据卷的使用</h4>
+<ul>
 <li>为容器添加数据卷</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run -v ~/container_data:/data -it ubuntu /bin/bash</span><br></pre></td></tr></table></figure>
@@ -419,10 +427,14 @@
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run -v [卷名]:[容器目录]:ro(访问权限) -it ubuntu /bin/bash</span><br></pre></td></tr></table></figure>
 <ul>
-<li>使用dockerfile构建包含数据卷的镜像<br>dockerfile指令：<br>  VOLUME [“/data1”, “/data2”]</li>
+<li>使用dockerfile构建包含数据卷的镜像<br>
+dockerfile指令：<br>
+VOLUME [&quot;/data1&quot;, “/data2”]</li>
 </ul>
 <p>不能映射到本地目录，并且运行同一镜像的不同容器所创建的数据卷也是不一样的。</p>
-<h3 id="docker的数据卷容器"><a href="#docker的数据卷容器" class="headerlink" title="docker的数据卷容器"></a>docker的数据卷容器</h3><p>什么是数据卷容器：<br>    命名的容器挂载数据卷，其他容器通过挂载这个容器实现数据共享，挂载数据卷的容器，就叫做数据卷容器</p>
+<h3 id="docker的数据卷容器"><a class="header-anchor" href="#docker的数据卷容器">¶</a>docker的数据卷容器</h3>
+<p>什么是数据卷容器：<br>
+命名的容器挂载数据卷，其他容器通过挂载这个容器实现数据共享，挂载数据卷的容器，就叫做数据卷容器</p>
 <p>图示：</p>
 <p><img alt data-src="/uploads/docker/6.PNG"></p>
 <ul>
@@ -431,7 +443,8 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --volumes-from [CONTAINER NAME]</span><br></pre></td></tr></table></figure>
 <p>如果数据卷容器删除（即使同时删除挂载的数据卷）后，挂载该数据卷容器的容器的数据目录仍存在且有效。</p>
 <p>数据卷容器的作用仅仅是将数据卷挂载的配置传递到挂载了数据卷容器的新容器中。</p>
-<h3 id="docker数据卷的备份与还原"><a href="#docker数据卷的备份与还原" class="headerlink" title="docker数据卷的备份与还原"></a>docker数据卷的备份与还原</h3><ul>
+<h3 id="docker数据卷的备份与还原"><a class="header-anchor" href="#docker数据卷的备份与还原">¶</a>docker数据卷的备份与还原</h3>
+<ul>
 <li>数据备份方法</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --volumes-from [container name] -v $(<span class="built_in">pwd</span>):/backup ubuntu tar cvf /backup/backup.tar [container data volume]</span><br></pre></td></tr></table></figure>
@@ -515,9 +528,9 @@
           
         
         <div class="post-tags">
-            <a href="/tags/docker/" rel="tag"><i class="fa fa-tag"></i> docker</a>
-          
             <a href="/tags/笔记/" rel="tag"><i class="fa fa-tag"></i> 笔记</a>
+          
+            <a href="/tags/docker/" rel="tag"><i class="fa fa-tag"></i> docker</a>
           
         </div>
         <div class="post-widgets">
@@ -791,7 +804,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#docker容器的数据管理简介"><span class="nav-number">1.</span> <span class="nav-text">docker容器的数据管理简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker容器的数据卷"><span class="nav-number">2.</span> <span class="nav-text">docker容器的数据卷</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是数据卷-Data-Volume"><span class="nav-number">2.1.</span> <span class="nav-text">什么是数据卷(Data Volume)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据卷的使用"><span class="nav-number">2.2.</span> <span class="nav-text">数据卷的使用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker的数据卷容器"><span class="nav-number">3.</span> <span class="nav-text">docker的数据卷容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker数据卷的备份与还原"><span class="nav-number">4.</span> <span class="nav-text">docker数据卷的备份与还原</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#docker容器的数据管理简介"><span class="nav-number">1.</span> <span class="nav-text">¶docker容器的数据管理简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker容器的数据卷"><span class="nav-number">2.</span> <span class="nav-text">¶docker容器的数据卷</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是数据卷-data-volume"><span class="nav-number">2.1.</span> <span class="nav-text">¶什么是数据卷(Data Volume)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据卷的使用"><span class="nav-number">2.2.</span> <span class="nav-text">¶数据卷的使用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker的数据卷容器"><span class="nav-number">3.</span> <span class="nav-text">¶docker的数据卷容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker数据卷的备份与还原"><span class="nav-number">4.</span> <span class="nav-text">¶docker数据卷的备份与还原</span></a></li></ol></div>
             
 
           </div>
@@ -818,12 +831,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">87k</span>
+    <span title="站点总字数">89k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:19</span>
+    <span title="站点阅读时长">1:21</span>
 </div>
 
 

@@ -70,18 +70,18 @@
   daovoice('update');
   </script>
 
-  <meta name="description" content="2019-8-13 为什么要求算法最小化cost function却要以准确率错误率来衡量它？从cost到准确率丢失了衡量差距到底有多大的信息，这两个并不等价啊！  如何衡量一个被选择的函数在某一目的上达到了多少效果？或者起到了多少作用？  把输入端之前看成也连接了一个网络，这个网络是一种输出数据的网络，两个网络连接在一起看成一个大网络，而这种网络的生成目的应当是不同于后面我们人类设计网络的目的。">
+  <meta name="description" content="¶2019-8-13   为什么要求算法最小化cost function却要以准确率错误率来衡量它？从cost到准确率丢失了衡量差距到底有多大的信息，这两个并不等价啊！   如何衡量一个被选择的函数在某一目的上达到了多少效果？或者起到了多少作用？   把输入端之前看成也连接了一个网络，这个网络是一种输出数据的网络，两个网络连接在一起看成一个大网络，而这种网络的生成目的应当是不同于后面我们人类设计网">
 <meta name="keywords" content="thinkload,花书">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[thinkload]读书-疑问">
 <meta property="og:url" content="https://zinw623.github.io/2019/08/13/deeplearning-book/index.html">
 <meta property="og:site_name" content="Zihan.W的博客">
-<meta property="og:description" content="2019-8-13 为什么要求算法最小化cost function却要以准确率错误率来衡量它？从cost到准确率丢失了衡量差距到底有多大的信息，这两个并不等价啊！  如何衡量一个被选择的函数在某一目的上达到了多少效果？或者起到了多少作用？  把输入端之前看成也连接了一个网络，这个网络是一种输出数据的网络，两个网络连接在一起看成一个大网络，而这种网络的生成目的应当是不同于后面我们人类设计网络的目的。">
+<meta property="og:description" content="¶2019-8-13   为什么要求算法最小化cost function却要以准确率错误率来衡量它？从cost到准确率丢失了衡量差距到底有多大的信息，这两个并不等价啊！   如何衡量一个被选择的函数在某一目的上达到了多少效果？或者起到了多少作用？   把输入端之前看成也连接了一个网络，这个网络是一种输出数据的网络，两个网络连接在一起看成一个大网络，而这种网络的生成目的应当是不同于后面我们人类设计网">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-13T03:02:00.205Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[thinkload]读书-疑问">
-<meta name="twitter:description" content="2019-8-13 为什么要求算法最小化cost function却要以准确率错误率来衡量它？从cost到准确率丢失了衡量差距到底有多大的信息，这两个并不等价啊！  如何衡量一个被选择的函数在某一目的上达到了多少效果？或者起到了多少作用？  把输入端之前看成也连接了一个网络，这个网络是一种输出数据的网络，两个网络连接在一起看成一个大网络，而这种网络的生成目的应当是不同于后面我们人类设计网络的目的。">
+<meta name="twitter:description" content="¶2019-8-13   为什么要求算法最小化cost function却要以准确率错误率来衡量它？从cost到准确率丢失了衡量差距到底有多大的信息，这两个并不等价啊！   如何衡量一个被选择的函数在某一目的上达到了多少效果？或者起到了多少作用？   把输入端之前看成也连接了一个网络，这个网络是一种输出数据的网络，两个网络连接在一起看成一个大网络，而这种网络的生成目的应当是不同于后面我们人类设计网">
   <link rel="alternate" href="/atom.xml" title="Zihan.W的博客" type="application/atom+xml">
   <link rel="canonical" href="https://zinw623.github.io/2019/08/13/deeplearning-book/">
 
@@ -352,7 +352,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">354</span>
+              <span title="本文字数">360</span>
             </span>
           
             <span class="post-meta-item">
@@ -375,14 +375,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h4 id="2019-8-13"><a href="#2019-8-13" class="headerlink" title="2019-8-13"></a>2019-8-13</h4><ul>
-<li><p>为什么要求算法最小化cost function却要以准确率错误率来衡量它？从cost到准确率丢失了衡量差距到底有多大的信息，这两个并不等价啊！</p>
+        <h4 id="2019-8-13"><a class="header-anchor" href="#2019-8-13">¶</a>2019-8-13</h4>
+<ul>
+<li>
+<p>为什么要求算法最小化cost function却要以准确率错误率来衡量它？从cost到准确率丢失了衡量差距到底有多大的信息，这两个并不等价啊！</p>
 </li>
-<li><p>如何衡量一个被选择的函数在某一目的上达到了多少效果？或者起到了多少作用？</p>
+<li>
+<p>如何衡量一个被选择的函数在某一目的上达到了多少效果？或者起到了多少作用？</p>
 </li>
-<li><p>把输入端之前看成也连接了一个网络，这个网络是一种输出数据的网络，两个网络连接在一起看成一个大网络，而这种网络的生成目的应当是不同于后面我们人类设计网络的目的。但是输出的结果仍能一定程度上的符合人类需求，是不是说网络的每个部分可以存在不同的目标？</p>
+<li>
+<p>把输入端之前看成也连接了一个网络，这个网络是一种输出数据的网络，两个网络连接在一起看成一个大网络，而这种网络的生成目的应当是不同于后面我们人类设计网络的目的。但是输出的结果仍能一定程度上的符合人类需求，是不是说网络的每个部分可以存在不同的目标？</p>
 </li>
-<li><p>有一个迷宫一样的屋子，同样也是一个挑战，找出从一楼走到天台的最短路径，有一万个人来接受挑战每个走到屋顶的人都被告知自己是否是走的最短路径，每个人都是独立的，有自己的判断标准，当他再次上楼时如何分析他们行为的变化？</p>
+<li>
+<p>有一个迷宫一样的屋子，同样也是一个挑战，找出从一楼走到天台的最短路径，有一万个人来接受挑战每个走到屋顶的人都被告知自己是否是走的最短路径，每个人都是独立的，有自己的判断标准，当他再次上楼时如何分析他们行为的变化？</p>
 </li>
 </ul>
 
@@ -711,7 +716,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#2019-8-13"><span class="nav-number">1.</span> <span class="nav-text">2019-8-13</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#2019-8-13"><span class="nav-number">1.</span> <span class="nav-text">¶2019-8-13</span></a></li></ol></div>
             
 
           </div>
@@ -738,12 +743,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">87k</span>
+    <span title="站点总字数">89k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:19</span>
+    <span title="站点阅读时长">1:21</span>
 </div>
 
 

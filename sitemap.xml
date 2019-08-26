@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zinw623.github.io/2019/08/10/thinkload/</loc>
+    
+    <lastmod>2019-08-26T07:08:08.877Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://zinw623.github.io/2019/08/26/pytorch-notes/</loc>
     
     <lastmod>2019-08-26T06:51:38.410Z</lastmod>
@@ -40,13 +47,6 @@
     <loc>https://zinw623.github.io/2019/08/19/pytorch-1/</loc>
     
     <lastmod>2019-08-19T08:49:53.865Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zinw623.github.io/2019/08/10/thinkload/</loc>
-    
-    <lastmod>2019-08-17T16:26:47.031Z</lastmod>
     
   </url>
   
