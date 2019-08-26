@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://zinw623.github.io/2019/08/26/pytorch-notes/</loc>
+    <loc>https://zinw623.github.io/2019/08/26/pytorch_doc-torch/</loc>
     
-    <lastmod>2019-08-26T07:44:21.080Z</lastmod>
+    <lastmod>2019-08-26T23:43:48.367Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zinw623.github.io/2019/08/26/pytorch_doc-notes/</loc>
+    
+    <lastmod>2019-08-26T09:07:47.692Z</lastmod>
     
   </url>
   
