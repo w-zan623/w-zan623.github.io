@@ -78,7 +78,7 @@
 <meta property="og:site_name" content="Zihan.W的博客">
 <meta property="og:description" content="¶autograd机制  对应的英文版文档https://pytorch.org/docs/stable/notes/autograd.html  这篇笔记将会展示自动求导是如何工作和如何记录操作的概述，没有绝对的必要去理解这些全部内容，但是我们推荐最好熟悉它，因为它会帮助你写出更有效率、更简洁的程序，并且在调试时会帮助到你。 ¶在反向传播（backwards）时排除子图 每一个张量都有一个标示：">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-26T06:51:38.410Z">
+<meta property="og:updated_time" content="2019-08-26T07:31:31.283Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【翻译】pytorch中文文档（1.2.0）- Notes部分">
 <meta name="twitter:description" content="¶autograd机制  对应的英文版文档https://pytorch.org/docs/stable/notes/autograd.html  这篇笔记将会展示自动求导是如何工作和如何记录操作的概述，没有绝对的必要去理解这些全部内容，但是我们推荐最好熟悉它，因为它会帮助你写出更有效率、更简洁的程序，并且在调试时会帮助到你。 ¶在反向传播（backwards）时排除子图 每一个张量都有一个标示：">
@@ -314,7 +314,7 @@
                 
               
 
-              <time title="创建时间：2019-08-26 18:30:45 / 修改时间：14:51:38" itemprop="dateCreated datePublished" datetime="2019-08-26T18:30:45+08:00">2019-08-26</time>
+              <time title="创建时间：2019-08-26 18:30:45 / 修改时间：15:31:31" itemprop="dateCreated datePublished" datetime="2019-08-26T18:30:45+08:00">2019-08-26</time>
             </span>
           
             
@@ -352,7 +352,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">5.4k</span>
+              <span title="本文字数">5.5k</span>
             </span>
           
             <span class="post-meta-item">
@@ -381,8 +381,8 @@
 </blockquote>
 <p>这篇笔记将会展示自动求导是如何工作和如何记录操作的概述，没有绝对的必要去理解这些全部内容，但是我们推荐最好熟悉它，因为它会帮助你写出更有效率、更简洁的程序，并且在调试时会帮助到你。</p>
 <h3 id="在反向传播-backwards-时排除子图"><a class="header-anchor" href="#在反向传播-backwards-时排除子图">¶</a>在反向传播（backwards）时排除子图</h3>
-<p>每一个张量都有一个标示：==requires_grad==，它使得在梯度计算时精细地排除子图并且变得更有效率。</p>
-<h4 id="requires-grad"><a class="header-anchor" href="#requires-grad">¶</a>==requires_grad==</h4>
+<p>每一个张量都有一个标示：{==requires_grad==}，它使得在梯度计算时精细地排除子图并且变得更有效率。</p>
+<h4 id="requires-grad"><a class="header-anchor" href="#requires-grad">¶</a>{==requires_grad==}</h4>
 <p>如果一个操作仅有一个输入且需要梯度，那么它的输出也需要梯度。相反，只有所有的输入都不需要梯度，输出才会不需要梯度。如果子图中所有的张量都不需要梯度，那么反向传播就不会再其中执行。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x = torch.randn(<span class="number">5</span>, <span class="number">5</span>)   <span class="comment"># requires_grad = False by default</span></span><br><span class="line">y = torch.randn(<span class="number">5</span>, <span class="number">5</span>)   <span class="comment"># requires_grad = False by default</span></span><br><span class="line">z = torch.randn((<span class="number">5</span>, <span class="number">5</span>), requires_grad = <span class="literal">True</span>)</span><br><span class="line">a = x + y</span><br><span class="line">a.requires_grad</span><br></pre></td></tr></table></figure>
 <pre><code>False
@@ -825,7 +825,7 @@ Changing behavior in a backwards incompatible manner to broadcasting rather than
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#autograd机制"><span class="nav-number">1.</span> <span class="nav-text">¶autograd机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在反向传播-backwards-时排除子图"><span class="nav-number">1.1.</span> <span class="nav-text">¶在反向传播（backwards）时排除子图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#requires-grad"><span class="nav-number">1.1.1.</span> <span class="nav-text">¶==requires_grad==</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#autograd如何编码历史信息"><span class="nav-number">1.2.</span> <span class="nav-text">¶autograd如何编码历史信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#autograd的in-place操作"><span class="nav-number">1.3.</span> <span class="nav-text">¶autograd的In-place操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#in-place正确性检查"><span class="nav-number">1.4.</span> <span class="nav-text">¶In-place正确性检查</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#广播语义"><span class="nav-number">2.</span> <span class="nav-text">¶广播语义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一般语义"><span class="nav-number">2.1.</span> <span class="nav-text">¶一般语义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#in-place语义"><span class="nav-number">2.2.</span> <span class="nav-text">¶In-place语义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反向传播兼容性"><span class="nav-number">2.3.</span> <span class="nav-text">¶反向传播兼容性</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#autograd机制"><span class="nav-number">1.</span> <span class="nav-text">¶autograd机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在反向传播-backwards-时排除子图"><span class="nav-number">1.1.</span> <span class="nav-text">¶在反向传播（backwards）时排除子图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#requires-grad"><span class="nav-number">1.1.1.</span> <span class="nav-text">¶{==requires_grad==}</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#autograd如何编码历史信息"><span class="nav-number">1.2.</span> <span class="nav-text">¶autograd如何编码历史信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#autograd的in-place操作"><span class="nav-number">1.3.</span> <span class="nav-text">¶autograd的In-place操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#in-place正确性检查"><span class="nav-number">1.4.</span> <span class="nav-text">¶In-place正确性检查</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#广播语义"><span class="nav-number">2.</span> <span class="nav-text">¶广播语义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一般语义"><span class="nav-number">2.1.</span> <span class="nav-text">¶一般语义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#in-place语义"><span class="nav-number">2.2.</span> <span class="nav-text">¶In-place语义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反向传播兼容性"><span class="nav-number">2.3.</span> <span class="nav-text">¶反向传播兼容性</span></a></li></ol></li></ol></div>
             
 
           </div>
