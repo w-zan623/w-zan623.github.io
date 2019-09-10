@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://zinw623.github.io/2019/09/03/pytorch-60-minutes/</loc>
-    <lastmod>2019-09-03</lastmod>
+    <loc>https://zinw623.github.io/2019/09/04/DATA-LOADING-AND-PROCESSING/</loc>
+    <lastmod>2019-09-05</lastmod>
   </url>  <url>
-    <loc>https://zinw623.github.io/2019/09/03/minutes/</loc>
+    <loc>https://zinw623.github.io/2019/09/03/pytorch-60-minutes/</loc>
     <lastmod>2019-09-03</lastmod>
   </url>  <url>
     <loc>https://zinw623.github.io/2019/08/28/pytorch-doc-torch-autograd/</loc>

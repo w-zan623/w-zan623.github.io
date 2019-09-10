@@ -1,5 +1,5 @@
+https://zinw623.github.io/2019/09/04/DATA-LOADING-AND-PROCESSING/
 https://zinw623.github.io/2019/09/03/pytorch-60-minutes/
-https://zinw623.github.io/2019/09/03/minutes/
 https://zinw623.github.io/2019/08/28/pytorch-doc-torch-autograd/
 https://zinw623.github.io/2019/08/26/pytorch-doc-notes/
 https://zinw623.github.io/2019/08/26/pytorch-doc-torch/
