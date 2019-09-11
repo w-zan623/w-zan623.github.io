@@ -415,7 +415,6 @@
 <p>也可以作为装饰器。</p>
 <p>例如：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = torch.tensor([<span class="number">1</span>], requires_grad = <span class="literal">True</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">with</span> torch.no_grad():</span><br><span class="line">···     y = x * <span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y.requires_grad</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>@torch.no_grad()</span><br><span class="line">··· <span class="function"><span class="keyword">def</span> <span class="title">doubler</span><span class="params">(x)</span>:</span></span><br><span class="line">···     <span class="keyword">return</span> x * <span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>z = doubler(x)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>z.requires_grad</span><br><span class="line"><span class="literal">False</span></span><br></pre></td></tr></table></figure>
-
 <p>CLASS torch.autograd.enable_grad <a href="https://pytorch.org/docs/stable/_modules/torch/autograd/grad_mode.html#enable_grad" target="_blank" rel="noopener">[源码]</a></p>
 <p>启动梯度计算的上下文管理器</p>
 <p>如果使用<code>no_grad</code>或<code>set_grad_enabled</code>利用过的话，可以使用来启动梯度计算。</p>
@@ -423,7 +422,6 @@
 <p>也可以作为装饰器。</p>
 <p>例如：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = torch.tensor([<span class="number">1</span>], requires_grad = <span class="literal">True</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">with</span> torch.no_grad():</span><br><span class="line">···     <span class="keyword">with</span> torch.enable_grad():</span><br><span class="line">···         y = x * <span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y.requires_grad</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y.backward()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x.grad</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>@torch.enable_grad()</span><br><span class="line">··· <span class="function"><span class="keyword">def</span> <span class="title">doubler</span><span class="params">(x)</span>:</span></span><br><span class="line">···     <span class="keyword">return</span> x * <span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">with</span> torch.no_grad()</span><br><span class="line">···     z = doubler(x)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>z.requires_grad</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
-
 <p>CLASS torch.autograd.set_grad_enabled(mode)</p>
 <p>设置是否进行梯度计算的上下文管理器。</p>
 <p><code>set_grad_enabled</code>将启动或禁用梯度，通过<code>mode</code>来确定。它可以被用作上下文管理器也可以是函数。</p>
@@ -435,14 +433,12 @@
 </ul>
 <p>例如：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = torch.tensor([<span class="number">1</span>], requires_grad=<span class="literal">True</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>is_train = <span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">with</span> torch.set_grad_enabled(is_train):</span><br><span class="line">···     y = x * <span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y.requires_grad</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.set_grad_enabled(<span class="literal">False</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y = x * <span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y.requires_grad</span><br><span class="line"><span class="literal">False</span></span><br></pre></td></tr></table></figure>
-
 <h3 id="Tensors的In-place操作"><a href="#Tensors的In-place操作" class="headerlink" title="Tensors的In-place操作"></a>Tensors的In-place操作</h3><p>在autograd中使用in-place操作是困难的事，并且我们在大多数情况下不鼓励使用。Autograd的缓存区积极地释放和重用非常高效,很少场合in-place操作能明显地降低内存的使用。如果不是你的操作在很大的内存压力下，你可能永远不会使用它们。</p>
 <h4 id="In-place正确性检查"><a href="#In-place正确性检查" class="headerlink" title="In-place正确性检查"></a>In-place正确性检查</h4><p>所有<code>Tensor</code>s记录应用于它们的in-place操作，并且如果执行过程检测张量为了反向传播而被保存在某个函数中，但是后来被in-place修改，一旦反向传播开始将会抛出错误。这确保如果你使用了in-place操作而没有看到任何错误，你会确定计算梯度是正确的。</p>
 <h3 id="Variable-弃用"><a href="#Variable-弃用" class="headerlink" title="Variable(弃用)"></a>Variable(弃用)</h3><p>WARNING:</p>
 <p>Variable API被弃用。Variables对张量自动求导没必要。自动求导把Tensors的<code>requires_grad</code>设为<code>True</code>会自动支持。</p>
 <p>另外，现在构造用工厂方法像是<code>torch.randn()</code>,<code>torch.zeros</code>,<code>torch.ones()</code>来构造tensors（通过<code>requires_grad=True</code>）,以及类似下面的：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">autograd_tensor = torch.randn((<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>), requires_grad=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-
 <h3 id="Tensor-autograd-的函数"><a href="#Tensor-autograd-的函数" class="headerlink" title="Tensor autograd 的函数"></a>Tensor autograd 的函数</h3><h4 id="CLASS-torch-Tensor"><a href="#CLASS-torch-Tensor" class="headerlink" title="CLASS torch.Tensor"></a>CLASS torch.Tensor</h4><p>backward(gradient=None, retain_graph=None, create_graph=False) <a href="https://pytorch.org/docs/stable/_modules/torch/tensor.html#Tensor.backward" target="_blank" rel="noopener">[源码]</a></p>
 <p>计算关于叶子节点的当前张量的梯度。</p>
 <p>图是通过链式法则求导。如果张量是非标量（也就是超过一个元素）并且需要梯度，函数需要另外指定<code>gradient</code>。它需要是匹配类型和位置的一个张量，这个张量包含了关于<code>self</code>的梯度。</p>
@@ -467,19 +463,19 @@
 <p>只有叶子节点的张量在调用backward()时填充它们的grad。为了填充非叶子节点的grad，你可以使用<code>retain_grad()</code>。</p>
 <p>例如：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = torch.rand(<span class="number">10</span>, requires_grad = <span class="literal">True</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.is_leaf</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = torch.rand(<span class="number">10</span>, requires_grad = <span class="literal">True</span>).cuda()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b.is_leaf</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="comment"># b是被从cpu移入cuda的操作创建的</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = torch.rand(<span class="number">10</span>, requires_grad = <span class="literal">True</span>) + <span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c.is_leaf</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="comment"># c被加法操作创建</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d = torch.rand(<span class="number">10</span>).cuda()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d.is_leaf</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="comment"># d不需要梯度所以没有操作创建它（被autograd引擎追踪）</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>e = torch.rand(<span class="number">10</span>).cuda().requires_grad()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>e.is_leaf</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="comment"># e需要梯度并且没有操作创建它</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f = torch.rand(<span class="number">10</span>, requires_grad=<span class="literal">True</span>, device = <span class="string">"cuda"</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f.is_leaf</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="comment"># f需要梯度，没有操作创建它</span></span><br></pre></td></tr></table></figure>
-
 <p>register_hook(hook)  <a href="https://pytorch.org/docs/stable/_modules/torch/tensor.html#Tensor.register_hook" target="_blank" rel="noopener">[源码]</a></p>
 <p>注册一个反向传播hook</p>
 <p>这个hook在每次求关于相应张量的导数时被调用。这个hook应当有下面的签名：</p>
-<pre><code>hook(grad) -&gt; Tensor or None</code></pre><p>这个hook不能修改它的变量，但是它能选择性地返回一个新的梯度，这个新的梯度可以用作代替<code>grad</code>。</p>
+<pre><code>hook(grad) -&gt; Tensor or None
+</code></pre><p>这个hook不能修改它的变量，但是它能选择性地返回一个新的梯度，这个新的梯度可以用作代替<code>grad</code>。</p>
 <p>这个函数返回了一个handle,通过方法<code>handle.remove()</code>来从模块中移出hook。</p>
 <p>例如：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>v = torch.tensor([<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>], requires_grad = <span class="literal">True</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>h = v.register_hook(<span class="keyword">lambda</span> grad: grad * <span class="number">2</span>) <span class="comment"># 加倍梯度</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>v.backward(torch.tensor([<span class="number">1.</span>, <span class="number">2.</span>, <span class="number">3.</span>]))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>v.grad</span><br><span class="line"></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">6</span></span><br><span class="line">[torch.FloatTensor of size (<span class="number">3</span>, )]</span><br></pre></td></tr></table></figure>
-
 <p>requires_grad</p>
 <p>如果需要计算这个Tensor的梯度就设为<code>True</code>，否则为<code>False</code>。</p>
 <p>注意：</p>
-<pre><code>张量需要计算梯度这一事实并不意味着`grad`属性一定会被填充，详情请看`is_leaf`。</code></pre><p>retain_grad() <a href="https://pytorch.org/docs/stable/_modules/torch/tensor.html#Tensor.retain_grad" target="_blank" rel="noopener">[源码]</a></p>
+<pre><code>张量需要计算梯度这一事实并不意味着`grad`属性一定会被填充，详情请看`is_leaf`。
+</code></pre><p>retain_grad() <a href="https://pytorch.org/docs/stable/_modules/torch/tensor.html#Tensor.retain_grad" target="_blank" rel="noopener">[源码]</a></p>
 <p>启动非叶子节点张量的.grad属性。</p>
 <h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h4 id="CLASS-torch-autograd-Function-源码"><a href="#CLASS-torch-autograd-Function-源码" class="headerlink" title="CLASS torch.autograd.Function [源码]"></a>CLASS torch.autograd.Function <a href="https://pytorch.org/docs/stable/_modules/torch/autograd/function.html#Function" target="_blank" rel="noopener">[源码]</a></h4><p>记录操作历史并且定义求导操作的公式。</p>
 <p>每一次对<code>Tensor</code>进行计算，就创建一个新的函数对象，这个函数对象执行了计算并且记录了发生了什么。历史以函数的有向无环图（DAG)的形式保留下来，通过边缘来表示依赖关系（<code>input</code> &lt;- <code>output</code>）。然后，当backward被调用时，图按照拓扑排序执行，通过调用每个<code>Function</code>对象的<code>backward()</code>方法，把返回的梯度传递给下一个<code>Function</code>s。</p>
@@ -487,7 +483,6 @@
 <p>每个函数对象只能使用一次（在一次前向传播中）。</p>
 <p>例如：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Exp</span><span class="params">(Function)</span>:</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>    @staticmethod</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(ctx, i)</span>:</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>        result = i.exp()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>        ctx.save_for_backward(result)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>        <span class="keyword">return</span> result</span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>    @staticmethod</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>    <span class="function"><span class="keyword">def</span> <span class="title">backward</span><span class="params">(ctx, grad_output)</span>:</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>        result = ctx.saved_tensors</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>        <span class="keyword">return</span> grad_output * result</span><br></pre></td></tr></table></figure>
-
 <p>STATIC backward(ctx, *grad_outputs)  <a href="https://pytorch.org/docs/stable/_modules/torch/autograd/function.html#Function.backward" target="_blank" rel="noopener">[源码]</a></p>
 <p>定义为求导计算定义公式</p>
 <p>这个函数会被所有子类覆盖。</p>
@@ -511,7 +506,7 @@
       
       <div class="popular-posts-title"><a href="\2019\09\04\DATA-LOADING-AND-PROCESSING\" rel="bookmark">翻译：pytorch数据加载和处理</a></div>
       
-        <div class="popular-posts-excerpt"><p><p>在解决任何机器学习问题时，都需要花费大量的精力来准备数据。PyTorch提供了许多工具来简化数据加载，希望能使代码更具可读性。在这篇教程里，我们将看看如何从非平凡的数据集中加载和预处理/扩增数据。</p></p></div>
+        <div class="popular-posts-excerpt"><p><p>在解决任何机器学习问题时，都需要花费大量的精力来准备数据。PyTorch提供了许多工具来简化数据加载，希望能使代码更具可读性。在这篇教程里，我们将看看如何从非平凡的数据集中加载和预处理/扩增数据。<br></p></div>
       
     </li>
   
@@ -678,7 +673,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -713,7 +708,9 @@
         
           
         
-        <span class="site-state-item-count">10</span>
+          
+        
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -758,7 +755,11 @@
         
           
         
-        <span class="site-state-item-count">15</span>
+          
+        
+          
+        
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -881,12 +882,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">131k</span>
+    <span title="站点总字数">133k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:59</span>
+    <span title="站点阅读时长">2:01</span>
 </div>
 
 

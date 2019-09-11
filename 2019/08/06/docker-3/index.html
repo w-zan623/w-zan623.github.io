@@ -70,18 +70,18 @@
   daovoice('update');
   </script>
 
-  <meta name="description" content="查看和删除镜像 镜像的存储位置：/var/lib/docker  列出镜像1docker images [OPSIONS] [REPOSITORY]      -a, –all = false   # 显示所有镜像，默认并不显示中间层镜像（没有标签名的镜像）   -f, –filter = []   # 过滤条件   –no-trunc = false  # 不使用截断的形式来显示数据(默认使用截">
-<meta name="keywords" content="docker,笔记">
+  <meta name="description" content="查看和删除镜像 镜像的存储位置：/var/lib/docker  列出镜像1docker images [OPSIONS] [REPOSITORY]     -a, —all = false   # 显示所有镜像，默认并不显示中间层镜像（没有标签名的镜像）   -f, —filter = []   # 过滤条件   —no-trunc = false  # 不使用截断的形式来显示数据(默认使用截断">
+<meta name="keywords" content="笔记,docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【notes】docker学习笔记3-docker镜像">
 <meta property="og:url" content="https://zinw623.github.io/2019/08/06/docker-3/index.html">
 <meta property="og:site_name" content="Zihan.W的博客">
-<meta property="og:description" content="查看和删除镜像 镜像的存储位置：/var/lib/docker  列出镜像1docker images [OPSIONS] [REPOSITORY]      -a, –all = false   # 显示所有镜像，默认并不显示中间层镜像（没有标签名的镜像）   -f, –filter = []   # 过滤条件   –no-trunc = false  # 不使用截断的形式来显示数据(默认使用截">
+<meta property="og:description" content="查看和删除镜像 镜像的存储位置：/var/lib/docker  列出镜像1docker images [OPSIONS] [REPOSITORY]     -a, —all = false   # 显示所有镜像，默认并不显示中间层镜像（没有标签名的镜像）   -f, —filter = []   # 过滤条件   —no-trunc = false  # 不使用截断的形式来显示数据(默认使用截断">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-06T16:06:44.693Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【notes】docker学习笔记3-docker镜像">
-<meta name="twitter:description" content="查看和删除镜像 镜像的存储位置：/var/lib/docker  列出镜像1docker images [OPSIONS] [REPOSITORY]      -a, –all = false   # 显示所有镜像，默认并不显示中间层镜像（没有标签名的镜像）   -f, –filter = []   # 过滤条件   –no-trunc = false  # 不使用截断的形式来显示数据(默认使用截">
+<meta name="twitter:description" content="查看和删除镜像 镜像的存储位置：/var/lib/docker  列出镜像1docker images [OPSIONS] [REPOSITORY]     -a, —all = false   # 显示所有镜像，默认并不显示中间层镜像（没有标签名的镜像）   -f, —filter = []   # 过滤条件   —no-trunc = false  # 不使用截断的形式来显示数据(默认使用截断">
   <link rel="alternate" href="/atom.xml" title="Zihan.W的博客" type="application/atom+xml">
   <link rel="canonical" href="https://zinw623.github.io/2019/08/06/docker-3/">
 
@@ -389,15 +389,13 @@
 <li>镜像的存储位置：/var/lib/docker</li>
 </ul>
 <h4 id="列出镜像"><a href="#列出镜像" class="headerlink" title="列出镜像"></a>列出镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images [OPSIONS] [REPOSITORY]</span><br></pre></td></tr></table></figure>
-
 <blockquote>
-<p>   -a, –all = false   # 显示所有镜像，默认并不显示中间层镜像（没有标签名的镜像）<br>   -f, –filter = []   # 过滤条件<br>   –no-trunc = false  # 不使用截断的形式来显示数据(默认使用截断显示EID，比文件名短)<br>   -q, –quiet = false # 只显示EID</p>
+<p>   -a, —all = false   # 显示所有镜像，默认并不显示中间层镜像（没有标签名的镜像）<br>   -f, —filter = []   # 过滤条件<br>   —no-trunc = false  # 不使用截断的形式来显示数据(默认使用截断显示EID，比文件名短)<br>   -q, —quiet = false # 只显示EID</p>
 </blockquote>
 <h4 id="镜像标签和仓库"><a href="#镜像标签和仓库" class="headerlink" title="镜像标签和仓库"></a>镜像标签和仓库</h4><ul>
 <li><p>镜像仓库<br>  区分：</p>
 <ul>
-<li><p>REPOSITORY 仓库</p>
-</li>
+<li>REPOSITORY 仓库</li>
 <li><p>REGISTRY 仓库</p>
 <p>REGISTRY里会有很多REPOSITORY仓库，每个REPOSITORY里会有一个个独立的镜像。</p>
 </li>
@@ -405,30 +403,25 @@
 </li>
 <li><p>标签 TAG</p>
 <ul>
-<li><p>镜像的名字 = 镜像仓库名 : 镜像标签    –对应–&gt;   镜像ID </p>
+<li><p>镜像的名字 = 镜像仓库名 : 镜像标签    —对应—&gt;   镜像ID </p>
 <p>ubuntu:latest, ubuntu:14.04, …..</p>
 </li>
 <li><p>如果没有指定标签，默认为latest。</p>
 </li>
-<li><p>同一仓库的不同标签可以对应同一镜像ID，也就是说可以根据需求给同一镜像文件打上不同的标签。</p>
-</li>
-<li><p>没有标签名的镜像称作中间层镜像。</p>
-</li>
+<li>同一仓库的不同标签可以对应同一镜像ID，也就是说可以根据需求给同一镜像文件打上不同的标签。</li>
+<li>没有标签名的镜像称作中间层镜像。</li>
 </ul>
 </li>
 </ul>
 <h4 id="查看镜像"><a href="#查看镜像" class="headerlink" title="查看镜像"></a>查看镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect [OPTIONS] CONTIANER|IMAGE [CONTAINER|IMAGE...]</span><br></pre></td></tr></table></figure>
-
 <blockquote>
-<p>   -f, –format=””</p>
+<p>   -f, —format=””</p>
 </blockquote>
 <h4 id="删除镜像"><a href="#删除镜像" class="headerlink" title="删除镜像"></a>删除镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rmi [OPTIONS] IMAGE [IMAGE...]</span><br></pre></td></tr></table></figure>
-
 <blockquote>
-<p>   -f, –force = false  强制删除<br>   –no-prune = false  不删除未打标签的父镜像<br>   对应多个标签的镜像文件可以直接用ID选定所有标签</p>
+<p>   -f, —force = false  强制删除<br>   —no-prune = false  不删除未打标签的父镜像<br>   对应多个标签的镜像文件可以直接用ID选定所有标签</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rmi ID</span><br></pre></td></tr></table></figure>
-
 <h3 id="获取和推送镜像"><a href="#获取和推送镜像" class="headerlink" title="获取和推送镜像"></a>获取和推送镜像</h3><h4 id="查找镜像"><a href="#查找镜像" class="headerlink" title="查找镜像"></a>查找镜像</h4><ul>
 <li><p>Docker Hub<br>  <a href="https://registry.hub.docker.com" target="_blank" rel="noopener">https://registry.hub.docker.com</a></p>
 </li>
@@ -436,17 +429,14 @@
 </li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search [OPTIONS] TERM</span><br></pre></td></tr></table></figure>
-
 <blockquote>
-<p>   –automated = false<br>   –no-trunc = false<br>   -s, stars = 0   只显示最少多少stars的<br>   最多返回25个结果</p>
+<p>   —automated = false<br>   —no-trunc = false<br>   -s, stars = 0   只显示最少多少stars的<br>   最多返回25个结果</p>
 </blockquote>
 <h4 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull [OPTIONS] NAME [:TAG]</span><br></pre></td></tr></table></figure>
-
 <blockquote>
-<p>   -a, –all-tags = false 下载仓库中所有被标记的镜像</p>
+<p>   -a, —all-tags = false 下载仓库中所有被标记的镜像</p>
 </blockquote>
 <h4 id="推送镜像"><a href="#推送镜像" class="headerlink" title="推送镜像"></a>推送镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker push username/IMAGE</span><br></pre></td></tr></table></figure>
-
 <h3 id="构建镜像"><a href="#构建镜像" class="headerlink" title="构建镜像"></a>构建镜像</h3><ul>
 <li>保存对容器的修改，并再次使用</li>
 <li>自定义镜像的能力</li>
@@ -454,19 +444,17 @@
 </ul>
 <h4 id="docker-commit"><a href="#docker-commit" class="headerlink" title="docker commit"></a>docker commit</h4><p>通过容器构建</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]</span><br></pre></td></tr></table></figure>
-
 <blockquote>
-<p>   -a, –author=”” Author<br>       e.g., “John Hannibal Smith <a href="mailto:hannibal@a-team.com" target="_blank" rel="noopener">hannibal@a-team.com</a>“<br>   -m, –message=””    记录构建的信息<br>   -p, –pause = true  不暂停容器的运行</p>
+<p>   -a, —author=”” Author<br>       e.g., “John Hannibal Smith hannibal@a-team.com”<br>   -m, —message=””    记录构建的信息<br>   -p, —pause = true  不暂停容器的运行</p>
 </blockquote>
 <h4 id="docker-build"><a href="#docker-build" class="headerlink" title="docker build"></a>docker build</h4><p>通过Dockerfile文件构建</p>
 <p>dockerfile:</p>
 <blockquote>
-<p> <strong>#First Dockerfile</strong><br>FROM ubuntu:14.04<br>MAINTAINER dormancypress “<a href="mailto:dormancypress@outlook.com" target="_blank" rel="noopener">dormancypress@outlook.com</a><br>RUN apt-get update<br>RUN apt-get install -y nginx<br>EXPOSE 80</p>
+<p> <strong>#First Dockerfile</strong><br>FROM ubuntu:14.04<br>MAINTAINER dormancypress “dormancypress@outlook.com<br>RUN apt-get update<br>RUN apt-get install -y nginx<br>EXPOSE 80</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build [OPTIONS] PATH|URL|-</span><br></pre></td></tr></table></figure>
-
 <blockquote>
-<p>   –force-rm = false<br>   –no-cache = false<br>   –pull=false<br>   -q,–quiet = false<br>   –rm = true<br>   -t, –tag=””</p>
+<p>   —force-rm = false<br>   —no-cache = false<br>   —pull=false<br>   -q,—quiet = false<br>   —rm = true<br>   -t, —tag=””</p>
 </blockquote>
 
     </div>
@@ -544,9 +532,9 @@
           
         
         <div class="post-tags">
-            <a href="/tags/docker/" rel="tag"><i class="fa fa-tag"></i> docker</a>
-          
             <a href="/tags/笔记/" rel="tag"><i class="fa fa-tag"></i> 笔记</a>
+          
+            <a href="/tags/docker/" rel="tag"><i class="fa fa-tag"></i> docker</a>
           
         </div>
         <div class="post-widgets">
@@ -644,7 +632,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -679,7 +667,9 @@
         
           
         
-        <span class="site-state-item-count">10</span>
+          
+        
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -724,7 +714,11 @@
         
           
         
-        <span class="site-state-item-count">15</span>
+          
+        
+          
+        
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -847,12 +841,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">131k</span>
+    <span title="站点总字数">133k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:59</span>
+    <span title="站点阅读时长">2:01</span>
 </div>
 
 
