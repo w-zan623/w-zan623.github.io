@@ -384,6 +384,7 @@
 </ul>
 <p>这里我们用Kaggle经典挑战赛“Dogs vs.Cat”</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%env LS_COLORS = <span class="literal">None</span></span><br><span class="line">!tree --charset ascii data/dogcat/</span><br></pre></td></tr></table></figure>
+
 <pre><code>env: LS_COLORS=None
 data/dogcat/
 |-- cat.0.jpg
@@ -399,11 +400,14 @@ data/dogcat/
 |-- dog.1000.jpg
 `-- dog.10000.jpg
 
-0 directories, 12 files
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch <span class="keyword">as</span> t</span><br><span class="line"><span class="keyword">from</span> torch.utils <span class="keyword">import</span> data</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br></pre></td></tr></table></figure>
+0 directories, 12 files</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch <span class="keyword">as</span> t</span><br><span class="line"><span class="keyword">from</span> torch.utils <span class="keyword">import</span> data</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DogCat</span><span class="params">(data.Dataset)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, root)</span>:</span></span><br><span class="line">        imgs = os.listdir(root)</span><br><span class="line">        <span class="comment"># 所有图片的绝对路径</span></span><br><span class="line">        self.imgs = [os.path.join(root, img) <span class="keyword">for</span> img <span class="keyword">in</span> imgs]</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span><span class="params">(self, index)</span>:</span></span><br><span class="line">        img_path = self.imgs[index]</span><br><span class="line">        <span class="comment"># dog-&gt;1 cat-&gt;0</span></span><br><span class="line">        label = <span class="number">1</span> <span class="keyword">if</span> <span class="string">'dog'</span> <span class="keyword">in</span> img_path.split(<span class="string">'/'</span>)[<span class="number">-1</span>] <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">        pil_img = Image.open(img_path)</span><br><span class="line">        array = np.asarray(pil_img)</span><br><span class="line">        data = t.from_numpy(array)</span><br><span class="line">        <span class="keyword">return</span> data, label</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> len(self.imgs)</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dataset = DogCat(<span class="string">'./data/dogcat/'</span>)</span><br><span class="line">img, label = dataset[<span class="number">0</span>]</span><br><span class="line"><span class="keyword">for</span> img, label <span class="keyword">in</span> dataset:</span><br><span class="line">    print(img.size(), img.float().mean(), label)</span><br></pre></td></tr></table></figure>
+
 <pre><code>torch.Size([375, 499, 3]) tensor(116.7904) 1
 torch.Size([499, 327, 3]) tensor(133.5602) 1
 torch.Size([144, 175, 3]) tensor(166.6151) 0
@@ -415,8 +419,7 @@ torch.Size([396, 312, 3]) tensor(131.8400) 0
 torch.Size([303, 400, 3]) tensor(129.1319) 0
 torch.Size([374, 500, 3]) tensor(119.7826) 0
 torch.Size([412, 263, 3]) tensor(152.9542) 1
-torch.Size([414, 500, 3]) tensor(156.6921) 0
-</code></pre><p>通过上面的代码，我们学习了如何自定义自己的数据集，并可以依次获取。但这里返回的数据不适用实际使用，因其具有如下两方面问题：</p>
+torch.Size([414, 500, 3]) tensor(156.6921) 0</code></pre><p>通过上面的代码，我们学习了如何自定义自己的数据集，并可以依次获取。但这里返回的数据不适用实际使用，因其具有如下两方面问题：</p>
 <ul>
 <li>返回样本的形状之一，每张图片的大小不一样，这对于需要去batch训练的神经网络来说很不友好。</li>
 <li>返回样本的数值较大，为归一化至[-1, 1]<br>针对上述问题，pytorch提供了torchvision。它是一个视觉工具包，提供了很多视觉图像处理的工具，其中transforms模块提供了对PIL Image对象和Tensor对象的常用操作。</li>
@@ -435,7 +438,9 @@ torch.Size([414, 500, 3]) tensor(156.6921) 0
 </ul>
 <p>如果要对图片进行多个操作，可通过Compose将这些操作拼接起来，类似于nn.Sequential。注意，这些操作定义后是以对象的形式存在，真正使用时需要调用它的__call__方法，类似于nn.Module。下面利用这些操作来优化上面的dataset。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> torchvision <span class="keyword">import</span> transforms <span class="keyword">as</span> T</span><br><span class="line"></span><br><span class="line">transform = T.Compose([</span><br><span class="line">    T.Resize(<span class="number">224</span>), <span class="comment"># 缩放图片（Image），保持长宽比不变，最短边为224像素</span></span><br><span class="line">    T.CenterCrop(<span class="number">224</span>), <span class="comment"># 从中间取出224 x224的图片</span></span><br><span class="line">    T.ToTensor(),   <span class="comment"># 将图片转换成Tensor并归一化至[0, 1]</span></span><br><span class="line">    T.Normalize(mean = [<span class="number">.5</span>, <span class="number">.5</span>, <span class="number">.5</span>], std = [<span class="number">.5</span>, <span class="number">.5</span> , <span class="number">.5</span>]) <span class="comment"># 标准化至[-1, 1]</span></span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DogCat</span><span class="params">(data.Dataset)</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, root, transforms = None)</span>:</span></span><br><span class="line">        imgs = os.listdir(root)</span><br><span class="line">        self.imgs = [os.path.join(root, img) <span class="keyword">for</span> img <span class="keyword">in</span> imgs]</span><br><span class="line">        self.transforms = transforms</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span><span class="params">(self, index)</span>:</span></span><br><span class="line">        </span><br><span class="line">        img_path = self.imgs[index]</span><br><span class="line">        label = <span class="number">0</span> <span class="keyword">if</span> <span class="string">'dog'</span> <span class="keyword">in</span> img_path.split(<span class="string">'/'</span>)[<span class="number">-1</span>] <span class="keyword">else</span> <span class="number">1</span></span><br><span class="line">        data = Image.open(img_path)</span><br><span class="line">        <span class="keyword">if</span> self.transforms:</span><br><span class="line">            data = self.transforms(data)</span><br><span class="line">        <span class="keyword">return</span> data, label</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> len(self.imgs)</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torchvision.transforms <span class="keyword">import</span> ToPILImage</span><br><span class="line">dataset = DogCat(<span class="string">'./data/dogcat/'</span>, transforms = transform)</span><br><span class="line">img, label = dataset[<span class="number">0</span>]</span><br><span class="line"><span class="keyword">for</span> img, label <span class="keyword">in</span> dataset:</span><br><span class="line">    print(img.size(), label)</span><br></pre></td></tr></table></figure>
+
 <pre><code>torch.Size([3, 224, 224]) 0
 torch.Size([3, 224, 224]) 0
 torch.Size([3, 224, 224]) 1
@@ -447,9 +452,10 @@ torch.Size([3, 224, 224]) 1
 torch.Size([3, 224, 224]) 1
 torch.Size([3, 224, 224]) 1
 torch.Size([3, 224, 224]) 0
-torch.Size([3, 224, 224]) 1
-</code></pre><p>除了上述操作之外，transforms还可以通过Lambda封装自定义的转换策略。例如，想对PIL Image进行随机旋转，则可写成trans = T.Lambda(lambda img: img.rotate(random() * 360))。</p>
-<p>torchvision已经预先实现了常用的Dataset，包括前面使用过的CIFAR-10，以及ImageNet、COCO、MNIST、LSUN等数据集，可通过调用torchvision.datasets下相应对象来调用相关数据集。<br>还有一个经常使用到的Dataset——ImageFolder，它的实现和上述DogCat很相似。ImageFolder假设所有的文件按文件夹保存，每个文件夹下储存同一个类别的图片，文件夹名为类名，其构造函数如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ImageFolder(root, transform = <span class="literal">None</span>, target_transform = <span class="literal">None</span>, loader = default_loader)</span><br></pre></td></tr></table></figure></p>
+torch.Size([3, 224, 224]) 1</code></pre><p>除了上述操作之外，transforms还可以通过Lambda封装自定义的转换策略。例如，想对PIL Image进行随机旋转，则可写成trans = T.Lambda(lambda img: img.rotate(random() * 360))。</p>
+<p>torchvision已经预先实现了常用的Dataset，包括前面使用过的CIFAR-10，以及ImageNet、COCO、MNIST、LSUN等数据集，可通过调用torchvision.datasets下相应对象来调用相关数据集。<br>还有一个经常使用到的Dataset——ImageFolder，它的实现和上述DogCat很相似。ImageFolder假设所有的文件按文件夹保存，每个文件夹下储存同一个类别的图片，文件夹名为类名，其构造函数如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ImageFolder(root, transform = <span class="literal">None</span>, target_transform = <span class="literal">None</span>, loader = default_loader)</span><br></pre></td></tr></table></figure>
+
 <p>它主要有以下四个参数。</p>
 <ul>
 <li>root：在root指定的路径下寻找图片。</li>
@@ -459,6 +465,7 @@ torch.Size([3, 224, 224]) 1
 </ul>
 <p>label是按照文件夹名顺序排序后存成字典的，即{类名:类序号}，一般来说最好直接将文件夹命名为从0开始的数字，这样会和ImageFolder实际的label一致，如果不是这种命名规范，建议通过self.class_to_idx属性了解label和文件夹名的映射关系。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!tree --charset ASCII data/dogcat2/</span><br></pre></td></tr></table></figure>
+
 <pre><code>data/dogcat2/
 |-- cat
 |   |-- cat.0.jpg
@@ -473,27 +480,32 @@ torch.Size([3, 224, 224]) 1
     |-- dog.1000.jpg
     `-- dog.10000.jpg
 
-2 directories, 10 files
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torchvision.datasets <span class="keyword">import</span> ImageFolder</span><br><span class="line">dataset = ImageFolder(<span class="string">'data/dogcat2/'</span>)</span><br></pre></td></tr></table></figure>
+2 directories, 10 files</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torchvision.datasets <span class="keyword">import</span> ImageFolder</span><br><span class="line">dataset = ImageFolder(<span class="string">'data/dogcat2/'</span>)</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dataset.class_to_idx</span><br></pre></td></tr></table></figure>
-<pre><code>{&#39;cat&#39;: 0, &#39;dog&#39;: 1}
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dataset.imgs</span><br></pre></td></tr></table></figure>
-<pre><code>[(&#39;data/dogcat2/cat/cat.0.jpg&#39;, 0),
- (&#39;data/dogcat2/cat/cat.1.jpg&#39;, 0),
- (&#39;data/dogcat2/cat/cat.2.jpg&#39;, 0),
- (&#39;data/dogcat2/cat/cat.3.jpg&#39;, 0),
- (&#39;data/dogcat2/cat/cat.4.jpg&#39;, 0),
- (&#39;data/dogcat2/dog/dog.0.jpg&#39;, 1),
- (&#39;data/dogcat2/dog/dog.1.jpg&#39;, 1),
- (&#39;data/dogcat2/dog/dog.10.jpg&#39;, 1),
- (&#39;data/dogcat2/dog/dog.1000.jpg&#39;, 1),
- (&#39;data/dogcat2/dog/dog.10000.jpg&#39;, 1)]
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 没有任何transform，所以返回的还是PIL Image对象</span></span><br><span class="line">dataset[<span class="number">0</span>][<span class="number">1</span>] <span class="comment"># 第一维是第几张图，第二维为1是label，为0是Image对象</span></span><br><span class="line">dataset[<span class="number">0</span>][<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+<pre><code>{&apos;cat&apos;: 0, &apos;dog&apos;: 1}</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dataset.imgs</span><br></pre></td></tr></table></figure>
+
+<pre><code>[(&apos;data/dogcat2/cat/cat.0.jpg&apos;, 0),
+ (&apos;data/dogcat2/cat/cat.1.jpg&apos;, 0),
+ (&apos;data/dogcat2/cat/cat.2.jpg&apos;, 0),
+ (&apos;data/dogcat2/cat/cat.3.jpg&apos;, 0),
+ (&apos;data/dogcat2/cat/cat.4.jpg&apos;, 0),
+ (&apos;data/dogcat2/dog/dog.0.jpg&apos;, 1),
+ (&apos;data/dogcat2/dog/dog.1.jpg&apos;, 1),
+ (&apos;data/dogcat2/dog/dog.10.jpg&apos;, 1),
+ (&apos;data/dogcat2/dog/dog.1000.jpg&apos;, 1),
+ (&apos;data/dogcat2/dog/dog.10000.jpg&apos;, 1)]</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 没有任何transform，所以返回的还是PIL Image对象</span></span><br><span class="line">dataset[<span class="number">0</span>][<span class="number">1</span>] <span class="comment"># 第一维是第几张图，第二维为1是label，为0是Image对象</span></span><br><span class="line">dataset[<span class="number">0</span>][<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
 <p><img alt="png" data-src="/uploads/tools/output_21_0.png"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加上transform</span></span><br><span class="line">normalize = T.Normalize(mean = [<span class="number">0.4</span>, <span class="number">0.4</span>, <span class="number">0.4</span>], std = [<span class="number">0.2</span>, <span class="number">0.2</span>, <span class="number">0.2</span>])</span><br><span class="line">transform = T.Compose([</span><br><span class="line">    T.RandomResizedCrop(<span class="number">224</span>),</span><br><span class="line">    T.RandomHorizontalFlip(),</span><br><span class="line">    T.ToTensor(),</span><br><span class="line">    normalize,</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dataset = ImageFolder(<span class="string">'data/dogcat2/'</span>, transform = transform)</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dataset.class_to_idx</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 深度学习中图片数据一般保存为CHW，即通道数 x 高 x 宽</span></span><br><span class="line"><span class="keyword">for</span> img, index <span class="keyword">in</span> dataset:</span><br><span class="line">    print(img.size(), index)</span><br></pre></td></tr></table></figure>
+
 <pre><code>torch.Size([3, 224, 224]) 0
 torch.Size([3, 224, 224]) 0
 torch.Size([3, 224, 224]) 0
@@ -503,10 +515,12 @@ torch.Size([3, 224, 224]) 1
 torch.Size([3, 224, 224]) 1
 torch.Size([3, 224, 224]) 1
 torch.Size([3, 224, 224]) 1
-torch.Size([3, 224, 224]) 1
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">to_img = T.ToPILImage()</span><br><span class="line"><span class="comment"># 0.2和0.4是标准差和均值的近似</span></span><br><span class="line">to_img(dataset[<span class="number">0</span>][<span class="number">0</span>]*<span class="number">0.2</span> + <span class="number">0.4</span>)</span><br></pre></td></tr></table></figure>
+torch.Size([3, 224, 224]) 1</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">to_img = T.ToPILImage()</span><br><span class="line"><span class="comment"># 0.2和0.4是标准差和均值的近似</span></span><br><span class="line">to_img(dataset[<span class="number">0</span>][<span class="number">0</span>]*<span class="number">0.2</span> + <span class="number">0.4</span>)</span><br></pre></td></tr></table></figure>
+
 <p><img alt="png" data-src="/uploads/tools/output_26_0.png"></p>
-<p>Dataset只负责数据的抽象，一次调用__getattr__只返回一个样本。而训练神经网络是对一个batch的数据进行操作，同时还需要对数据进行shuffle和并行加速等。对此，pytorch提供了DataLoader帮助我们实现这些功能。<br>DataLoader的函数定义如下。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DataLoader(dataset, batch_size = <span class="number">1</span>, shuffle = <span class="literal">False</span>, sampler = <span class="literal">None</span>, num_workers = <span class="number">0</span>, collate_fn = default_collate, pin_memory = <span class="literal">False</span>, drop_last = <span class="literal">False</span>)</span><br></pre></td></tr></table></figure></p>
+<p>Dataset只负责数据的抽象，一次调用__getattr__只返回一个样本。而训练神经网络是对一个batch的数据进行操作，同时还需要对数据进行shuffle和并行加速等。对此，pytorch提供了DataLoader帮助我们实现这些功能。<br>DataLoader的函数定义如下。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DataLoader(dataset, batch_size = <span class="number">1</span>, shuffle = <span class="literal">False</span>, sampler = <span class="literal">None</span>, num_workers = <span class="number">0</span>, collate_fn = default_collate, pin_memory = <span class="literal">False</span>, drop_last = <span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>dataset：加载的数据集（Dataset对象）</li>
 <li>batch_size：batch size（批大小）</li>
@@ -518,11 +532,17 @@ torch.Size([3, 224, 224]) 1
 <li>drop_last：dataset中的数据个数可能不是batch_size的整数倍，drop_last为True会将多出来不足一个batch的数据丢失。</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> DataLoader</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dataloader = DataLoader(dataset, batch_size = <span class="number">3</span>, shuffle = <span class="literal">True</span>, num_workers = <span class="number">0</span>, drop_last = <span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dataiter = iter(dataloader)</span><br><span class="line">imgs, labels = next(dataiter)</span><br><span class="line">imgs.size()</span><br></pre></td></tr></table></figure>
-<pre><code>torch.Size([3, 3, 224, 224])
-</code></pre><p>dataloader是一个可迭代对象，我们可以向使用迭代器一样使用它，利用：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> batch_datas, batch_labels <span class="keyword">in</span> dataloader:</span><br><span class="line">    train()</span><br></pre></td></tr></table></figure></p>
-<p>或<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dataiter = iter(dataloader)</span><br><span class="line">batch_datas, batch_labels = next(dataiter)</span><br></pre></td></tr></table></figure></p>
+
+<pre><code>torch.Size([3, 3, 224, 224])</code></pre><p>dataloader是一个可迭代对象，我们可以向使用迭代器一样使用它，利用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> batch_datas, batch_labels <span class="keyword">in</span> dataloader:</span><br><span class="line">    train()</span><br></pre></td></tr></table></figure>
+
+<p>或</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dataiter = iter(dataloader)</span><br><span class="line">batch_datas, batch_labels = next(dataiter)</span><br></pre></td></tr></table></figure>
+
 <p>在数据处理中，有时会出现某个样本无法读取等问题，例如某张图片损坏。这时__getitem__函数中将出现异常，此时最好的解决方案即是将出错的样本剔除。如果遇到这种情况实在无法处理，则可以返回None对象，然后在Dataloader中实现自定义的collate_fn，将空对象过滤掉。但要注意，在这种情况下dataloader返回的一个batch的样本数目会少于batch_size。<br>对丢弃样本异常图片而言，这种做法会更好一些，因为它能保证每个batch样本的数目仍是batch_size。但在大多数情况下，最好的方式还是对数据进行彻底清除。</p>
 <p>DataLoader里并没有太多的魔法方法，它封装了python的标准库multiprocessing使其能够实现多进程加速。在Dataset和DataLoader的使用方面有以下建议。</p>
 <ol>
@@ -531,6 +551,7 @@ torch.Size([3, 224, 224]) 1
 </ol>
 <p>第一点是因为多进程会并行地调用__getitem__函数，将负载高的放在__getitem__函数中能够实现并行加速。第二点是因为dataloader使用多进程加载，如果在Dataset中使用了可变对象，可能会有意想不到的冲突。<br>在多线程/多进程中，修改一个可变对象需要加锁，但是dataloader的设计使得其很难加锁（在实际使用中也应尽量避免锁的存在）。<br>如果一定要修改可变对象，建议使用python标准库queue<br>使用python multiprocessing库的另一个问题是，在使用多进程时，如果主程序异常终止（比如用“Ctrl+C”快捷键强行退出），相应的数据加载进程可能无法正常退出。这时需要手动强行终止进程。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps x | grep &lt;cmdline&gt; | awk <span class="string">'&#123;print $1&#125;'</span> | xargs <span class="built_in">kill</span></span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>ps x:获取当前用户的所有进程。</li>
 <li>grep <cmdline>: 找到已经停止的pytorch程序的进程，例如你是通过python train.py启动的，那就需要些grep ‘python train.py’。</cmdline></li>
@@ -540,6 +561,7 @@ torch.Size([3, 224, 224]) 1
 <p>pytorch还单独提供一个sampler模块，用来对数据进行采样。常用的有随机采样器RandomSampler，当dataloader的shuffle参数为True时，就是调用的这个。<br>这里介绍一个很有用的采样方法：WeightedRandomSampler，它会根据每个样本的权重选取数据，在样本比例不均衡的问题中，可用它进行重采样。</p>
 <p>构建WeightedRandomSampler时需提供两个参数：每个样本的权重weights、共选取的样本总数num_samples，以及一个可选参数replacement。权重越大的样本被选中的概率越大，待选取的样本数量一般小于全部的样本数目。replacement用于指定是否可以重复选取某一个样本，默认为True，即允许在一个epoch中重复采样某一个数据。如果设为False，则当某一类样本被全部选取完，但其样本数目仍未达到num_samples时，sampler将不会从该类中选取数据，此时可能导致weights参数失效。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!tree --charset ASCII data/dogcat/</span><br></pre></td></tr></table></figure>
+
 <pre><code>data/dogcat/
 |-- cat.0.jpg
 |-- cat.1.jpg
@@ -552,19 +574,18 @@ torch.Size([3, 224, 224]) 1
 |-- dog.1000.jpg
 `-- dog.10000.jpg
 
-0 directories, 10 files
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dataset = DogCat(<span class="string">'data/dogcat'</span>,transforms = transform)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 狗的图片被取出的概率是猫的概率的两倍</span></span><br><span class="line"><span class="comment"># 两类图片被取出的概率与weights的绝对大小无关，只和比值有关</span></span><br><span class="line">weights = [<span class="number">2</span> <span class="keyword">if</span> label == <span class="number">1</span> <span class="keyword">else</span> <span class="number">1</span> <span class="keyword">for</span> data, label <span class="keyword">in</span> dataset]</span><br><span class="line">weights</span><br></pre></td></tr></table></figure>
-<pre><code>[1, 1, 2, 1, 1, 2, 2, 2, 2, 1]
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.utils.data.sampler <span class="keyword">import</span> WeightedRandomSampler</span><br><span class="line">sampler = WeightedRandomSampler(weights, num_samples=<span class="number">12</span>, replacement=<span class="literal">True</span>)</span><br><span class="line">dataloader = DataLoader(dataset, batch_size = <span class="number">3</span>, sampler=sampler)</span><br><span class="line"><span class="keyword">for</span> datas, labels <span class="keyword">in</span> dataloader:</span><br><span class="line">    print(labels.tolist())</span><br></pre></td></tr></table></figure>
+0 directories, 10 files</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dataset = DogCat(<span class="string">'data/dogcat'</span>,transforms = transform)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 狗的图片被取出的概率是猫的概率的两倍</span></span><br><span class="line"><span class="comment"># 两类图片被取出的概率与weights的绝对大小无关，只和比值有关</span></span><br><span class="line">weights = [<span class="number">2</span> <span class="keyword">if</span> label == <span class="number">1</span> <span class="keyword">else</span> <span class="number">1</span> <span class="keyword">for</span> data, label <span class="keyword">in</span> dataset]</span><br><span class="line">weights</span><br></pre></td></tr></table></figure>
+
+<pre><code>[1, 1, 2, 1, 1, 2, 2, 2, 2, 1]</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.utils.data.sampler <span class="keyword">import</span> WeightedRandomSampler</span><br><span class="line">sampler = WeightedRandomSampler(weights, num_samples=<span class="number">12</span>, replacement=<span class="literal">True</span>)</span><br><span class="line">dataloader = DataLoader(dataset, batch_size = <span class="number">3</span>, sampler=sampler)</span><br><span class="line"><span class="keyword">for</span> datas, labels <span class="keyword">in</span> dataloader:</span><br><span class="line">    print(labels.tolist())</span><br></pre></td></tr></table></figure>
+
 <pre><code>[0, 0, 1]
 [0, 1, 1]
 [1, 1, 1]
-[0, 0, 0]
-</code></pre><p>一共只有10个样本，却返回了12个，说明样本被重复返回，这就是replacement参数的作用</p>
+[0, 0, 0]</code></pre><p>一共只有10个样本，却返回了12个，说明样本被重复返回，这就是replacement参数的作用</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># replacement改为False</span></span><br><span class="line">sampler = WeightedRandomSampler(weights, num_samples=<span class="number">10</span>, replacement=<span class="literal">False</span>)</span><br><span class="line">dataloader = DataLoader(dataset, batch_size = <span class="number">5</span>, sampler=sampler)</span><br><span class="line"><span class="keyword">for</span> datas, labels <span class="keyword">in</span> dataloader:</span><br><span class="line">    print(labels.tolist())</span><br></pre></td></tr></table></figure>
+
 <pre><code>[0, 1, 0, 1, 1]
-[1, 1, 0, 0, 0]
-</code></pre><p>在这种情况下，num_samples等于dataset的样本总数，为了不重复选取，sampler会将每个样本都返回，这样就失去了weight参数的意义。</p>
+[1, 1, 0, 0, 0]</code></pre><p>在这种情况下，num_samples等于dataset的样本总数，为了不重复选取，sampler会将每个样本都返回，这样就失去了weight参数的意义。</p>
 <p>从上面的例子可见sampler在样本采样中的作用：如果指定了sampler，shuffle将不再生效，并且sampler.num_samples<br>会覆盖dataset的实际大小，即一个epoch返回的图片总数取决于sampler.num_samples。</p>
 <h4 id="计算机视觉工具包：torchvision"><a href="#计算机视觉工具包：torchvision" class="headerlink" title="计算机视觉工具包：torchvision"></a>计算机视觉工具包：torchvision</h4><p>计算机视觉是深度学习中最重要的一类应用，为了方便研究者使用，pytorch团队专门开发一个视觉工具包torchvision，这个包独立于pytorch。</p>
 <p>torchvision主要包含以下三部分。</p>
@@ -574,16 +595,20 @@ torch.Size([3, 224, 224]) 1
 <li>transforms：提供常用的数据预处理操作，主要包括对Tensor及PIL Image对象的操作。</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torchvision <span class="keyword">import</span> models</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载预训练好的模型，如果不存在会下载</span></span><br><span class="line"><span class="comment"># 预训练好的模型保存在 ~/.torch/models/下面</span></span><br><span class="line">resnet34 = models.resnet34(pretrained = <span class="literal">True</span>,num_classes = <span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改最后的全连接层为10分类问题（默认是ImageNet上的1000分类）</span></span><br><span class="line">resnet34.fc = nn.Linear(<span class="number">512</span>, <span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+
 <pre><code>Downloading: &quot;https://download.pytorch.org/models/resnet34-333f7ec4.pth&quot; to /root/.cache/torch/checkpoints/resnet34-333f7ec4.pth
-100%|██████████| 83.3M/83.3M [00:35&lt;00:00, 2.49MB/s]
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">transform = T.Compose([</span><br><span class="line">    T.Resize(<span class="number">32</span>), <span class="comment"># 缩放图片（Image），保持长宽比不变，最短边为224像素</span></span><br><span class="line">    T.CenterCrop(<span class="number">32</span>), <span class="comment"># 从中间取出224 x224的图片</span></span><br><span class="line">    T.ToTensor(),   <span class="comment"># 将图片转换成Tensor并归一化至[0, 1]</span></span><br><span class="line">    T.Normalize(mean = [<span class="number">.5</span>], std = [<span class="number">.5</span>,]) <span class="comment"># 标准化至[-1, 1]</span></span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+100%|██████████| 83.3M/83.3M [00:35&lt;00:00, 2.49MB/s]</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">transform = T.Compose([</span><br><span class="line">    T.Resize(<span class="number">32</span>), <span class="comment"># 缩放图片（Image），保持长宽比不变，最短边为224像素</span></span><br><span class="line">    T.CenterCrop(<span class="number">32</span>), <span class="comment"># 从中间取出224 x224的图片</span></span><br><span class="line">    T.ToTensor(),   <span class="comment"># 将图片转换成Tensor并归一化至[0, 1]</span></span><br><span class="line">    T.Normalize(mean = [<span class="number">.5</span>], std = [<span class="number">.5</span>,]) <span class="comment"># 标准化至[-1, 1]</span></span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torchvision <span class="keyword">import</span> datasets</span><br><span class="line"><span class="comment"># 指定数据集路径为data，如果数据集不存在则进行下载</span></span><br><span class="line"><span class="comment"># 通过train = False获取测试集</span></span><br><span class="line">dataset = datasets.MNIST(<span class="string">'data/'</span>,download=<span class="literal">True</span>, train = <span class="literal">False</span>, transform = transform)</span><br></pre></td></tr></table></figure>
+
 <p>torchvision还提供了两个常用的函数。一个是make_grid，它能将多张图片拼接在一个网络中；另一个是save_img，它能将Tensor保存成图片。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">len(dataset)</span><br></pre></td></tr></table></figure>
-<pre><code>10000
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dataloader = DataLoader(dataset, shuffle = <span class="literal">True</span>, batch_size = <span class="number">16</span>)</span><br><span class="line"><span class="keyword">from</span> torchvision.utils <span class="keyword">import</span> make_grid, save_image</span><br><span class="line">dataiter = iter(dataloader)</span><br><span class="line">img = make_grid(next(dataiter)[<span class="number">0</span>], <span class="number">4</span>) <span class="comment"># 拼成4*4网络图片，且会转成3通道</span></span><br><span class="line">to_img(img)</span><br></pre></td></tr></table></figure>
+
+<pre><code>10000</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dataloader = DataLoader(dataset, shuffle = <span class="literal">True</span>, batch_size = <span class="number">16</span>)</span><br><span class="line"><span class="keyword">from</span> torchvision.utils <span class="keyword">import</span> make_grid, save_image</span><br><span class="line">dataiter = iter(dataloader)</span><br><span class="line">img = make_grid(next(dataiter)[<span class="number">0</span>], <span class="number">4</span>) <span class="comment"># 拼成4*4网络图片，且会转成3通道</span></span><br><span class="line">to_img(img)</span><br></pre></td></tr></table></figure>
+
 <p><img alt="png" data-src="/uploads/tools/output_52_0.png"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">img2 = make_grid(next(dataiter)[<span class="number">0</span>], <span class="number">4</span>) <span class="comment"># 拼成4*4网络图片，且会转成3通道</span></span><br><span class="line">save_image(img2, <span class="string">'a.png'</span>)</span><br><span class="line">Image.open(<span class="string">'a.png'</span>)</span><br></pre></td></tr></table></figure>
+
 <p><img alt="png" data-src="/uploads/tools/output_53_0.png"></p>
 <h4 id="可视化工具"><a href="#可视化工具" class="headerlink" title="可视化工具"></a>可视化工具</h4><h5 id="visdom"><a href="#visdom" class="headerlink" title="visdom"></a>visdom</h5><p><a href="https://github.com/facebookresearch/visdom" target="_blank" rel="noopener">visdom</a>是facebook专门为pytorch开发的一款可视化工具，开源于2017年3月。</p>
 <p>visdom可以创造、组织和共享多种数据的可视化，包括数值、图像、文本，甚至是视频，支持pytorch、torch及numpy。用户可通过编程组织可视化空间或通过用户接口为数据打造仪表盘，检查试验结果和调试代码。<br>visdom中有一下两个重要概念。</p>
@@ -598,14 +623,14 @@ torch.Size([3, 224, 224]) 1
 <li>客户端与服务器之间的交互采用tornado异步框架，可视化操作不会阻塞当前程序，网络异常也不会导致程序退出。<br>visdom以Plotly为基础。</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> visdom</span><br><span class="line">vis = visdom.Visdom(env = <span class="string">u'test1'</span>)</span><br><span class="line">x = t.arange(<span class="number">1</span>, <span class="number">30</span>, <span class="number">0.01</span>)</span><br><span class="line">y = t.sin(x)</span><br><span class="line">vis.line(X = x, Y = y, win = <span class="string">'sinx'</span>,opts = &#123;<span class="string">'title'</span>:<span class="string">'y = sin(x)'</span>&#125;)</span><br></pre></td></tr></table></figure>
+
 <pre><code>WARNING:root:Setting up a new session...
 
 
 
 
 
-&#39;sinx&#39;
-</code></pre><p>下面我们逐一分析这几行代码。</p>
+&apos;sinx&apos;</code></pre><p>下面我们逐一分析这几行代码。</p>
 <ul>
 <li>vis = visdom.Visdom(env = u’test1’)，用于构建一个客户端，客户端除了制定env外，还可以制定host、post等参数。</li>
 <li>vis作为一个客户端对象，可以使用如下常见的画图函数。<ul>
@@ -627,21 +652,23 @@ torch.Size([3, 224, 224]) 1
 </ul>
 <p>之前提到过，每次操作会覆盖之前的数据，但我们在训练网络的过程中往往需要不断更新数值，这时就需要指定参数update=’append’来避免覆盖之前的数值。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="comment"># append追加数据</span></span><br><span class="line"><span class="keyword">for</span> ii <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">10</span>):</span><br><span class="line">    x = t.Tensor([ii])</span><br><span class="line">    y = <span class="number">2</span> * x</span><br><span class="line">    time.sleep(<span class="number">0.5</span>)</span><br><span class="line">    vis.line(X = x, Y= y, win = <span class="string">'polynomial'</span>,name = <span class="string">'Trace1'</span>, update = <span class="string">'append'</span> <span class="keyword">if</span> ii &gt; <span class="number">0</span> <span class="keyword">else</span> <span class="literal">None</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 新增一条线</span></span><br><span class="line"><span class="keyword">for</span> ii <span class="keyword">in</span> np.linspace(<span class="number">0</span>, <span class="number">5</span>, <span class="number">50</span>):</span><br><span class="line">    x = t.Tensor([ii])</span><br><span class="line">    y = x ** <span class="number">2</span></span><br><span class="line">    time.sleep(<span class="number">0.1</span>)</span><br><span class="line">    vis.line(X = x, Y= y, win = <span class="string">'polynomial'</span>,name = <span class="string">'Trace2'</span>, update = <span class="string">'append'</span>)</span><br></pre></td></tr></table></figure>
+
 <p>images的画图功能可分为如下两类。</p>
 <ul>
 <li>image接受一个二维或三维向量，H<em>W 或 3</em>H*W ，前者是黑白图像，后者是彩色图像。</li>
 <li>images接受一个四维向量N<em>C</em>H*W，C可以是1或3，分别代表黑白和彩色图像。可实现类似torchvision中make_grid的功能，将多张图片拼接在一起。images也可以接受一个二维或三维的向量，此时它所实现的功能与image一致。</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 可视化一张随机的黑白照片</span></span><br><span class="line">vis.image(t.randn(<span class="number">64</span>, <span class="number">64</span>).numpy())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 可视化一张随机的彩色图片</span></span><br><span class="line">vis.image(t.randn(<span class="number">3</span>, <span class="number">64</span>, <span class="number">64</span>).numpy(), win = <span class="string">'random2'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 可视化36张随机的彩色图片，每行6张</span></span><br><span class="line">vis.images(t.randn(<span class="number">36</span>, <span class="number">3</span>, <span class="number">64</span>, <span class="number">64</span>).numpy(), nrow = <span class="number">6</span>, win = <span class="string">'random3'</span>,opts = &#123;<span class="string">'title'</span>:<span class="string">'random_imgs'</span>&#125;)</span><br></pre></td></tr></table></figure>
-<pre><code>&#39;random3&#39;
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">x = dataset[<span class="number">0</span>][<span class="number">0</span>].unsqueeze(<span class="number">0</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">36</span>):</span><br><span class="line">    x = t.cat((x, dataset[i][<span class="number">0</span>].unsqueeze(<span class="number">0</span>)), dim = <span class="number">0</span>)</span><br><span class="line">vis.images(x, nrow = <span class="number">6</span>, win = <span class="string">'MNIST'</span>,opts = &#123;<span class="string">'title'</span>:<span class="string">'MNIST数据集'</span>&#125;)</span><br></pre></td></tr></table></figure>
-<pre><code>&#39;MNIST&#39;
-</code></pre><p>vis.text用于可视化文本，它支持所有的html标签，同时也遵循着html的语法标签。</p>
+
+<pre><code>&apos;random3&apos;</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">x = dataset[<span class="number">0</span>][<span class="number">0</span>].unsqueeze(<span class="number">0</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">36</span>):</span><br><span class="line">    x = t.cat((x, dataset[i][<span class="number">0</span>].unsqueeze(<span class="number">0</span>)), dim = <span class="number">0</span>)</span><br><span class="line">vis.images(x, nrow = <span class="number">6</span>, win = <span class="string">'MNIST'</span>,opts = &#123;<span class="string">'title'</span>:<span class="string">'MNIST数据集'</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<pre><code>&apos;MNIST&apos;</code></pre><p>vis.text用于可视化文本，它支持所有的html标签，同时也遵循着html的语法标签。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vis.text(<span class="string">u'''&lt;h1&gt;Hello visdom&lt;/h1&gt;&lt;br&gt;visdom是Facebook专门为&lt;b&gt;pytorch&lt;b/&gt;开发一个可视化工具，'''</span>,win = <span class="string">'visdom'</span>,opts = &#123;<span class="string">'title'</span>:<span class="string">u'visdom简介'</span>&#125;)</span><br></pre></td></tr></table></figure>
-<pre><code>&#39;visdom&#39;
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vis.text(<span class="string">'ss'</span>, win = <span class="string">'visdom'</span>, append = <span class="literal">True</span>, opts = &#123;<span class="string">'title'</span>:<span class="string">'平方'</span>&#125;)</span><br></pre></td></tr></table></figure>
-<pre><code>&#39;visdom&#39;
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 文本更新</span></span><br><span class="line">vis.text(<span class="string">'&lt;b&gt;平方:&lt;/b&gt;'</span>, win = <span class="string">'pingfang'</span>,opts = &#123;<span class="string">'title'</span>:<span class="string">'pingfang'</span>&#125;)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">20</span>):</span><br><span class="line">    time.sleep(<span class="number">0.5</span>)</span><br><span class="line">    vis.text(<span class="string">'&lt;b&gt;[info]&#123;&#125;^2=&#123;&#125;&lt;/b&gt;'</span>.format(i, i **<span class="number">2</span>), append = <span class="literal">True</span>,win = <span class="string">'pingfang'</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>&apos;visdom&apos;</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vis.text(<span class="string">'ss'</span>, win = <span class="string">'visdom'</span>, append = <span class="literal">True</span>, opts = &#123;<span class="string">'title'</span>:<span class="string">'平方'</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<pre><code>&apos;visdom&apos;</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 文本更新</span></span><br><span class="line">vis.text(<span class="string">'&lt;b&gt;平方:&lt;/b&gt;'</span>, win = <span class="string">'pingfang'</span>,opts = &#123;<span class="string">'title'</span>:<span class="string">'pingfang'</span>&#125;)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">20</span>):</span><br><span class="line">    time.sleep(<span class="number">0.5</span>)</span><br><span class="line">    vis.text(<span class="string">'&lt;b&gt;[info]&#123;&#125;^2=&#123;&#125;&lt;/b&gt;'</span>.format(i, i **<span class="number">2</span>), append = <span class="literal">True</span>,win = <span class="string">'pingfang'</span>)</span><br></pre></td></tr></table></figure>
+
 <h4 id="GPU"><a href="#GPU" class="headerlink" title="GPU"></a>GPU</h4><p>略</p>
 <h4 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h4><p>在pytorch中，以下对象可以持久化到硬盘，并能通过相应的方法加载到内存中。</p>
 <ul>
@@ -654,24 +681,29 @@ torch.Size([3, 224, 224]) 1
 <p>我们可以通过t.save(obj, file_name)等方法保存任意可序列化的对象，然后通过obj = t.load(file_name)方法加载保存的数据。</p>
 <p>对Module和Optimizer对象，这里建议保存对应的state_dict，而不是直接保存整个Module/Optimizer对象。Optimizer对象保存的是参数即动量信息，通过加载之前的动量信息，能够有效减少模型震荡。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">a = t.Tensor(<span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line"><span class="keyword">if</span> t.cuda.is_available():</span><br><span class="line">    a = a.cuda(<span class="number">1</span>)<span class="comment"># 把a转为GPU1上的tensor</span></span><br><span class="line">    t.save(a, <span class="string">'a.pth'</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#加载为b，存储于GPU1上（因为保存时就在GPU1）</span></span><br><span class="line">    b = t.load(<span class="string">'a.pth'</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 加载为c，存储于CPU</span></span><br><span class="line">    c = t.load(<span class="string">'a.pth'</span>, map_location = <span class="keyword">lambda</span> storage, loc:storage)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 加载为d，存储于GPU0</span></span><br><span class="line">    d = t.load(<span class="string">'a.pth'</span>, map_location = &#123;<span class="string">'cuda:1'</span>:<span class="string">'cuda:0'</span>&#125;)</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torchvision.models <span class="keyword">import</span> resnet34</span><br><span class="line"></span><br><span class="line">model = resnet34()</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># model的state_dict是一个字典</span></span><br><span class="line">list(model.state_dict().keys())[:<span class="number">8</span>]</span><br></pre></td></tr></table></figure>
-<pre><code>[&#39;conv1.weight&#39;,
- &#39;bn1.weight&#39;,
- &#39;bn1.bias&#39;,
- &#39;bn1.running_mean&#39;,
- &#39;bn1.running_var&#39;,
- &#39;bn1.num_batches_tracked&#39;,
- &#39;layer1.0.conv1.weight&#39;,
- &#39;layer1.0.bn1.weight&#39;]
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># module对象的保存与加载</span></span><br><span class="line">t.save(model.state_dict(), <span class="string">'resnet32.pth'</span>)</span><br><span class="line">model.load_state_dict(t.load(<span class="string">'resnet32.pth'</span>))</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;All keys matched successfully&gt;
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">optimizer = t.optim.Adam(model.parameters(), lr = <span class="number">0.1</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>[&apos;conv1.weight&apos;,
+ &apos;bn1.weight&apos;,
+ &apos;bn1.bias&apos;,
+ &apos;bn1.running_mean&apos;,
+ &apos;bn1.running_var&apos;,
+ &apos;bn1.num_batches_tracked&apos;,
+ &apos;layer1.0.conv1.weight&apos;,
+ &apos;layer1.0.bn1.weight&apos;]</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># module对象的保存与加载</span></span><br><span class="line">t.save(model.state_dict(), <span class="string">'resnet32.pth'</span>)</span><br><span class="line">model.load_state_dict(t.load(<span class="string">'resnet32.pth'</span>))</span><br></pre></td></tr></table></figure>
+
+<pre><code>&lt;All keys matched successfully&gt;</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">optimizer = t.optim.Adam(model.parameters(), lr = <span class="number">0.1</span>)</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t.save(optimizer.state_dict(),<span class="string">'optimizer.pth'</span>)</span><br><span class="line">optimizer.load_state_dict(t.load(<span class="string">'optimizer.pth'</span>))</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">all_data = dict(</span><br><span class="line">    optimizer = optimizer.state_dict(),</span><br><span class="line">    model = model.state_dict(),</span><br><span class="line">    info = <span class="string">u'模型和优化器的所有参数'</span></span><br><span class="line">)</span><br><span class="line">t.save(all_data, <span class="string">'all_data.pth'</span>)</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">all_data = t.load(<span class="string">'all_data.pth'</span>)</span><br><span class="line">all_data.keys()</span><br></pre></td></tr></table></figure>
-<pre><code>dict_keys([&#39;optimizer&#39;, &#39;model&#39;, &#39;info&#39;])
-</code></pre>
+
+<pre><code>dict_keys([&apos;optimizer&apos;, &apos;model&apos;, &apos;info&apos;])</code></pre>
     </div>
       <p>———————————————感谢阅读———————————————</p>
 <blockquote><p>欢迎收藏访问我的<a href="https://zinw623.github.io/">博客</a>  <a href="https://www.zhihu.com/people/tai-li-wu-yan-zu/activities" target="_blank" rel="noopener">知乎</a>   <a href="https://juejin.im/user/5d40058ef265da03b76afb66" target="_blank" rel="noopener">掘金</a>  <a href="https://www.jianshu.com/u/a38373c2e45b" target="_blank" rel="noopener">简书</a> <a href="https://www.zhihu.com/people/tai-li-wu-yan-zu/activities" target="_blank" rel="noopener">知乎</a></p></blockquote>
@@ -1056,12 +1088,12 @@ torch.Size([3, 224, 224]) 1
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">133k</span>
+    <span title="站点总字数">134k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:01</span>
+    <span title="站点阅读时长">2:02</span>
 </div>
 
 
