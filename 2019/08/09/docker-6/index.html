@@ -410,14 +410,17 @@
 <li>为容器添加数据卷</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run -v ~/container_data:/data -it ubuntu /bin/bash</span><br></pre></td></tr></table></figure>
+
 <p>在本机系统的目录:在容器中映射的目录名</p>
 <p>注：这种方式（bind mount)已不推荐使用，应使用volume方式</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker volume create my_volume <span class="comment"># 创建卷</span></span><br><span class="line">docker volume ls  <span class="comment"># 卷列表</span></span><br><span class="line">docker volume inspect my_volume <span class="comment">#卷信息</span></span><br><span class="line">docker volume rm my_volume <span class="comment"># 删除卷</span></span><br><span class="line"></span><br><span class="line">docker run -v [卷名]:[容器目录]:[选项列表] -it ubuntu /bin/bash</span><br></pre></td></tr></table></figure>
+
 <p>详情：<a href="https://deepzz.com/post/the-docker-volumes-basic.html" target="_blank" rel="noopener">https://deepzz.com/post/the-docker-volumes-basic.html</a></p>
 <ul>
 <li>为数据卷添加访问权限</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run -v [卷名]:[容器目录]:ro(访问权限) -it ubuntu /bin/bash</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>使用dockerfile构建包含数据卷的镜像<br>dockerfile指令：<br>  VOLUME [“/data1”, “/data2”]</li>
 </ul>
@@ -429,12 +432,14 @@
 <li>挂载数据卷容器的方法</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --volumes-from [CONTAINER NAME]</span><br></pre></td></tr></table></figure>
+
 <p>如果数据卷容器删除（即使同时删除挂载的数据卷）后，挂载该数据卷容器的容器的数据目录仍存在且有效。</p>
 <p>数据卷容器的作用仅仅是将数据卷挂载的配置传递到挂载了数据卷容器的新容器中。</p>
 <h3 id="docker数据卷的备份与还原"><a href="#docker数据卷的备份与还原" class="headerlink" title="docker数据卷的备份与还原"></a>docker数据卷的备份与还原</h3><ul>
 <li>数据备份方法</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --volumes-from [container name] -v $(<span class="built_in">pwd</span>):/backup ubuntu tar cvf /backup/backup.tar [container data volume]</span><br></pre></td></tr></table></figure>
+
 <p><img alt data-src="/uploads/docker/7.PNG"></p>
 <ul>
 <li>数据还原方法</li>
@@ -824,12 +829,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">133k</span>
+    <span title="站点总字数">134k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:01</span>
+    <span title="站点阅读时长">2:02</span>
 </div>
 
 
