@@ -78,7 +78,7 @@
 <meta property="og:site_name" content="Zihan.W的博客">
 <meta property="og:description" content="自从开始下决心死磕卓里奇的数学分析之后，我才开始见识到卓老师的数学分析的教材的彪悍，通过习题直接把你虐到升华。对于我这个刚学完两个学期的数分的普通大学生来说，内心除了心酸，也有对卓老师佩服。昨晚肝了将近三个多小时的可数集部分的课后题，才把大部分习题的思路梳理出来，收获良多，所以打算整理一下做个纪念。我这里只说我觉得十分精彩、关键的部分。 P64 3.a 任何无穷集含有可数子集  这个题应当是让我们">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-11T10:59:06.009Z">
+<meta property="og:updated_time" content="2019-09-11T14:18:16.023Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="可数与不可数（卓里奇数学分析部分习题整理）">
 <meta name="twitter:description" content="自从开始下决心死磕卓里奇的数学分析之后，我才开始见识到卓老师的数学分析的教材的彪悍，通过习题直接把你虐到升华。对于我这个刚学完两个学期的数分的普通大学生来说，内心除了心酸，也有对卓老师佩服。昨晚肝了将近三个多小时的可数集部分的课后题，才把大部分习题的思路梳理出来，收获良多，所以打算整理一下做个纪念。我这里只说我觉得十分精彩、关键的部分。 P64 3.a 任何无穷集含有可数子集  这个题应当是让我们">
@@ -314,7 +314,7 @@
                 
               
 
-              <time title="创建时间：2019-09-11 16:37:58 / 修改时间：18:59:06" itemprop="dateCreated datePublished" datetime="2019-09-11T16:37:58+08:00">2019-09-11</time>
+              <time title="创建时间：2019-09-11 16:37:58 / 修改时间：22:18:16" itemprop="dateCreated datePublished" datetime="2019-09-11T16:37:58+08:00">2019-09-11</time>
             </span>
           
             
@@ -373,7 +373,7 @@
 <p>任何无穷集含有可数子集</p>
 </blockquote>
 <p>这个题应当是让我们对于任意无穷集给出一个能构造出其可数子集的方法，我的思路是这样的：</p>
-<p>首先设无穷集为$X$，从$X$中选取一个元素$x_1$，然后构造一个集合$X - {x_1} = X_2$，然后从$X_2$中我们可以选取一个元素$x_2$，然后构造一个集合$X-{x_1, x_2}=X_3$······再利用数学归纳原理，假设可以选取n个元素${x_1, x_2, x_3, ……}$，当到n+1时，我们构造集合$X_n=X-{x_1, x_2, x_3, ···,x_n, ···}$，然后从这个集合选出元素$x_{n+1}$，所以此命题成立。</p>
+<p>首先设无穷集为$X$，从$X$中选取一个元素$x_1$，然后构造一个集合$X -  { x_1 }  = X_2$，然后从$X_2$中我们可以选取一个元素$x_2$，然后构造一个集合$X- { x_1, x_2 } =X_3$······再利用数学归纳原理，假设可以选取n个元素$ { x_1, x_2, x_3, …… } $，当到n+1时，我们构造集合$X_n=X- { x_1, x_2, x_3, ···,x_n, ··· } $，然后从这个集合选出元素$x_{n+1}$，所以此命题成立。</p>
 <h4 id="P63-3-b"><a href="#P63-3-b" class="headerlink" title="P63 3.b"></a>P63 3.b</h4><blockquote>
 <p>无穷集与一个至多可数集的并的势与原来那个无穷集的势一样</p>
 </blockquote>
@@ -396,7 +396,7 @@
 <p>递增自然数列之集与形如$0.\alpha_1 \alpha_2 \alpha_3···$的二进制小数之集等势</p>
 </blockquote>
 <p>证明等势就是构建双射，我是这样想的：</p>
-<p>设递增自然数列之集为$X$，从$X$中选取一个递增数列A构造一个集合$A^{\prime}={a_1, a_2, a_3, ···}$，$A^{\prime}$可以是有限集也可以是可数集。设二进制小数的集为$Y$，建立映射：$f:X \mapsto Y $：</p>
+<p>设递增自然数列之集为$X$，从$X$中选取一个递增数列A构造一个集合$A^{\prime}= { a_1, a_2, a_3, ··· } $，$A^{\prime}$可以是有限集也可以是可数集。设二进制小数的集为$Y$，建立映射：$f:X \mapsto Y $：</p>
 <p>$$<br>f(A) = 0.\alpha_1 \alpha_2 \alpha_3···，其中<br>\alpha_i=<br>\begin{cases}<br>1 , i \in A^{\prime}\<br>0 , i \notin A^{\prime}\<br>\end{cases}<br>$$</p>
 <h4 id="P63-4-b"><a href="#P63-4-b" class="headerlink" title="P63 4.b"></a>P63 4.b</h4><blockquote>
 <p>可数集的一切子集之集合具有连续统的势</p>
@@ -408,7 +408,7 @@
 </blockquote>
 <p>这个函数可以看作给集合$X$了一个划分，具有某个性质的子集的元素对应的值为1，这个子集的补集的元素对应的值为0。所以一个这个二值函数就等价于从集合$X$中选出了一个子集，这就与上一题的一切子集的集合相对应了。</p>
 <h4 id="P63-7"><a href="#P63-7" class="headerlink" title="P63 7"></a>P63 7</h4><blockquote>
-<p>在闭区间$[0, 1]\subset \mathbb{R}上，画出那样的数x的集合：x \in [0, 1]，其三进位记法x=0.\alpha_1 \alpha_2 \alpha_3···（x\in{0, 1, 2}$具有下列三性质之一：<br>a) $\alpha_1 \neq 1$<br>b) $(\alpha_1 \neq 1) \wedge (\alpha_2 \neq 1)$<br>c) $\forall i \in \mathbb{N} (\alpha_i = 1) (康托尔集）$</p>
+<p>在闭区间$[0, 1]\subset \mathbb{R}上，画出那样的数x的集合：x \in [0, 1]，其三进位记法x=0.\alpha_1 \alpha_2 \alpha_3···（x\in { 0, 1, 2 } $具有下列三性质之一：<br>a) $\alpha_1 \neq 1$<br>b) $(\alpha_1 \neq 1) \wedge (\alpha_2 \neq 1)$<br>c) $\forall i \in \mathbb{N} (\alpha_i = 1) (康托尔集）$</p>
 </blockquote>
 <p>这个利用三进制数表示康托尔集的方式真的太精彩了，我之前听说过康托尔集是三等分线段，没想到还能这样搞。</p>
 <p>为了好理解我先定义个函数：$x = f(\alpha_1, \alpha_2, \alpha_3, ···) = 0.\alpha_1 \alpha_2 \alpha_3···$。<br>f具有性质：</p>
@@ -419,10 +419,10 @@
 <p>对于a):</p>
 <p>$$<br>f(0, \alpha_2, \alpha_3, ···) = 0 + f(0, \alpha_2, \alpha_3, ···) \in [0, \frac{1}{3}) \newline<br>f(2, \alpha_2, \alpha_3, ···) = \frac{2}{3} + f(0, \alpha_2, \alpha_3, ···) \in [\frac{2}{3},1)<br>$$</p>
 <p>对于b):</p>
-<p>$$<br>f(0, 0, \alpha_3, ···) = 0 + 0+ f(0, 0, \alpha_3, ···) \in [0, \frac{1}{9}) \newline<br>f(0, 2, \alpha_3, ···) = 0 + \frac{2}{9}+ f(0, 0, \alpha_3, ···) \in [\frac{2}{9}, \frac{1}{3}) \newline<br>f(2, 0, \alpha_3, ···) = \frac{2}{3} + 0 +f(0, 0, \alpha_3, ···) \in [\frac{2}{3},\frac{7}{9})\newline<br>f(2, 2, \alpha_3, ···) = \frac{2}{3} + \frac{2}{9} +f(0, 0, \alpha_3, ···) \in [\frac{8}{9},1)\newline<br>$$</p>
+<p>$$<br>f(0, 0, \alpha_3, ···) = 0 + 0+ f(0, 0, \alpha_3, ···) \in [0, \frac{1}{9}) \newline<br>f(0, 2, \alpha_3, ···) = 0 + \frac{2}{9}+ f(0, 0, \alpha_3, ···) \in [\frac{2}{9}, \frac{1}{3})  \newline<br>f(2, 0, \alpha_3, ···) = \frac{2}{3} + 0 +f(0, 0, \alpha_3, ···) \in [\frac{2}{3},\frac{7}{9})  \newline<br>f(2, 2, \alpha_3, ···) = \frac{2}{3} + \frac{2}{9} +f(0, 0, \alpha_3, ···) \in [\frac{8}{9},1)  \newline<br>$$</p>
 <p>对于c)就是无限重复上面的操作。</p>
 <p>画出图就是：</p>
-<p><img alt data-src="/uploads/fenxing.png"></p>
+<p>@import “fenxing.png”</p>
 <p>a)对应于$E_1$，b)对应于$E_2$。</p>
 <p>对于康托尔集只需把不含1的三进制小数中的2换成1就能对应二进制小数，从而和区间[0, 1]中的所有数对应了，即两集合等势。</p>
 <p>到了最后啥也不想说了，数学真的秀！！！</p>
@@ -769,7 +769,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">134k</span>
+    <span title="站点总字数">135k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
