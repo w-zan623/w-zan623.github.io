@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zinw623.github.io/"/>
-  <updated>2019-09-11T14:34:32.619Z</updated>
+  <updated>2019-09-13T13:20:29.462Z</updated>
   <id>https://zinw623.github.io/</id>
   
   <author>
@@ -15,6 +15,40 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>序列极限</title>
+    <link href="https://zinw623.github.io/2019/09/13/jixian/"/>
+    <id>https://zinw623.github.io/2019/09/13/jixian/</id>
+    <published>2019-09-13T01:02:35.000Z</published>
+    <updated>2019-09-13T13:20:29.462Z</updated>
+    
+    <content type="html"><![CDATA[<pre class="mermaid" style="text-align: center;">                        graph LRa(极限) --> b(定义);a --> c{性质};c --> d[普遍性质];d --> d1(最终为常数的数列收敛)d --> d2(数列极限的任何邻域,包含着数列中除了有限多个数之外的所有项)d --> d3(数列不能有两个不同的极限)d --> d4(收敛数列必有界)c --> e[算术运算]e --> e1(加法运算)e --> e2(乘法运算)e --> e3(除法运算)c --> f[不等式]f --> f1(夹逼准则)f --> f2(由极限不等关系到序列,保持严格不等性)f --> f3(由序列不等关系到极限,结果都为非严格不等性)a --> g{极限存在问题}g --> h1[柯西准则]g --> h2[单调数列的极限存在准则]g --> h3[子列]h3 --> h31(每个有界实数列含有收敛的子列)h3 --> h32(从任何实数列中,或者能选出一个收敛子数列,或者能选出一个趋于无穷的子数列)g --> i[部分极限]i --> j1(上极限与下极限的定义)i --> j2(任何数列的下极限与上极限,分别是其部分极限中的最小者与最大者)g --> j3(数列有极限或趋于负无穷或趋于正无穷,其充要条件是其上下极限重合)g --> j4(数列收敛的充要条件是它的每个子数列收敛)j3 -->|推出|h32j4 -->|推出|h31          </pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;pre class=&quot;mermaid&quot; style=&quot;text-align: center;&quot;&gt;
+            
+            graph LR
+
+a(极限) --&gt; b(定义);
+a --&gt; c{性质};
+c --&gt; d[普遍性质];
+d --&gt; d1(最
+      
+    
+    </summary>
+    
+      <category term="数学分析" scheme="https://zinw623.github.io/categories/%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/"/>
+    
+    
+      <category term="数学分析" scheme="https://zinw623.github.io/tags/%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/"/>
+    
+      <category term="极限" scheme="https://zinw623.github.io/tags/%E6%9E%81%E9%99%90/"/>
+    
+  </entry>
   
   <entry>
     <title>可数与不可数（卓里奇数学分析部分习题整理）</title>
@@ -561,32 +595,6 @@
       <category term="docker" scheme="https://zinw623.github.io/tags/docker/"/>
     
       <category term="笔记" scheme="https://zinw623.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>用Xshell管理虚拟机Ubuntu</title>
-    <link href="https://zinw623.github.io/2019/08/03/xshell-vmware/"/>
-    <id>https://zinw623.github.io/2019/08/03/xshell-vmware/</id>
-    <published>2019-08-03T14:14:16.000Z</published>
-    <updated>2019-08-13T08:28:01.528Z</updated>
-    
-    <content type="html"><![CDATA[<p>因为使用VM虚拟机太过占用资源，所以我们可以用Xshell连接到虚拟机，来达到节省本机资源的目的。</p><a id="more"></a><ol><li>安装SSH： </li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install openssh-server</span><br><span class="line">service iptables stop <span class="comment">#关闭防火墙</span></span><br><span class="line">service ssh start <span class="comment">#开启ssh服务</span></span><br></pre></td></tr></table></figure><ol start="2"><li>获得登录需要的ip ,在虚拟机输入：</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig</span><br></pre></td></tr></table></figure><img width="50%" data-src="/uploads/xshell-vmware/1.PNG"><p>ens*后面的inet后面的值就是ip。</p><ol start="3"><li><p>按照我之前写过的xshell连接的教程 <a href="/2019/08/01/XshellDownload/">windows系统：Xshell下载安装+连接服务器</a> 建立会话就ok，主机就是刚才你获得的ip，登录用的用户名和密码就是你安装时填的用户名(非root账户)和密码。</p></li><li><p>之后只需要打开虚拟机后最小化界面，从xshell登入后reboot一下虚拟机，这样从内存角度就能节省将近90多MB。</p></li></ol><p>注意： reboot后就不要在打开VMware了，一直让它最小化直到关闭。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;因为使用VM虚拟机太过占用资源，所以我们可以用Xshell连接到虚拟机，来达到节省本机资源的目的。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Xshell" scheme="https://zinw623.github.io/categories/Xshell/"/>
-    
-    
-      <category term="Xshell" scheme="https://zinw623.github.io/tags/Xshell/"/>
-    
-      <category term="虚拟机" scheme="https://zinw623.github.io/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
-    
-      <category term="Ubuntu" scheme="https://zinw623.github.io/tags/Ubuntu/"/>
     
   </entry>
   
