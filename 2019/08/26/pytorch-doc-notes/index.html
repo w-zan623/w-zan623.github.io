@@ -392,10 +392,9 @@
 <h3 id="在反向传播（backwards）时排除子图"><a href="#在反向传播（backwards）时排除子图" class="headerlink" title="在反向传播（backwards）时排除子图"></a>在反向传播（backwards）时排除子图</h3><p>每一个张量都有一个标示：<code>requires_grad</code>，它使得在梯度计算时精细地排除子图并且变得更有效率。</p>
 <h4 id="requires-grad"><a href="#requires-grad" class="headerlink" title="requires_grad"></a><code>requires_grad</code></h4><p>如果一个操作仅有一个输入且需要梯度，那么它的输出也需要梯度。相反，只有所有的输入都不需要梯度，输出才会不需要梯度。如果子图中所有的张量都不需要梯度，那么反向传播就不会再其中执行。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x = torch.randn(<span class="number">5</span>, <span class="number">5</span>)   <span class="comment"># requires_grad = False by default</span></span><br><span class="line">y = torch.randn(<span class="number">5</span>, <span class="number">5</span>)   <span class="comment"># requires_grad = False by default</span></span><br><span class="line">z = torch.randn((<span class="number">5</span>, <span class="number">5</span>), requires_grad = <span class="literal">True</span>)</span><br><span class="line">a = x + y</span><br><span class="line">a.requires_grad</span><br></pre></td></tr></table></figure>
-
-<pre><code>False</code></pre><p>当你想要冻结你模型的一部分或者你提前知道你将不使用一些参数的梯度。例如，如果你想要微调一个预训练过的卷积神经网络，将要冻结的部分的requires_grad标示切换就足够了，并且知道计算到最后一层才会被保存到中间缓存区，其中仿射变换将使用需要梯度的权重，并且网络的输出也将会需要它们。</p>
+<pre><code>False
+</code></pre><p>当你想要冻结你模型的一部分或者你提前知道你将不使用一些参数的梯度。例如，如果你想要微调一个预训练过的卷积神经网络，将要冻结的部分的requires_grad标示切换就足够了，并且知道计算到最后一层才会被保存到中间缓存区，其中仿射变换将使用需要梯度的权重，并且网络的输出也将会需要它们。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">model = torchvision.models.resnet18(pretrained = <span class="literal">True</span>)</span><br><span class="line"><span class="keyword">for</span> param <span class="keyword">in</span> model.parameters():</span><br><span class="line">    param.requires_grad = <span class="literal">False</span></span><br><span class="line"><span class="comment"># Replace the last fully-connected layer</span></span><br><span class="line"><span class="comment"># Parameters of newly constructed modules have </span></span><br><span class="line"><span class="comment"># requires_grad = True by default</span></span><br><span class="line">model.fc = nn.Linear(<span class="number">512</span>, <span class="number">100</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Optimize only the classifier</span></span><br><span class="line">optimizer = optim.SGD(model.fc.parameters(), lr = <span class="number">1e-2</span>,</span><br><span class="line">                     momentum = <span class="number">0.9</span>)</span><br></pre></td></tr></table></figure>
-
 <h3 id="autograd如何编码历史信息"><a href="#autograd如何编码历史信息" class="headerlink" title="autograd如何编码历史信息"></a>autograd如何编码历史信息</h3><p>Autograd是反向的自动求导系统。概念上，autograd记录了一张图，这张图记录了所有的操作，当你运行这些操作时它们会产生数据。得到的这张图是一个有向无环图，图的叶子节点是输入张量，根节点是输出张量。通过从根节点到叶子节点跟踪这张图，你可以自动地使用链式法则来计算梯度。</p>
 <p>在内部，autograd将会将这张图表示为 <code>Function</code> 对象组成的图（真正的表达），函数可以通过 <code>apply()</code> 来求图的值。当计算前向传播时，autograd同时做到执行请求操作和建立用来表示计算梯度的函数的图（每一个 <code>torch.Tensor</code> 的 <code>.grad_fn</code> 属性是进入这张（用来计算梯度的）图的入口）。当前向传播完成后，我们求出这场图在反向传播时的值来计算梯度。</p>
 <p>一件需要注意的重要的事是图在每次迭代时会重新建立图，并且这允许使用任意的python控制语句，即使这些语句每次迭代都会改变图的整个形状和大小。你不必在启动训练之前编写出所有可能的路径-what you run is what you differentiate（你运行什么就会对什么求导）。</p>
@@ -417,7 +416,6 @@
 <li>当迭代维度的大小时，从末尾（trailing）的维度开始，维度大小必须相等，或者它们中的一个的维度大小为1，或者它们中的一个的维度不存在。<br>例如：</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">x = torch.empty(<span class="number">5</span>, <span class="number">7</span>, <span class="number">3</span>)</span><br><span class="line">y = torch.empty(<span class="number">5</span>, <span class="number">7</span>, <span class="number">3</span>)</span><br><span class="line"><span class="comment"># 相同形状的永远是可广播的（上面的规则永远成立）</span></span><br><span class="line"></span><br><span class="line">x = torch.empty((<span class="number">0</span>,))</span><br><span class="line">y = torch.empty(<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line"><span class="comment"># x和y不是可广播的，因为x没有至少一个维度</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 可以排列出的维度</span></span><br><span class="line">x = torch.empty(<span class="number">5</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">1</span>)</span><br><span class="line">y = torch.empty(   <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"><span class="comment"># x和y是可广播的</span></span><br><span class="line"><span class="comment"># 第一末尾的维度：都是1。</span></span><br><span class="line"><span class="comment"># 第二靠近尾部的维度：y是1</span></span><br><span class="line"><span class="comment"># 第三靠近尾部的维度：x的大小等于y的大小</span></span><br><span class="line"><span class="comment"># 第四靠近尾部的维度：y的该维度不存在</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 但是：</span></span><br><span class="line">x = torch.empty(<span class="number">5</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">1</span>)</span><br><span class="line">y = torch.empty(  <span class="number">3</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line"><span class="comment"># x和y是不可广播的</span></span><br><span class="line"><span class="comment"># 因为第三靠近尾部的维度x的2不等于y的3</span></span><br></pre></td></tr></table></figure>
-
 <p>如果两个张量x，y是“可广播的”，那么结果张量的大小是按照下面的方法计算的：</p>
 <ul>
 <li>如果x和y的维度的长度不相等，就在维度个数更少的张量的维度前面加1，使两个张量的维度相等。</li>
@@ -425,11 +423,10 @@
 </ul>
 <p>例如：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 可以列出各维度来使阅读更容易</span></span><br><span class="line">x = torch.empty(<span class="number">5</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">1</span>)</span><br><span class="line">y = torch.empty(   <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">(x + y).size()</span><br></pre></td></tr></table></figure>
-
-<pre><code>torch.Size([5, 3, 4, 1])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 但是没有必要:</span></span><br><span class="line">x = torch.empty(<span class="number">1</span>)</span><br><span class="line">y = torch.empty(<span class="number">3</span>, <span class="number">1</span>, <span class="number">7</span>)</span><br><span class="line">(x + y).size()</span><br></pre></td></tr></table></figure>
-
-<pre><code>torch.Size([3, 1, 7])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = torch.empty(<span class="number">5</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">1</span>)</span><br><span class="line">y = torch.empty(<span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">(x + y).size()</span><br></pre></td></tr></table></figure>
-
+<pre><code>torch.Size([5, 3, 4, 1])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 但是没有必要:</span></span><br><span class="line">x = torch.empty(<span class="number">1</span>)</span><br><span class="line">y = torch.empty(<span class="number">3</span>, <span class="number">1</span>, <span class="number">7</span>)</span><br><span class="line">(x + y).size()</span><br></pre></td></tr></table></figure>
+<pre><code>torch.Size([3, 1, 7])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = torch.empty(<span class="number">5</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">1</span>)</span><br><span class="line">y = torch.empty(<span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">(x + y).size()</span><br></pre></td></tr></table></figure>
 <pre><code>---------------------------------------------------------------------------
 
 RuntimeError                              Traceback (most recent call last)
@@ -440,12 +437,12 @@ RuntimeError                              Traceback (most recent call last)
 ----&gt; 3 (x + y).size()
 
 
-RuntimeError: The size of tensor a (2) must match the size of tensor b (3) at non-singleton dimension 1</code></pre><h3 id="In-place语义"><a href="#In-place语义" class="headerlink" title="In-place语义"></a>In-place语义</h3><p>一个复杂的问题是in-place操作不允许in-place张量由于广播而改变形状。</p>
+RuntimeError: The size of tensor a (2) must match the size of tensor b (3) at non-singleton dimension 1
+</code></pre><h3 id="In-place语义"><a href="#In-place语义" class="headerlink" title="In-place语义"></a>In-place语义</h3><p>一个复杂的问题是in-place操作不允许in-place张量由于广播而改变形状。</p>
 <p>例如：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = torch.empty(<span class="number">5</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">1</span>)</span><br><span class="line">y = torch.empty(<span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">(x.add_(y)).size()</span><br></pre></td></tr></table></figure>
-
-<pre><code>torch.Size([5, 3, 4, 1])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 但是：</span></span><br><span class="line">x = torch.empty(<span class="number">1</span>, <span class="number">3</span>, <span class="number">1</span>)</span><br><span class="line">y = torch.empty(<span class="number">3</span>, <span class="number">1</span>, <span class="number">7</span>)</span><br><span class="line">(x.add_(y)).size()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一般广播会将x的size改成(3, 3, 7)</span></span><br><span class="line"><span class="comment"># 但是x为in-place张量</span></span><br></pre></td></tr></table></figure>
-
+<pre><code>torch.Size([5, 3, 4, 1])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 但是：</span></span><br><span class="line">x = torch.empty(<span class="number">1</span>, <span class="number">3</span>, <span class="number">1</span>)</span><br><span class="line">y = torch.empty(<span class="number">3</span>, <span class="number">1</span>, <span class="number">7</span>)</span><br><span class="line">(x.add_(y)).size()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一般广播会将x的size改成(3, 3, 7)</span></span><br><span class="line"><span class="comment"># 但是x为in-place张量</span></span><br></pre></td></tr></table></figure>
 <pre><code>---------------------------------------------------------------------------
 
 RuntimeError                              Traceback (most recent call last)
@@ -458,22 +455,22 @@ RuntimeError                              Traceback (most recent call last)
       6 # 一般广播会将x的size改成(3, 3, 7)
 
 
-RuntimeError: output with shape [1, 3, 1] doesn&apos;t match the broadcast shape [3, 3, 7]</code></pre><h3 id="反向传播兼容性"><a href="#反向传播兼容性" class="headerlink" title="反向传播兼容性"></a>反向传播兼容性</h3><p>pytorch的较早版本允许在不同形状的张量上执行逐点函数（pointwise functions），只要这些张量的元素数量相等。然后逐点函数将把各张量看作一维的张量然后执行。pytorch现在支持广播而“一维”逐点计算已经被弃用了，并且在张量不可广播但元素数目一样的情况下将生成Python警告。</p>
+RuntimeError: output with shape [1, 3, 1] doesn&#39;t match the broadcast shape [3, 3, 7]
+</code></pre><h3 id="反向传播兼容性"><a href="#反向传播兼容性" class="headerlink" title="反向传播兼容性"></a>反向传播兼容性</h3><p>pytorch的较早版本允许在不同形状的张量上执行逐点函数（pointwise functions），只要这些张量的元素数量相等。然后逐点函数将把各张量看作一维的张量然后执行。pytorch现在支持广播而“一维”逐点计算已经被弃用了，并且在张量不可广播但元素数目一样的情况下将生成Python警告。</p>
 <p>注意，如果两个张量形状不同，但可广播且元素数目相同，则引入广播会导致反向传播不兼容的变化。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.add(torch.ones(<span class="number">4</span>, <span class="number">1</span>), torch.randn(<span class="number">4</span>))</span><br></pre></td></tr></table></figure>
-
 <pre><code>tensor([[2.8629, 0.4929, 0.8330, 0.1047],
         [2.8629, 0.4929, 0.8330, 0.1047],
         [2.8629, 0.4929, 0.8330, 0.1047],
-        [2.8629, 0.4929, 0.8330, 0.1047]])</code></pre><p>这个例子之前生成size为[4,1]的张量，但是现在生成了一个size为[4,4]的张量。为了帮助识别代码里出现由于广播而导致的反向传播不兼容的情况，可以将<code>torch.utils.backcompat.broadcast_warning</code>设为True，在这种情况下将生成Python警告</p>
+        [2.8629, 0.4929, 0.8330, 0.1047]])
+</code></pre><p>这个例子之前生成size为[4,1]的张量，但是现在生成了一个size为[4,4]的张量。为了帮助识别代码里出现由于广播而导致的反向传播不兼容的情况，可以将<code>torch.utils.backcompat.broadcast_warning</code>设为True，在这种情况下将生成Python警告</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.utils.backcompat.broadcast_warning.enable = <span class="literal">True</span></span><br></pre></td></tr></table></figure>
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.add(torch.ones(<span class="number">4</span>, <span class="number">1</span>), torch.ones(<span class="number">4</span>))</span><br></pre></td></tr></table></figure>
-
 <pre><code>tensor([[2., 2., 2., 2.],
         [2., 2., 2., 2.],
         [2., 2., 2., 2.],
-        [2., 2., 2., 2.]])</code></pre><p>译者注：</p>
+        [2., 2., 2., 2.]])
+</code></pre><p>译者注：</p>
 <p>文档里说运行会出现下面这个warning，但是实际运行没用出现，咱也不知道为啥，咱也不知道问谁。</p>
 <p>__main__:1: UserWarning: self and other do not have the same shape, but are broadcastable, and have the same number of elements.<br>Changing behavior in a backwards incompatible manner to broadcasting rather than viewing as 1-dimensional.</p>
 <p>未完待译。。。</p>
@@ -488,7 +485,7 @@ RuntimeError: output with shape [1, 3, 1] doesn&apos;t match the broadcast shape
       
       <div class="popular-posts-title"><a href="\2019\09\04\DATA-LOADING-AND-PROCESSING\" rel="bookmark">翻译：pytorch数据加载和处理</a></div>
       
-        <div class="popular-posts-excerpt"><p><p>在解决任何机器学习问题时，都需要花费大量的精力来准备数据。PyTorch提供了许多工具来简化数据加载，希望能使代码更具可读性。在这篇教程里，我们将看看如何从非平凡的数据集中加载和预处理/扩增数据。</p></p></div>
+        <div class="popular-posts-excerpt"><p><p>在解决任何机器学习问题时，都需要花费大量的精力来准备数据。PyTorch提供了许多工具来简化数据加载，希望能使代码更具可读性。在这篇教程里，我们将看看如何从非平凡的数据集中加载和预处理/扩增数据。<br></p></div>
       
     </li>
   
@@ -655,7 +652,7 @@ RuntimeError: output with shape [1, 3, 1] doesn&apos;t match the broadcast shape
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -743,7 +740,9 @@ RuntimeError: output with shape [1, 3, 1] doesn&apos;t match the broadcast shape
         
           
         
-        <span class="site-state-item-count">18</span>
+          
+        
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -866,12 +865,12 @@ RuntimeError: output with shape [1, 3, 1] doesn&apos;t match the broadcast shape
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">135k</span>
+    <span title="站点总字数">133k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:03</span>
+    <span title="站点阅读时长">2:01</span>
 </div>
 
 
