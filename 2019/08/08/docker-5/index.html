@@ -70,18 +70,18 @@
   daovoice('update');
   </script>
 
-  <meta name="description" content="dockerfile指令指令格式注释： # Comment指令： INSTRUCTION argument FROM FROM \ FROM \:\ 必须已经存在的镜像，也就是基础镜像 必须是第一条非注释指令  MAINTAINER MAINTAINER \  指定镜像的作者信息，包含镜像的所有者和练习方式  RUN构建构成运行的  RUN \  (shell模式)  /bin/sh -c com">
+  <meta name="description" content="dockerfile指令指令格式注释： # Comment指令： INSTRUCTION argument FROM FROM &amp;lt;image&amp;gt; FROM &amp;lt;image&amp;gt;:&amp;lt;tag&amp;gt; 必须已经存在的镜像，也就是基础镜像 必须是第一条非注释指令  MAINTAINER MAINTAINER &amp;lt;name&amp;gt;  指定镜像的作者信息，包含镜像的所有者和练习方式">
 <meta name="keywords" content="docker,笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【notes】docker学习笔记5-dockerfile">
 <meta property="og:url" content="https://zinw623.github.io/2019/08/08/docker-5/index.html">
 <meta property="og:site_name" content="Zihan.W的博客">
-<meta property="og:description" content="dockerfile指令指令格式注释： # Comment指令： INSTRUCTION argument FROM FROM \ FROM \:\ 必须已经存在的镜像，也就是基础镜像 必须是第一条非注释指令  MAINTAINER MAINTAINER \  指定镜像的作者信息，包含镜像的所有者和练习方式  RUN构建构成运行的  RUN \  (shell模式)  /bin/sh -c com">
+<meta property="og:description" content="dockerfile指令指令格式注释： # Comment指令： INSTRUCTION argument FROM FROM &amp;lt;image&amp;gt; FROM &amp;lt;image&amp;gt;:&amp;lt;tag&amp;gt; 必须已经存在的镜像，也就是基础镜像 必须是第一条非注释指令  MAINTAINER MAINTAINER &amp;lt;name&amp;gt;  指定镜像的作者信息，包含镜像的所有者和练习方式">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-13T04:38:51.262Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【notes】docker学习笔记5-dockerfile">
-<meta name="twitter:description" content="dockerfile指令指令格式注释： # Comment指令： INSTRUCTION argument FROM FROM \ FROM \:\ 必须已经存在的镜像，也就是基础镜像 必须是第一条非注释指令  MAINTAINER MAINTAINER \  指定镜像的作者信息，包含镜像的所有者和练习方式  RUN构建构成运行的  RUN \  (shell模式)  /bin/sh -c com">
+<meta name="twitter:description" content="dockerfile指令指令格式注释： # Comment指令： INSTRUCTION argument FROM FROM &amp;lt;image&amp;gt; FROM &amp;lt;image&amp;gt;:&amp;lt;tag&amp;gt; 必须已经存在的镜像，也就是基础镜像 必须是第一条非注释指令  MAINTAINER MAINTAINER &amp;lt;name&amp;gt;  指定镜像的作者信息，包含镜像的所有者和练习方式">
   <link rel="alternate" href="/atom.xml" title="Zihan.W的博客" type="application/atom+xml">
   <link rel="canonical" href="https://zinw623.github.io/2019/08/08/docker-5/">
 
@@ -362,7 +362,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">776</span>
+              <span title="本文字数">2k</span>
             </span>
           
             <span class="post-meta-item">
@@ -372,7 +372,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">1 分钟</span>
+              <span title="阅读时长">2 分钟</span>
             </span>
           
 
@@ -387,21 +387,21 @@
       
         <h3 id="dockerfile指令"><a href="#dockerfile指令" class="headerlink" title="dockerfile指令"></a>dockerfile指令</h3><h4 id="指令格式"><a href="#指令格式" class="headerlink" title="指令格式"></a>指令格式</h4><p>注释： # Comment<br>指令： INSTRUCTION argument</p>
 <h5 id="FROM"><a href="#FROM" class="headerlink" title="FROM"></a>FROM</h5><ul>
-<li>FROM \<image></image></li>
-<li>FROM \<image>:\<tag></tag></image></li>
+<li>FROM &lt;image&gt;</li>
+<li>FROM &lt;image&gt;:&lt;tag&gt;</li>
 <li>必须已经存在的镜像，也就是基础镜像</li>
 <li>必须是第一条非注释指令</li>
 </ul>
 <h5 id="MAINTAINER"><a href="#MAINTAINER" class="headerlink" title="MAINTAINER"></a>MAINTAINER</h5><ul>
-<li>MAINTAINER \<name><br>  指定镜像的作者信息，包含镜像的所有者和练习方式</name></li>
+<li>MAINTAINER &lt;name&gt;<br>  指定镜像的作者信息，包含镜像的所有者和练习方式</li>
 </ul>
 <h5 id="RUN"><a href="#RUN" class="headerlink" title="RUN"></a>RUN</h5><p><strong>构建构成运行的</strong></p>
 <ul>
-<li>RUN \<command>  (shell模式)<br>  /bin/sh -c command</li>
+<li>RUN &lt;command&gt;  (shell模式)<br>  /bin/sh -c command</li>
 <li>RUN [“executable”, “param1”, “param2”]  (exec模式)<br>  RUN[“/bin/bash”, “-c”, “echo hello”]</li>
 </ul>
 <h5 id="EXPOSE"><a href="#EXPOSE" class="headerlink" title="EXPOSE"></a>EXPOSE</h5><ul>
-<li>EXPOSE \<port> [\<port>…]<br>  指定运行该镜像的容器使用的端口，但只是告诉docker会使用特定的端口号，出于安全考虑不会自动打开，在容器运行时仍需要手动指定端口映射。<h5 id="CMD-ENTRYPOINT"><a href="#CMD-ENTRYPOINT" class="headerlink" title="CMD ENTRYPOINT"></a>CMD ENTRYPOINT</h5></port></port></li>
+<li>EXPOSE &lt;port&gt; [&lt;port&gt;…]<br>  指定运行该镜像的容器使用的端口，但只是告诉docker会使用特定的端口号，出于安全考虑不会自动打开，在容器运行时仍需要手动指定端口映射。<h5 id="CMD-ENTRYPOINT"><a href="#CMD-ENTRYPOINT" class="headerlink" title="CMD ENTRYPOINT"></a>CMD ENTRYPOINT</h5></li>
 </ul>
 <p><strong>指定容器启动时运行的命令</strong></p>
 <ul>
@@ -414,15 +414,17 @@
 <li>ENTRYPOINT [“executable”, “param1”, “param2”] (exec模式)</li>
 <li>ENTRYPOINT command param1 param2 (shell模式)</li>
 </ul>
-<p>默认不会被覆盖，如果需要覆盖需要指定docker run —entrypoint 覆盖</p>
+<p>默认不会被覆盖，如果需要覆盖需要指定docker run –entrypoint 覆盖</p>
 <h5 id="ADD-COPY-VOLUME"><a href="#ADD-COPY-VOLUME" class="headerlink" title="ADD COPY VOLUME"></a>ADD COPY VOLUME</h5><p><strong>设置镜像的目录和文件</strong></p>
 <ul>
-<li>ADD \<src>…\<dest></dest></src></li>
-<li><p>ADD [“<src"..."<dest>“] (适用于文件路径中有空格)</src"..."<dest></p>
+<li><p>ADD &lt;src&gt;…&lt;dest&gt;</p>
 </li>
-<li><p>COPY \<src>…\<dest></dest></src></p>
+<li><p>ADD [“&lt;src”…”<dest>“] (适用于文件路径中有空格)</dest></p>
 </li>
-<li>COPY  [“<src"..."<dest>“] (适用于文件路径中有空格)</src"..."<dest></li>
+<li><p>COPY &lt;src&gt;…&lt;dest&gt;</p>
+</li>
+<li><p>COPY  [“&lt;src”…”<dest>“] (适用于文件路径中有空格)</dest></p>
+</li>
 </ul>
 <p>可以使文件地址（构建目录的相对地址），也可以是远程url（推荐使用curl获取文件内容）</p>
 <ul>
@@ -437,9 +439,10 @@
 </ul>
 <p>e.g:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">WORKDIR /a</span><br><span class="line">WORKDIR b</span><br><span class="line">WORKDIR C</span><br><span class="line">RUN <span class="built_in">pwd</span>  <span class="comment"># 结果为 /a/b/c</span></span><br></pre></td></tr></table></figure>
+
 <ul>
-<li>ENV \<key>\<value></value></key></li>
-<li>ENV \<key>=\<value></value></key></li>
+<li>ENV &lt;key&gt;&lt;value&gt;</li>
+<li>ENV &lt;key&gt;=&lt;value&gt;</li>
 </ul>
 <p>设置环境变量</p>
 <ul>
@@ -472,7 +475,7 @@
 </li>
 </ul>
 <blockquote>
-<p>FROM Ubuntu:14:04<br>MAINTAINER dormancypress user@mail.com<br>ENV REFRESH_DATE 2019-08-08<br>RUN apt-get update<br>RUN apt-get install -y nginx<br>EXPOSE 80</p>
+<p>FROM Ubuntu:14:04<br>MAINTAINER dormancypress <a href="mailto:user@mail.com" target="_blank" rel="noopener">user@mail.com</a><br>ENV REFRESH_DATE 2019-08-08<br>RUN apt-get update<br>RUN apt-get install -y nginx<br>EXPOSE 80</p>
 </blockquote>
 <p>修改REFRESH_DATE时间</p>
 <ul>
@@ -867,12 +870,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">133k</span>
+    <span title="站点总字数">134k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:01</span>
+    <span title="站点阅读时长">2:02</span>
 </div>
 
 
