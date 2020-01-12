@@ -1,43 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[【体会】数理哲学导论 - 自然数串]]></title>
-    <url>%2F2019%2F09%2F21%2Fshulizhexue-1%2F</url>
-    <content type="text"><![CDATA[第一次接触偏哲学的东西，昨晚睡觉前看完了第一章自然数串，感觉很有趣，今天打算做一下总结体会。 先挑一些我觉得有趣的部分专门说一下，然后挑出一些我觉的需要注意的句子分析一下，写一下我自己的体会，因为是刚接触哲学逻辑的东西，可能用词上会不太严谨，我尽量注意吧。 数理哲学的研究方向首先作者指出对数学的研究方向可以分为两种： 第一种是偏向于 构造 ，趋向于递增的复杂，构造出更高等的数学。比如从整数到有理数，然后再到无理数，实数，复数；从基础的加法和乘法运算再到复杂的微分和积分运算等。 第二种是偏向于 分析和抽象 ，分析我们已经肯定的概念和命题，从这些知识中再得到 更普遍 的概念和原理定义或推演出什么。 我们可以用更具象的方式理解，我们站在已经拥有的公理公设上，既需要望远镜这一工具，来扩大我们的视力，看向更复杂更高等的数学；同时我们又需要显微镜这一工具，去找出比我们现在所习用、假定的概念和命题更基础更本质的逻辑基础，从其中获得新的见识和新的能力，从而获得完全崭新的数学题材。 graph TB a[出发点:基础的概念和公理公设] --> b[显微镜:抽象出更普遍的概念和原理定义] a --> c[望远镜:构造更高等更复杂的数学] 自然数串我们研究自然数串的目的在于： 所有传统的纯粹数学，包括解析几何在内，全可以看作是有关自然数的命题所组成。这也就是说，其中的概念可以用自然数来定义，其中的命题可以从自然数的性质推演得出。————当然，在每种情形下，还得加上一些纯逻辑的概念和命题。 重点分析句子 数学与数理哲学之间的区分取决于激发研究的兴趣上，和研究所达到的阶段上；而不是研究所涉及的命题。 作者指出这种研究方向的不同是数理哲学不同于普通数学的特点。但是这种区别不在主题内容，而在于研究者的思想状况（比如进行研究的兴趣是分析公理的合理性还是去用数学去演绎推理证明出新的定理去解决一些具体实际问题）。这种区别也表现在研究所达到的阶段上，比如从陆地测量的经验中总结出证明这些经验规则的普遍命题，再从这些命题中抽象出公理公设，这个阶段属于数理哲学，然而之后利用这些公理公设去演绎推理出其他新的命题就属于普通意义的数学了。 最易把握领会的概念是那些既不过与复杂，也不十分简单（我们用逻辑意义上所谓的“简单”）的概念。 我觉得关键不在于问题到底是逻辑上的复杂或是简单，而是我们所处的“维度”（这里的维度不是我们常见维度的意思，但是我临时想不到有什么更好的词）与所研究问题的“维度”之间的距离，我们最易领会的是我们所身处的维度周围的事物，或是最容易感知到的东西，就像我们这种三维生物对于二维世界和四维世界都不怎么能很好地了解领会，即使二维直觉上应该比三维要简单一些。]]></content>
-      <categories>
-        <category>thinkload</category>
-        <category>数理哲学导论</category>
-      </categories>
-      <tags>
-        <tag>数理哲学导论</tag>
-        <tag>自然数串</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[序列极限]]></title>
-    <url>%2F2019%2F09%2F13%2Fjixian%2F</url>
-    <content type="text"><![CDATA[graph LR a(极限) --> b(定义); a --> c{性质}; c --> d[普遍性质]; d --> d1(最终为常数的数列收敛) d --> d2(数列极限的任何邻域,包含着数列中除了有限多个数之外的所有项) d --> d3(数列不能有两个不同的极限) d --> d4(收敛数列必有界) c --> e[算术运算] e --> e1(加法运算) e --> e2(乘法运算) e --> e3(除法运算) c --> f[不等式] f --> f1(夹逼准则) f --> f2(由极限不等关系到序列,保持严格不等性) f --> f3(由序列不等关系到极限,结果都为非严格不等性) a --> g{极限存在问题} g --> h1[柯西准则] g --> h2[单调数列的极限存在准则] g --> h3[子列] h3 --> h31(每个有界实数列含有收敛的子列) h3 --> h32(从任何实数列中,或者能选出一个收敛子数列,或者能选出一个趋于无穷的子数列) g --> i[部分极限] i --> j1(上极限与下极限的定义) i --> j2(任何数列的下极限与上极限,分别是其部分极限中的最小者与最大者) g --> j3(数列有极限或趋于负无穷或趋于正无穷,其充要条件是其上下极限重合) g --> j4(数列收敛的充要条件是它的每个子数列收敛) j3 -->|推出|h32 j4 -->|推出|h31 习题1 试证：数$x \in \mathbb{R}$是有理数的充要条件是，它在任何q进位记数法中是循环的，即从某一位开始，就由一组数码重复循环组成。 这个问题的充要性比较好证，我们主要看一下必要性。]]></content>
-      <categories>
-        <category>数学分析</category>
-      </categories>
-      <tags>
-        <tag>数学分析</tag>
-        <tag>极限</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[可数与不可数（卓里奇数学分析部分习题整理）]]></title>
-    <url>%2F2019%2F09%2F11%2Fkeshuyubukeshu%2F</url>
-    <content type="text"><![CDATA[自从开始下决心死磕卓里奇的数学分析之后，我才开始见识到卓老师的数学分析的教材的彪悍，通过习题直接把你虐到升华。对于我这个刚学完两个学期的数分的普通大学生来说，内心除了心酸，也有对卓老师佩服。昨晚肝了将近三个多小时的可数集部分的课后题，才把大部分习题的思路梳理出来，收获良多，所以打算整理一下做个纪念。我这里只说我觉得十分精彩、关键的部分。 P64 3.a 任何无穷集含有可数子集 这个题应当是让我们对于任意无穷集给出一个能构造出其可数子集的方法，我的思路是这样的： 首先设无穷集为$X$，从$X$中选取一个元素$x_1$，然后构造一个集合$X - ${$ x_1 $}$ = X_2$，然后从$X_2$中我们可以选取一个元素$x_2$，然后构造一个集合$X- ${$ x_1, x_2 $}$ =X_3$……再利用数学归纳原理，假设可以选取n个元素$ ${$ x_1, x_2, x_3, …… $}$ $，当到n+1时，我们构造集合$X_n=X- ${$ x_1, x_2, x_3, …,x_n, … $}$ $，然后从这个集合选出元素$x_{n+1}$，所以此命题成立。 P63 3.b 无穷集与一个至多可数集的并的势与原来那个无穷集的势一样 这个题目给我的感觉是让我想到： $$A\cup \emptyset = A$$ 再联系前面的一问，于是让我有了下面的思路： 设无穷集为$X$，使用反证法证明，假设不相等，即$card(X \cup 可数集) \neq card(X) $，有a)知存在可数集$A \subset X$，由假设知$card(X \cup A) \neq card(X)$，但是$X \cup A = X$，即$card(X \cup A) = card(X)$，因此出现了矛盾。 小结1 以上两个题，使我们有了一个证明了至多可数集的势具有与加法中的0相似的性质，像是一个基础的单位元素。 给出了由一个已知可数集的势推出其在$\mathbb{R}$的补集方法，也就是正着想不容易那就反着来，这有可能是卓老师的出题用意，有了3.b)的结论我们就可以很容易得到以下两个推论了： 无理数集具有连续势统。(P63 3.d) 超越数集具有连续势统。(P63 3.e) 二进制小数的应用下面这几道题卓老师反复以小问的形式提示二进制小数在集合的势的证明里的非同一般的作用，真的是让我跪了。 P63 4.a 递增自然数列之集与形如$0.\alpha_1 \alpha_2 \alpha_3…$的二进制小数之集等势 证明等势就是构建双射，我是这样想的： 设递增自然数列之集为$X$，从$X$中选取一个递增数列A构造一个集合$A^{\prime}= ${$ a_1, a_2, a_3, … $}$ $，$A^{\prime}$可以是有限集也可以是可数集。设二进制小数的集为$Y$，建立映射：$f:X \mapsto Y $： $$f(A) = 0.\alpha_1 \alpha_2 \alpha_3…，其中\alpha_i=\begin{cases}1 , i \in A^{\prime}\0 , i \notin A^{\prime}\\end{cases}$$ P63 4.b 可数集的一切子集之集合具有连续统的势 这个题就是把取子集和递增自然数列建立联系，从而与二进制小数建立联系，最终与区间$[0, 1]$建立联系： 对于一个可数集$A$，对其元素进行编号：$a_1, a_2, a_3, ……$。对于任意一个$A$的非空子集，将其元素按照序号从小到大列出就是一个递增自然数列，根据4.a进而得到其对应于一个形如$0.\alpha_1 \alpha_2 \alpha_3…$的二进制小数。然后空集对应0，全集对应1，这样就建立起一个双射$f:p(X) \mapsto [0, 1] ，p(X)$是A的一切子集之集。 P63 5.a 集合X的一切子集的集合p(X)与一切在X上定义而取值为0或1的函数等势 这个函数可以看作给集合$X$了一个划分，具有某个性质的子集的元素对应的值为1，这个子集的补集的元素对应的值为0。所以一个这个二值函数就等价于从集合$X$中选出了一个子集，这就与上一题的一切子集的集合相对应了。 P63 7 在闭区间$[0, 1]\subset \mathbb{R}上，画出那样的数x的集合：x \in [0, 1]，其三进位记法x=0.\alpha_1 \alpha_2 \alpha_3…（x\in ${$ 0, 1, 2 $}$ $具有下列三性质之一：a) $\alpha_1 \neq 1$b) $(\alpha_1 \neq 1) \wedge (\alpha_2 \neq 1)$c) $\forall i \in \mathbb{N} (\alpha_i = 1) (康托尔集）$ 这个利用三进制数表示康托尔集的方式真的太精彩了，我之前听说过康托尔集是三等分线段，没想到还能这样搞。 为了好理解我先定义个函数：$x = f(\alpha_1, \alpha_2, \alpha_3, …) = 0.\alpha_1 \alpha_2 \alpha_3…$。f具有性质： $f(\alpha_1, \alpha_2, \alpha_3, …) = \frac{\alpha_1}{3} + f(0, \alpha_2, \alpha_3, …) $ $f(0,0,…,0,\alpha_{i+1}, \alpha_{i+2}, \alpha_{i+3}, …) \in [0, \frac{1}{3^{i}})$ 对于a): $$f(0, \alpha_2, \alpha_3, …) = 0 + f(0, \alpha_2, \alpha_3, …) \in [0, \frac{1}{3}) $$$$f(2, \alpha_2, \alpha_3, …) = \frac{2}{3} + f(0, \alpha_2, \alpha_3, …) \in [\frac{2}{3},1)$$ 对于b): $$f(0, 0, \alpha_3, …) = 0 + 0+ f(0, 0, \alpha_3, …) \in [0, \frac{1}{9}) $$$$ f(0, 2, \alpha_3, …) = 0 + \frac{2}{9}+ f(0, 0, \alpha_3, …) \in [\frac{2}{9}, \frac{1}{3}) $$$$ f(2, 0, \alpha_3, …) = \frac{2}{3} + 0 +f(0, 0, \alpha_3, …) \in [\frac{2}{3},\frac{7}{9}) $$$$ f(2, 2, \alpha_3, …) = \frac{2}{3} + \frac{2}{9} +f(0, 0, \alpha_3, …) \in [\frac{8}{9},1) $$ 对于c)就是无限重复上面的操作。 画出图就是： a)对应于$E_1$，b)对应于$E_2$。 对于康托尔集只需把不含1的三进制小数中的2换成1就能对应二进制小数，从而和区间[0, 1]中的所有数对应了，即两集合等势。 到了最后啥也不想说了，数学真的秀！！！]]></content>
-      <categories>
-        <category>数学分析</category>
-      </categories>
-      <tags>
-        <tag>数学分析</tag>
-        <tag>可数与不可数</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[翻译：pytorch数据加载和处理]]></title>
     <url>%2F2019%2F09%2F04%2FDATA-LOADING-AND-PROCESSING%2F</url>
     <content type="text"><![CDATA[在解决任何机器学习问题时，都需要花费大量的精力来准备数据。PyTorch提供了许多工具来简化数据加载，希望能使代码更具可读性。在这篇教程里，我们将看看如何从非平凡的数据集中加载和预处理/扩增数据。 为了运行这篇教程，请确保一下模块已经安装了： scikit-image：为了图像的输入输出和转化 pandas：为了跟容易解析csv 123456789101112131415from __future__ import print_function, divisionimport osimport torchimport pandas as pdfrom skimage import io, transformimport numpy as npimport matplotlib.pyplot as pltfrom torch.utils.data import Dataset, DataLoaderfrom torchvision import transforms, utils# 忽略警告import warningswarnings.filterwarnings('ignore')plt.ion() # 交互模式 我们将要处理的数据集是人脸姿态。这以为着一张脸被标注成这样： @import “landmarked_face2.png” 总共有68个标注点标注在每张脸上。 注意： 从这里下载数据集，图片在‘data/faces/’目录下。这个数据集是基于imagenet中被标记为‘face’的一些图片通过应用优秀的dlib的姿态估计生成。 数据集带有一个csv文件，其中带有类似于下面的注释： image_name,part_0_x,part_0_y,part_1_x,part_1_y,part_2_x, ... ,part_67_x,part_67_y 0805personali01.jpg,27,83,27,98, ... 84,134 1084239450_e76e00b7e7.jpg,70,236,71,257, ... ,128,312让我们快速读取csv并且得到(N, 2)数组的标注，N是指的标注点的个数。 12345678910landmarks_frame = pd.read_csv('data/faces/face_landmarks.csv')n = 65img_name = landmarks_frame.iloc[n, 0]landmarks = landmarks_frame.iloc[n, 1:].as_matrix()landmarks = landmarks.astype('float').reshape(-1, 2)print('Image name: &#123;&#125;'.format(img_name))print('Landmarks shape: &#123;&#125;'.format(landmarks.shape))print('First 4 Landmarks: &#123;&#125;'.format(landmarks[:4])) 输出： Image name: person-7.jpg Landmarks shape: (68, 2) First 4 Landmarks: [[32. 65.] [33. 76.] [34. 86.] [34. 97.]]让我们写一个简单的展示一张图片和它的标注点的帮助函数，使用它来显示一个样本。 12345678910def show_landmarks(image, landmarks): """显示一张带有标注点的函数""" plt.imshow(image) plt.scatter(landmarks[:, 0], landmarks[:, 1], s = 10, marker = '.', c = 'r') plt.pause(0.001) # 暂停一会等待更新plt.figure()show_landmarks(io.imread(os.path.join('data/faces/', img_name)), landmarks)plt.show() @import “sphx_glr_data_loading_tutorial_001.png” Dataset类torch.utils.data.Dataset是表示数据集的抽象类。你的自定义数据集应该继承Dataset并覆盖以下方法： __len__以便len(dataset)返回dataset的大小 __getitem__来支持索引操作，像是dataset[i]用来获得第i个样本 让我们创建一个我们脸部表注数据集的dataset吧。我们将在__init__中读取csv但是留在__getitem__中读取图片。这是为了内存效率因为所有的图片不是一次储存在内存中，而是按需要储存。 我们数据集的赝本将会是字典{&#39;image&#39;:image, &#39;landmarks&#39;:landmarks}。我们数据集将获得一个选填参数transform以便对样本进行所有必要的处理。我们将在下一个章节看到transform的有效性。 12345678910111213141516171819202122232425262728293031323334class FaceLandmarksDataset(Dataset): def __init__(self, csv_file, root_dir, transform = None): """ 参数： csv_file(string):csv file的路径 root_dir(string):所有图片的目录 transform(callable, 选填):被应用到样本上的transforms """ self.landmarks_frame = pd.read_csv(csv_file) self.root_dir = root_dir self.transform = transform def __len__(self): return len(self.landmarks_frame) def __getitem__(self, idx): if torch.is_tensor(idx): idx = idx.tolist() img_name = os.path.join(self.root_dir, self.landmarks_frame.iloc[idx, 0]) images = io.imread(img_name) landmarks = self.landmarks_frame.iloc[idx, 1:] landmarks = np.array([landmarks]) landmarks = landmarks.astype('float').reshape(-1, 2) sample = &#123;'image':image, 'landmarks':landmarks&#125; if self.transform: sample = self.transform(sample) return sample 让我们举例使用这个类并且在迭代这个数据集。我们将打印出前四个样本的大小和它们的标注点。 123456789101112131415161718face_dataset = FaceLandmarksDataset(csv_file = 'data/faces/face_landmarks.csv', root_dir = 'data/faces/)fig = plt.figure()for i in range(len(face_dataset)): sample = face_dataset[i] print(i, sample['image'].shape, sample['landmarks'].shape) ax = plt.subplot(1, 4, i + 1) plt.tight_layout() ax.set_title('Sample # &#123;&#125;'.format(i)) ax.axis('off') show_landmarks(**sample) if i == 3: plt.show() break]]></content>
@@ -111,8 +74,8 @@
         <category>pytorch</category>
       </categories>
       <tags>
-        <tag>pytorch</tag>
         <tag>笔记</tag>
+        <tag>pytorch</tag>
       </tags>
   </entry>
   <entry>
@@ -124,8 +87,8 @@
         <category>pytorch</category>
       </categories>
       <tags>
-        <tag>pytorch</tag>
         <tag>笔记</tag>
+        <tag>pytorch</tag>
       </tags>
   </entry>
   <entry>
@@ -137,8 +100,8 @@
         <category>pytorch</category>
       </categories>
       <tags>
-        <tag>pytorch</tag>
         <tag>笔记</tag>
+        <tag>pytorch</tag>
       </tags>
   </entry>
   <entry>
@@ -150,8 +113,8 @@
         <category>pytorch</category>
       </categories>
       <tags>
-        <tag>pytorch</tag>
         <tag>笔记</tag>
+        <tag>pytorch</tag>
       </tags>
   </entry>
   <entry>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zinw623.github.io/"/>
-  <updated>2019-09-21T10:56:22.970Z</updated>
+  <updated>2019-09-05T08:20:45.416Z</updated>
   <id>https://zinw623.github.io/</id>
   
   <author>
@@ -15,93 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>【体会】数理哲学导论 - 自然数串</title>
-    <link href="https://zinw623.github.io/2019/09/21/shulizhexue-1/"/>
-    <id>https://zinw623.github.io/2019/09/21/shulizhexue-1/</id>
-    <published>2019-09-21T04:00:15.000Z</published>
-    <updated>2019-09-21T10:56:22.970Z</updated>
-    
-    <content type="html"><![CDATA[<p>第一次接触偏哲学的东西，昨晚睡觉前看完了第一章自然数串，感觉很有趣，今天打算做一下总结体会。</p><a id="more"></a><p>先挑一些我觉得有趣的部分专门说一下，然后挑出一些我觉的需要注意的句子分析一下，写一下我自己的体会，因为是刚接触哲学逻辑的东西，可能用词上会不太严谨，我尽量注意吧。</p><h3 id="数理哲学的研究方向"><a href="#数理哲学的研究方向" class="headerlink" title="数理哲学的研究方向"></a>数理哲学的研究方向</h3><p>首先作者指出对数学的研究方向可以分为两种：</p><ul><li><p>第一种是偏向于 <strong>构造</strong> ，趋向于递增的复杂，构造出更高等的数学。比如从整数到有理数，然后再到无理数，实数，复数；从基础的加法和乘法运算再到复杂的微分和积分运算等。</p></li><li><p>第二种是偏向于 <strong>分析和抽象</strong> ，分析我们已经肯定的概念和命题，从这些知识中再得到 <strong>更普遍</strong> 的概念和原理定义或推演出什么。</p></li></ul><p>我们可以用更具象的方式理解，我们站在已经拥有的公理公设上，既需要望远镜这一工具，来扩大我们的视力，看向更复杂更高等的数学；同时我们又需要显微镜这一工具，去找出比我们现在所习用、假定的概念和命题更基础更本质的逻辑基础，从其中获得新的见识和新的能力，从而获得完全崭新的数学题材。</p><pre class="mermaid" style="text-align: center;">                        graph TBa[出发点:基础的概念和公理公设] --> b[显微镜:抽象出更普遍的概念和原理定义]a --> c[望远镜:构造更高等更复杂的数学]          </pre><h3 id="自然数串"><a href="#自然数串" class="headerlink" title="自然数串"></a>自然数串</h3><p>我们研究自然数串的目的在于：</p><blockquote><p>所有传统的纯粹数学，包括解析几何在内，全可以看作是有关自然数的命题所组成。这也就是说，其中的概念可以用自然数来定义，其中的命题可以从自然数的性质推演得出。————当然，在每种情形下，还得加上一些纯逻辑的概念和命题。</p></blockquote><h3 id="重点分析句子"><a href="#重点分析句子" class="headerlink" title="重点分析句子"></a>重点分析句子</h3><blockquote><p>数学与数理哲学之间的区分取决于激发研究的兴趣上，和研究所达到的阶段上；而不是研究所涉及的命题。</p></blockquote><p>作者指出这种研究方向的不同是数理哲学不同于普通数学的特点。但是这种区别不在主题内容，而在于研究者的思想状况（比如进行研究的兴趣是分析公理的合理性还是去用数学去演绎推理证明出新的定理去解决一些具体实际问题）。这种区别也表现在研究所达到的阶段上，比如从陆地测量的经验中总结出证明这些经验规则的普遍命题，再从这些命题中抽象出公理公设，这个阶段属于数理哲学，然而之后利用这些公理公设去演绎推理出其他新的命题就属于普通意义的数学了。</p><blockquote><p>最易把握领会的概念是那些既不过与复杂，也不十分简单（我们用逻辑意义上所谓的“简单”）的概念。</p></blockquote><p>我觉得关键不在于问题到底是逻辑上的复杂或是简单，而是我们所处的“维度”（这里的维度不是我们常见维度的意思，但是我临时想不到有什么更好的词）与所研究问题的“维度”之间的距离，我们最易领会的是我们所身处的维度周围的事物，或是最容易感知到的东西，就像我们这种三维生物对于二维世界和四维世界都不怎么能很好地了解领会，即使二维直觉上应该比三维要简单一些。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;第一次接触偏哲学的东西，昨晚睡觉前看完了第一章自然数串，感觉很有趣，今天打算做一下总结体会。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="thinkload" scheme="https://zinw623.github.io/categories/thinkload/"/>
-    
-      <category term="数理哲学导论" scheme="https://zinw623.github.io/categories/thinkload/%E6%95%B0%E7%90%86%E5%93%B2%E5%AD%A6%E5%AF%BC%E8%AE%BA/"/>
-    
-    
-      <category term="数理哲学导论" scheme="https://zinw623.github.io/tags/%E6%95%B0%E7%90%86%E5%93%B2%E5%AD%A6%E5%AF%BC%E8%AE%BA/"/>
-    
-      <category term="自然数串" scheme="https://zinw623.github.io/tags/%E8%87%AA%E7%84%B6%E6%95%B0%E4%B8%B2/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>序列极限</title>
-    <link href="https://zinw623.github.io/2019/09/13/jixian/"/>
-    <id>https://zinw623.github.io/2019/09/13/jixian/</id>
-    <published>2019-09-13T01:02:35.000Z</published>
-    <updated>2019-09-15T08:51:56.234Z</updated>
-    
-    <content type="html"><![CDATA[<pre class="mermaid" style="text-align: center;">                        graph LRa(极限) --> b(定义);a --> c{性质};c --> d[普遍性质];d --> d1(最终为常数的数列收敛)d --> d2(数列极限的任何邻域,包含着数列中除了有限多个数之外的所有项)d --> d3(数列不能有两个不同的极限)d --> d4(收敛数列必有界)c --> e[算术运算]e --> e1(加法运算)e --> e2(乘法运算)e --> e3(除法运算)c --> f[不等式]f --> f1(夹逼准则)f --> f2(由极限不等关系到序列,保持严格不等性)f --> f3(由序列不等关系到极限,结果都为非严格不等性)a --> g{极限存在问题}g --> h1[柯西准则]g --> h2[单调数列的极限存在准则]g --> h3[子列]h3 --> h31(每个有界实数列含有收敛的子列)h3 --> h32(从任何实数列中,或者能选出一个收敛子数列,或者能选出一个趋于无穷的子数列)g --> i[部分极限]i --> j1(上极限与下极限的定义)i --> j2(任何数列的下极限与上极限,分别是其部分极限中的最小者与最大者)g --> j3(数列有极限或趋于负无穷或趋于正无穷,其充要条件是其上下极限重合)g --> j4(数列收敛的充要条件是它的每个子数列收敛)j3 -->|推出|h32j4 -->|推出|h31          </pre><h3 id="习题"><a href="#习题" class="headerlink" title="习题"></a>习题</h3><h4 id="1"><a href="#1" class="headerlink" title="1"></a>1</h4><blockquote><p>试证：数$x \in \mathbb{R}$是有理数的充要条件是，它在任何q进位记数法中是循环的，即从某一位开始，就由一组数码重复循环组成。</p></blockquote><p>这个问题的充要性比较好证，我们主要看一下必要性。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;pre class=&quot;mermaid&quot; style=&quot;text-align: center;&quot;&gt;
-            
-            graph LR
-
-a(极限) --&gt; b(定义);
-a --&gt; c{性质};
-c --&gt; d[普遍性质];
-d --&gt; d1(最
-      
-    
-    </summary>
-    
-      <category term="数学分析" scheme="https://zinw623.github.io/categories/%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/"/>
-    
-    
-      <category term="数学分析" scheme="https://zinw623.github.io/tags/%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/"/>
-    
-      <category term="极限" scheme="https://zinw623.github.io/tags/%E6%9E%81%E9%99%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>可数与不可数（卓里奇数学分析部分习题整理）</title>
-    <link href="https://zinw623.github.io/2019/09/11/keshuyubukeshu/"/>
-    <id>https://zinw623.github.io/2019/09/11/keshuyubukeshu/</id>
-    <published>2019-09-11T08:37:58.000Z</published>
-    <updated>2019-09-11T14:34:32.619Z</updated>
-    
-    <content type="html"><![CDATA[<p>自从开始下决心死磕卓里奇的数学分析之后，我才开始见识到卓老师的数学分析的教材的彪悍，通过习题直接把你虐到升华。对于我这个刚学完两个学期的数分的普通大学生来说，内心除了心酸，也有对卓老师佩服。昨晚肝了将近三个多小时的可数集部分的课后题，才把大部分习题的思路梳理出来，收获良多，所以打算整理一下做个纪念。我这里只说我觉得十分精彩、关键的部分。</p><h4 id="P64-3-a"><a href="#P64-3-a" class="headerlink" title="P64 3.a"></a>P64 3.a</h4><blockquote><p>任何无穷集含有可数子集</p></blockquote><p>这个题应当是让我们对于任意无穷集给出一个能构造出其可数子集的方法，我的思路是这样的：</p><p>首先设无穷集为$X$，从$X$中选取一个元素$x_1$，然后构造一个集合$X -  ${$ x_1  $}$  = X_2$，然后从$X_2$中我们可以选取一个元素$x_2$，然后构造一个集合$X-  ${$ x_1, x_2  $}$ =X_3$……再利用数学归纳原理，假设可以选取n个元素$  ${$ x_1, x_2, x_3, ……  $}$ $，当到n+1时，我们构造集合$X_n=X-  ${$ x_1, x_2, x_3, …,x_n, …  $}$ $，然后从这个集合选出元素$x_{n+1}$，所以此命题成立。</p><h4 id="P63-3-b"><a href="#P63-3-b" class="headerlink" title="P63 3.b"></a>P63 3.b</h4><blockquote><p>无穷集与一个至多可数集的并的势与原来那个无穷集的势一样</p></blockquote><p>这个题目给我的感觉是让我想到：</p><p>$$A\cup \emptyset = A$$</p><p>再联系前面的一问，于是让我有了下面的思路：</p><p>设无穷集为$X$，使用反证法证明，假设不相等，即$card(X \cup 可数集) \neq card(X) $，有a)知存在可数集$A \subset X$，由假设知$card(X \cup A) \neq card(X)$，但是$X \cup A = X$，即$card(X \cup A) = card(X)$，因此出现了矛盾。</p><h4 id="小结1"><a href="#小结1" class="headerlink" title="小结1"></a>小结1</h4><ul><li><p>以上两个题，使我们有了一个证明了至多可数集的势具有与加法中的0相似的性质，像是一个基础的单位元素。</p></li><li><p>给出了由一个已知可数集的势推出其在$\mathbb{R}$的补集方法，也就是正着想不容易那就反着来，这有可能是卓老师的出题用意，有了3.b)的结论我们就可以很容易得到以下两个推论了：</p><ul><li>无理数集具有连续势统。(P63 3.d)</li><li>超越数集具有连续势统。(P63 3.e)</li></ul></li></ul><h3 id="二进制小数的应用"><a href="#二进制小数的应用" class="headerlink" title="二进制小数的应用"></a>二进制小数的应用</h3><p>下面这几道题卓老师反复以小问的形式提示二进制小数在集合的势的证明里的非同一般的作用，真的是让我跪了。</p><h4 id="P63-4-a"><a href="#P63-4-a" class="headerlink" title="P63 4.a"></a>P63 4.a</h4><blockquote><p>递增自然数列之集与形如$0.\alpha_1 \alpha_2 \alpha_3…$的二进制小数之集等势</p></blockquote><p>证明等势就是构建双射，我是这样想的：</p><p>设递增自然数列之集为$X$，从$X$中选取一个递增数列A构造一个集合$A^{\prime}=  ${$ a_1, a_2, a_3, …  $}$ $，$A^{\prime}$可以是有限集也可以是可数集。设二进制小数的集为$Y$，建立映射：$f:X \mapsto Y $：</p><p>$$<br>f(A) = 0.\alpha_1 \alpha_2 \alpha_3…，其中<br>\alpha_i=<br>\begin{cases}<br>1 , i \in A^{\prime}\<br>0 , i \notin A^{\prime}\<br>\end{cases}<br>$$</p><h4 id="P63-4-b"><a href="#P63-4-b" class="headerlink" title="P63 4.b"></a>P63 4.b</h4><blockquote><p>可数集的一切子集之集合具有连续统的势</p></blockquote><p>这个题就是把取子集和递增自然数列建立联系，从而与二进制小数建立联系，最终与区间$[0, 1]$建立联系：</p><p>对于一个可数集$A$，对其元素进行编号：$a_1, a_2, a_3, ……$。<br>对于任意一个$A$的非空子集，将其元素按照序号从小到大列出就是一个递增自然数列，根据4.a进而得到其对应于一个形如$0.\alpha_1 \alpha_2 \alpha_3…$的二进制小数。<br>然后空集对应0，全集对应1，这样就建立起一个双射$f:p(X) \mapsto [0, 1] ，p(X)$是A的一切子集之集。</p><h4 id="P63-5-a"><a href="#P63-5-a" class="headerlink" title="P63 5.a"></a>P63 5.a</h4><blockquote><p>集合X的一切子集的集合p(X)与一切在X上定义而取值为0或1的函数等势</p></blockquote><p>这个函数可以看作给集合$X$了一个划分，具有某个性质的子集的元素对应的值为1，这个子集的补集的元素对应的值为0。所以一个这个二值函数就等价于从集合$X$中选出了一个子集，这就与上一题的一切子集的集合相对应了。</p><h4 id="P63-7"><a href="#P63-7" class="headerlink" title="P63 7"></a>P63 7</h4><blockquote><p>在闭区间$[0, 1]\subset \mathbb{R}上，画出那样的数x的集合：x \in [0, 1]，其三进位记法x=0.\alpha_1 \alpha_2 \alpha_3…（x\in  ${$ 0, 1, 2  $}$ $具有下列三性质之一：<br>a) $\alpha_1 \neq 1$<br>b) $(\alpha_1 \neq 1) \wedge (\alpha_2 \neq 1)$<br>c) $\forall i \in \mathbb{N} (\alpha_i = 1) (康托尔集）$</p></blockquote><p>这个利用三进制数表示康托尔集的方式真的太精彩了，我之前听说过康托尔集是三等分线段，没想到还能这样搞。</p><p>为了好理解我先定义个函数：$x = f(\alpha_1, \alpha_2, \alpha_3, …) = 0.\alpha_1 \alpha_2 \alpha_3…$。<br>f具有性质：</p><ul><li>$f(\alpha_1, \alpha_2, \alpha_3, …) = \frac{\alpha_1}{3} + f(0, \alpha_2, \alpha_3, …) $</li><li>$f(0,0,…,0,\alpha_{i+1}, \alpha_{i+2}, \alpha_{i+3}, …) \in [0, \frac{1}{3^{i}})$</li></ul><p>对于a):</p><p>$$f(0, \alpha_2, \alpha_3, …) = 0 + f(0, \alpha_2, \alpha_3, …) \in [0, \frac{1}{3}) $$<br>$$f(2, \alpha_2, \alpha_3, …) = \frac{2}{3} + f(0, \alpha_2, \alpha_3, …) \in [\frac{2}{3},1)$$</p><p>对于b):</p><p>$$f(0, 0, \alpha_3, …) = 0 + 0+ f(0, 0, \alpha_3, …) \in [0, \frac{1}{9}) $$<br>$$ f(0, 2, \alpha_3, …) = 0 + \frac{2}{9}+ f(0, 0, \alpha_3, …) \in [\frac{2}{9}, \frac{1}{3}) $$<br>$$ f(2, 0, \alpha_3, …) = \frac{2}{3} + 0 +f(0, 0, \alpha_3, …) \in [\frac{2}{3},\frac{7}{9}) $$<br>$$ f(2, 2, \alpha_3, …) = \frac{2}{3} + \frac{2}{9} +f(0, 0, \alpha_3, …) \in [\frac{8}{9},1) $$</p><p>对于c)就是无限重复上面的操作。</p><p>画出图就是：</p><p><img alt data-src="/uploads/fenxing.png"></p><p>a)对应于$E_1$，b)对应于$E_2$。</p><p>对于康托尔集只需把不含1的三进制小数中的2换成1就能对应二进制小数，从而和区间[0, 1]中的所有数对应了，即两集合等势。</p><p>到了最后啥也不想说了，数学真的秀！！！</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;自从开始下决心死磕卓里奇的数学分析之后，我才开始见识到卓老师的数学分析的教材的彪悍，通过习题直接把你虐到升华。对于我这个刚学完两个学期的数分的普通大学生来说，内心除了心酸，也有对卓老师佩服。昨晚肝了将近三个多小时的可数集部分的课后题，才把大部分习题的思路梳理出来，收获良多，
-      
-    
-    </summary>
-    
-      <category term="数学分析" scheme="https://zinw623.github.io/categories/%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/"/>
-    
-    
-      <category term="数学分析" scheme="https://zinw623.github.io/tags/%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/"/>
-    
-      <category term="可数与不可数" scheme="https://zinw623.github.io/tags/%E5%8F%AF%E6%95%B0%E4%B8%8E%E4%B8%8D%E5%8F%AF%E6%95%B0/"/>
-    
-  </entry>
   
   <entry>
     <title>翻译：pytorch数据加载和处理</title>
@@ -270,9 +183,9 @@ d --&gt; d1(最
       <category term="pytorch" scheme="https://zinw623.github.io/categories/%E7%AC%94%E8%AE%B0/pytorch/"/>
     
     
-      <category term="pytorch" scheme="https://zinw623.github.io/tags/pytorch/"/>
-    
       <category term="笔记" scheme="https://zinw623.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="pytorch" scheme="https://zinw623.github.io/tags/pytorch/"/>
     
   </entry>
   
@@ -299,9 +212,9 @@ d --&gt; d1(最
       <category term="pytorch" scheme="https://zinw623.github.io/categories/%E7%AC%94%E8%AE%B0/pytorch/"/>
     
     
-      <category term="pytorch" scheme="https://zinw623.github.io/tags/pytorch/"/>
-    
       <category term="笔记" scheme="https://zinw623.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="pytorch" scheme="https://zinw623.github.io/tags/pytorch/"/>
     
   </entry>
   
@@ -328,9 +241,9 @@ d --&gt; d1(最
       <category term="pytorch" scheme="https://zinw623.github.io/categories/%E7%AC%94%E8%AE%B0/pytorch/"/>
     
     
-      <category term="pytorch" scheme="https://zinw623.github.io/tags/pytorch/"/>
-    
       <category term="笔记" scheme="https://zinw623.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="pytorch" scheme="https://zinw623.github.io/tags/pytorch/"/>
     
   </entry>
   
@@ -358,9 +271,9 @@ d --&gt; d1(最
       <category term="pytorch" scheme="https://zinw623.github.io/categories/%E7%AC%94%E8%AE%B0/pytorch/"/>
     
     
-      <category term="pytorch" scheme="https://zinw623.github.io/tags/pytorch/"/>
-    
       <category term="笔记" scheme="https://zinw623.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="pytorch" scheme="https://zinw623.github.io/tags/pytorch/"/>
     
   </entry>
   
@@ -597,6 +510,81 @@ d --&gt; d1(最
       <category term="虚拟机" scheme="https://zinw623.github.io/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
     
       <category term="Ubuntu" scheme="https://zinw623.github.io/tags/Ubuntu/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>photoshop cc 2019安装破解</title>
+    <link href="https://zinw623.github.io/2019/08/02/photoshop-cc-2019-download/"/>
+    <id>https://zinw623.github.io/2019/08/02/photoshop-cc-2019-download/</id>
+    <published>2019-08-02T03:08:27.000Z</published>
+    <updated>2019-08-08T03:22:57.465Z</updated>
+    
+    <content type="html"><![CDATA[<p>Photoshop如今已经非常常用的处理图片的软件，本文就是介绍一下photoshop cc 2019安装破解的完整过程。</p><p>注：本文参考了<a href="http://www.3322.cc/soft/48343.html" target="_blank" rel="noopener">http://www.3322.cc/soft/48343.html</a></p><a id="more"></a><h3 id="下载creative-cloud"><a href="#下载creative-cloud" class="headerlink" title="下载creative cloud"></a>下载creative cloud</h3><p>什么是creative cloud？creative cloud相当于adobe系列的一个应用商城，我们可以在里面安装各种adobe系列的软件。<br>下载链接： <a href="https://creativecloud.adobe.com/apps/download/creative-cloud?promoid=KSPDX" target="_blank" rel="noopener">官网链接</a>       <a href="https://pan.baidu.com/s/1qr6U3l48Nr-pakBNumR7Tw" target="_blank" rel="noopener">网盘链接</a></p><p>下载完成直接按提示安装，然后注册adobe账号并登陆。</p><h3 id="下载安装photoshop-cc-2019"><a href="#下载安装photoshop-cc-2019" class="headerlink" title="下载安装photoshop-cc-2019"></a>下载安装photoshop-cc-2019</h3><p>默认的下载位置在c盘，如果想改到其他盘可以点击右上角的三个点，出来菜单再点首选项。</p><img width="50%" data-src="/uploads/downloadPS/3.PNG"><p>然后点击creative Cloud界面，在安装位置条目处更改到你想安装到的位置。</p><img width="50%" data-src="/uploads/downloadPS/4.PNG"><p>打开creative cloud，找到photoshop的条目点击试用，photoshop自动下载安装成功。</p><img width="50%" data-src="/uploads/downloadPS/5.PNG"><img width="50%" data-src="/uploads/downloadPS/1.PNG"><h3 id="利用补丁破解"><a href="#利用补丁破解" class="headerlink" title="利用补丁破解"></a>利用补丁破解</h3><p>安装完成后安全起见先不要打开ps，我们先下载补丁工具。<br>下载链接：<a href="https://pan.baidu.com/s/1RWVV7HKcgqNU_a6GsLjyDw" target="_blank" rel="noopener">网盘链接</a> <a href="/uploads/downloadPS/PhotoshopCC2019pjbd_48343.zip">其他链接</a></p><p>将压缩包里的adobe.photoshop.cc.2019.20.0.0-patch.exe文件解压到ps安装目录下，就是你刚才修改的安装位置，保证那个位置下有photoshop.exe文件。</p><p>然后点击运行补丁（你可能会听到一段诡异的音乐。。。）。</p><img width="50%" data-src="/uploads/downloadPS/6.PNG"><p>点击应用，等待出现文件补丁已成功完成的提示。</p><img width="50%" data-src="/uploads/downloadPS/7.PNG"><p>这样就破解完成了，这时再打开ps发现没有试用还有多少天的提醒了。</p><img width="50%" data-src="/uploads/downloadPS/8.PNG"><p>按照补丁制作者的建议，在 编辑 ==&gt; 首选项 ==&gt; 常规 ==&gt; 停用”主页”屏幕 打钩。</p><img width="50%" data-src="/uploads/downloadPS/9.PNG"><p>最后做好重启一下ps再试用。</p><p>注：这篇文章是我安装后就写了，我在安装完的七天后再次检验是否失效，如果失效我会更新补丁，如果补丁失效可以回来看我是否有更新方法。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Photoshop如今已经非常常用的处理图片的软件，本文就是介绍一下photoshop cc 2019安装破解的完整过程。&lt;/p&gt;
+&lt;p&gt;注：本文参考了&lt;a href=&quot;http://www.3322.cc/soft/48343.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://www.3322.cc/soft/48343.html&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="photoshop" scheme="https://zinw623.github.io/categories/photoshop/"/>
+    
+    
+      <category term="破解" scheme="https://zinw623.github.io/tags/%E7%A0%B4%E8%A7%A3/"/>
+    
+      <category term="photoshop" scheme="https://zinw623.github.io/tags/photoshop/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Xshell：在本地浏览器使用服务器的jupyter notebook</title>
+    <link href="https://zinw623.github.io/2019/08/02/hexo-jupyter/"/>
+    <id>https://zinw623.github.io/2019/08/02/hexo-jupyter/</id>
+    <published>2019-08-02T01:47:42.000Z</published>
+    <updated>2019-08-04T03:19:26.760Z</updated>
+    
+    <content type="html"><![CDATA[<p>有的服务器里只是命令行，无法可视化，可能就无法使用jupyter notebook。其实需要稍微修改一下连接的属性就能在本地浏览器里打开在服务器里启动的jupyter notebook<a id="more"></a>，具体操作如下：</p><ol><li>首先右击会话管理器里的服务器标签，在菜单点击属性。</li></ol><img width="50%" data-src="/uploads/xshellJupyter/1.PNG"><ol start="2"><li>然后点击左侧的隧道，然后再点击添加。</li></ol><img width="50%" data-src="/uploads/xshellJupyter/2.PNG"><ol start="3"><li>输入两个端口号，我这输入的是jupyter notebook默认的8888端口，然后点确定</li></ol><img width="50%" data-src="/uploads/xshellJupyter/3.PNG"><ol start="4"><li>然后再取消右下方转发X11连接到的选项，然后点确定。</li></ol><img width="50%" data-src="/uploads/xshellJupyter/4.PNG"><ol start="5"><li>之后双击会话管理器里的服务器进行连接，在命令行里输入jupyter notebook，启动后在浏览器里访问<a href="http://localhost:8888/" target="_blank" rel="noopener"></a>就会看到jupyter notebook的界面了。</li></ol><img width="50%" data-src="/uploads/xshellJupyter/5.PNG">]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;有的服务器里只是命令行，无法可视化，可能就无法使用jupyter notebook。其实需要稍微修改一下连接的属性就能在本地浏览器里打开在服务器里启动的jupyter notebook
+    
+    </summary>
+    
+      <category term="Xshell" scheme="https://zinw623.github.io/categories/Xshell/"/>
+    
+    
+      <category term="Xshell" scheme="https://zinw623.github.io/tags/Xshell/"/>
+    
+      <category term="jupyter notebook" scheme="https://zinw623.github.io/tags/jupyter-notebook/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>windows系统：Xshell下载安装+连接服务器</title>
+    <link href="https://zinw623.github.io/2019/08/01/XshellDownload/"/>
+    <id>https://zinw623.github.io/2019/08/01/XshellDownload/</id>
+    <published>2019-08-01T04:32:52.000Z</published>
+    <updated>2019-08-04T03:20:07.357Z</updated>
+    
+    <content type="html"><![CDATA[<p>学习深度学习需要足够的计算资源，往往需要连接远程服务器用来计算。本篇文章就介绍一下如何在windows系统里利用xshell连接服务器。</p><a id="more"></a><h3 id="xshell下载安装"><a href="#xshell下载安装" class="headerlink" title="xshell下载安装"></a>xshell下载安装</h3><p>首先要下载安装包:<a href="https://pan.baidu.com/s/1BK70moXvCw5xt3w7pKFH5g" target="_blank" rel="noopener">百度网盘资源</a>。<br>当然也可以去官网下载安装包，选择<a href="https://www.netsarang.com/zh/free-for-home-school/" target="_blank" rel="noopener">家庭学校免费版</a>，下载前要填一下姓名邮箱，提交后你会收到带有下载链接的邮件。</p><img width="50%" data-src="/uploads/downloadXshell/1.PNG"><p>点击安装包，然后一路默认下一步就ok。如果不想安装在c盘也可以，在其他盘里专门存xshell的各种文件，安装过程中只需把主文件夹换成你刚才的文件夹就ok。</p><img width="50%" data-src="/uploads/downloadXshell/2.PNG"><img width="50%" data-src="/uploads/downloadXshell/3.PNG"><h3 id="建立连接"><a href="#建立连接" class="headerlink" title="建立连接"></a>建立连接</h3><ol><li><p>打开xshell后，点击左上角的文件然后点新建。</p><img width="50%" data-src="/uploads/downloadXshell/4.PNG"></li></ol><ol start="2"><li><p>然后填入服务器名称、主机、端口号,然后点确定。</p><img width="50%" data-src="/uploads/downloadXshell/5.png"></li><li><p>双击左侧会话管理器里刚建的服务器，在弹出的窗口里填入登录用的用户名，选上记住用户名。</p><img width="50%" data-src="/uploads/downloadXshell/6.PNG"></li><li><p>然后输入密码，并选上记住密码。</p><img width="50%" data-src="/uploads/downloadXshell/7.PNG"></li><li><p>点击确定以后就能在黑色的shell看到已经登录成功的提示了，然后就可以在shell里进行操作了。</p><img width="50%" data-src="/uploads/downloadXshell/8.PNG"></li><li><p>之后登录只需要双击左侧会话管理器里的对应标签即可。</p><h3 id="上传下载文件"><a href="#上传下载文件" class="headerlink" title="上传下载文件"></a>上传下载文件</h3></li><li><p>在Linux主机上，安装上传下载工具包rz及sz，使用sudo apt install lrzsz  进行安装。</p></li><li><p>从Windows上传文件，上传命令为rz；输入命令后会弹出选择要上传的本地文件的窗口。</p></li></ol><img width="50%" data-src="/uploads/downloadXshell/9.PNG"><ol start="3"><li><p>从Linux主机下载文件，下载命令为sz ，后面跟要下载的文件名。例如：</p><p> <code>sz helloworld.py。</code></p></li></ol><p>然后就会弹出选择要保存到本机位置的窗口。</p><img width="50%" data-src="/uploads/downloadXshell/10.PNG"><p><strong>xshell的基本操作就说这些了，这些的操作已经基本够用了</strong></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;学习深度学习需要足够的计算资源，往往需要连接远程服务器用来计算。本篇文章就介绍一下如何在windows系统里利用xshell连接服务器。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Xshell" scheme="https://zinw623.github.io/categories/Xshell/"/>
+    
+    
+      <category term="Xshell" scheme="https://zinw623.github.io/tags/Xshell/"/>
+    
+      <category term="linux服务器" scheme="https://zinw623.github.io/tags/linux%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+      <category term="windows" scheme="https://zinw623.github.io/tags/windows/"/>
     
   </entry>
   
