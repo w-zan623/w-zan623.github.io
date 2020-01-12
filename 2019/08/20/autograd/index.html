@@ -385,7 +385,6 @@ A[autograd.Variable] --> B(data);
 A[autograd.Variable] --> C(grad);
 A[autograd.Variable] --> D(grad_fn);
           </pre>
-
 <p>Variable的构造函数需要传入tensor，同时有两个可选参数。</p>
 <ul>
 <li>require_grad(bool)：是否需要对该variable进行求导。</li>
@@ -402,49 +401,46 @@ A[autograd.Variable] --> D(grad_fn);
 <li>create_graph：对反向传播过程再次构建计算图，可通过backward of backward实现求高阶导数。</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Variable <span class="keyword">as</span> V</span><br><span class="line"><span class="keyword">import</span> torch <span class="keyword">as</span> t</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 从tensor中创建variable，指定需要求导</span></span><br><span class="line"></span><br><span class="line">a = V(t.ones(<span class="number">3</span>, <span class="number">4</span>), requires_grad = <span class="literal">True</span>);a</span><br></pre></td></tr></table></figure>
-
 <pre><code>tensor([[1., 1., 1., 1.],
         [1., 1., 1., 1.],
-        [1., 1., 1., 1.]], requires_grad=True)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b = V(t.zeros(<span class="number">3</span>, <span class="number">4</span>));b</span><br></pre></td></tr></table></figure>
-
+        [1., 1., 1., 1.]], requires_grad=True)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b = V(t.zeros(<span class="number">3</span>, <span class="number">4</span>));b</span><br></pre></td></tr></table></figure>
 <pre><code>tensor([[0., 0., 0., 0.],
         [0., 0., 0., 0.],
-        [0., 0., 0., 0.]])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 函数的使用和tensor一致</span></span><br><span class="line"><span class="comment"># 也可写成c = a + b</span></span><br><span class="line">c = a.add(b)</span><br><span class="line">c</span><br></pre></td></tr></table></figure>
-
+        [0., 0., 0., 0.]])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 函数的使用和tensor一致</span></span><br><span class="line"><span class="comment"># 也可写成c = a + b</span></span><br><span class="line">c = a.add(b)</span><br><span class="line">c</span><br></pre></td></tr></table></figure>
 <pre><code>tensor([[1., 1., 1., 1.],
         [1., 1., 1., 1.],
-        [1., 1., 1., 1.]], grad_fn=&lt;AddBackward0&gt;)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d = c.sum()</span><br><span class="line">d.backward() <span class="comment"># 反向传播</span></span><br></pre></td></tr></table></figure>
-
+        [1., 1., 1., 1.]], grad_fn=&lt;AddBackward0&gt;)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d = c.sum()</span><br><span class="line">d.backward() <span class="comment"># 反向传播</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 注意二者的区别</span></span><br><span class="line"><span class="comment"># 前者在取data后变为tensor，从tensor计算sum得到float</span></span><br><span class="line"><span class="comment"># 后者计算sum后仍然是Variable</span></span><br><span class="line">c.data.sum(), c.sum()</span><br></pre></td></tr></table></figure>
-
-<pre><code>(tensor(12.), tensor(12., grad_fn=&lt;SumBackward0&gt;))</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a.grad</span><br></pre></td></tr></table></figure>
-
+<pre><code>(tensor(12.), tensor(12., grad_fn=&lt;SumBackward0&gt;))
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a.grad</span><br></pre></td></tr></table></figure>
 <pre><code>tensor([[1., 1., 1., 1.],
         [1., 1., 1., 1.],
-        [1., 1., 1., 1.]])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 此处虽然没有指定c需要求导，但c依赖于a，而a需要求导</span></span><br><span class="line"><span class="comment"># 因此c的requires_grad属性会自动设为True</span></span><br><span class="line">a.requires_grad, b.requires_grad, c.requires_grad</span><br></pre></td></tr></table></figure>
-
-<pre><code>(True, False, True)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># c.grad是None，c不是叶子节点，他的梯度是用来计算a的梯度</span></span><br><span class="line"><span class="comment"># 虽然c.requires_grad = True，但其梯度计算完之后即被释放</span></span><br><span class="line">c.grad <span class="keyword">is</span> <span class="literal">None</span></span><br></pre></td></tr></table></figure>
-
-<pre><code>True</code></pre><p>接下来看看autograd计算导数和我们手动推导的导数的区别。<br>$$y=x^2e^x$$</p>
-<p>它的导函数是：<br>$$\frac{\partial{y}}{\partial{x}}=2xe^x+x^2e^x$$</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x)</span>:</span></span><br><span class="line">    y = x**<span class="number">2</span> * t.exp(x)</span><br><span class="line">    <span class="keyword">return</span> y</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gradf</span><span class="params">(x)</span>:</span></span><br><span class="line">    dx = <span class="number">2</span>*x*t.exp(x) + x**<span class="number">2</span>*t.exp(x)</span><br><span class="line">    <span class="keyword">return</span> dx</span><br></pre></td></tr></table></figure>
-
+        [1., 1., 1., 1.]])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 此处虽然没有指定c需要求导，但c依赖于a，而a需要求导</span></span><br><span class="line"><span class="comment"># 因此c的requires_grad属性会自动设为True</span></span><br><span class="line">a.requires_grad, b.requires_grad, c.requires_grad</span><br></pre></td></tr></table></figure>
+<pre><code>(True, False, True)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># c.grad是None，c不是叶子节点，他的梯度是用来计算a的梯度</span></span><br><span class="line"><span class="comment"># 虽然c.requires_grad = True，但其梯度计算完之后即被释放</span></span><br><span class="line">c.grad <span class="keyword">is</span> <span class="literal">None</span></span><br></pre></td></tr></table></figure>
+<pre><code>True
+</code></pre><p>接下来看看autograd计算导数和我们手动推导的导数的区别。</p>
+<script type="math/tex; mode=display">y=x^2e^x</script><p>它的导函数是：</p>
+<script type="math/tex; mode=display">\frac{\partial{y}}{\partial{x}}=2xe^x+x^2e^x</script><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x)</span>:</span></span><br><span class="line">    y = x**<span class="number">2</span> * t.exp(x)</span><br><span class="line">    <span class="keyword">return</span> y</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gradf</span><span class="params">(x)</span>:</span></span><br><span class="line">    dx = <span class="number">2</span>*x*t.exp(x) + x**<span class="number">2</span>*t.exp(x)</span><br><span class="line">    <span class="keyword">return</span> dx</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = V(t.randn(<span class="number">3</span>, <span class="number">4</span>), requires_grad = <span class="literal">True</span>)</span><br><span class="line">y = f(x)</span><br><span class="line">y</span><br></pre></td></tr></table></figure>
-
 <pre><code>tensor([[1.3949e-01, 2.7201e-01, 4.9848e-01, 2.2968e+00],
         [3.2033e-01, 3.3618e-01, 2.3554e-02, 1.0507e+01],
         [3.9416e+01, 3.5322e+00, 9.6847e-02, 1.2743e+01]],
-       grad_fn=&lt;MulBackward0&gt;)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y.backward(t.ones(y.size())) <span class="comment"># grad_variables形状与y一致</span></span><br><span class="line">x.grad</span><br></pre></td></tr></table></figure>
-
+       grad_fn=&lt;MulBackward0&gt;)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y.backward(t.ones(y.size())) <span class="comment"># grad_variables形状与y一致</span></span><br><span class="line">x.grad</span><br></pre></td></tr></table></figure>
 <pre><code>tensor([[ 1.0154, -0.4398, -0.1755,  7.1583],
         [-0.4095,  1.7961,  0.3532, 24.3531],
-        [76.1412, 10.0143, -0.4190, 28.6505]])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># autograd的计算结果与利用公式手动计算的结果一致</span></span><br><span class="line">gradf(x)</span><br></pre></td></tr></table></figure>
-
+        [76.1412, 10.0143, -0.4190, 28.6505]])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># autograd的计算结果与利用公式手动计算的结果一致</span></span><br><span class="line">gradf(x)</span><br></pre></td></tr></table></figure>
 <pre><code>tensor([[ 1.0154, -0.4398, -0.1755,  7.1583],
         [-0.4095,  1.7961,  0.3532, 24.3531],
-        [76.1412, 10.0143, -0.4190, 28.6505]], grad_fn=&lt;AddBackward0&gt;)</code></pre><h4 id="计算图"><a href="#计算图" class="headerlink" title="计算图"></a>计算图</h4><p>pytorch中autograd的底层采用了计算图，计算图是一种特殊的有向无环图（DAG），用于记录算子与变量之间的关系。一般用矩形表示算子，椭圆形表示变量。如表达式$\boldsymbol{z}=\boldsymbol{wx}+\boldsymbol{b}$可分解为$\boldsymbol{y}=\boldsymbol{wx}$和$\boldsymbol{z}=\boldsymbol{y}+\boldsymbol{b}$，其计算图如图所示，图中的MUL和ADD都是算子，$\boldsymbol{w}$、$\boldsymbol{x}$、$\boldsymbol{b}$为变量。</p>
+        [76.1412, 10.0143, -0.4190, 28.6505]], grad_fn=&lt;AddBackward0&gt;)
+</code></pre><h4 id="计算图"><a href="#计算图" class="headerlink" title="计算图"></a>计算图</h4><p>pytorch中autograd的底层采用了计算图，计算图是一种特殊的有向无环图（DAG），用于记录算子与变量之间的关系。一般用矩形表示算子，椭圆形表示变量。如表达式$\boldsymbol{z}=\boldsymbol{wx}+\boldsymbol{b}$可分解为$\boldsymbol{y}=\boldsymbol{wx}$和$\boldsymbol{z}=\boldsymbol{y}+\boldsymbol{b}$，其计算图如图所示，图中的MUL和ADD都是算子，$\boldsymbol{w}$、$\boldsymbol{x}$、$\boldsymbol{b}$为变量。</p>
 <pre class="mermaid" style="text-align: center;">
             
             graph LR;
@@ -455,10 +451,8 @@ E((b)) --> F[Add];
 D((y)) --> F[Add];
 F[Add] --> G((z));
           </pre>
-
 <p>如上有向无环图，$\boldsymbol{X}$和$\boldsymbol{b}$是叶子节点，这些节点通常有用户自己创建，不依赖于其他变量。$\boldsymbol{z}$称为根节点，是计算图的最终目标。利用链式法则很容易求各个叶子节点的梯度。</p>
-<p>$$ \frac{\partial{z}}{\partial{b}}=1,\frac{\partial{z}}{\partial{y}}=1\\frac{\partial{y}}{\partial{w}}=x,\frac{\partial{y}}{\partial{x}}=w\\frac{\partial{z}}{\partial{x}}=\frac{\partial{z}}{\partial{y}}\frac{\partial{y}}{\partial{x}}=1<em>w\\frac{\partial{z}}{\partial{w}}=\frac{\partial{z}}{\partial{y}}\frac{\partial{y}}{\partial{w}}=1</em>x $$</p>
-<p>有了计算图上述链式求导可自动利用计算图的反向传播自动完成，其过程如图所示：</p>
+<script type="math/tex; mode=display">\frac{\partial{z}}{\partial{b}}=1,\frac{\partial{z}}{\partial{y}}=1\\\frac{\partial{y}}{\partial{w}}=x,\frac{\partial{y}}{\partial{x}}=w\\\frac{\partial{z}}{\partial{x}}=\frac{\partial{z}}{\partial{y}}\frac{\partial{y}}{\partial{x}}=1*w\\\frac{\partial{z}}{\partial{w}}=\frac{\partial{z}}{\partial{y}}\frac{\partial{y}}{\partial{w}}=1*x</script><p>有了计算图上述链式求导可自动利用计算图的反向传播自动完成，其过程如图所示：</p>
 <pre class="mermaid" style="text-align: center;">
             
             graph LR;
@@ -469,33 +463,30 @@ C((dy)) --> E[mulBackward];
 E[mulBackward] --> F((dX));
 E[mulBackward] --> G((dW));
           </pre>
-
 <p>图中记录了操作function，每个变量在图中的位置可通过其grad_fn属性在图中的位置推测得到。在反向传播的过程中，autograd沿着这个图从当前变量（根节点z）溯源，可以利用链式求导法则计算所有叶子节点的梯度。</p>
 <p>每一个前向传播操作的函数都有与之对应的反向传播函数用来计算输入的各个variable的梯度，这些函数的函数名通常以Backward结尾。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x = V(t.ones(<span class="number">1</span>))</span><br><span class="line">b = V(t.rand(<span class="number">1</span>), requires_grad = <span class="literal">True</span>)</span><br><span class="line">w = V(t.rand(<span class="number">1</span>), requires_grad = <span class="literal">True</span>)</span><br><span class="line">y = w * x <span class="comment"># 等价于y = w.mul(x)</span></span><br><span class="line">z = y + b <span class="comment"># 等价于z = y.add(b)</span></span><br></pre></td></tr></table></figure>
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x.requires_grad, b.requires_grad, w.requires_grad</span><br></pre></td></tr></table></figure>
-
-<pre><code>(False, True, True)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 虽然未指定y.requires_grad为True，但由于y依赖于需要求导的w</span></span><br><span class="line"><span class="comment"># 故而y.requires_grad为True</span></span><br><span class="line">y.requires_grad</span><br></pre></td></tr></table></figure>
-
-<pre><code>True</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x.is_leaf, w.is_leaf, b.is_leaf</span><br></pre></td></tr></table></figure>
-
-<pre><code>(True, True, True)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y.is_leaf, z.is_leaf</span><br></pre></td></tr></table></figure>
-
-<pre><code>(False, False)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># grad_fn可以查看这个variable的反向传播函数</span></span><br><span class="line"><span class="comment"># z是add函数的输出，所以它的反向传播函数是AddBackward</span></span><br><span class="line">z.grad_fn</span><br></pre></td></tr></table></figure>
-
-<pre><code>&lt;AddBackward0 at 0x7f073e390e80&gt;</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#next_function保存grad_fn的输入，grad_fn的输入是一个tuple</span></span><br><span class="line"><span class="comment"># 第一个是y，它是乘法（mul）的输出，所以对应的反向传播函数y.grad_fn是MulBackward</span></span><br><span class="line"><span class="comment"># 第二个是b，它是叶子节点，由用户创建，grad_fn为None，但是有</span></span><br><span class="line">z.grad_fn.next_functions</span><br></pre></td></tr></table></figure>
-
+<pre><code>(False, True, True)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 虽然未指定y.requires_grad为True，但由于y依赖于需要求导的w</span></span><br><span class="line"><span class="comment"># 故而y.requires_grad为True</span></span><br><span class="line">y.requires_grad</span><br></pre></td></tr></table></figure>
+<pre><code>True
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x.is_leaf, w.is_leaf, b.is_leaf</span><br></pre></td></tr></table></figure>
+<pre><code>(True, True, True)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y.is_leaf, z.is_leaf</span><br></pre></td></tr></table></figure>
+<pre><code>(False, False)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># grad_fn可以查看这个variable的反向传播函数</span></span><br><span class="line"><span class="comment"># z是add函数的输出，所以它的反向传播函数是AddBackward</span></span><br><span class="line">z.grad_fn</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;AddBackward0 at 0x7f073e390e80&gt;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#next_function保存grad_fn的输入，grad_fn的输入是一个tuple</span></span><br><span class="line"><span class="comment"># 第一个是y，它是乘法（mul）的输出，所以对应的反向传播函数y.grad_fn是MulBackward</span></span><br><span class="line"><span class="comment"># 第二个是b，它是叶子节点，由用户创建，grad_fn为None，但是有</span></span><br><span class="line">z.grad_fn.next_functions</span><br></pre></td></tr></table></figure>
 <pre><code>((&lt;MulBackward0 at 0x7f073e390828&gt;, 0),
- (&lt;AccumulateGrad at 0x7f073e390f28&gt;, 0))</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># variable的grad_fn对应着图中的function</span></span><br><span class="line">z.grad_fn.next_functions[<span class="number">0</span>][<span class="number">0</span>] == y.grad_fn</span><br></pre></td></tr></table></figure>
-
-<pre><code>True</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第一个是w，叶子节点，需要求导，梯度是累加的</span></span><br><span class="line"><span class="comment"># 第二个是x，叶子节点，不需要求导，所以为None</span></span><br><span class="line">y.grad_fn.next_functions</span><br></pre></td></tr></table></figure>
-
-<pre><code>((&lt;AccumulateGrad at 0x7f073e390470&gt;, 0), (None, 0))</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 叶子节点的grad_fn是None</span></span><br><span class="line">w.grad_fn, x.grad_fn</span><br></pre></td></tr></table></figure>
-
-<pre><code>(None, None)</code></pre><p>计算$\boldsymbol{w}$的梯度时需要用到$\boldsymbol{x}$的数值（$\frac{\partial{y}}{\partial{w}}=x$），这些数值在前向过程中会保存成buffer，在计算完梯度之后会自动清空。为了能够多次反向传播需要指定retain_graph来保留这些buffer。</p>
+ (&lt;AccumulateGrad at 0x7f073e390f28&gt;, 0))
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># variable的grad_fn对应着图中的function</span></span><br><span class="line">z.grad_fn.next_functions[<span class="number">0</span>][<span class="number">0</span>] == y.grad_fn</span><br></pre></td></tr></table></figure>
+<pre><code>True
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第一个是w，叶子节点，需要求导，梯度是累加的</span></span><br><span class="line"><span class="comment"># 第二个是x，叶子节点，不需要求导，所以为None</span></span><br><span class="line">y.grad_fn.next_functions</span><br></pre></td></tr></table></figure>
+<pre><code>((&lt;AccumulateGrad at 0x7f073e390470&gt;, 0), (None, 0))
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 叶子节点的grad_fn是None</span></span><br><span class="line">w.grad_fn, x.grad_fn</span><br></pre></td></tr></table></figure>
+<pre><code>(None, None)
+</code></pre><p>计算$\boldsymbol{w}$的梯度时需要用到$\boldsymbol{x}$的数值（$\frac{\partial{y}}{\partial{w}}=x$），这些数值在前向过程中会保存成buffer，在计算完梯度之后会自动清空。为了能够多次反向传播需要指定retain_graph来保留这些buffer。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y.grad_fn.saved_variables</span><br></pre></td></tr></table></figure>
-
 <pre><code>---------------------------------------------------------------------------
 
 AttributeError                            Traceback (most recent call last)
@@ -504,51 +495,52 @@ AttributeError                            Traceback (most recent call last)
 ----&gt; 1 y.grad_fn.saved_variables
 
 
-AttributeError: &apos;MulBackward0&apos; object has no attribute &apos;saved_variables&apos;</code></pre><p>原因确实是版本问题，PyTorch0.3 中把许多python的操作转移到了C++中，saved_variables 现在是一个c++的对象，无法通过python访问。<a href="https://github.com/chenyuntc/pytorch-book/issues/7" target="_blank" rel="noopener">https://github.com/chenyuntc/pytorch-book/issues/7</a></p>
+AttributeError: &#39;MulBackward0&#39; object has no attribute &#39;saved_variables&#39;
+</code></pre><p>原因确实是版本问题，PyTorch0.3 中把许多python的操作转移到了C++中，saved_variables 现在是一个c++的对象，无法通过python访问。<a href="https://github.com/chenyuntc/pytorch-book/issues/7" target="_blank" rel="noopener">https://github.com/chenyuntc/pytorch-book/issues/7</a></p>
 <p>可以查看这里进行学习<a href="https://github.com/chenyuntc/pytorch-book/blob/0.3/chapter3-Tensor" target="_blank" rel="noopener">https://github.com/chenyuntc/pytorch-book/blob/0.3/chapter3-Tensor</a>和autograd/Autograd.ipynb,省掉上面的操作</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用retain_graph保存buffer</span></span><br><span class="line">z.backward(retain_graph = <span class="literal">True</span>)</span><br><span class="line">w.grad</span><br></pre></td></tr></table></figure>
-
-<pre><code>tensor([1.])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 多次反向传播，梯度累加，这也就是w中AccumulateGrad标识的含义</span></span><br><span class="line">z.backward()</span><br><span class="line">w.grad</span><br></pre></td></tr></table></figure>
-
-<pre><code>tensor([2.])</code></pre><p>pytorch使用的是动态图，它的计算图在每次前向传播时都是从头开始构建的，所以它能够使用python的控制语句（如for、if等），根据需求创建计算图。这一点在自然语言处理领域中很有用，它意为你不需要事先构建所有可能用到的图的路径，图在运行时才构建。</p>
+<pre><code>tensor([1.])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 多次反向传播，梯度累加，这也就是w中AccumulateGrad标识的含义</span></span><br><span class="line">z.backward()</span><br><span class="line">w.grad</span><br></pre></td></tr></table></figure>
+<pre><code>tensor([2.])
+</code></pre><p>pytorch使用的是动态图，它的计算图在每次前向传播时都是从头开始构建的，所以它能够使用python的控制语句（如for、if等），根据需求创建计算图。这一点在自然语言处理领域中很有用，它意为你不需要事先构建所有可能用到的图的路径，图在运行时才构建。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">abs</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> x.data[<span class="number">0</span>] &gt; <span class="number">0</span>: <span class="keyword">return</span> x</span><br><span class="line">    <span class="keyword">else</span>: <span class="keyword">return</span> -x</span><br><span class="line">x = V(t.ones(<span class="number">1</span>), requires_grad = <span class="literal">True</span>)</span><br><span class="line">y = abs(x)</span><br><span class="line">y.backward()</span><br><span class="line">x.grad</span><br></pre></td></tr></table></figure>
-
-<pre><code>tensor([1.])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x = V(<span class="number">-1</span> * t.ones(<span class="number">1</span>), requires_grad = <span class="literal">True</span>)</span><br><span class="line">y = abs(x)</span><br><span class="line">y.backward()</span><br><span class="line">print(x.grad)</span><br></pre></td></tr></table></figure>
-
-<pre><code>tensor([-1.])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x)</span>:</span></span><br><span class="line">    result = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> ii <span class="keyword">in</span> x:</span><br><span class="line">        <span class="keyword">if</span> ii.data &gt; <span class="number">0</span>: result = ii * result</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">x = V(t.arange(<span class="number">-2</span>, <span class="number">4</span>).float(), requires_grad = <span class="literal">True</span>)</span><br><span class="line">y = f(x) <span class="comment"># y = x[3] * x[4] * x[5]</span></span><br><span class="line">y.backward()</span><br><span class="line">x.grad</span><br></pre></td></tr></table></figure>
-
-<pre><code>tensor([0., 0., 0., 6., 3., 2.])</code></pre><p>变量的requires_grad属性默认为False，如果某一个节点requires_grad被设置为True，那么所有依赖它的节点requires_grad都是True。</p>
+<pre><code>tensor([1.])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x = V(<span class="number">-1</span> * t.ones(<span class="number">1</span>), requires_grad = <span class="literal">True</span>)</span><br><span class="line">y = abs(x)</span><br><span class="line">y.backward()</span><br><span class="line">print(x.grad)</span><br></pre></td></tr></table></figure>
+<pre><code>tensor([-1.])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x)</span>:</span></span><br><span class="line">    result = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> ii <span class="keyword">in</span> x:</span><br><span class="line">        <span class="keyword">if</span> ii.data &gt; <span class="number">0</span>: result = ii * result</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">x = V(t.arange(<span class="number">-2</span>, <span class="number">4</span>).float(), requires_grad = <span class="literal">True</span>)</span><br><span class="line">y = f(x) <span class="comment"># y = x[3] * x[4] * x[5]</span></span><br><span class="line">y.backward()</span><br><span class="line">x.grad</span><br></pre></td></tr></table></figure>
+<pre><code>tensor([0., 0., 0., 6., 3., 2.])
+</code></pre><p>变量的requires_grad属性默认为False，如果某一个节点requires_grad被设置为True，那么所有依赖它的节点requires_grad都是True。</p>
 <p>with torch.no_grad()内的variable均为不会求导，其优先级高于requires_grad。函数可以用装饰器@torch.no_grad()。可实现一定程度的速度提升，并节省约一半显存，因为其不需要分配空间保存梯度。</p>
 <p>详细内容可见：<a href="https://pytorch.org/docs/master/autograd.html#locally-disable-grad" target="_blank" rel="noopener">https://pytorch.org/docs/master/autograd.html#locally-disable-grad</a></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x = t.tensor([<span class="number">1.</span>], requires_grad = <span class="literal">True</span>)</span><br><span class="line"><span class="keyword">with</span> t.no_grad():</span><br><span class="line">    y = x * <span class="number">2</span></span><br><span class="line">y.requires_grad</span><br></pre></td></tr></table></figure>
-
-<pre><code>False</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@t.no_grad()</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">doubler</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> x * <span class="number">2</span></span><br><span class="line">z = doubler(x)</span><br><span class="line">z.requires_grad</span><br></pre></td></tr></table></figure>
-
-<pre><code>False</code></pre><p>在反向传播过程中非叶子节点的导数计算完之后即被清空。若想查看这些变量的梯度，有以下两种方法：</p>
+<pre><code>False
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@t.no_grad()</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">doubler</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> x * <span class="number">2</span></span><br><span class="line">z = doubler(x)</span><br><span class="line">z.requires_grad</span><br></pre></td></tr></table></figure>
+<pre><code>False
+</code></pre><p>在反向传播过程中非叶子节点的导数计算完之后即被清空。若想查看这些变量的梯度，有以下两种方法：</p>
 <ul>
 <li>使用autograd.grad函数</li>
 <li>使用hook</li>
 </ul>
 <p>推荐使用hook方法，但在实际使用中应尽量避免修改grad的值。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x = V(t.ones(<span class="number">3</span>), requires_grad = <span class="literal">True</span>)</span><br><span class="line">w = V(t.rand(<span class="number">3</span>), requires_grad = <span class="literal">True</span>)</span><br><span class="line">y = x * w</span><br><span class="line"><span class="comment"># y依赖于w，而w.requires_grad = True</span></span><br><span class="line">z = y.sum()</span><br><span class="line">x.requires_grad, w.requires_grad, y.requires_grad</span><br></pre></td></tr></table></figure>
-
-<pre><code>(True, True, True)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 非叶子节点grad计算完之后自动清空，y.grad是None</span></span><br><span class="line">z.backward()</span><br><span class="line">x.grad, w.grad, y.grad</span><br></pre></td></tr></table></figure>
-
-<pre><code>(tensor([0.1283, 0.8326, 0.6539]), tensor([1., 1., 1.]), None)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第一种方法：使用grad获取中间变量的梯度</span></span><br><span class="line">x = V(t.ones(<span class="number">3</span>), requires_grad = <span class="literal">True</span>)</span><br><span class="line">w = V(t.rand(<span class="number">3</span>), requires_grad = <span class="literal">True</span>)</span><br><span class="line">y = x * w</span><br><span class="line"><span class="comment"># y依赖于w，而w.requires_grad = True</span></span><br><span class="line">z = y.sum()</span><br><span class="line"><span class="comment"># z对y的梯度，隐式调用backward()</span></span><br><span class="line">t.autograd.grad(z, y)</span><br></pre></td></tr></table></figure>
-
-<pre><code>(tensor([1., 1., 1.]),)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第二种方法：使用hook</span></span><br><span class="line"><span class="comment"># hook是一个函数，输入是梯度，不应该有返回值</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">variable_hook</span><span class="params">(grad)</span>:</span></span><br><span class="line">    print(<span class="string">'y的梯度：\r\n'</span>,grad)</span><br><span class="line">    </span><br><span class="line">x = V(t.ones(<span class="number">3</span>), requires_grad = <span class="literal">True</span>)</span><br><span class="line">w = V(t.rand(<span class="number">3</span>), requires_grad = <span class="literal">True</span>)</span><br><span class="line">y = x * w</span><br><span class="line"><span class="comment"># 注册hook</span></span><br><span class="line">hook_handle = y.register_hook(variable_hook)</span><br><span class="line">z = y.sum()</span><br><span class="line">z.backward()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 除非你每次都要用hook，否则用完之后记得移除hook</span></span><br><span class="line">hook_handle.remove()</span><br></pre></td></tr></table></figure>
-
+<pre><code>(True, True, True)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 非叶子节点grad计算完之后自动清空，y.grad是None</span></span><br><span class="line">z.backward()</span><br><span class="line">x.grad, w.grad, y.grad</span><br></pre></td></tr></table></figure>
+<pre><code>(tensor([0.1283, 0.8326, 0.6539]), tensor([1., 1., 1.]), None)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第一种方法：使用grad获取中间变量的梯度</span></span><br><span class="line">x = V(t.ones(<span class="number">3</span>), requires_grad = <span class="literal">True</span>)</span><br><span class="line">w = V(t.rand(<span class="number">3</span>), requires_grad = <span class="literal">True</span>)</span><br><span class="line">y = x * w</span><br><span class="line"><span class="comment"># y依赖于w，而w.requires_grad = True</span></span><br><span class="line">z = y.sum()</span><br><span class="line"><span class="comment"># z对y的梯度，隐式调用backward()</span></span><br><span class="line">t.autograd.grad(z, y)</span><br></pre></td></tr></table></figure>
+<pre><code>(tensor([1., 1., 1.]),)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第二种方法：使用hook</span></span><br><span class="line"><span class="comment"># hook是一个函数，输入是梯度，不应该有返回值</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">variable_hook</span><span class="params">(grad)</span>:</span></span><br><span class="line">    print(<span class="string">'y的梯度：\r\n'</span>,grad)</span><br><span class="line">    </span><br><span class="line">x = V(t.ones(<span class="number">3</span>), requires_grad = <span class="literal">True</span>)</span><br><span class="line">w = V(t.rand(<span class="number">3</span>), requires_grad = <span class="literal">True</span>)</span><br><span class="line">y = x * w</span><br><span class="line"><span class="comment"># 注册hook</span></span><br><span class="line">hook_handle = y.register_hook(variable_hook)</span><br><span class="line">z = y.sum()</span><br><span class="line">z.backward()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 除非你每次都要用hook，否则用完之后记得移除hook</span></span><br><span class="line">hook_handle.remove()</span><br></pre></td></tr></table></figure>
 <pre><code>y的梯度：
- tensor([1., 1., 1.])</code></pre><p>最后再来看看variable中grad属性和backward函数grad_variables参数的含义。</p>
+ tensor([1., 1., 1.])
+</code></pre><p>最后再来看看variable中grad属性和backward函数grad_variables参数的含义。</p>
 <ul>
 <li>variables $\boldsymbol{x}$ 的梯度是目标函数$f(x)$对$\boldsymbol{x}$的梯度，形状与$\boldsymbol{x}$一致。</li>
 <li>y.backward(grad_variables)中grad_variables相当于链式法则中的$\frac{\partial{z}}{\partial{x}}=\frac{\partial{z}}{\partial{y}}\frac{\partial{y}}{\partial{x}}$中的$\frac{\partial{z}}{\partial{y}}$。z是目标函数，一般是个标量，故而$\frac{\partial{z}}{\partial{y}}$的形状与$\boldsymbol{y}$的形状一致。z.backward()等价于y.backward(grad_y)。而z.backward()省略了grad_variables参数，是因为z是个标量，而$\frac{\partial{z}}{\partial{z}}=1$</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x = V(t.arange(<span class="number">0</span>, <span class="number">3</span>).float(), requires_grad = <span class="literal">True</span>)</span><br><span class="line">y = x**<span class="number">2</span> + x*<span class="number">2</span></span><br><span class="line">z = y.sum()</span><br><span class="line">z.backward()</span><br><span class="line">x.grad</span><br></pre></td></tr></table></figure>
-
-<pre><code>tensor([2., 4., 6.])</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x = V(t.arange(<span class="number">0</span>, <span class="number">3</span>).float(), requires_grad = <span class="literal">True</span>)</span><br><span class="line">y = x**<span class="number">2</span> + x*<span class="number">2</span></span><br><span class="line">z = y.sum()</span><br><span class="line">y_grad_variables = V(t.Tensor([<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>])) </span><br><span class="line">y.backward(y_grad_variables)</span><br><span class="line">x.grad</span><br></pre></td></tr></table></figure>
-
-<pre><code>tensor([2., 4., 6.])</code></pre><p>值得注意的是，只有对variable的操作才能使用autograd，如果variable的data直接进行操作，将无法使用反向传播。除了参数初始化，一般我们不会直接修改variable.data的值。</p>
+<pre><code>tensor([2., 4., 6.])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x = V(t.arange(<span class="number">0</span>, <span class="number">3</span>).float(), requires_grad = <span class="literal">True</span>)</span><br><span class="line">y = x**<span class="number">2</span> + x*<span class="number">2</span></span><br><span class="line">z = y.sum()</span><br><span class="line">y_grad_variables = V(t.Tensor([<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>])) </span><br><span class="line">y.backward(y_grad_variables)</span><br><span class="line">x.grad</span><br></pre></td></tr></table></figure>
+<pre><code>tensor([2., 4., 6.])
+</code></pre><p>值得注意的是，只有对variable的操作才能使用autograd，如果variable的data直接进行操作，将无法使用反向传播。除了参数初始化，一般我们不会直接修改variable.data的值。</p>
 <p>在pytorch中计算图的特点总结如下：</p>
 <ul>
 <li>autograd根据用户对variable的操作构建计算图。对variable的操作抽象为Function。</li>
@@ -563,7 +555,6 @@ AttributeError: &apos;MulBackward0&apos; object has no attribute &apos;saved_var
 </ul>
 <h4 id="扩展autograd"><a href="#扩展autograd" class="headerlink" title="扩展autograd"></a>扩展autograd</h4><p>目前绝大多数函数都可以使用autograd实现反向求导，但如果需要自己写一个复杂的函数，不支持自动反向求导怎么办？答案是写一个Function，实现它的前向传播和反向传播代码，Function对应于计算图中的矩形，它接受参数，计算并返回结果。下面给出了一个例子。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Function</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MultiplyAdd</span><span class="params">(Function)</span>:</span></span><br><span class="line">    </span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(ctx, w, x, b)</span>:</span></span><br><span class="line">        print(<span class="string">'type in forward'</span>, type(x))</span><br><span class="line">        ctx.save_for_backward(w, x)<span class="comment">#存储用来反向传播的参数</span></span><br><span class="line">        output = w*x +b</span><br><span class="line">        <span class="keyword">return</span> output</span><br><span class="line">    </span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">backward</span><span class="params">(ctx, grad_output)</span>:</span></span><br><span class="line">        w, x = ctx.saved_tensors <span class="comment"># 老版本是saved_variables</span></span><br><span class="line">        print(<span class="string">'type in backward'</span>,type(x))</span><br><span class="line">        grad_w = grad_output * x</span><br><span class="line">        grad_x = grad_output * w</span><br><span class="line">        grad_b = grad_output * <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> grad_w, grad_x, grad_b</span><br></pre></td></tr></table></figure>
-
 <p>分析如下：</p>
 <ul>
 <li>自定义的Function需要继承autograd.Function，没有构造函数<strong>init</strong>，forward和backward函数都是静态方法</li>
@@ -574,33 +565,33 @@ AttributeError: &apos;MulBackward0&apos; object has no attribute &apos;saved_var
 <li>反向传播可能需要利用前向传播的某些中间结果，需要进行保存，否则前向传播结束后这些对象即被释放</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">x = V(t.ones(<span class="number">1</span>))</span><br><span class="line">w = V(t.rand(<span class="number">1</span>),requires_grad=<span class="literal">True</span>)</span><br><span class="line">b = V(t.rand(<span class="number">1</span>),requires_grad=<span class="literal">True</span>)</span><br><span class="line">print(<span class="string">'开始前向传播'</span>)</span><br><span class="line">z = MultiplyAdd.apply(w, x, b)</span><br><span class="line">print(<span class="string">'开始反向传播'</span>)</span><br><span class="line">z.backward()</span><br><span class="line"></span><br><span class="line"><span class="comment"># x不需要求导，中间过程还是会计算它的导数，但随后被清空</span></span><br><span class="line">x.grad, w.grad, b.grad</span><br></pre></td></tr></table></figure>
-
 <pre><code>开始前向传播
-type in forward &lt;class &apos;torch.Tensor&apos;&gt;
+type in forward &lt;class &#39;torch.Tensor&#39;&gt;
 开始反向传播
-type in backward &lt;class &apos;torch.Tensor&apos;&gt;
+type in backward &lt;class &#39;torch.Tensor&#39;&gt;
 
 
 
 
 
-(None, tensor([1.]), tensor([1.]))</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">x = V(t.ones(<span class="number">1</span>))</span><br><span class="line">w = V(t.rand(<span class="number">1</span>),requires_grad=<span class="literal">True</span>)</span><br><span class="line">b = V(t.rand(<span class="number">1</span>),requires_grad=<span class="literal">True</span>)</span><br><span class="line">print(<span class="string">'开始前向传播'</span>)</span><br><span class="line">z = MultiplyAdd.apply(w, x, b)</span><br><span class="line">print(<span class="string">'开始反向传播'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用MultiplyAdd.backward</span></span><br><span class="line"><span class="comment"># 会自动输出grad_w, grad_x, grad_b</span></span><br><span class="line">z.grad_fn.apply(V(t.ones(<span class="number">1</span>)))</span><br></pre></td></tr></table></figure>
-
+(None, tensor([1.]), tensor([1.]))
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">x = V(t.ones(<span class="number">1</span>))</span><br><span class="line">w = V(t.rand(<span class="number">1</span>),requires_grad=<span class="literal">True</span>)</span><br><span class="line">b = V(t.rand(<span class="number">1</span>),requires_grad=<span class="literal">True</span>)</span><br><span class="line">print(<span class="string">'开始前向传播'</span>)</span><br><span class="line">z = MultiplyAdd.apply(w, x, b)</span><br><span class="line">print(<span class="string">'开始反向传播'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用MultiplyAdd.backward</span></span><br><span class="line"><span class="comment"># 会自动输出grad_w, grad_x, grad_b</span></span><br><span class="line">z.grad_fn.apply(V(t.ones(<span class="number">1</span>)))</span><br></pre></td></tr></table></figure>
 <pre><code>开始前向传播
-type in forward &lt;class &apos;torch.Tensor&apos;&gt;
+type in forward &lt;class &#39;torch.Tensor&#39;&gt;
 开始反向传播
-type in backward &lt;class &apos;torch.Tensor&apos;&gt;
+type in backward &lt;class &#39;torch.Tensor&#39;&gt;
 
 
 
 
 
-(tensor([1.]), tensor([0.5986], grad_fn=&lt;MulBackward0&gt;), tensor([1.]))</code></pre><p>在backward函数里之所以也要对variable进行操作是为了能计算梯度的梯度。</p>
+(tensor([1.]), tensor([0.5986], grad_fn=&lt;MulBackward0&gt;), tensor([1.]))
+</code></pre><p>在backward函数里之所以也要对variable进行操作是为了能计算梯度的梯度。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x = V(t.Tensor([<span class="number">5</span>]), requires_grad = <span class="literal">True</span>)</span><br><span class="line">y = x ** <span class="number">2</span></span><br><span class="line">grad_x = t.autograd.grad(y, x, create_graph = <span class="literal">True</span>)</span><br><span class="line">grad_x</span><br></pre></td></tr></table></figure>
-
-<pre><code>(tensor([10.], grad_fn=&lt;MulBackward0&gt;),)</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grad_grad_x = t.autograd.grad(grad_x[<span class="number">0</span>],x);grad_grad_x</span><br></pre></td></tr></table></figure>
-
-<pre><code>(tensor([2.]),)</code></pre>
+<pre><code>(tensor([10.], grad_fn=&lt;MulBackward0&gt;),)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grad_grad_x = t.autograd.grad(grad_x[<span class="number">0</span>],x);grad_grad_x</span><br></pre></td></tr></table></figure>
+<pre><code>(tensor([2.]),)
+</code></pre>
     </div>
       <p>———————————————感谢阅读———————————————</p>
 <blockquote><p>欢迎收藏访问我的<a href="https://zinw623.github.io/">博客</a>  <a href="https://www.zhihu.com/people/tai-li-wu-yan-zu/activities" target="_blank" rel="noopener">知乎</a>   <a href="https://juejin.im/user/5d40058ef265da03b76afb66" target="_blank" rel="noopener">掘金</a>  <a href="https://www.jianshu.com/u/a38373c2e45b" target="_blank" rel="noopener">简书</a> <a href="https://www.zhihu.com/people/tai-li-wu-yan-zu/activities" target="_blank" rel="noopener">知乎</a></p></blockquote>
@@ -975,12 +966,12 @@ type in backward &lt;class &apos;torch.Tensor&apos;&gt;
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">129k</span>
+    <span title="站点总字数">128k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:58</span>
+    <span title="站点阅读时长">1:56</span>
 </div>
 
 

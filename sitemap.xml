@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zinw623.github.io/about/index.html</loc>
+    
+    <lastmod>2020-01-12T03:54:43.093Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://zinw623.github.io/2019/09/04/DATA-LOADING-AND-PROCESSING/</loc>
     
     <lastmod>2019-09-05T08:20:45.416Z</lastmod>
@@ -124,13 +131,6 @@
     <loc>https://zinw623.github.io/2019/08/06/docker-2/</loc>
     
     <lastmod>2019-08-06T15:45:01.235Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zinw623.github.io/about/index.html</loc>
-    
-    <lastmod>2019-08-04T15:21:01.441Z</lastmod>
     
   </url>
   

@@ -70,18 +70,18 @@
   daovoice('update');
   </script>
 
-  <meta name="description" content="TORCHtorch package包含多维张量和定义好的数学运算的数据结构。另外，它提供了许多实用程序用于有效的序列化张量和任意类型，以及其他有用的实用程序。 它支持CUDA环境，使你能在NVIDIA GPU上进行你的张量计算，这要求你compute capability&amp;gt;=3.0。 Tensors torch.is_tensor(obj) [源码]   如果是一个PyTorch tens">
+  <meta name="description" content="TORCHtorch package包含多维张量和定义好的数学运算的数据结构。另外，它提供了许多实用程序用于有效的序列化张量和任意类型，以及其他有用的实用程序。 它支持CUDA环境，使你能在NVIDIA GPU上进行你的张量计算，这要求你compute capability&amp;gt;=3.0。 Tensors _torch.is_tensor(obj)_ [源码]   如果是一个PyTorch te">
 <meta name="keywords" content="pytorch,翻译">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【翻译】pytorch中文文档（1.2.0）- Package Reference&#x2F;torch">
 <meta property="og:url" content="https://zinw623.github.io/2019/08/26/pytorch-doc-torch/index.html">
 <meta property="og:site_name" content="Zihan.W的博客">
-<meta property="og:description" content="TORCHtorch package包含多维张量和定义好的数学运算的数据结构。另外，它提供了许多实用程序用于有效的序列化张量和任意类型，以及其他有用的实用程序。 它支持CUDA环境，使你能在NVIDIA GPU上进行你的张量计算，这要求你compute capability&amp;gt;=3.0。 Tensors torch.is_tensor(obj) [源码]   如果是一个PyTorch tens">
+<meta property="og:description" content="TORCHtorch package包含多维张量和定义好的数学运算的数据结构。另外，它提供了许多实用程序用于有效的序列化张量和任意类型，以及其他有用的实用程序。 它支持CUDA环境，使你能在NVIDIA GPU上进行你的张量计算，这要求你compute capability&amp;gt;=3.0。 Tensors _torch.is_tensor(obj)_ [源码]   如果是一个PyTorch te">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-27T03:52:56.177Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【翻译】pytorch中文文档（1.2.0）- Package Reference&#x2F;torch">
-<meta name="twitter:description" content="TORCHtorch package包含多维张量和定义好的数学运算的数据结构。另外，它提供了许多实用程序用于有效的序列化张量和任意类型，以及其他有用的实用程序。 它支持CUDA环境，使你能在NVIDIA GPU上进行你的张量计算，这要求你compute capability&amp;gt;=3.0。 Tensors torch.is_tensor(obj) [源码]   如果是一个PyTorch tens">
+<meta name="twitter:description" content="TORCHtorch package包含多维张量和定义好的数学运算的数据结构。另外，它提供了许多实用程序用于有效的序列化张量和任意类型，以及其他有用的实用程序。 它支持CUDA环境，使你能在NVIDIA GPU上进行你的张量计算，这要求你compute capability&amp;gt;=3.0。 Tensors _torch.is_tensor(obj)_ [源码]   如果是一个PyTorch te">
   <link rel="alternate" href="/atom.xml" title="Zihan.W的博客" type="application/atom+xml">
   <link rel="canonical" href="https://zinw623.github.io/2019/08/26/pytorch-doc-torch/">
 
@@ -388,34 +388,34 @@
         <h2 id="TORCH"><a href="#TORCH" class="headerlink" title="TORCH"></a>TORCH</h2><p>torch package包含多维张量和定义好的数学运算的数据结构。另外，它提供了许多实用程序用于有效的序列化张量和任意类型，以及其他有用的实用程序。</p>
 <p>它支持CUDA环境，使你能在NVIDIA GPU上进行你的张量计算，这要求你compute capability&gt;=3.0。</p>
 <h3 id="Tensors"><a href="#Tensors" class="headerlink" title="Tensors"></a>Tensors</h3><ul>
-<li><p><em>torch.is_tensor(obj)</em> <a href https: pytorch.org docs stable _modules torch.html#is_tensor"">[源码]</a></p>
+<li><p>_torch.is_tensor(obj)_ <a href="&quot;https://pytorch.org/docs/stable/_modules/torch.html#is_tensor&quot;">[源码]</a></p>
 <p>  如果是一个PyTorch tensor返回True</p>
 <ul>
-<li><p><em>Parameters</em></p>
-<p>  <strong>obj</strong>(<em>Object</em>)-要测试的对象</p>
+<li><p>_Parameters_</p>
+<p>  <strong>obj</strong>(_Object_)-要测试的对象</p>
 </li>
 </ul>
 </li>
-<li><p><em>torch.is_storage(obj)</em> <a href="https://pytorch.org/docs/stable/_modules/torch.html#is_storage" target="_blank" rel="noopener">[源码]</a></p>
+<li><p>_torch.is_storage(obj)_ <a href="https://pytorch.org/docs/stable/_modules/torch.html#is_storage" target="_blank" rel="noopener">[源码]</a></p>
 <p>  如果obj是pytorch storage对象就返回True</p>
 <ul>
-<li><p><em>Parameters</em></p>
-<p>  <strong>obj</strong>( <em>Object</em> ) - 要测试的对象</p>
+<li><p>_Parameters_</p>
+<p>  <strong>obj</strong>( _Object_ ) - 要测试的对象</p>
 </li>
 </ul>
 </li>
-<li><p><em>torch.is_floating_point(input)</em> ——&gt; (<em>bool</em>)</p>
+<li><p>_torch.is_floating_point(input)_ ——&gt; (_bool_)</p>
 <p>  如果<code>input</code>的数据类型是浮点型数据（即<code>torch.float64</code>, <code>torch.float32</code>和<code>torch.float16</code>中的一种），就返回True。</p>
 <ul>
 <li><p>_Parameters</p>
-<p>  <strong>input</strong>(<em>Tensor</em>) —— 要测试的pytorch张量</p>
+<p>  <strong>input</strong>(_Tensor_) —— 要测试的pytorch张量</p>
 </li>
 </ul>
 </li>
-<li><p><em>torch.set_default_dtype(d)</em> <a href="https://pytorch.org/docs/stable/_modules/torch.html#set_default_dtype" target="_blank" rel="noopener">[源码]</a></p>
+<li><p>_torch.set_default_dtype(d)_ <a href="https://pytorch.org/docs/stable/_modules/torch.html#set_default_dtype" target="_blank" rel="noopener">[源码]</a></p>
 <p>  把默认的浮点数类型的dtype设为<code>d</code>。这种类型将被用做<code>torch.tensor()</code>类型推断的默认浮点类型。这个默认的浮点dtype是初始为torch.float32</p>
 <ul>
-<li><p><em>Parameters</em></p>
+<li><p>_Parameters_</p>
 <p>  <strong>d</strong>(<code>torch.dtype</code>) —— 将被设为默认的浮点型dtype</p>
 <p>例如:</p>
 </li>
@@ -423,7 +423,6 @@
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.tensor([<span class="number">1.2</span>, <span class="number">3</span>]).dtype     <span class="comment"># 初始默认的浮点型是torch.float32</span></span><br><span class="line">torch.float32</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.set_default_dtype(torch.float64)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.tensor([<span class="number">1.2</span>, <span class="number">3</span>]).dtype     <span class="comment"># 新的浮点型tensor</span></span><br><span class="line">torch.float64</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><p>torch.get_default_dtype() ——&gt; torch.dtype</p>
 <p>  获得当前默认浮点型<code>torch.dtype</code>。</p>
@@ -431,43 +430,40 @@
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.get_default_dtype()  <span class="comment"># 初始默认的浮点型为torch.float32</span></span><br><span class="line">torch.float32</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.set_default_dtype(torch.float64)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.get_default_dtype()  <span class="comment"># 默认改为torch.float64</span></span><br><span class="line">torch.float64</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.set_default_tensor_type(torch.FloatTensor) </span><br><span class="line"><span class="comment"># 设置tensor type也会影响这个</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.get_default_dtype()  <span class="comment"># 改为了对应于torch.FloatTensor对应的dtype：torch.float32</span></span><br><span class="line">torch.float32</span><br></pre></td></tr></table></figure>
-
 <ul>
-<li><p>torch.set_default_tensor_type( <em>t</em> ) <a href="https://pytorch.org/docs/stable/_modules/torch.html#set_default_tensor_type" target="_blank" rel="noopener">[源码]</a></p>
+<li><p>torch.set_default_tensor_type( _t_ ) <a href="https://pytorch.org/docs/stable/_modules/torch.html#set_default_tensor_type" target="_blank" rel="noopener">[源码]</a></p>
 <p>  设置默认的<code>torch.Tensor</code>类型为浮点型tensor类型<code>t</code>。这种类型也将会被勇作为torch.tensor()类型推断的默认浮点型类型。</p>
 <p>  默认的浮点型tensor type是初始化为<code>torch.FloatTensor</code>。</p>
 <ul>
-<li><p><em>Parameters</em><br> <strong>t</strong>( <em>type or string</em> ) —— 浮点型tensor type或者它的名字</p>
+<li><p>_Parameters_<br> <strong>t</strong>( _type or string_ ) —— 浮点型tensor type或者它的名字</p>
 <p>例如：</p>
 </li>
 </ul>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.tensor([<span class="number">1.2</span>, <span class="number">3</span>]).dtype     <span class="comment"># 初始的默认浮点型是torch.float32</span></span><br><span class="line">torch.float32</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.set_default_tensor_type(torch.DoubleTensor)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.tensor([<span class="number">1.2</span>, <span class="number">3</span>]).dtype     <span class="comment"># 新的浮点型tensor</span></span><br><span class="line">torch.float64</span><br></pre></td></tr></table></figure>
-
 <ul>
-<li><p>torch.numel( <em>input</em> ) ——&gt; int</p>
+<li><p>torch.numel( _input_ ) ——&gt; int</p>
 <p>  返回<code>input</code>张量里元素的数量</p>
 <ul>
-<li><p><em>Parameters</em></p>
-<p>  <strong>input</strong>( <em>Tensor</em> ) —— 输入的向量</p>
+<li><p>_Parameters_</p>
+<p>  <strong>input</strong>( _Tensor_ ) —— 输入的向量</p>
 <p>例如：</p>
 </li>
 </ul>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = torch.randn(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.numel(a)</span><br><span class="line"><span class="number">120</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = torch.zeros(<span class="number">4</span>, <span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.numel(a)</span><br><span class="line"><span class="number">16</span></span><br></pre></td></tr></table></figure>
-
 <ul>
-<li><p>torch.set_printoptions( <em>precision=None, threshold=None, edgeitems=None, linewidth=None, profile=None, sci_mode=None</em> ) <a href="https://pytorch.org/docs/stable/_modules/torch/_tensor_str.html#set_printoptions" target="_blank" rel="noopener">[源码]</a><br>  为print设置选项。从NumPy中无耻地拿出的项目</p>
+<li><p>torch.set_printoptions( _precision=None, threshold=None, edgeitems=None, linewidth=None, profile=None, sci_mode=None_ ) <a href="https://pytorch.org/docs/stable/_modules/torch/_tensor_str.html#set_printoptions" target="_blank" rel="noopener">[源码]</a><br>  为print设置选项。从NumPy中无耻地拿出的项目</p>
 <ul>
-<li><p><em>Parameters</em></p>
+<li><p>_Parameters_</p>
 <ul>
 <li><strong>precision</strong> —— 输出浮点型精度的位数（默认为4）</li>
 <li><strong>threshold</strong> —— 输出时的阈值，当数组总和超过阈值，会被截断输出（默认为1000）</li>
 <li><strong>edgeitems</strong> —— 每个维度统计的数组条目的数量（默认为3）</li>
 <li><strong>linewidth</strong> —— 为了插入换行符每行设置的字符数（默认为80）。Thresholded矩阵将会忽略这个参数</li>
-<li><strong>profile</strong> —— Sane为了好的打印的默认设置，可以用以上任何选项覆盖掉（可以是 <em>default,short,full</em> 中任意一个）</li>
+<li><strong>profile</strong> —— Sane为了好的打印的默认设置，可以用以上任何选项覆盖掉（可以是 _default,short,full_ 中任意一个）</li>
 <li><strong>sci_mode</strong> —— 是（True）否（False）使用科学符号。如果指定是None（默认），那么值将会被_Formatter定义。</li>
 </ul>
 </li>
@@ -475,19 +471,18 @@
 </li>
 </ul>
 <ul>
-<li><p>torch.set_flush_denormal( <em>mode</em> ) ——&gt; bool</p>
+<li><p>torch.set_flush_denormal( _mode_ ) ——&gt; bool</p>
 <p>  禁用CPU上的非规格化的浮点数</p>
 <p>  如果你的系统支持非规格化数字（flushing denormal numbers）并且成功配置非规格化模式（flush denormal mode）将会返回True。<code>set_flush_denormal()</code>仅使用在支持SSE3的x86架构。</p>
 <ul>
-<li><p><em>Parameters</em></p>
-<p>  <strong>mode</strong>( <em>boor</em> ) —— 控制是否使用非规格化模式（flush denormal mode）</p>
+<li><p>_Parameters_</p>
+<p>  <strong>mode</strong>( _boor_ ) —— 控制是否使用非规格化模式（flush denormal mode）</p>
 <p>例如：</p>
 </li>
 </ul>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.set_flush_denormal(<span class="literal">True</span>)</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.tensor([<span class="number">1e-323</span>], dtype = torch.float32)</span><br><span class="line">tensor([<span class="number">0</span>,], dtype=torch.float64)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.set_flush_denormal(<span class="literal">False</span>)</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.tensor([<span class="number">1e-323</span>], dtype=torch.float64)</span><br><span class="line">tensor(<span class="number">9.88131e-324</span> *</span><br><span class="line">        [ <span class="number">1.0000</span>], dtype=torch.float64)</span><br></pre></td></tr></table></figure>
-
 <h4 id="Creation-Ops"><a href="#Creation-Ops" class="headerlink" title="Creation Ops"></a>Creation Ops</h4><ul>
 <li><p>NOTE</p>
 <p>  随机抽样创建操作被列在<strong>Random sampling</strong>之下，包括：<code>torch.rand()</code> <code>torch.rand_like()</code> <code>torch.randn_like()</code> <code>torch.randint()</code> <code>torch.randint_like()</code> <code>torch.randperm()</code> 你可能也使用<code>torch.empty()</code>并使用In-place random sampling方法来更广泛的分布范围中取样的值来创建<code>torch.Tensor</code>s</p>
@@ -503,22 +498,19 @@
 <li><p>WARNING</p>
 <p>  当data是一个tensor x，<code>torch.tensor()</code>会读取出“the data”，无论之前传入过什么，并且构建一个leaf variable（）。因此<code>torch.tensor(x)</code>等价于<code>x.clone().detach()</code>，<code>torch.tensor(x, requires_grad = True)</code>等价于<code>x.clone().detach().requires_grad_(True)</code>。对于等价的操作，推荐使用<code>clone()</code>和<code>detach()</code>。</p>
 </li>
-<li><p><em>Parameters</em></p>
+<li><p>_Parameters_</p>
 <ul>
-<li><strong>data</strong>( <em>array_like</em> ) —— 为tensor初始化data。可以是list，tuple，Numpy <code>ndarray</code>，scalar，和其他类型。</li>
+<li><strong>data</strong>( _array_like_ ) —— 为tensor初始化data。可以是list，tuple，Numpy <code>ndarray</code>，scalar，和其他类型。</li>
 <li><strong>dtype</strong>(<code>torch.dtype</code>, optional) —— 返回tensor期望的数据类型。默认：如果为None，从<code>data</code>中推断数据类型</li>
 <li><strong>device</strong>(<code>torch.device</code>, optional) —— 返回tensor期望使用的硬件。默认：如果是None，对当前张量类型使用当前硬件（参考<code>torch.set_default_tensor_type()</code>)。<code>device</code>可以是提供CPU张量类型的CPU和支持CUDA张量类型的CUDA设备。</li>
-<li><strong>requires_grad</strong>( <em>bool</em>, optional) —— 如果自动求导应当记录返回张量的操作。默认：<code>False</code></li>
-<li><strong>pin_memory</strong>( <em>bool</em>, optional) —— 如果设置，返回的向量分配到锁页内存（pinned memory)。这仅对CPU张量有效。默认：<code>False</code>。<br>例如：</li>
+<li><strong>requires_grad</strong>( _bool_, optional) —— 如果自动求导应当记录返回张量的操作。默认：<code>False</code></li>
+<li><strong>pin_memory</strong>( _bool_, optional) —— 如果设置，返回的向量分配到锁页内存（pinned memory)。这仅对CPU张量有效。默认：<code>False</code>。<br>例如：</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.tensor([[<span class="number">0.1</span>, <span class="number">1.2</span>], [<span class="number">2.2</span>, <span class="number">3.1</span>], [<span class="number">4.9</span>, <span class="number">5.2</span>]])</span><br><span class="line">tensor([[ <span class="number">0.1000</span>, <span class="number">1.2000</span>],</span><br><span class="line">        [ <span class="number">2.2000</span>, <span class="number">3.1000</span>],</span><br><span class="line">        [ <span class="number">4.9000</span>, <span class="number">5.2000</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.tensor([<span class="number">0</span>, <span class="number">1</span>])  <span class="comment"># 基于data判断类型</span></span><br><span class="line">tensor([ <span class="number">0</span>, <span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.tensor([[<span class="number">0.11111</span>, <span class="number">0.222222</span>, <span class="number">0.3333333</span>]],</span><br><span class="line">                    dtype=torch.float64,</span><br><span class="line">                    device=torch.device(<span class="string">'cuda:0'</span>))  <span class="comment"># 创建一个torch.cuda.DoubleTensor</span></span><br><span class="line">tensor([[ <span class="number">0.1111</span>, <span class="number">0.2222</span>, <span class="number">0.3333</span>]], dtype=torch.float64, device=<span class="string">'cuda:0'</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.tensor(<span class="number">3.14159</span>)  <span class="comment"># 创建一个标量</span></span><br><span class="line">tensor(<span class="number">3.1416</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.tensor([])  <span class="comment"># 创建一个空张量（size为(0,))</span></span><br><span class="line">tensor([])</span><br></pre></td></tr></table></figure>
-
-
-
 <h4 id="Indexing-Slicing-Joining-Mutating-Ops"><a href="#Indexing-Slicing-Joining-Mutating-Ops" class="headerlink" title="Indexing, Slicing, Joining, Mutating Ops"></a>Indexing, Slicing, Joining, Mutating Ops</h4><h3 id="Generators"><a href="#Generators" class="headerlink" title="Generators"></a>Generators</h3><h3 id="Random-sampling"><a href="#Random-sampling" class="headerlink" title="Random sampling"></a>Random sampling</h3><h4 id="In-place-random-sampling"><a href="#In-place-random-sampling" class="headerlink" title="In-place random sampling"></a>In-place random sampling</h4><h4 id="Quasi-random-sampling"><a href="#Quasi-random-sampling" class="headerlink" title="Quasi-random sampling"></a>Quasi-random sampling</h4><h3 id="Serialization"><a href="#Serialization" class="headerlink" title="Serialization"></a>Serialization</h3><h3 id="Parallelism"><a href="#Parallelism" class="headerlink" title="Parallelism"></a>Parallelism</h3><h3 id="Locally-disabling-gradient-computation"><a href="#Locally-disabling-gradient-computation" class="headerlink" title="Locally disabling gradient computation"></a>Locally disabling gradient computation</h3><h3 id="Math-operations"><a href="#Math-operations" class="headerlink" title="Math operations"></a>Math operations</h3><h4 id="Pointwise-Ops"><a href="#Pointwise-Ops" class="headerlink" title="Pointwise Ops"></a>Pointwise Ops</h4><h4 id="Reduction-Ops"><a href="#Reduction-Ops" class="headerlink" title="Reduction Ops"></a>Reduction Ops</h4><h4 id="Comparision-Ops"><a href="#Comparision-Ops" class="headerlink" title="Comparision Ops"></a>Comparision Ops</h4><h4 id="Spectral-Ops"><a href="#Spectral-Ops" class="headerlink" title="Spectral Ops"></a>Spectral Ops</h4><h4 id="Other-Operations"><a href="#Other-Operations" class="headerlink" title="Other Operations"></a>Other Operations</h4><h4 id="BLAS-and-LAPACK-Operations"><a href="#BLAS-and-LAPACK-Operations" class="headerlink" title="BLAS and LAPACK Operations"></a>BLAS and LAPACK Operations</h4><h3 id="Utilities"><a href="#Utilities" class="headerlink" title="Utilities"></a>Utilities</h3>
     </div>
       <p>———————————————感谢阅读———————————————</p>
@@ -530,7 +522,7 @@
       
       <div class="popular-posts-title"><a href="\2019\09\04\DATA-LOADING-AND-PROCESSING\" rel="bookmark">翻译：pytorch数据加载和处理</a></div>
       
-        <div class="popular-posts-excerpt"><p><p>在解决任何机器学习问题时，都需要花费大量的精力来准备数据。PyTorch提供了许多工具来简化数据加载，希望能使代码更具可读性。在这篇教程里，我们将看看如何从非平凡的数据集中加载和预处理/扩增数据。</p></p></div>
+        <div class="popular-posts-excerpt"><p><p>在解决任何机器学习问题时，都需要花费大量的精力来准备数据。PyTorch提供了许多工具来简化数据加载，希望能使代码更具可读性。在这篇教程里，我们将看看如何从非平凡的数据集中加载和预处理/扩增数据。<br></p></div>
       
     </li>
   
@@ -896,12 +888,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">129k</span>
+    <span title="站点总字数">128k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:58</span>
+    <span title="站点阅读时长">1:56</span>
 </div>
 
 
