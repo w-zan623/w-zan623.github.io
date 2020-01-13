@@ -277,6 +277,148 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zinw623.github.io/2019/08/13/deeplearning-book/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zihan.W">
+      <meta itemprop="description" content="我不是那个特别的人？但是我来到了这个世界。">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zihan.W的博客">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/13/deeplearning-book/" class="post-title-link" itemprop="url">[thinkload]读书-疑问</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-13 10:18:13 / 修改时间：11:02:00" itemprop="dateCreated datePublished" datetime="2019-08-13T10:18:13+08:00">2019-08-13</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/thinkload/" itemprop="url" rel="index"><span itemprop="name">thinkload</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/thinkload/花书/" itemprop="url" rel="index"><span itemprop="name">花书</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          <br/>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">354</span>
+            </span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">1 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+            <p>
+              2019-8-13
+为什么要求算法最小化cost function却要以准确率错误率来衡量它？从cost到准确率丢失了衡量差距到底有多大的信息，这两个并不等价啊！
+
+如何衡量一个被选择的函数在某一目的上达到了多少效果？或者起到了多少作用？
+
+把输入端之前看成也连接了一个网络，这个网络是一种输出数据的
+              ...
+            </p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/08/13/deeplearning-book/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://zinw623.github.io/2019/08/09/docker-6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -505,7 +647,7 @@ docker容器的数据卷什么是数据卷(Data Volume)docker的生存周期是�
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">776</span>
+              <span title="本文字数">2k</span>
             </span>
           
             <span class="post-meta-item">
@@ -515,7 +657,7 @@ docker容器的数据卷什么是数据卷(Data Volume)docker的生存周期是�
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">1 分钟</span>
+              <span title="阅读时长">2 分钟</span>
             </span>
           
 
@@ -532,13 +674,12 @@ docker容器的数据卷什么是数据卷(Data Volume)docker的生存周期是�
             <p>
               dockerfile指令指令格式注释： # Comment指令： INSTRUCTION argument
 FROM
-FROM \
-FROM \:\
+FROM &lt;image&gt;
+FROM &lt;image&gt;:&lt;tag&gt;
 必须已经存在的镜像，也就是基础镜像
 必须是第一条非注释指令
 
 MAINTAINER
-MAINTAINER \  指定镜像的作者信息，包含镜像的所有者和
               ...
             </p>
           <!--noindex-->
@@ -848,7 +989,8 @@ uni
 
 列出镜像docker images [OPSIONS] [REPOSITORY]
 
-   -a, —all = false   # 显示所有镜像，默认并不显示中间层镜像（没有标签名的镜像）   -f, —filter = []   #
+
+   -a, –all = false   # 显示所有镜像，默认并不显示中间层镜像（没有标签名的镜像）   -f, –filter = []   
               ...
             </p>
           <!--noindex-->
@@ -960,7 +1102,7 @@ uni
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">1.6k</span>
+              <span title="本文字数">1.7k</span>
             </span>
           
             <span class="post-meta-item">
@@ -970,7 +1112,7 @@ uni
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span title="阅读时长">1 分钟</span>
+              <span title="阅读时长">2 分钟</span>
             </span>
           
 
@@ -993,7 +1135,8 @@ docker run IMAGE [COMMAND] [ARG]
 docker run -i -t IMAGE /bin/bash
 
 
--i —interactive=ture | false 默认是false，为容器始终打开标准输入-t —tt
+
+-i –interactive=ture | false 默认是false，为容器始终打开标准输入-t –t
               ...
             </p>
           <!--noindex-->
@@ -1265,7 +1408,7 @@ docker客户端对服务器的访问： 本地/远程
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">407</span>
+              <span title="本文字数">411</span>
             </span>
           
             <span class="post-meta-item">
@@ -1401,7 +1544,7 @@ docker客户端对服务器的访问： 本地/远程
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">775</span>
+              <span title="本文字数">785</span>
             </span>
           
             <span class="post-meta-item">
@@ -1425,7 +1568,7 @@ docker客户端对服务器的访问： 本地/远程
 
       
           <p>Photoshop如今已经非常常用的处理图片的软件，本文就是介绍一下photoshop cc 2019安装破解的完整过程。</p>
-<p>注：本文参考了<a href="http://www.3322.cc/soft/48343.html" target="_blank" rel="noopener">http://www.3322.cc/soft/48343.html</a><br>
+<p>注：本文参考了<a href="http://www.3322.cc/soft/48343.html" target="_blank" rel="noopener">http://www.3322.cc/soft/48343.html</a></p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1538,7 +1681,7 @@ docker客户端对服务器的访问： 本地/远程
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">313</span>
+              <span title="本文字数">320</span>
             </span>
           
             <span class="post-meta-item">
@@ -1590,147 +1733,11 @@ docker客户端对服务器的访问： 本地/远程
   </article>
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://zinw623.github.io/2019/08/01/XshellDownload/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Zihan.W">
-      <meta itemprop="description" content="我不是那个特别的人？但是我来到了这个世界。">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zihan.W的博客">
-    </span>
-      <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/08/01/XshellDownload/" class="post-title-link" itemprop="url">windows系统：Xshell下载安装+连接服务器</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-08-01 12:32:52" itemprop="dateCreated datePublished" datetime="2019-08-01T12:32:52+08:00">2019-08-01</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-08-04 11:20:07" itemprop="dateModified" datetime="2019-08-04T11:20:07+08:00">2019-08-04</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Xshell/" itemprop="url" rel="index"><span itemprop="name">Xshell</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          <br/>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">本文字数：</span>
-              
-              <span title="本文字数">652</span>
-            </span>
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              
-              <span title="阅读时长">1 分钟</span>
-            </span>
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>学习深度学习需要足够的计算资源，往往需要连接远程服务器用来计算。本篇文章就介绍一下如何在windows系统里利用xshell连接服务器。<br>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/08/01/XshellDownload/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1766,7 +1773,7 @@ docker客户端对服务器的访问： 本地/远程
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1799,7 +1806,9 @@ docker客户端对服务器的访问： 本地/远程
         
           
         
-        <span class="site-state-item-count">9</span>
+          
+        
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -1842,7 +1851,11 @@ docker客户端对服务器的访问： 本地/远程
         
           
         
-        <span class="site-state-item-count">14</span>
+          
+        
+          
+        
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -1948,12 +1961,12 @@ docker客户端对服务器的访问： 本地/远程
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">128k</span>
+    <span title="站点总字数">133k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:56</span>
+    <span title="站点阅读时长">2:01</span>
 </div>
 
 
@@ -2104,7 +2117,7 @@ docker客户端对服务器的访问： 本地/远程
   
     
       
-    
+        
       
     
       
@@ -2122,6 +2135,53 @@ docker客户端对服务器的访问： 本地/远程
       
     
       
+    
+      
+    
+  
+    
+      <script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
     
   
 
