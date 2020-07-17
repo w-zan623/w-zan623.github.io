@@ -233,7 +233,7 @@
       
     
 
-    <a href="/book/" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br/>book</a>
+    <a href="/book/" rel="section"><i class="menu-item-icon fa fa-fw fa-book"></i> <br/>book</a>
 
   </li>
         <li class="menu-item menu-item-search">
@@ -396,13 +396,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>在解决任何机器学习问题时，都需要花费大量的精力来准备数据。PyTorch提供了许多工具来简化数据加载，希望能使代码更具可读性。在这篇教程里，我们将看看如何从非平凡的数据集中加载和预处理/扩增数据。<br><a id="more"></a></p>
+        <p>在解决任何机器学习问题时，都需要花费大量的精力来准备数据。PyTorch提供了许多工具来简化数据加载，希望能使代码更具可读性。在这篇教程里，我们将看看如何从非平凡的数据集中加载和预处理/扩增数据。</p>
+<a id="more"></a>
+
 <p>为了运行这篇教程，请确保一下模块已经安装了：</p>
 <ul>
 <li><code>scikit-image</code>：为了图像的输入输出和转化</li>
 <li><code>pandas</code>：为了跟容易解析csv</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> print_function, division</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> skimage <span class="keyword">import</span> io, transform</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> Dataset, DataLoader</span><br><span class="line"><span class="keyword">from</span> torchvision <span class="keyword">import</span> transforms, utils</span><br><span class="line"></span><br><span class="line"><span class="comment"># 忽略警告</span></span><br><span class="line"><span class="keyword">import</span> warnings</span><br><span class="line">warnings.filterwarnings(<span class="string">'ignore'</span>)</span><br><span class="line"></span><br><span class="line">plt.ion()   <span class="comment"># 交互模式</span></span><br></pre></td></tr></table></figure>
+
 <p>我们将要处理的数据集是人脸姿态。这以为着一张脸被标注成这样：</p>
 <p>@import “landmarked_face2.png”</p>
 <p>总共有68个标注点标注在每张脸上。</p>
@@ -412,18 +415,18 @@
 <p>数据集带有一个csv文件，其中带有类似于下面的注释：</p>
 <pre><code>image_name,part_0_x,part_0_y,part_1_x,part_1_y,part_2_x, ... ,part_67_x,part_67_y
 0805personali01.jpg,27,83,27,98, ... 84,134
-1084239450_e76e00b7e7.jpg,70,236,71,257, ... ,128,312
-</code></pre><p>让我们快速读取csv并且得到(N, 2)数组的标注，N是指的标注点的个数。</p>
+1084239450_e76e00b7e7.jpg,70,236,71,257, ... ,128,312</code></pre><p>让我们快速读取csv并且得到(N, 2)数组的标注，N是指的标注点的个数。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">landmarks_frame = pd.read_csv(<span class="string">'data/faces/face_landmarks.csv'</span>)</span><br><span class="line"></span><br><span class="line">n = <span class="number">65</span></span><br><span class="line">img_name = landmarks_frame.iloc[n, <span class="number">0</span>]</span><br><span class="line">landmarks = landmarks_frame.iloc[n, <span class="number">1</span>:].as_matrix()</span><br><span class="line">landmarks = landmarks.astype(<span class="string">'float'</span>).reshape(<span class="number">-1</span>, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">'Image name: &#123;&#125;'</span>.format(img_name))</span><br><span class="line">print(<span class="string">'Landmarks shape: &#123;&#125;'</span>.format(landmarks.shape))</span><br><span class="line">print(<span class="string">'First 4 Landmarks: &#123;&#125;'</span>.format(landmarks[:<span class="number">4</span>]))</span><br></pre></td></tr></table></figure>
+
 <p>输出：</p>
 <pre><code>Image name: person-7.jpg
 Landmarks shape: (68, 2)
 First 4 Landmarks: [[32. 65.]
 [33. 76.]
 [34. 86.]
-[34. 97.]]
-</code></pre><p>让我们写一个简单的展示一张图片和它的标注点的帮助函数，使用它来显示一个样本。</p>
+[34. 97.]]</code></pre><p>让我们写一个简单的展示一张图片和它的标注点的帮助函数，使用它来显示一个样本。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_landmarks</span><span class="params">(image, landmarks)</span>:</span></span><br><span class="line">    <span class="string">"""显示一张带有标注点的函数"""</span></span><br><span class="line"></span><br><span class="line">    plt.imshow(image)</span><br><span class="line">    plt.scatter(landmarks[:, <span class="number">0</span>], landmarks[:, <span class="number">1</span>], s = <span class="number">10</span>, marker = <span class="string">'.'</span>, c = <span class="string">'r'</span>)</span><br><span class="line">    plt.pause(<span class="number">0.001</span>)    <span class="comment"># 暂停一会等待更新</span></span><br><span class="line"></span><br><span class="line">plt.figure()</span><br><span class="line">show_landmarks(io.imread(os.path.join(<span class="string">'data/faces/'</span>, img_name)), landmarks)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
 <p>@import “sphx_glr_data_loading_tutorial_001.png”</p>
 <h3 id="Dataset类"><a href="#Dataset类" class="headerlink" title="Dataset类"></a>Dataset类</h3><p><code>torch.utils.data.Dataset</code>是表示数据集的抽象类。你的自定义数据集应该继承<code>Dataset</code>并覆盖以下方法：</p>
 <ul>
@@ -433,6 +436,7 @@ First 4 Landmarks: [[32. 65.]
 <p>让我们创建一个我们脸部表注数据集的dataset吧。我们将在<code>__init__</code>中读取csv但是留在<code>__getitem__</code>中读取图片。这是为了内存效率因为所有的图片不是一次储存在内存中，而是按需要储存。</p>
 <p>我们数据集的赝本将会是字典<code>{&#39;image&#39;:image, &#39;landmarks&#39;:landmarks}</code>。我们数据集将获得一个选填参数<code>transform</code>以便对样本进行所有必要的处理。我们将在下一个章节看到<code>transform</code>的有效性。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FaceLandmarksDataset</span><span class="params">(Dataset)</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, csv_file, root_dir, transform = None)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        参数：</span></span><br><span class="line"><span class="string">            csv_file(string):csv file的路径</span></span><br><span class="line"><span class="string">            root_dir(string):所有图片的目录</span></span><br><span class="line"><span class="string">            transform(callable, 选填):被应用到样本上的transforms</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        self.landmarks_frame = pd.read_csv(csv_file)</span><br><span class="line">        self.root_dir = root_dir</span><br><span class="line">        self.transform = transform</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span><span class="params">(self)</span>:</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> len(self.landmarks_frame)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span><span class="params">(self, idx)</span>:</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> torch.is_tensor(idx):</span><br><span class="line">            idx = idx.tolist()</span><br><span class="line">        </span><br><span class="line">        img_name = os.path.join(self.root_dir, self.landmarks_frame.iloc[idx, <span class="number">0</span>])</span><br><span class="line">        images = io.imread(img_name)</span><br><span class="line">        landmarks = self.landmarks_frame.iloc[idx, <span class="number">1</span>:]</span><br><span class="line">        landmarks = np.array([landmarks])</span><br><span class="line">        landmarks = landmarks.astype(<span class="string">'float'</span>).reshape(<span class="number">-1</span>, <span class="number">2</span>)</span><br><span class="line">        sample = &#123;<span class="string">'image'</span>:image, <span class="string">'landmarks'</span>:landmarks&#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> self.transform:</span><br><span class="line">            sample = self.transform(sample)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> sample</span><br></pre></td></tr></table></figure>
+
 <p>让我们举例使用这个类并且在迭代这个数据集。我们将打印出前四个样本的大小和它们的标注点。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">face_dataset = FaceLandmarksDataset(csv_file = <span class="string">'data/faces/face_landmarks.csv'</span>, root_dir = <span class="string">'data/faces/)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">fig = plt.figure()</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">for i in range(len(face_dataset)):</span></span><br><span class="line"><span class="string">    sample = face_dataset[i]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    print(i, sample['</span>image<span class="string">'].shape, sample['</span>landmarks<span class="string">'].shape)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    ax = plt.subplot(1, 4, i + 1)</span></span><br><span class="line"><span class="string">    plt.tight_layout()</span></span><br><span class="line"><span class="string">    ax.set_title('</span>Sample <span class="comment"># &#123;&#125;'.format(i))</span></span><br><span class="line">    ax.axis(<span class="string">'off'</span>)</span><br><span class="line">    show_landmarks(**sample)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">3</span>:</span><br><span class="line">        plt.show()</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
     </div>
@@ -815,12 +819,12 @@ First 4 Landmarks: [[32. 65.]
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">131k</span>
+    <span title="站点总字数">133k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:59</span>
+    <span title="站点阅读时长">2:01</span>
 </div>
 
 
