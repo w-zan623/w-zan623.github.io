@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Zihan.W的博客</title>
+  <title>今天写了点东西</title>
   
   
   <link href="/atom.xml" rel="self"/>
@@ -10,7 +10,7 @@
   <id>https://zinw623.github.io/</id>
   
   <author>
-    <name>Zihan.W</name>
+    <name>涵贰十</name>
     
   </author>
   
