@@ -225,6 +225,17 @@
     <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
 
   </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-book">
+      
+    
+
+    <a href="/book/" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br/>book</a>
+
+  </li>
         <li class="menu-item menu-item-search">
           <a href="javascript:;" class="popup-trigger">
           
@@ -404,41 +415,33 @@
 <li>查看正在运行的守护进程</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep docker</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>连接socket进行通信</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nc -U /var/run/docker.sock</span><br><span class="line">GET /info HTTP/1.1</span><br></pre></td></tr></table></figure>
-
 <p>以上都是在本地的访问，docker也支持远程访问。</p>
 <h3 id="docker守护进程的配置和操作"><a href="#docker守护进程的配置和操作" class="headerlink" title="docker守护进程的配置和操作"></a>docker守护进程的配置和操作</h3><ul>
 <li>查看守护进程</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep docker</span><br><span class="line">sudo status docker</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>守护进程的启动、停止和重启</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo service docker start</span><br><span class="line">sudo service docker stop</span><br><span class="line">sudo service docker restart</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><p>docker的启动选项</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker -d [OPTIONS]  <span class="comment">#所以守护形式运行</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>运行相关:<br>  -D, –debug = false<br>  -e, –exec-driver = “native”<br>  -g, –graph = “/var/lib/docker”<br>  –icc = true<br>  -l, –log-level = “info”<br>  –label = []<br>  -p, –pidfile = “/var/run/docker.pid”</p>
+<li><p>运行相关:<br>  -D, —debug = false<br>  -e, —exec-driver = “native”<br>  -g, —graph = “/var/lib/docker”<br>  —icc = true<br>  -l, —log-level = “info”<br>  —label = []<br>  -p, —pidfile = “/var/run/docker.pid”</p>
 </li>
-<li><p>docker服务器连接相关：<br>  -G, –group = “docker”<br>  -H, –host = []<br>  –tls = false<br>  –tlscacert = “/home/sven/.docker/ca.pem”<br>  –tlscert = “/home/sven/.docker/cert.pem”<br>  –tlskey = “/home/sven/.docker/key.pem”<br>  –tlsverify = false</p>
-</li>
-<li><p>RemotAPI相关：<br>  –api-enable-cors = false</p>
-</li>
-<li><p>Registry相关：<br>  –insecure-registry = []<br>  –registry-mirror = []</p>
-</li>
-<li><p>网络设置相关：<br>  -b, –bridge = “”<br>  –bip = “”<br>  –fixed-cidr = “”<br>  –fixed-cidr-v6 = “”<br>  –dns = []<br>  –dns-search = []<br>  –ip = 0.0.0.0<br>  –ip-forward = true<br>  –ip-masq = true<br>  –iptables = true<br>  –ipv6 = false<br>  –mtu = 0</p>
-</li>
-<li><p>启动配置文件  /etc/default/docker<br>  注：ubuntu 16.04及以上版本使用：</p>
-<pre><code>修改/lib/systemd/system/docker.service中的ExecStart
-加载配置：
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">service docker restart</span><br><span class="line">docker info</span><br></pre></td></tr></table></figure></code></pre></li>
+<li>docker服务器连接相关：<br>  -G, —group = “docker”<br>  -H, —host = []<br>  —tls = false<br>  —tlscacert = “/home/sven/.docker/ca.pem”<br>  —tlscert = “/home/sven/.docker/cert.pem”<br>  —tlskey = “/home/sven/.docker/key.pem”<br>  —tlsverify = false</li>
+<li>RemotAPI相关：<br>  —api-enable-cors = false</li>
+<li>Registry相关：<br>  —insecure-registry = []<br>  —registry-mirror = []</li>
+<li>网络设置相关：<br>  -b, —bridge = “”<br>  —bip = “”<br>  —fixed-cidr = “”<br>  —fixed-cidr-v6 = “”<br>  —dns = []<br>  —dns-search = []<br>  —ip = 0.0.0.0<br>  —ip-forward = true<br>  —ip-masq = true<br>  —iptables = true<br>  —ipv6 = false<br>  —mtu = 0</li>
+<li>启动配置文件  /etc/default/docker<br>  注：ubuntu 16.04及以上版本使用：<pre><code>  修改/lib/systemd/system/docker.service中的ExecStart
+  加载配置：
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">service docker restart</span><br><span class="line">docker info</span><br></pre></td></tr></table></figure>
+</code></pre></li>
 </ul>
 <h3 id="docker的远程访问"><a href="#docker的远程访问" class="headerlink" title="docker的远程访问"></a>docker的远程访问</h3><ul>
 <li>第二台安装docker的服务器</li>
@@ -446,16 +449,21 @@
 </ul>
 <h4 id="修改docker守护进程启动选项"><a href="#修改docker守护进程启动选项" class="headerlink" title="修改docker守护进程启动选项"></a>修改docker守护进程启动选项</h4><ul>
 <li><p>修改服务器端配置<br>  -H  tcp://host:post</p>
-<pre><code>unix:///path/to/socket 
-fd://* or fd//socketfd</code></pre><p>  守护进程默认配置：</p>
-<pre><code>-H unix:///var/run/docker.sock
-注：我的默认的是 fd://</code></pre><p>  改为 tcp:</p>
-<pre><code>tcp://0.0.0.0:2375</code></pre>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl http://ip:2375/info</span><br></pre></td></tr></table></figure>
+<pre><code>  unix:///path/to/socket 
+  fd://* or fd//socketfd
+</code></pre><p>  守护进程默认配置：</p>
+<pre><code>  -H unix:///var/run/docker.sock
+  注：我的默认的是 fd://
+</code></pre><p>  改为 tcp:</p>
+<pre><code>  tcp://0.0.0.0:2375
+</code></pre>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl http://ip:2375/info</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>修改客户端配置<br>  -H  tcp://host:post</p>
-<pre><code>unix:///path/to/socket 
-fd://* or fd//socketfd</code></pre><p>  默认配置：</p>
-<pre><code>-H unix:///var/run/docker.sock</code></pre><ol>
+<pre><code>  unix:///path/to/socket 
+  fd://* or fd//socketfd
+</code></pre><p>  默认配置：</p>
+<pre><code>  -H unix:///var/run/docker.sock
+</code></pre><ol>
 <li>docker -H tcp//ip:2375 # 太麻烦</li>
 <li>export DOCKET_HOST=”tcp://ip:2357” # 使用环境变量<br> export DOCKET_HOST=”tcp://ip:2357”  # 使用本地</li>
 </ol>
@@ -845,12 +853,12 @@ fd://* or fd//socketfd</code></pre><p>  默认配置：</p>
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">133k</span>
+    <span title="站点总字数">131k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:01</span>
+    <span title="站点阅读时长">1:59</span>
 </div>
 
 
